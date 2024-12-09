@@ -1,7 +1,6 @@
 import { ArrowUpRight } from "lucide-react";
 import { TypeAnimation } from "react-type-animation";
 
-const DIVIDER = <div className="w-full border-t-2"></div>;
 const HIRING_BUTTON = (
   <a href="mailto:brhoulton@gmail.com">
     <button className="rounded-lg border flex gap-2 justify-center px-2 py-1 text-sm items-center bg-slate-950 text-white">
@@ -41,8 +40,8 @@ function App() {
         <ul className="flex gap-2 divide-x">
           <li>
             <sup>[1]</sup>
-            <a href="https://www.frontiersin.org/articles/10.3389/fncom.2017.00087/full">
-              Frontiers in Computational Neuroscience
+            <a href="https://www.hpcwire.com/2024/04/22/intel-announces-hala-point-worlds-largest-neuromorphic-system-for-sustainable-ai/">
+              Intel Hala Point
             </a>
           </li>
         </ul>
