@@ -15,7 +15,7 @@ function App() {
   return (
     <div className="p-16 w-fit flex flex-col gap-4">
       <TypeAnimation
-        sequence={["cortical.sh"]}
+        sequence={["incortical"]}
         repeat={0}
         wrapper="span"
         className="text-5xl"
@@ -37,7 +37,7 @@ function App() {
       {HIRING_BUTTON}
 
       <div className="absolute bottom-0 right-0 left-0 flex justify-between p-4 text-sm text-slate-500">
-        <p>Copyright © 2021 Cortical.sh</p>
+        <p>Copyright © 2021 Incortical</p>
         <ul className="flex gap-2 divide-x">
           <li>
             <sup>[1]</sup>
