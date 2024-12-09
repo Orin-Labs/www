@@ -22,9 +22,7 @@ function App() {
         cursor={false}
       />
 
-      <h3 className="text-slate-700 text-xl">
-        building biologically-inspired AI
-      </h3>
+      <h3 className="text-slate-700 text-xl">building brain-inspired ai</h3>
 
       <p>
         Intelligence needs {"<"}86B neurons to work. <br></br>
@@ -36,7 +34,7 @@ function App() {
       {HIRING_BUTTON}
 
       <div className="absolute bottom-0 right-0 left-0 flex justify-between p-4 text-sm text-slate-500">
-        <p>Copyright © 2021 Incortical</p>
+        <p>Copyright © 2024 Incortical</p>
         <ul className="flex gap-2 divide-x">
           <li>
             <sup>[1]</sup>
