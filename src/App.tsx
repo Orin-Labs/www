@@ -1,5 +1,5 @@
-import { ArrowUpRight } from "lucide-react";
-import { TypeAnimation } from "react-type-animation";
+import { ArrowUpRight } from 'lucide-react';
+import { TypeAnimation } from 'react-type-animation';
 
 const HIRING_BUTTON = (
   <a href="mailto:brhoulton@gmail.com">
@@ -25,7 +25,7 @@ function App() {
       <h3 className="text-slate-700 text-xl">building brain-inspired ai</h3>
 
       <p>
-        Intelligence needs {"<"}86B neurons to work. <br></br>
+        Intelligence<sup>[1]</sup> needs {"<"}86B neurons to work. <br></br>
         Event-based neuronal systems can already scale to billions of neurons.
         <sup>[2]</sup>
         <br></br>
@@ -38,6 +38,12 @@ function App() {
         <ul className="flex gap-2 divide-x">
           <li>
             <sup>[1]</sup>
+            <a href="https://arxiv.org/pdf/1911.01547">
+              On the Measure of Intelligence
+            </a>
+          </li>
+          <li className="pl-2">
+            <sup>[2]</sup>
             <a href="https://www.hpcwire.com/2024/04/22/intel-announces-hala-point-worlds-largest-neuromorphic-system-for-sustainable-ai/">
               Intel Hala Point
             </a>
