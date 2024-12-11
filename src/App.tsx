@@ -40,7 +40,7 @@ function App() {
 
       <h3 className="text-xl">projects [research]</h3>
       <p>1. grow functional connectomes from brain structures</p>
-      <p>2. simulated rat connectome</p>
+      <p>2. scale simulated animal pseudo-connectome</p>
 
       <h3 className="text-xl">projects [infra]</h3>
       <p>1. cloud: millions of neurons across thousands of VMs</p>
