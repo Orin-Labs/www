@@ -14,8 +14,8 @@ import {
 
 const HIRING_BUTTON = (
   <a href="mailto:brhoulton@gmail.com">
-    <button className="rounded-lg border flex gap-2 justify-center px-1.5 py-0.5 text-sm items-center">
-      we're hiring
+    <button className="text-gray-500 flex gap-2 justify-center px-1.5 py-0.5 text-sm items-center">
+      Join Us
       <ArrowUpRight size={18} />
     </button>
   </a>
@@ -101,10 +101,11 @@ function App() {
   return (
     <div className="min-h-screen max-w-screen relative">
       {/* Grid */}
+      <div className="fixed right-4 top-4">{HIRING_BUTTON}</div>
 
       {/* Hero Section */}
-      <header className="container z-10 mx-auto px-4 h-[95vh] flex flex-col justify-center relative">
-        <div className="max-w-4xl mx-auto text-center">
+      <header className="z-10 w-full px-4 h-[95vh] flex flex-col items-center justify-center relative">
+        <div className="container max-w-4xl w-full text-center">
           <h1 className="text-5xl md:text-6xl font-semibold text-gray-900 mb-6">
             Meet Orin, Your<br></br>
             <span className="text-indigo-600">Personalized AI Tutor</span>
@@ -115,7 +116,7 @@ function App() {
           {FREE_TRIAL_BUTTON}
         </div>
 
-        <div className="absolute bottom-8 right-0 text-gray-500 flex gap-2">
+        <div className="absolute bottom-4 right-4 text-gray-500 text-sm flex gap-2">
           <span>Scroll to meet Orin</span>
           <DownOutlined />
         </div>
