@@ -123,7 +123,7 @@ function App() {
       </header>
 
       {/* Features Grid */}
-      <section className="w-full z-10 flex flex-col items-center gap-8 py-32 bg-indigo-600">
+      <section className="w-full z-10 flex flex-col items-center gap-8 py-32 bg-indigo-600 border-y-4 border-black">
         <h1 className="text-white text-4xl font-semibold">
           So, what can Orin do?
         </h1>
@@ -209,7 +209,7 @@ function App() {
 
       {/* Footer */}
       <footer className="bg-gray-50 py-2 border-t">
-        <div className="container mx-auto text-center text-gray-600 text-xs">
+        <div className="container mx-auto text-center text-gray-400 text-xs">
           <p>© 2024 Incortical. All rights reserved.</p>
         </div>
       </footer>
