@@ -127,7 +127,7 @@ function App() {
         <h1 className="text-white text-4xl font-semibold">
           So, what can Orin do?
         </h1>
-        <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-8 max-w-96 sm:max-w-xl md:max-w-2xl lg:max-w-3xl mx-auto">
           <FeatureCard
             icon={SunOutlined}
             title="Teach Any Subject, Any Level"
@@ -139,7 +139,7 @@ function App() {
             description="Orin maps out your knowledge behind the scenes and uses that information to build perfectly crafted instruction."
           />
         </div>
-        <div className="max-w-2xl mx-auto">
+        <div className="max-w-96 sm:max-w-xl md:max-w-2xl mx-auto">
           <FeatureCard
             icon={HourglassOutlined}
             title="Learn How You Learn"
