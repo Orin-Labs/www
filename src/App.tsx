@@ -104,7 +104,7 @@ function App() {
       <div className="fixed right-4 top-4">{HIRING_BUTTON}</div>
 
       {/* Hero Section */}
-      <header className="z-10 w-full px-4 h-[95vh] flex flex-col items-center justify-center relative">
+      <header className="z-10 dot-vignette w-full px-4 h-[95vh] flex flex-col items-center justify-center relative">
         <div className="container max-w-4xl w-full text-center">
           <h1 className="text-5xl md:text-6xl font-semibold text-gray-900 mb-6">
             Meet Orin, Your<br></br>

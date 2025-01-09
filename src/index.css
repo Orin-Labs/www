@@ -10,6 +10,18 @@
   --drop-opacity: 0.75;
 }
 
+.dot-vignette {
+  background-image: radial-gradient(
+      circle,
+      rgba(0, 0, 0, 0.032) 20%,
+      transparent 20%
+    ),
+    radial-gradient(circle, white 50%, transparent 100%);
+
+  background-size: 20px 20px, 100% 100%;
+  background-blend-mode: overlay; /* Blend the layers */
+}
+
 .drop-light {
   --drop-opacity: 0.25;
 }
