@@ -1,74 +1,217 @@
-import { ArrowUpRight } from "lucide-react";
-import { TypeAnimation } from "react-type-animation";
+import React from "react";
 
-const DIVIDER = <div className="w-full border-t"></div>;
+import { ArrowUpRight } from "lucide-react";
+
+import {
+  DownOutlined,
+  ForwardOutlined,
+  HourglassOutlined,
+  RadarChartOutlined,
+  RightOutlined,
+  RocketOutlined,
+  SunOutlined,
+} from "@ant-design/icons";
+
 const HIRING_BUTTON = (
   <a href="mailto:brhoulton@gmail.com">
-    <button className="rounded-lg border flex gap-2 justify-center px-2 py-1 text-sm items-center">
+    <button className="rounded-lg border flex gap-2 justify-center px-1.5 py-0.5 text-sm items-center">
       we're hiring
       <ArrowUpRight size={18} />
     </button>
   </a>
 );
 
+const FREE_TRIAL_BUTTON = (
+  <button className="bg-indigo-600 w-fit depress text-white pl-6 pr-4 py-2 text-md font-semibold hover:bg-indigo-700 transition-colors drop">
+    <div className="flex gap-2 items-center">
+      Start Free Trial
+      <RightOutlined size={24} />
+    </div>
+  </button>
+);
+
+function Navbar() {
+  return (
+    <div className="fixed w-screen px-4 top-4 z-50">
+      <nav className="max-w-4xl w-fit mx-auto bg-white/80 backdrop-blur border p-4">
+        <div className="flex items-center justify-between gap-8">
+          <div className="flex items-center space-x-2">
+            {/* <Sparkles className="w-6 h-6 text-indigo-600" /> */}
+            <span className="text-lg font-bold text-gray-900">Orin</span>
+          </div>
+
+          {/* <div className="flex gap-4">
+            <a
+              href="#how-it-works"
+              className="text-sm text-gray-700 hover:text-indigo-600 transition-colors"
+            >
+              How It Works
+            </a>
+            <a
+              href="#pricing"
+              className="text-sm text-gray-700 hover:text-indigo-600 transition-colors"
+            >
+              Pricing
+            </a>
+          </div> */}
+
+          {FREE_TRIAL_BUTTON}
+        </div>
+      </nav>
+    </div>
+  );
+}
+
+function FeatureCard({
+  icon: Icon,
+  title,
+  description,
+}: {
+  icon: React.ElementType;
+  title: string;
+  description: string;
+}) {
+  return (
+    <div className="bg-white p-6 drop">
+      <div className="flex gap-2 items-center mb-2">
+        <Icon className="text-2xl text-indigo-600" />
+        <h3 className="text-xl font-semibold">{title}</h3>
+      </div>
+      <p className="text-gray-600">{description}</p>
+    </div>
+  );
+}
+
+function Bullet({
+  icon: Icon,
+  description,
+}: {
+  icon: React.ElementType;
+  description: string;
+}) {
+  return (
+    <div className="flex items-center gap-2 text-gray-500">
+      <Icon className="text-2xl text-indigo-600" />
+      <span className="text-md">{description}</span>
+    </div>
+  );
+}
+
 function App() {
   return (
-    <div className="p-6 md:p-10 lg:p-16 w-fit flex flex-col gap-4 sm:pb-8">
-      <TypeAnimation
-        sequence={["incortical"]}
-        repeat={0}
-        wrapper="span"
-        className="text-5xl rounded-lg bg-black text-white p-2 -ml-2 w-fit"
-        speed={50}
-        cursor={false}
-      />
+    <div className="min-h-screen max-w-screen relative">
+      {/* Grid */}
 
-      <h3 className="text-slate-700 text-2xl">brain-inspired ai</h3>
+      {/* Hero Section */}
+      <header className="container z-10 mx-auto px-4 h-[95vh] flex flex-col justify-center relative">
+        <div className="max-w-4xl mx-auto text-center">
+          <h1 className="text-5xl md:text-6xl font-semibold text-gray-900 mb-6">
+            Meet Orin, Your<br></br>
+            <span className="text-indigo-600">Personalized AI Tutor</span>
+          </h1>
+          <p className="text-xl text-gray-600 mb-8">
+            The first learning assistant that learns <strong>you</strong>.
+          </p>
+          {FREE_TRIAL_BUTTON}
+        </div>
 
-      <p>
-        intelligence<sup className="hidden sm:inline">[1]</sup> needs {"<"}86B
-        neurons to work.
-      </p>
-      <p>
-        event-based neuronal systems can already scale to billions of neurons.
-        <sup className="hidden sm:inline">[2]</sup>
-      </p>
-      <p>we're building the software to bridge the gap.</p>
-      {HIRING_BUTTON}
+        <div className="absolute bottom-8 right-0 text-gray-500 flex gap-2">
+          <span>Scroll to meet Orin</span>
+          <DownOutlined />
+        </div>
+      </header>
 
-      {DIVIDER}
+      {/* Features Grid */}
+      <section className="w-full z-10 flex flex-col items-center gap-8 py-32 bg-indigo-600">
+        <h1 className="text-white text-4xl font-semibold">
+          So, what can Orin do?
+        </h1>
+        <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+          <FeatureCard
+            icon={SunOutlined}
+            title="Teach Any Subject, Any Level"
+            description="Orin can pass the LSAT, MCAT, scores perfectly on the SAT/ACT and AP tests, and is an expert on virtually every subject."
+          />
+          <FeatureCard
+            icon={RadarChartOutlined}
+            title="Map Your Knowledge"
+            description="Orin maps out your knowledge behind the scenes and uses that information to build perfectly crafted instruction."
+          />
+        </div>
+        <div className="max-w-2xl mx-auto">
+          <FeatureCard
+            icon={HourglassOutlined}
+            title="Learn How You Learn"
+            description="Orin learns your preferred learning style and adjusts teaching methods for optimal understanding."
+          />
+        </div>
+      </section>
 
-      <h3 className="text-xl">projects [research]</h3>
-      <p>1. grow functional connectomes from brain structures</p>
-      <p>2. scale simulated animal pseudo-connectome</p>
+      <section className="w-full z-10 flex flex-col items-center gap-8 py-32">
+        <h1 className="text-4xl font-semibold">Pricing</h1>
+        <div className="flex gap-8 justify-center">
+          <div className="border drop drop-light p-8 flex flex-col gap-2">
+            <div className="flex justify-between items-center">
+              <p className="text-2xl font-medium">Full Access</p>
+              <h1 className="text-2xl">
+                $150.00<span className="text-sm text-gray-500 ml-1">/mo</span>
+              </h1>
+            </div>
+            <p className="text-gray-500 text-lg">
+              Unparalleled learning power, more accessible than ever.
+            </p>
 
-      <h3 className="text-xl">projects [infra]</h3>
-      <p>1. cloud: millions of neurons across thousands of VMs</p>
-      <p>2. neuromorphic: billions of neurons on custom hardware</p>
-      <p>
-        3.{" "}
-        <a href="mailto:brhoulton@gmail.com" className="text-blue-700">
-          {"</ ideas? join us />"}
-        </a>
-      </p>
+            <div className="border-b my-4"></div>
 
-      <div className="sm:fixed sm:border-t bg-white sm:bottom-0 sm:left-0 sm:right-0 justify-center flex sm:justify-between p-4 text-sm text-slate-500">
-        <p>Copyright © 2024 Incortical</p>
-        <ul className="hidden md:flex gap-2 divide-x text-right">
-          <li>
-            <sup>[1]</sup>
-            <a href="https://arxiv.org/pdf/1911.01547">
-              On the Measure of Intelligence
-            </a>
-          </li>
-          <li className="pl-2">
-            <sup>[2]</sup>
-            <a href="https://www.hpcwire.com/2024/04/22/intel-announces-hala-point-worlds-largest-neuromorphic-system-for-sustainable-ai/">
-              Intel Hala Point
-            </a>
-          </li>
-        </ul>
-      </div>
+            <div className="flex flex-col gap-4">
+              <Bullet
+                icon={SunOutlined}
+                description="Capacity to teach any subject."
+              />
+              <Bullet
+                icon={ForwardOutlined}
+                description="Instruct via every medium - chat, voice, visual."
+              />
+              <Bullet
+                icon={RadarChartOutlined}
+                description="Comprehensive knowledge mapping and assessment."
+              />
+              <Bullet
+                icon={HourglassOutlined}
+                description="Adaptive tutoring for your optimal learning."
+              />
+              <Bullet
+                icon={RocketOutlined}
+                description="Predefined learning objectives (SAT, MCAT, etc)."
+              />
+            </div>
+
+            <div className="w-full flex justify-end mt-4">
+              {FREE_TRIAL_BUTTON}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      {/* <section className="py-64 z-10">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-3xl md:text-4xl font-semibold mb-6">
+            Experience the Future of Learning
+          </h2>
+          <p className="text-xl mb-8 opacity-90">
+            Learning is a lifelong endeavor. Welcome to your first step.
+          </p>
+          {FREE_TRIAL_BUTTON}
+        </div>
+      </section> */}
+
+      {/* Footer */}
+      <footer className="bg-gray-50 py-2 border-t">
+        <div className="container mx-auto text-center text-gray-600 text-xs">
+          <p>© 2024 Incortical. All rights reserved.</p>
+        </div>
+      </footer>
     </div>
   );
 }

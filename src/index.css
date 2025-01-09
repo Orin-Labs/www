@@ -3,5 +3,40 @@
 @tailwind utilities;
 
 * {
-  font-family: "SF Mono";
+  font-family: "Figtree";
+  --drop-size: 4px;
+  --depress-size: 2px;
+  --depress-drop-size: calc(var(--drop-size) - var(--depress-size));
+  --drop-opacity: 0.75;
+}
+
+.drop-light {
+  --drop-opacity: 0.25;
+}
+
+.drop {
+  -webkit-box-shadow: var(--drop-size) var(--drop-size) 0px 0px
+    rgba(0, 0, 0, var(--drop-opacity));
+  -moz-box-shadow: var(--drop-size) var(--drop-size) 0px 0px
+    rgba(0, 0, 0, var(--drop-opacity));
+  box-shadow: var(--drop-size) var(--drop-size) 0px 0px
+    rgba(0, 0, 0, var(--drop-opacity));
+}
+
+.depress:hover {
+  transform: translate(var(--depress-size), var(--depress-size));
+}
+
+.depress:active {
+  transform: translate(var(--drop-size), var(--drop-size));
+  box-shadow: none !important;
+}
+
+.depress.drop:hover {
+  -webkit-box-shadow: var(--depress-drop-size) var(--depress-drop-size) 0px 0px
+    rgba(0, 0, 0, var(--drop-opacity));
+  -moz-box-shadow: var(--depress-drop-size) var(--depress-drop-size) 0px 0px
+    rgba(0, 0, 0, var(--drop-opacity));
+  box-shadow: var(--depress-drop-size) var(--depress-drop-size) 0px 0px
+    rgba(0, 0, 0, var(--drop-opacity));
 }
