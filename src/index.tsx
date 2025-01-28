@@ -3,6 +3,7 @@ import "./index.css";
 import React from "react";
 
 import ReactDOM from "react-dom/client";
+import { SlateProvider } from "slate-ui";
 
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
@@ -12,7 +13,9 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <App />
+    <SlateProvider>
+      <App />
+    </SlateProvider>
   </React.StrictMode>
 );
 
