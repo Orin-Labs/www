@@ -106,9 +106,9 @@ function App() {
             transition={{ duration: 0.2 }}
           >
             <FeatureCard
-              icon={Sun}
-              title="Teach Any Subject, Any Level"
-              description="Orin can pass the LSAT, MCAT, scores perfectly on the SAT/ACT and AP tests, and is an expert on virtually every subject."
+              icon={Radar}
+              title="Map Your Knowledge"
+              description="Orin maps out your knowledge and uses that information to build a personalized learning plan."
             />
           </motion.div>
           <motion.div
@@ -117,9 +117,9 @@ function App() {
             transition={{ duration: 0.2 }}
           >
             <FeatureCard
-              icon={Radar}
-              title="Map Your Knowledge"
-              description="Orin maps out your knowledge behind the scenes and uses that information to build perfectly crafted instruction."
+              icon={Sun}
+              title="Expertise in Every Subject"
+              description="Orin can pass the LSAT, MCAT, scores perfectly on the SAT/ACT and AP tests, and is an expert on virtually every subject."
             />
           </motion.div>
         </div>
