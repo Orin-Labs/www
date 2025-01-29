@@ -138,7 +138,7 @@ function App() {
         </div>
       </section>
 
-      <section className="grow m-16 rounded-lg z-10 flex flex-col items-center bg-muted gap-4 py-32">
+      <section className="grow m-16 px-6 rounded-lg z-10 flex flex-col items-center bg-muted gap-4 py-32">
         <h1 className="text-4xl font-semibold">Pricing</h1>
         <div className="flex gap-8 justify-center">
           <div className="border bg-white rounded-lg p-8 flex flex-col gap-2">
