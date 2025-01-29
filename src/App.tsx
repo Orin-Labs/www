@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-import { motion } from "framer-motion";
+import { motion } from 'framer-motion';
 import {
   ArrowUpRight,
   ChevronDown,
@@ -10,9 +10,10 @@ import {
   Radar,
   Rocket,
   Sun,
-} from "lucide-react";
-import { TypeAnimation } from "react-type-animation";
-import { Button } from "slate-ui";
+} from 'lucide-react';
+import { TypeAnimation } from 'react-type-animation';
+import { Button } from 'slate-ui';
+import { useLocalStorage } from 'usehooks-ts';
 
 const HIRING_BUTTON = (
   <a href="mailto:brhoulton@gmail.com">
@@ -59,18 +60,38 @@ function Bullet({
 }
 
 function App() {
+  // Detect "waitlist-confirmed" query param
+  const waitlistConfirmed = new URLSearchParams(window.location.search).get(
+    "waitlist-confirmed"
+  );
+
+  const [isWaitlistConfirmed, setIsWaitlistConfirmed] = useLocalStorage(
+    "waitlist-confirmed",
+    !!waitlistConfirmed
+  );
+
+  if (waitlistConfirmed) {
+    setIsWaitlistConfirmed(true);
+  }
+
   return (
     <div className="max-w-screen relative overflow-y-auto">
       {/* Hero Section */}
       <header className="z-10 dot-vignette w-full px-4 h-[95vh] flex flex-col items-center justify-center relative">
         <div className="container max-w-4xl w-full text-center flex flex-col items-center">
-          <h1 className="text-5xl md:text-6xl font-semibold text-gray-900 mb-6">
-            Meet Orin, your<br></br>
-            <TypeAnimation
-              className="text-primary"
-              sequence={["personal SAT tutor.", 1000]}
-            />
-          </h1>
+          {isWaitlistConfirmed || waitlistConfirmed ? (
+            <h1 className="text-5xl md:text-6xl font-semibold text-gray-900 mb-6">
+              Meet Orin, your<br></br>
+              <TypeAnimation
+                className="text-primary"
+                sequence={["personal SAT tutor.", 1000]}
+              />
+            </h1>
+          ) : (
+            <h1 className="text-5xl md:text-6xl font-semibold text-gray-900 mb-6">
+              You're on the waitlist!
+            </h1>
+          )}
           <span className="text-xl text-gray-600 mb-8">
             The first learning assistant that learns <strong>you</strong>.
           </span>
