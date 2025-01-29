@@ -68,7 +68,7 @@ function App() {
             Meet Orin, your<br></br>
             <TypeAnimation
               className="text-primary"
-              sequence={["customized SAT tutor.", 1000]}
+              sequence={["personal SAT tutor.", 1000]}
             />
           </h1>
           <span className="text-xl text-gray-600 mb-8">
