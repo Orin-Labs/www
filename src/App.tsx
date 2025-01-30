@@ -52,7 +52,7 @@ function Bullet({
   description: string;
 }) {
   return (
-    <div className="flex items-center gap-2 text-gray-500">
+    <div className="flex items-center gap-2 text-gray-500 flex-col sm:flex-row text-center sm:text-left">
       <Icon className="text-2xl text-primary" />
       <span className="text-md">{description}</span>
     </div>
@@ -81,15 +81,15 @@ function App() {
         <div className="container max-w-4xl w-full text-center flex flex-col items-center">
           {isWaitlistConfirmed || waitlistConfirmed ? (
             <h1 className="text-5xl md:text-6xl font-semibold text-gray-900 mb-6">
+              You're on the waitlist!
+            </h1>
+          ) : (
+            <h1 className="text-5xl md:text-6xl font-semibold text-gray-900 mb-6">
               Meet Orin, your<br></br>
               <TypeAnimation
                 className="text-primary"
                 sequence={["personal SAT tutor.", 1000]}
               />
-            </h1>
-          ) : (
-            <h1 className="text-5xl md:text-6xl font-semibold text-gray-900 mb-6">
-              You're on the waitlist!
             </h1>
           )}
           <span className="text-xl text-gray-600 mb-8">
@@ -107,7 +107,7 @@ function App() {
         </div>
 
         <Button
-          className="absolute bottom-4 right-16"
+          className="absolute bottom-4 right-4 sm:right-8 md:right-16 text-muted"
           iconRight={ChevronDown}
           variant="subtle"
         >
@@ -116,7 +116,7 @@ function App() {
       </header>
 
       {/* Features Grid */}
-      <section className="grow mx-16 rounded-lg z-10 flex flex-col items-center gap-8 py-32 bg-primary border-y">
+      <section className="grow md:mx-16 md:rounded-lg z-10 flex flex-col items-center gap-8 py-8 sm:py-16 md:py-32 px-8 bg-primary border-y">
         <h1 className="text-white text-4xl font-semibold">
           So, what can Orin do?
         </h1>
@@ -159,23 +159,23 @@ function App() {
         </div>
       </section>
 
-      <section className="grow m-16 px-6 rounded-lg z-10 flex flex-col items-center bg-muted gap-4 py-32">
+      <section className="grow m-6 sm:m-12 md:m-16 px-6 rounded-lg z-10 flex flex-col items-center sm:bg-muted gap-4 py-8 sm:py-16 md:py-32">
         <h1 className="text-4xl font-semibold">Pricing</h1>
         <div className="flex gap-8 justify-center">
           <div className="border bg-white rounded-lg p-8 flex flex-col gap-2">
-            <div className="flex justify-between items-center">
+            <div className="flex justify-between items-center flex-col sm:flex-row">
               <p className="text-2xl font-medium">Full Access</p>
               <h1 className="text-2xl">
                 $150.00<span className="text-sm text-gray-500 ml-1">/mo</span>
               </h1>
             </div>
-            <p className="text-gray-500 text-lg">
+            <p className="text-gray-500 text-lg text-center sm:text-left">
               Unparalleled learning power, more accessible than ever.
             </p>
 
             <div className="border-b my-4"></div>
 
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-8 sm:gap-4">
               <Bullet icon={Sun} description="Capacity to teach any subject." />
               <Bullet
                 icon={Forward}
@@ -195,7 +195,7 @@ function App() {
               />
             </div>
 
-            <div className="w-full flex justify-end mt-4">
+            <div className="w-full flex justify-center sm:justify-end mt-4">
               <Button iconRight={ChevronRight}>Join Waitlist</Button>
             </div>
           </div>
