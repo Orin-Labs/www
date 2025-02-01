@@ -159,7 +159,7 @@ function App() {
   return (
     <div className="max-w-screen relative overflow-y-auto">
       {/* Hero Section */}
-      <header className="z-10 dot-vignette w-full px-4 h-[95vh] flex flex-col items-center justify-center relative">
+      <header className="z-10 dot-vignette w-full px-4 h-[90vh] flex flex-col items-center justify-center relative">
         <div className="container max-w-4xl w-full text-center flex flex-col items-center">
           {isWaitlistConfirmed || waitlistConfirmed ? (
             <h1 className="text-5xl md:text-6xl font-semibold text-gray-900 mb-6">
@@ -221,7 +221,7 @@ function App() {
                 size="lg"
                 iconRight={ChevronRight}
               >
-                Join Waitlist
+                <span className="hidden sm:block">Join</span> Waitlist
               </Button>
             </a>
           </div>
