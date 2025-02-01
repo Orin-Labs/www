@@ -1,28 +1,25 @@
-import React from 'react';
+import React, { useState } from "react";
 
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
 import {
-  ArrowUpRight,
+  AudioLinesIcon,
   ChevronDown,
   ChevronRight,
   Forward,
   Hourglass,
+  LoaderCircle,
+  Minus,
   Radar,
   Rocket,
+  Speech,
   Sun,
-} from 'lucide-react';
-import { TypeAnimation } from 'react-type-animation';
-import { Button } from 'slate-ui';
-import { useLocalStorage } from 'usehooks-ts';
+} from "lucide-react";
+import { TypeAnimation } from "react-type-animation";
+import { Button } from "slate-ui";
+import { useLocalStorage } from "usehooks-ts";
 
-const HIRING_BUTTON = (
-  <a href="mailto:brhoulton@gmail.com">
-    <button className="text-gray-500 flex gap-2 justify-center px-1.5 py-0.5 text-sm items-center">
-      Join Us
-      <ArrowUpRight size={18} />
-    </button>
-  </a>
-);
+import Vapi from "@vapi-ai/web";
+import { CreateAssistantDTO } from "@vapi-ai/web/dist/api";
 
 function FeatureCard({
   icon: Icon,
@@ -34,7 +31,7 @@ function FeatureCard({
   description: string;
 }) {
   return (
-    <div className="bg-white p-6 rounded-lg">
+    <div className="bg-white p-6 rounded-lg h-full">
       <div className="flex gap-2 items-center mb-2">
         <Icon className="text-2xl text-primary" />
         <h3 className="text-xl font-semibold">{title}</h3>
@@ -74,6 +71,91 @@ function App() {
     setIsWaitlistConfirmed(true);
   }
 
+  const [vapi, setVapi] = useState<Vapi>(
+    new Vapi("6abe9004-54a5-454e-8bf6-0678db02abdf")
+  );
+  const [orinLoading, setOrinLoading] = useState(false);
+  const [orinTalking, setOrinTalking] = useState(false);
+  const [callOn, setCallOn] = useState(false);
+
+  const initVapi = async () => {
+    setOrinLoading(true);
+    const MODEL: CreateAssistantDTO = {
+      transcriber: {
+        provider: "deepgram",
+        model: "nova-2",
+        language: "en-US",
+      },
+      model: {
+        provider: "openai",
+        model: "gpt-4o",
+        messages: [
+          {
+            role: "system",
+            content: `
+            You are a succinct AI tutor named Orin. You're currently studying at Oxford and
+            are tutoring for some side cash. You love coffee, renaissance art, violin, and
+            whatever subject is being taught.
+
+            Currently, you're embedded in a landing page selling your services. The person you're
+            talking to is a potential customer. Your job is to be friendly, engaging, not too
+            salesly, and help them learn more about you and your services.
+
+            Within the app, user's will enter lessons with you. You'll be able to coach them
+            through their lessons, controlling their UI and generating a shared notebook with
+            notes, quizzes, examples, and more. You also construct a knowledge graph of the user's
+            knowledge and use that to tailor the exact lessons they need.
+
+            The price is $150/month with a 7-day free trial. This is cheaper than any human tutoring
+            service, and users can use you as much as they want every month.
+
+            Do not mention features that aren't explicitly mentioned on the page or in this prompt.
+            
+            Features on the roadmap include:
+            - Practice tests for the SAT
+            - Parental reporting: realtime reports, allowing parents to call you and get a report
+              on their child's progress.
+
+            Here's the HTML of the page you're embedded in:
+            ${document.documentElement.outerHTML}
+            
+            Greet the user and ask if you can help them navigate or understand the webpage.
+            `,
+          },
+        ],
+      },
+      voice: {
+        provider: "11labs",
+        voiceId: "L0Dsvb3SLTyegXwtm47J", // "T5cu6IU92Krx4mh43osx",
+        model: "eleven_flash_v2_5",
+      },
+      stopSpeakingPlan: {
+        numWords: 1,
+      },
+      // @ts-expect-error: Vapi type error thinks this shouldn't be an array.
+      clientMessages: ["tool-calls", "speech-update", "conversation-update"],
+      maxDurationSeconds: 600,
+      name: "Orin",
+      firstMessageMode: "assistant-speaks-first-with-model-generated-message",
+    };
+    await vapi.start(MODEL);
+    setOrinLoading(false);
+    setCallOn(true);
+
+    vapi.on(
+      "message",
+      async (message: {
+        type: "speech-update";
+        status: "started" | "stopped";
+        role: "assistant" | "user";
+      }) => {
+        if (message.type === "speech-update" && message.role === "assistant") {
+          setOrinTalking(message.status === "started");
+        }
+      }
+    );
+  };
+
   return (
     <div className="max-w-screen relative overflow-y-auto">
       {/* Hero Section */}
@@ -95,15 +177,54 @@ function App() {
           <span className="text-xl text-gray-600 mb-8">
             The first learning assistant that learns <strong>you</strong>.
           </span>
-          <a
-            href="https://getwaitlist.com/waitlist/24645"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <Button size="lg" className="text-md" iconRight={ChevronRight}>
-              Join Waitlist
+          <div className="flex gap-4">
+            <Button
+              className="text-md gap-2 hover:scale-105 transition-all"
+              iconLeft={
+                orinLoading
+                  ? LoaderCircle
+                  : callOn
+                  ? orinTalking
+                    ? AudioLinesIcon
+                    : Minus
+                  : Speech
+              }
+              onClick={() => {
+                if (callOn) {
+                  vapi.stop();
+                  setOrinTalking(false);
+                  setCallOn(false);
+                } else {
+                  initVapi();
+                }
+              }}
+              size="lg"
+              disabled={orinLoading}
+              styles={{
+                icon: {
+                  animation: orinLoading
+                    ? "spin 1s linear infinite"
+                    : undefined,
+                },
+              }}
+            >
+              {orinLoading ? "Loading..." : callOn ? "Stop" : "Talk to Orin"}
             </Button>
-          </a>
+            <a
+              href="https://getwaitlist.com/waitlist/24645"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <Button
+                variant="secondary"
+                className="text-md hover:scale-105 transition-all"
+                size="lg"
+                iconRight={ChevronRight}
+              >
+                Join Waitlist
+              </Button>
+            </a>
+          </div>
         </div>
 
         <Button
@@ -159,10 +280,17 @@ function App() {
         </div>
       </section>
 
+      {/* <div className="h-[70vh] mt-16 mx-auto aspect-video bg-muted overflow-hidden border rounded-lg">
+        <video className="w-full h-full object-cover" autoPlay muted loop>
+          <source src="/video.mov" type="video/mp4" />
+        </video>
+      </div> */}
+
+      {/* Pricing */}
       <section className="grow m-6 sm:m-12 md:m-16 px-6 rounded-lg z-10 flex flex-col items-center sm:bg-muted gap-4 py-8 sm:py-16 md:py-32">
         <h1 className="text-4xl font-semibold">Pricing</h1>
         <div className="flex gap-8 justify-center">
-          <div className="border bg-white rounded-lg p-8 flex flex-col gap-2">
+          <div className="border bg-white rounded-lg p-6 flex flex-col gap-2">
             <div className="flex justify-between items-center flex-col sm:flex-row">
               <p className="text-2xl font-medium">Full Access</p>
               <h1 className="text-2xl">
@@ -196,7 +324,13 @@ function App() {
             </div>
 
             <div className="w-full flex justify-center sm:justify-end mt-4">
-              <Button iconRight={ChevronRight}>Join Waitlist</Button>
+              <Button
+                iconRight={ChevronRight}
+                className="hover:scale-105 transition-all text-md"
+                size="lg"
+              >
+                Join Waitlist
+              </Button>
             </div>
           </div>
         </div>
