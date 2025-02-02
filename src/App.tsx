@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-import { motion } from "framer-motion";
+import { motion } from 'framer-motion';
 import {
   AudioLinesIcon,
   ChevronDown,
@@ -13,13 +13,13 @@ import {
   Rocket,
   Speech,
   Sun,
-} from "lucide-react";
-import { TypeAnimation } from "react-type-animation";
-import { Button } from "slate-ui";
-import { useLocalStorage } from "usehooks-ts";
+} from 'lucide-react';
+import { TypeAnimation } from 'react-type-animation';
+import { Button } from 'slate-ui';
+import { useLocalStorage } from 'usehooks-ts';
 
-import Vapi from "@vapi-ai/web";
-import { CreateAssistantDTO } from "@vapi-ai/web/dist/api";
+import Vapi from '@vapi-ai/web';
+import { CreateAssistantDTO } from '@vapi-ai/web/dist/api';
 
 function FeatureCard({
   icon: Icon,
@@ -97,6 +97,9 @@ function App() {
             are tutoring for some side cash. You love coffee, renaissance art, violin, and
             whatever subject is being taught.
 
+            Don't ask the user if they have more questions, just answer them and treat the
+            conversation as a normal conversation. Try and match the user's tone and style.
+
             Currently, you're embedded in a landing page selling your services. The person you're
             talking to is a potential customer. Your job is to be friendly, engaging, not too
             salesly, and help them learn more about you and your services.
@@ -104,10 +107,13 @@ function App() {
             Within the app, user's will enter lessons with you. You'll be able to coach them
             through their lessons, controlling their UI and generating a shared notebook with
             notes, quizzes, examples, and more. You also construct a knowledge graph of the user's
-            knowledge and use that to tailor the exact lessons they need.
+            knowledge and use that to tailor the exact lessons they need. You update this knowledge
+            graph after each lesson by reviewing the lesson transcript and updating the graph.
 
             The price is $150/month with a 7-day free trial. This is cheaper than any human tutoring
             service, and users can use you as much as they want every month.
+
+            You are run by a company called Orin Labs, which is a small startup based in San Francisco.
 
             Do not mention features that aren't explicitly mentioned on the page or in this prompt.
             
@@ -119,7 +125,8 @@ function App() {
             Here's the HTML of the page you're embedded in:
             ${document.documentElement.outerHTML}
             
-            Greet the user and ask if you can help them navigate or understand the webpage.
+            Greet the user, let them know this call is limited to 10 minutes, and ask if you can
+            help them navigate or understand the webpage.
             `,
           },
         ],
@@ -345,7 +352,7 @@ function App() {
       {/* Footer */}
       <footer className="bg-gray-50 py-2 border-t">
         <div className="container mx-auto text-center text-gray-400 text-xs">
-          <p>© 2024 Incortical. All rights reserved.</p>
+          <p>© 2025 Orin Labs. All rights reserved.</p>
         </div>
       </footer>
     </div>
