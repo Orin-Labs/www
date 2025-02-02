@@ -324,13 +324,19 @@ function App() {
             </div>
 
             <div className="w-full flex justify-center sm:justify-end mt-4">
-              <Button
-                iconRight={ChevronRight}
-                className="hover:scale-105 transition-all text-md"
-                size="lg"
+              <a
+                href="https://getwaitlist.com/waitlist/24645"
+                target="_blank"
+                rel="noreferrer"
               >
-                Join Waitlist
-              </Button>
+                <Button
+                  iconRight={ChevronRight}
+                  className="hover:scale-105 transition-all text-md"
+                  size="lg"
+                >
+                  Join Waitlist
+                </Button>
+              </a>
             </div>
           </div>
         </div>
