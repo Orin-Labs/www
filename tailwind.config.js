@@ -1,6 +1,6 @@
-import tailwindCssAnimate from "tailwindcss-animate";
-import primaryTheme from "tailwindcss/defaultTheme";
-import plugin from "tailwindcss/plugin";
+import tailwindCssAnimate from 'tailwindcss-animate';
+import primaryTheme from 'tailwindcss/defaultTheme';
+import plugin from 'tailwindcss/plugin';
 
 module.exports = {
   darkMode: ["class"],
@@ -25,7 +25,7 @@ module.exports = {
         white: "var(--white)",
         black: "var(--black)",
         "anti-primary": "var(--anti-primary)",
-        "anti-secondary": "var(--anti-secondary",
+        "anti-secondary": "var(--anti-secondary)",
         gray: {
           50: "var(--gray-50)",
           100: "var(--gray-100)",
