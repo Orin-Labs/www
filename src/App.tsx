@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
 import {
   AudioLinesIcon,
   ChevronDown,
@@ -13,13 +13,13 @@ import {
   Rocket,
   Speech,
   Sun,
-} from 'lucide-react';
-import { TypeAnimation } from 'react-type-animation';
-import { Button } from 'slate-ui';
-import { useLocalStorage } from 'usehooks-ts';
+} from "lucide-react";
+import { TypeAnimation } from "react-type-animation";
+import { Button } from "slate-ui";
+import { useLocalStorage } from "usehooks-ts";
 
-import Vapi from '@vapi-ai/web';
-import { CreateAssistantDTO } from '@vapi-ai/web/dist/api';
+import Vapi from "@vapi-ai/web";
+import { CreateAssistantDTO } from "@vapi-ai/web/dist/api";
 
 function FeatureCard({
   icon: Icon,
@@ -164,7 +164,20 @@ function App() {
   };
 
   return (
-    <div className="max-w-screen relative overflow-y-auto">
+    <div className="max-w-screen relative overflow-y-auto z-0">
+      <div className="absolute top-0 flex justify-between w-full h-[90vh] overflow-hidden opacity-10 xl:opacity-25">
+        <img
+          src="/tree.png"
+          alt="Orin"
+          className="w-full xl:w-[40vw] object-cover xl:-rotate-45"
+        />
+        <img
+          src="/tree.png"
+          alt="Orin"
+          className="hidden xl:block w-[40vw] object-cover rotate-45"
+        />
+      </div>
+
       {/* Hero Section */}
       <header className="z-10 dot-vignette w-full px-4 h-[90vh] flex flex-col items-center justify-center relative">
         <div className="container max-w-4xl w-full text-center flex flex-col items-center">
@@ -244,7 +257,7 @@ function App() {
       </header>
 
       {/* Features Grid */}
-      <section className="grow md:mx-16 md:rounded-lg z-10 flex flex-col items-center gap-8 py-8 sm:py-16 md:py-32 px-8 bg-primary border-y">
+      <section className="z-10 grow md:mx-16 md:rounded-lg flex flex-col items-center gap-8 py-8 sm:py-16 md:py-32 px-8 bg-primary border-y">
         <h1 className="text-white text-4xl font-semibold">
           So, what can Orin do?
         </h1>
@@ -287,11 +300,12 @@ function App() {
         </div>
       </section>
 
-      {/* <div className="h-[70vh] mt-16 mx-auto aspect-video bg-muted overflow-hidden border rounded-lg">
-        <video className="w-full h-full object-cover" autoPlay muted loop>
-          <source src="/video.mov" type="video/mp4" />
-        </video>
-      </div> */}
+      <section className="grow m-6 sm:m-12 md:m-16 px-6 rounded-lg z-10 flex flex-col items-center sm:bg-muted gap-4 py-8 sm:py-16 md:py-32">
+        <h1 className="text-4xl text-center font-semibold">The SAT, mapped.</h1>
+        <div className="w-full lg:w-3/4 overflow-hidden rounded-lg border shadow-lg">
+          <img src="/product.png" alt="SAT" className="w-full" />
+        </div>
+      </section>
 
       {/* Pricing */}
       <section className="grow m-6 sm:m-12 md:m-16 px-6 rounded-lg z-10 flex flex-col items-center sm:bg-muted gap-4 py-8 sm:py-16 md:py-32">
