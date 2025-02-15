@@ -7601,6 +7601,11 @@ levn@~0.3.0:
     prelude-ls "~1.1.2"
     type-check "~0.3.2"
 
+libphonenumber-js@^1.11.19:
+  version "1.11.19"
+  resolved "https://registry.yarnpkg.com/libphonenumber-js/-/libphonenumber-js-1.11.19.tgz#de6437b15d23d9e3b16e5b14c6f2d6d65f58c9b7"
+  integrity sha512-bW/Yp/9dod6fmyR+XqSUL1N5JE7QRxQ3KrBIbYS1FTv32e5i3SEtQVX+71CYNv8maWNSOgnlCoNp9X78f/cKiA==
+
 lie@3.1.1:
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/lie/-/lie-3.1.1.tgz#9a436b2cc7746ca59de7a41fa469b3efb76bd87e"
@@ -9929,10 +9934,10 @@ slash@^4.0.0:
   resolved "https://registry.yarnpkg.com/slash/-/slash-4.0.0.tgz#2422372176c4c6c5addb5e2ada885af984b396a7"
   integrity sha512-3dOsAHXXUkQTpOYcoAxLIorMTp4gIQr5IW3iVb7A7lFIp0VHhnynm9izx6TssdrIcVIESAlVjtnO2K8bg+Coew==
 
-slate-ui@^1.1.22:
-  version "1.1.22"
-  resolved "https://registry.yarnpkg.com/slate-ui/-/slate-ui-1.1.22.tgz#fab1174423ac71fde588abfa5750665ff9975af3"
-  integrity sha512-osXMf/Pie6DFk2Afl2M3tKNMMvpKQjfUJmkFJl6d3oF48xSO3ZWCBNd+IMh4Xv/JgwncU6JU5hZ82Nf3Ywd7WQ==
+slate-ui@^1.1.26:
+  version "1.1.26"
+  resolved "https://registry.yarnpkg.com/slate-ui/-/slate-ui-1.1.26.tgz#480ec9febf5678f6c39ea557fe74614b0b949587"
+  integrity sha512-Mkr4EjtTw+EQpMhZrhRQiSY1BK7zSJbAKLNfdD5O5SSF63sAVRd5yAQXaFC2lMz4dQpHU3SqQIPfcnFV2iiAAg==
   dependencies:
     "@headlessui/react" "^2.0.4"
     "@radix-ui/react-alert-dialog" "^1.0.5"
@@ -9964,6 +9969,11 @@ sockjs@^0.3.24:
     faye-websocket "^0.11.3"
     uuid "^8.3.2"
     websocket-driver "^0.7.4"
+
+sonner@^1.7.4:
+  version "1.7.4"
+  resolved "https://registry.yarnpkg.com/sonner/-/sonner-1.7.4.tgz#4c39820db86623800a17115c8970796aa862133a"
+  integrity sha512-DIS8z4PfJRbIyfVFDVnK9rO3eYDtse4Omcm6bt0oEr5/jtLgysmjuBl1frJ9E/EQZrFmKx2A8m/s5s9CRXIzhw==
 
 source-list-map@^2.0.0, source-list-map@^2.0.1:
   version "2.0.1"

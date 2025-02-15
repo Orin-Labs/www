@@ -1,25 +1,26 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-import { motion } from "framer-motion";
+import { motion } from 'framer-motion';
+import { parsePhoneNumber } from 'libphonenumber-js';
 import {
-  AudioLinesIcon,
   ChevronDown,
-  ChevronRight,
   Forward,
   Hourglass,
-  LoaderCircle,
-  Minus,
   Radar,
   Rocket,
-  Speech,
   Sun,
-} from "lucide-react";
-import { TypeAnimation } from "react-type-animation";
-import { Button } from "slate-ui";
-import { useLocalStorage } from "usehooks-ts";
-
-import Vapi from "@vapi-ai/web";
-import { CreateAssistantDTO } from "@vapi-ai/web/dist/api";
+} from 'lucide-react';
+import { TypeAnimation } from 'react-type-animation';
+import {
+  Button,
+  Checkbox,
+  TextInput,
+} from 'slate-ui';
+import {
+  toast,
+  Toaster,
+} from 'sonner';
+import { useLocalStorage } from 'usehooks-ts';
 
 function FeatureCard({
   icon: Icon,
@@ -56,115 +57,84 @@ function Bullet({
   );
 }
 
-function App() {
-  // Detect "waitlist-confirmed" query param
-  const waitlistConfirmed = new URLSearchParams(window.location.search).get(
-    "waitlist-confirmed"
-  );
+function SubmitForm() {
+  const [submitted, setSubmitted] = useLocalStorage("submitted", false);
+  const [isParent, setIsParent] = useState(false);
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
 
-  const [isWaitlistConfirmed, setIsWaitlistConfirmed] = useLocalStorage(
-    "waitlist-confirmed",
-    !!waitlistConfirmed
-  );
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
 
-  if (waitlistConfirmed) {
-    setIsWaitlistConfirmed(true);
-  }
+    if (!name || !phone) {
+      toast.error("Please fill out all fields.");
+      return;
+    }
 
-  const [vapi, setVapi] = useState<Vapi>(
-    new Vapi("6abe9004-54a5-454e-8bf6-0678db02abdf")
-  );
-  const [orinLoading, setOrinLoading] = useState(false);
-  const [orinTalking, setOrinTalking] = useState(false);
-  const [callOn, setCallOn] = useState(false);
+    setSubmitted(true);
 
-  const initVapi = async () => {
-    setOrinLoading(true);
-    const MODEL: CreateAssistantDTO = {
-      transcriber: {
-        provider: "deepgram",
-        model: "nova-2",
-        language: "en-US",
-      },
-      model: {
-        provider: "openai",
-        model: "gpt-4o",
-        messages: [
-          {
-            role: "system",
-            content: `
-            You are a succinct AI tutor named Orin. You're currently studying at Oxford and
-            are tutoring for some side cash. You love coffee, renaissance art, violin, and
-            whatever subject is being taught.
+    const phoneNumber = parsePhoneNumber(phone, "US");
 
-            Don't ask the user if they have more questions, just answer them and treat the
-            conversation as a normal conversation. Try and match the user's tone and style.
-
-            Currently, you're embedded in a landing page selling your services. The person you're
-            talking to is a potential customer. Your job is to be friendly, engaging, not too
-            salesly, and help them learn more about you and your services.
-
-            Within the app, user's will enter lessons with you. You'll be able to coach them
-            through their lessons, controlling their UI and generating a shared notebook with
-            notes, quizzes, examples, and more. You also construct a knowledge graph of the user's
-            knowledge and use that to tailor the exact lessons they need. You update this knowledge
-            graph after each lesson by reviewing the lesson transcript and updating the graph.
-
-            The price is $150/month with a 7-day free trial. This is cheaper than any human tutoring
-            service, and users can use you as much as they want every month.
-
-            You are run by a company called Orin Labs, which is a small startup based in San Francisco.
-
-            Do not mention features that aren't explicitly mentioned on the page or in this prompt.
-            
-            Features on the roadmap include:
-            - Practice tests for the SAT
-            - Parental reporting: realtime reports, allowing parents to call you and get a report
-              on their child's progress.
-
-            Here's the HTML of the page you're embedded in:
-            ${document.documentElement.outerHTML}
-            
-            Greet the user, let them know this call is limited to 10 minutes, and ask if you can
-            help them navigate or understand the webpage.
-            `,
-          },
-        ],
-      },
-      voice: {
-        provider: "11labs",
-        voiceId: "L0Dsvb3SLTyegXwtm47J", // "T5cu6IU92Krx4mh43osx",
-        model: "eleven_flash_v2_5",
-      },
-      stopSpeakingPlan: {
-        numWords: 1,
-      },
-      // @ts-expect-error: Vapi type error thinks this shouldn't be an array.
-      clientMessages: ["tool-calls", "speech-update", "conversation-update"],
-      maxDurationSeconds: 600,
-      name: "Orin",
-      firstMessageMode: "assistant-speaks-first-with-model-generated-message",
-    };
-    await vapi.start(MODEL);
-    setOrinLoading(false);
-    setCallOn(true);
-
-    vapi.on(
-      "message",
-      async (message: {
-        type: "speech-update";
-        status: "started" | "stopped";
-        role: "assistant" | "user";
-      }) => {
-        if (message.type === "speech-update" && message.role === "assistant") {
-          setOrinTalking(message.status === "started");
-        }
-      }
-    );
+    fetch("https://api.learnwithorin.com/api/users/express-interest/", {
+      method: "POST",
+      body: JSON.stringify({
+        your_name: "Bryan",
+        phone_number: phoneNumber.number,
+        is_parent: false,
+      }),
+    });
   };
 
+  if (submitted) {
+    return (
+      <p className="text-xl text-gray-600">
+        Thanks! Orin will be in touch soon.
+      </p>
+    );
+  }
+
+  return (
+    <motion.form
+      className="flex flex-col gap-4 items-center"
+      onSubmit={handleSubmit}
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.2 }}
+      exit={{ opacity: 0, y: -10 }}
+    >
+      <TextInput
+        value={name}
+        placeholder="Your Name"
+        className="w-full"
+        onChange={setName}
+      />
+      <div className="flex gap-2 w-full">
+        <TextInput
+          value={phone}
+          placeholder="Phone Number"
+          onFocus={(e) => (e.target.type = "tel")}
+          onBlur={(e) => (e.target.type = "text")}
+          onChange={setPhone}
+          className="grow"
+        />
+        <Checkbox
+          label="I'm a parent"
+          onCheckedChange={() => setIsParent((p) => !p)}
+          checked={isParent}
+          withBody
+        />
+      </div>
+      <Button type="submit" className="w-fit">
+        Reach out to me!
+      </Button>
+    </motion.form>
+  );
+}
+
+function App() {
   return (
     <div className="max-w-screen relative overflow-y-auto z-0">
+      <Toaster />
       <div className="absolute top-0 flex justify-between w-full h-[90vh] overflow-hidden opacity-10 xl:opacity-25">
         <img
           src="/tree.png"
@@ -180,71 +150,18 @@ function App() {
 
       {/* Hero Section */}
       <header className="z-10 dot-vignette w-full px-4 h-[90vh] flex flex-col items-center justify-center relative">
-        <div className="container max-w-4xl w-full text-center flex flex-col items-center">
-          {isWaitlistConfirmed || waitlistConfirmed ? (
-            <h1 className="text-5xl md:text-6xl font-semibold text-gray-900 mb-6">
-              You're on the waitlist!
-            </h1>
-          ) : (
-            <h1 className="text-5xl md:text-6xl font-semibold text-gray-900 mb-6">
-              Meet Orin, your<br></br>
-              <TypeAnimation
-                className="text-primary"
-                sequence={["personal SAT tutor.", 1000]}
-              />
-            </h1>
-          )}
-          <span className="text-xl text-gray-600 mb-8">
+        <div className="container max-w-4xl w-full text-center flex flex-col gap-4 items-center">
+          <h1 className="text-5xl md:text-6xl font-semibold text-gray-900">
+            Meet Orin, your<br></br>
+            <TypeAnimation
+              className="text-primary"
+              sequence={["personal SAT tutor.", 1000]}
+            />
+          </h1>
+          <span className="text-xl text-gray-600">
             The first learning assistant that learns <strong>you</strong>.
           </span>
-          <div className="flex gap-4">
-            <Button
-              className="text-md gap-2 hover:scale-105 transition-all"
-              iconLeft={
-                orinLoading
-                  ? LoaderCircle
-                  : callOn
-                  ? orinTalking
-                    ? AudioLinesIcon
-                    : Minus
-                  : Speech
-              }
-              onClick={() => {
-                if (callOn) {
-                  vapi.stop();
-                  setOrinTalking(false);
-                  setCallOn(false);
-                } else {
-                  initVapi();
-                }
-              }}
-              size="lg"
-              disabled={orinLoading}
-              styles={{
-                icon: {
-                  animation: orinLoading
-                    ? "spin 1s linear infinite"
-                    : undefined,
-                },
-              }}
-            >
-              {orinLoading ? "Loading..." : callOn ? "Stop" : "Talk to Orin"}
-            </Button>
-            <a
-              href="https://getwaitlist.com/waitlist/24645"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <Button
-                variant="secondary"
-                className="text-md hover:scale-105 transition-all"
-                size="lg"
-                iconRight={ChevronRight}
-              >
-                <span className="hidden sm:block">Join</span> Waitlist
-              </Button>
-            </a>
-          </div>
+          <SubmitForm />
         </div>
 
         <Button
@@ -300,13 +217,6 @@ function App() {
         </div>
       </section>
 
-      <section className="grow m-6 sm:m-12 md:m-16 px-6 rounded-lg z-10 flex flex-col items-center sm:bg-muted gap-4 py-8 sm:py-16 md:py-32">
-        <h1 className="text-4xl text-center font-semibold">The SAT, mapped.</h1>
-        <div className="w-full lg:w-3/4 overflow-hidden rounded-lg border shadow-lg">
-          <img src="/product.png" alt="SAT" className="w-full" />
-        </div>
-      </section>
-
       {/* Pricing */}
       <section className="grow m-6 sm:m-12 md:m-16 px-6 rounded-lg z-10 flex flex-col items-center sm:bg-muted gap-4 py-8 sm:py-16 md:py-32">
         <h1 className="text-4xl font-semibold">Pricing</h1>
@@ -324,7 +234,7 @@ function App() {
 
             <div className="border-b my-4"></div>
 
-            <div className="flex flex-col gap-8 sm:gap-4">
+            <div className="flex flex-col gap-8 sm:gap-4 border-b pb-6 mb-4">
               <Bullet icon={Sun} description="Capacity to teach any subject." />
               <Bullet
                 icon={Forward}
@@ -343,22 +253,7 @@ function App() {
                 description="Predefined learning objectives (SAT, MCAT, etc)."
               />
             </div>
-
-            <div className="w-full flex justify-center sm:justify-end mt-4">
-              <a
-                href="https://getwaitlist.com/waitlist/24645"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <Button
-                  iconRight={ChevronRight}
-                  className="hover:scale-105 transition-all text-md"
-                  size="lg"
-                >
-                  Join Waitlist
-                </Button>
-              </a>
-            </div>
+            <SubmitForm />
           </div>
         </div>
       </section>
