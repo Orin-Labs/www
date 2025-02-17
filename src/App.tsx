@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-import { motion } from "framer-motion";
+import { motion } from 'framer-motion';
 import {
   AudioLinesIcon,
   ChevronDown,
@@ -13,13 +13,13 @@ import {
   Rocket,
   Speech,
   Sun,
-} from "lucide-react";
-import { TypeAnimation } from "react-type-animation";
-import { Button } from "slate-ui";
-import { useLocalStorage } from "usehooks-ts";
+} from 'lucide-react';
+import { TypeAnimation } from 'react-type-animation';
+import { Button } from 'slate-ui';
+import { useLocalStorage } from 'usehooks-ts';
 
-import Vapi from "@vapi-ai/web";
-import { CreateAssistantDTO } from "@vapi-ai/web/dist/api";
+import Vapi from '@vapi-ai/web';
+import { CreateAssistantDTO } from '@vapi-ai/web/dist/api';
 
 function FeatureCard({
   icon: Icon,
@@ -366,7 +366,7 @@ function App() {
       {/* Footer */}
       <footer className="bg-gray-50 py-2 border-t">
         <div className="container mx-auto text-center text-gray-400 text-xs">
-          <p>© 2025 Orin Labs. All rights reserved.</p>
+          <p>© 2025 Pylon Solutions, Co. All rights reserved.</p>
         </div>
       </footer>
     </div>
