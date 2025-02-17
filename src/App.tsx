@@ -88,7 +88,7 @@ function SubmitForm() {
   if (submitted) {
     return (
       <p className="text-xl text-gray-600">
-        Thanks! Orin will be in touch soon.
+        Submitted! Orin will be in touch soon.
       </p>
     );
   }
