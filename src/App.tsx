@@ -92,7 +92,7 @@ function SubmitForm() {
 
   return (
     <>
-      <Button onClick={() => setOpen(true)}>Reach out to me!</Button>
+      <Button onClick={() => setOpen(true)}>Contact Orin</Button>
       <Modal
         className="p-4 rounded-lg animate-contentShow"
         onClose={() => setOpen(false)}
