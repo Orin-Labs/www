@@ -11,7 +11,7 @@ import {
   Sun,
 } from "lucide-react";
 import { TypeAnimation } from "react-type-animation";
-import { Button, Checkbox, TextInput } from "slate-ui";
+import { Button, Checkbox, Modal, TextInput } from "slate-ui";
 import { toast, Toaster } from "sonner";
 import { useLocalStorage } from "usehooks-ts";
 
@@ -55,7 +55,7 @@ function SubmitForm() {
   const [isParent, setIsParent] = useState(false);
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
-  const [consent, setConsent] = useState(false);
+  const [open, setOpen] = useState(false);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -91,47 +91,56 @@ function SubmitForm() {
   }
 
   return (
-    <motion.form
-      onSubmit={handleSubmit}
-      className="flex flex-col gap-4 items-center"
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.2 }}
-      exit={{ opacity: 0, y: -10 }}
-    >
-      <TextInput
-        value={name}
-        placeholder="Your Name"
-        className="w-full"
-        onChange={setName}
-      />
+    <>
+      <Button onClick={() => setOpen(true)}>Reach out to me!</Button>
+      <Modal
+        className="p-4 rounded-lg animate-contentShow"
+        onClose={() => setOpen(false)}
+        open={open}
+      >
+        <form onSubmit={handleSubmit} className="flex flex-col gap-2 w-full">
+          <h1 className="text-2xl font-semibold">Interested in Orin?</h1>
+          <p className="text-gray-500 text-sm">
+            Submit your information below to get in touch with Orin.
+          </p>
+          <TextInput
+            value={name}
+            placeholder="Your Name"
+            className="w-full"
+            onChange={setName}
+          />
 
-      <TextInput
-        value={phone}
-        placeholder="Phone Number"
-        onFocus={(e) => (e.target.type = "tel")}
-        onBlur={(e) => (e.target.type = "text")}
-        onChange={setPhone}
-        className="w-full"
-      />
-      <div className="w-full">
-        <Checkbox
-          label="I consent to being contacted via phone and can opt out at any time by replying to the text with 'STOP'."
-          withBody
-          checked={consent}
-          onCheckedChange={() => setConsent((prev) => !prev)}
-        />
-        <Checkbox
-          label="I'm a parent"
-          checked={isParent}
-          onCheckedChange={() => setIsParent((prev) => !prev)}
-          withBody
-        />
-      </div>
-      <Button type="submit" className="w-fit">
-        Reach out to me!
-      </Button>
-    </motion.form>
+          <TextInput
+            value={phone}
+            placeholder="Phone Number"
+            onFocus={(e) => (e.target.type = "tel")}
+            onBlur={(e) => (e.target.type = "text")}
+            onChange={setPhone}
+            className="w-full"
+          />
+
+          <Checkbox
+            label="I'm a parent"
+            checked={isParent}
+            onCheckedChange={() => setIsParent((prev) => !prev)}
+            withBody
+          />
+          <p className="text-[10px] text-gray-500 max-w-96">
+            By submitting, you authorize Orin to text and call the number you
+            provided, possibly using automated means. Message/data rates apply.
+            Message frequency may vary. Text HELP for help or STOP to opt out.
+            See terms and privacy policy.
+          </p>
+          <Button
+            type="submit"
+            disabled={!name || !phone}
+            className="w-fit ml-auto"
+          >
+            Reach out to me!
+          </Button>
+        </form>
+      </Modal>
+    </>
   );
 }
 
@@ -264,8 +273,11 @@ function App() {
 
       {/* Footer */}
       <footer className="bg-gray-50 py-2 border-t">
-        <div className="container mx-auto text-center text-gray-400 text-xs">
+        <div className="container mx-auto text-center text-gray-400 text-xs flex justify-between gap-4">
           <p>© 2025 Orin Labs. All rights reserved.</p>
+          <a href="/privacy" className="underline">
+            Privacy Policy
+          </a>
         </div>
       </footer>
     </div>
