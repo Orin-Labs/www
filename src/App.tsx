@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-import { motion } from 'framer-motion';
-import { parsePhoneNumber } from 'libphonenumber-js';
+import { motion } from "framer-motion";
+import { parsePhoneNumber } from "libphonenumber-js";
 import {
   ChevronDown,
   Forward,
@@ -9,18 +9,11 @@ import {
   Radar,
   Rocket,
   Sun,
-} from 'lucide-react';
-import { TypeAnimation } from 'react-type-animation';
-import {
-  Button,
-  Checkbox,
-  TextInput,
-} from 'slate-ui';
-import {
-  toast,
-  Toaster,
-} from 'sonner';
-import { useLocalStorage } from 'usehooks-ts';
+} from "lucide-react";
+import { TypeAnimation } from "react-type-animation";
+import { Button, Checkbox, TextInput } from "slate-ui";
+import { toast, Toaster } from "sonner";
+import { useLocalStorage } from "usehooks-ts";
 
 function FeatureCard({
   icon: Icon,
@@ -62,13 +55,12 @@ function SubmitForm() {
   const [isParent, setIsParent] = useState(false);
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
-  const [email, setEmail] = useState("");
-  const [useEmail, setUseEmail] = useState(false);
+  const [consent, setConsent] = useState(false);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!name || (!phone && !useEmail) || (useEmail && !email)) {
+    if (!name || !phone) {
       toast.error("Please fill out all fields.");
       return;
     }
@@ -78,9 +70,7 @@ function SubmitForm() {
     const payload = {
       your_name: name,
       is_parent: isParent,
-      ...(useEmail
-        ? { email }
-        : { phone_number: parsePhoneNumber(phone, "US").number }),
+      phone_number: parsePhoneNumber(phone, "US").number,
     };
 
     fetch("https://api.learnwithorin.com/api/users/express-interest/", {
@@ -115,33 +105,22 @@ function SubmitForm() {
         className="w-full"
         onChange={setName}
       />
-      <div className="flex gap-2 w-full">
-        {useEmail ? (
-          <TextInput
-            value={email}
-            type="email"
-            placeholder="Email Address"
-            onChange={setEmail}
-            className="grow"
-          />
-        ) : (
-          <TextInput
-            value={phone}
-            placeholder="Phone Number"
-            onFocus={(e) => (e.target.type = "tel")}
-            onBlur={(e) => (e.target.type = "text")}
-            onChange={setPhone}
-            className="grow"
-          />
-        )}
-        <Checkbox
-          label="Use email instead"
-          checked={useEmail}
-          onCheckedChange={() => setUseEmail((prev) => !prev)}
-          withBody
-        />
-      </div>
+
+      <TextInput
+        value={phone}
+        placeholder="Phone Number"
+        onFocus={(e) => (e.target.type = "tel")}
+        onBlur={(e) => (e.target.type = "text")}
+        onChange={setPhone}
+        className="w-full"
+      />
       <div className="w-full">
+        <Checkbox
+          label="I consent to being contacted via phone and can opt out at any time by replying to the text with 'STOP'."
+          withBody
+          checked={consent}
+          onCheckedChange={() => setConsent((prev) => !prev)}
+        />
         <Checkbox
           label="I'm a parent"
           checked={isParent}
