@@ -9934,10 +9934,10 @@ slash@^4.0.0:
   resolved "https://registry.yarnpkg.com/slash/-/slash-4.0.0.tgz#2422372176c4c6c5addb5e2ada885af984b396a7"
   integrity sha512-3dOsAHXXUkQTpOYcoAxLIorMTp4gIQr5IW3iVb7A7lFIp0VHhnynm9izx6TssdrIcVIESAlVjtnO2K8bg+Coew==
 
-slate-ui@^1.1.31:
-  version "1.1.31"
-  resolved "https://registry.yarnpkg.com/slate-ui/-/slate-ui-1.1.31.tgz#d0d9ddc6f4219287165a0f3af36a723db3a4a76d"
-  integrity sha512-9XVfDeb+J+d7COAiGYwGpt/sp9KaC+RhN2Wj3valgybdIYby+Al2z6BXIDItzL7XHzIDVxYMj8MlSqeulJHCqA==
+slate-ui@^1.1.32:
+  version "1.1.32"
+  resolved "https://registry.yarnpkg.com/slate-ui/-/slate-ui-1.1.32.tgz#59e546be24ebe0927336e57eaa97cf55d87b6ab8"
+  integrity sha512-x3qpU6VF3lLfMIsgiAEuoSRBQVKvxUw9Ee6R+n7n0lteTF3DPKOeRbQLzCyu4mbyuj2r7nl8UZCt+fuccvutsw==
   dependencies:
     "@headlessui/react" "^2.0.4"
     "@radix-ui/react-alert-dialog" "^1.0.5"
