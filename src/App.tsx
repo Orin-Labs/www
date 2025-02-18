@@ -62,26 +62,33 @@ function SubmitForm() {
   const [isParent, setIsParent] = useState(false);
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [useEmail, setUseEmail] = useState(false);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!name || !phone) {
+    if (!name || (!phone && !useEmail) || (useEmail && !email)) {
       toast.error("Please fill out all fields.");
       return;
     }
 
     setSubmitted(true);
 
-    const phoneNumber = parsePhoneNumber(phone, "US");
+    const payload = {
+      your_name: name,
+      is_parent: isParent,
+      ...(useEmail
+        ? { email }
+        : { phone_number: parsePhoneNumber(phone, "US").number }),
+    };
 
     fetch("https://api.learnwithorin.com/api/users/express-interest/", {
       method: "POST",
-      body: JSON.stringify({
-        your_name: "Bryan",
-        phone_number: phoneNumber.number,
-        is_parent: false,
-      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
     });
   };
 
@@ -109,17 +116,35 @@ function SubmitForm() {
         onChange={setName}
       />
       <div className="flex gap-2 w-full">
-        <TextInput
-          value={phone}
-          placeholder="Phone Number"
-          onFocus={(e) => (e.target.type = "tel")}
-          onBlur={(e) => (e.target.type = "text")}
-          onChange={setPhone}
-          className="grow"
+        {useEmail ? (
+          <TextInput
+            value={email}
+            type="email"
+            placeholder="Email Address"
+            onChange={setEmail}
+            className="grow"
+          />
+        ) : (
+          <TextInput
+            value={phone}
+            placeholder="Phone Number"
+            onFocus={(e) => (e.target.type = "tel")}
+            onBlur={(e) => (e.target.type = "text")}
+            onChange={setPhone}
+            className="grow"
+          />
+        )}
+        <Checkbox
+          label="Use email instead"
+          onCheckedChange={() => setUseEmail((prev) => !prev)}
+          checked={useEmail}
+          withBody
         />
+      </div>
+      <div className="w-full">
         <Checkbox
           label="I'm a parent"
-          onCheckedChange={() => setIsParent((p) => !p)}
+          onCheckedChange={() => setIsParent((prev) => !prev)}
           checked={isParent}
           withBody
         />
