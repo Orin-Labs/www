@@ -13,7 +13,7 @@ import {
 import { TypeAnimation } from 'react-type-animation';
 import {
   Button,
-  Checkbox,
+  Switch,
   TextInput,
 } from 'slate-ui';
 import {
@@ -65,9 +65,7 @@ function SubmitForm() {
   const [email, setEmail] = useState("");
   const [useEmail, setUseEmail] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
+  const handleSubmit = () => {
     if (!name || (!phone && !useEmail) || (useEmail && !email)) {
       toast.error("Please fill out all fields.");
       return;
@@ -101,9 +99,8 @@ function SubmitForm() {
   }
 
   return (
-    <motion.form
+    <motion.div
       className="flex flex-col gap-4 items-center"
-      onSubmit={handleSubmit}
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.2 }}
@@ -134,25 +131,25 @@ function SubmitForm() {
             className="grow"
           />
         )}
-        <Checkbox
+        <Switch
           label="Use email instead"
-          onCheckedChange={() => setUseEmail((prev) => !prev)}
           checked={useEmail}
+          onCheckedChange={() => setUseEmail((prev) => !prev)}
           withBody
         />
       </div>
       <div className="w-full">
-        <Checkbox
+        <Switch
           label="I'm a parent"
-          onCheckedChange={() => setIsParent((prev) => !prev)}
           checked={isParent}
+          onCheckedChange={() => setIsParent((prev) => !prev)}
           withBody
         />
       </div>
-      <Button type="submit" className="w-fit">
+      <Button type="submit" className="w-fit" onClick={handleSubmit}>
         Reach out to me!
       </Button>
-    </motion.form>
+    </motion.div>
   );
 }
 
