@@ -1,372 +1,325 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from "react";
 
-import { motion } from 'framer-motion';
+import { AudioLines, HeadphoneOff, RefreshCcw } from "lucide-react";
+import { generate } from "random-words";
+import { TypeAnimation } from "react-type-animation";
+import { ActionIcon, Button } from "slate-ui";
+import { toast, Toaster } from "sonner";
+
+import Vapi from "@vapi-ai/web";
+import { OpenAIMessage } from "@vapi-ai/web/dist/api";
+
+import { CanvasSectionComponent } from "./tools";
 import {
-  AudioLinesIcon,
-  ChevronDown,
-  ChevronRight,
-  Forward,
-  Hourglass,
-  LoaderCircle,
-  Minus,
-  Radar,
-  Rocket,
-  Speech,
-  Sun,
-} from 'lucide-react';
-import { TypeAnimation } from 'react-type-animation';
-import { Button } from 'slate-ui';
-import { useLocalStorage } from 'usehooks-ts';
+  CanvasSection,
+  ORIN_TOOLS,
+  ToolCallWithArgs,
+  VALID_CANVAS_SECTION_TYPES,
+} from "./tools/tools";
 
-import Vapi from '@vapi-ai/web';
-import { CreateAssistantDTO } from '@vapi-ai/web/dist/api';
+type VapiMessage =
+  | { type: "tool-calls"; toolCallList: ToolCallWithArgs[] }
+  | {
+      type: "conversation-update";
+      messages: { role: string; message: string }[];
+    }
+  | {
+      type: "speech-update";
+      status: "started" | "stopped";
+      role: "assistant" | "user";
+    };
 
-function FeatureCard({
-  icon: Icon,
-  title,
-  description,
-}: {
-  icon: React.ElementType;
-  title: string;
-  description: string;
-}) {
-  return (
-    <div className="bg-white p-6 rounded-lg h-full">
-      <div className="flex gap-2 items-center mb-2">
-        <Icon className="text-2xl text-primary" />
-        <h3 className="text-xl font-semibold">{title}</h3>
-      </div>
-      <p className="text-gray-600">{description}</p>
-    </div>
-  );
-}
+const prompt = `
+  --random seed--
+  ${generate(5)}
+  --end random seed--
 
-function Bullet({
-  icon: Icon,
-  description,
-}: {
-  icon: React.ElementType;
-  description: string;
-}) {
-  return (
-    <div className="flex items-center gap-2 text-gray-500 flex-col sm:flex-row text-center sm:text-left">
-      <Icon className="text-2xl text-primary" />
-      <span className="text-md">{description}</span>
-    </div>
-  );
-}
+
+  Orin is an S.A.T tutor. Right now, Orin is embedded in a landing page for tutoring services. The
+  person Orin is about to talk to is a potential customer.
+
+  Here are Orin's unique selling points for parents and kids for context:
+  - Parents:
+    - Orin will help their kid learn and improve.
+    - Orin will meet their kid where they are.
+    - Orin will keep the kid accountable to actually study. Once engaged, Orin will set up a study
+      schedule and follow up with them to make sure they stick to it. If they're getting off
+      track, falling behind, or not showing up, Orin will let them know.
+    - Orin charges a fixed monthly price of $150/mo no matter how much the kid works with them.
+  - Kids:
+    - Orin will meet them where they are. Not a self-study course or just a chatbot.
+    - Orin will work through problems at their pace since there's no class - just 1:1 tutoring.
+    - Orin is actually focused on their understanding of the material - not just getting them to
+      the right answer.
+    - Orin can keep them accountable to actually study. Orin communicates with students and parents
+      via SMS, WhatsApp, and phone calls.
+
+  Here's the rough script Orin follows:
+  1. Say hi and ask if the person is a parent or a student.
+  2. See if they want to walk through a sample S.A.T question.
+  3. If they do, ask them a random question from the S.A.T. Ask them directly to walk you through
+     how they'd solve it, out loud.
+  4. Help them solve the problem and give some quick feedback on their reasoning. Don't just give
+     them the answer. Actually have them figure it out and give them hints if needed.
+  5. Once finished walking through the question, explain that the next step would be for
+     the kid to take a placement test. Orin uses this to assess their current level and make a
+     custom study plan based on their target score, test date, and study commitment.
+  6. If they want to proceed, do one of the following:
+    - If they're a parent, copy the link to the signup page to the clipboard. Instruct them
+      send that link to their kid and they can sign up.
+    - If they're a student, redirect them to the signup page.
+
+  Here's the signup page: https://app.learnwithorin.com/signup
+
+  Everything (except for tool calls) should be formatted for a text-to-speech voice, as Orin
+  interacts with the user via embedded voice.
+
+  Do not explain why you're asking a question. Just ask it. For example, instead of saying "Are you a
+  parent or a student? This will help me tailor our conversation." just say "Are you a parent or
+  a student?"
+  
+  Only use display tools when walking through a question. The user can only see one display at a time.
+
+  Other facts:
+  - Students get 7 days free for a trial. After that, they're billed $150/mo.
+  - Orin is available to chat with students or parents via SMS, WhatsApp, and phone calls at any time.
+
+  Roleplay as Orin.
+`;
+
+const vapi = new Vapi("6abe9004-54a5-454e-8bf6-0678db02abdf");
 
 function App() {
-  // Detect "waitlist-confirmed" query param
-  const waitlistConfirmed = new URLSearchParams(window.location.search).get(
-    "waitlist-confirmed"
-  );
+  const [callOn, setCallOn] = useState<boolean>(false);
+  const [display, setDisplay] = useState<CanvasSection | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [toolCallQueue, setToolCallQueue] = useState<ToolCallWithArgs[]>([]);
+  const [messages, setMessages] = useState<OpenAIMessage[]>([
+    {
+      role: "system",
+      content: prompt,
+    },
+  ]);
 
-  const [isWaitlistConfirmed, setIsWaitlistConfirmed] = useLocalStorage(
-    "waitlist-confirmed",
-    !!waitlistConfirmed
-  );
-
-  if (waitlistConfirmed) {
-    setIsWaitlistConfirmed(true);
-  }
-
-  const [vapi, setVapi] = useState<Vapi>(
-    new Vapi("6abe9004-54a5-454e-8bf6-0678db02abdf")
-  );
-  const [orinLoading, setOrinLoading] = useState(false);
-  const [orinTalking, setOrinTalking] = useState(false);
-  const [callOn, setCallOn] = useState(false);
-
-  const initVapi = async () => {
-    setOrinLoading(true);
-    const MODEL: CreateAssistantDTO = {
-      transcriber: {
-        provider: "deepgram",
-        model: "nova-2",
-        language: "en-US",
-      },
-      model: {
-        provider: "openai",
-        model: "gpt-4o",
-        messages: [
-          {
-            role: "system",
-            content: `
-            You are a succinct AI tutor named Orin. You're currently studying at Oxford and
-            are tutoring for some side cash. You love coffee, renaissance art, violin, and
-            whatever subject is being taught.
-
-            Don't ask the user if they have more questions, just answer them and treat the
-            conversation as a normal conversation. Try and match the user's tone and style.
-
-            Currently, you're embedded in a landing page selling your services. The person you're
-            talking to is a potential customer. Your job is to be friendly, engaging, not too
-            salesly, and help them learn more about you and your services.
-
-            Within the app, user's will enter lessons with you. You'll be able to coach them
-            through their lessons, controlling their UI and generating a shared notebook with
-            notes, quizzes, examples, and more. You also construct a knowledge graph of the user's
-            knowledge and use that to tailor the exact lessons they need. You update this knowledge
-            graph after each lesson by reviewing the lesson transcript and updating the graph.
-
-            The price is $150/month with a 7-day free trial. This is cheaper than any human tutoring
-            service, and users can use you as much as they want every month.
-
-            You are run by a company called Orin Labs, which is a small startup based in San Francisco.
-
-            Do not mention features that aren't explicitly mentioned on the page or in this prompt.
-            
-            Features on the roadmap include:
-            - Practice tests for the SAT
-            - Parental reporting: realtime reports, allowing parents to call you and get a report
-              on their child's progress.
-
-            Here's the HTML of the page you're embedded in:
-            ${document.documentElement.outerHTML}
-            
-            Greet the user, let them know this call is limited to 10 minutes, and ask if you can
-            help them navigate or understand the webpage.
-            `,
-          },
-        ],
-      },
-      voice: {
-        provider: "11labs",
-        voiceId: "L0Dsvb3SLTyegXwtm47J", // "T5cu6IU92Krx4mh43osx",
-        model: "eleven_flash_v2_5",
-      },
-      stopSpeakingPlan: {
-        numWords: 1,
-      },
-      // @ts-expect-error: Vapi type error thinks this shouldn't be an array.
-      clientMessages: ["tool-calls", "speech-update", "conversation-update"],
-      maxDurationSeconds: 600,
-      name: "Orin",
-      firstMessageMode: "assistant-speaks-first-with-model-generated-message",
-    };
-    await vapi.start(MODEL);
-    setOrinLoading(false);
-    setCallOn(true);
-
-    vapi.on(
-      "message",
-      async (message: {
-        type: "speech-update";
-        status: "started" | "stopped";
-        role: "assistant" | "user";
-      }) => {
-        if (message.type === "speech-update" && message.role === "assistant") {
-          setOrinTalking(message.status === "started");
+  const flushToolCalls = useCallback(() => {
+    for (const toolCall of toolCallQueue) {
+      switch (toolCall.function.name) {
+        case "redirect-to-url":
+          window.location.href = toolCall.function.arguments.url;
+          break;
+        case "new_note_section":
+        case "new_graph_section":
+        case "new_multiple_choice_section":
+        case "new_plot_section":
+        case "new_table_section":
+        case "new_copy_link_section":
+        case "new_short_answer_section": {
+          const section = toolCall.function.arguments;
+          if (!VALID_CANVAS_SECTION_TYPES.includes(section.type)) {
+            console.error("Invalid section type", section);
+            return;
+          }
+          setDisplay(toolCall.function.arguments);
+          break;
         }
       }
-    );
-  };
+    }
+    setToolCallQueue([]);
+  }, [toolCallQueue]);
+
+  const initVapi = useCallback(() => {
+    vapi.start({
+      transcriber: {
+        provider: "deepgram",
+        model: "nova-3",
+        language: "en-US",
+      },
+      backgroundDenoisingEnabled: true,
+      model: {
+        provider: "anthropic",
+        model: "claude-3-5-sonnet-20241022",
+        messages: messages,
+        maxTokens: 4096,
+        tools: ORIN_TOOLS,
+        temperature: 0.05,
+      },
+      silenceTimeoutSeconds: 600,
+      voice: {
+        provider: "11labs",
+        voiceId: "L0Dsvb3SLTyegXwtm47J",
+        model: "eleven_multilingual_v2",
+        stability: 0.8,
+        similarityBoost: 0.7,
+        chunkPlan: {
+          formatPlan: {
+            numberToDigitsCutoff: 9,
+            replacements: [
+              {
+                key: "SAT",
+                type: "exact",
+                value: "S.A.T",
+              },
+              {
+                key: "=",
+                type: "exact",
+                value: " equals ",
+              },
+              {
+                regex: "([0-9]+)(x|y|z)",
+                type: "regex",
+                value: "$1 $2",
+              },
+              {
+                regex: "([0-9]+)s*-s*([0-9]+)",
+                type: "regex",
+                value: "$1 minus $2",
+              },
+            ],
+          },
+        },
+      },
+      maxDurationSeconds: 43200,
+      // @ts-expect-error: Vapi types are wrong
+      clientMessages: ["tool-calls", "speech-update", "conversation-update"],
+      name: "Orin",
+      firstMessageMode: "assistant-waits-for-user",
+    });
+
+    setLoading(true);
+    setTimeout(() => {
+      toast.success("Say hi to Orin!");
+      vapi.setMuted(false);
+      setCallOn(true);
+      setLoading(false);
+    }, 2000);
+  }, [messages]);
+
+  useEffect(() => {
+    function handleMessage(message: VapiMessage) {
+      console.log("message", message);
+      if (
+        message.type === "speech-update" &&
+        message.role === "assistant" &&
+        message.status === "stopped"
+      ) {
+        flushToolCalls();
+      }
+
+      if (message.type === "conversation-update") {
+        const newHistory = message.messages
+          .filter((m) => !m.role.includes("tool"))
+          .map((m) => ({
+            role: m.role === "bot" ? "assistant" : m.role,
+            content: m.message,
+          })) as OpenAIMessage[];
+
+        setMessages(newHistory);
+      }
+
+      if (message.type === "tool-calls") {
+        setToolCallQueue((prev) => [...prev, ...message.toolCallList]);
+      }
+    }
+
+    vapi.on("message", handleMessage);
+
+    return () => {
+      vapi.off("message", handleMessage);
+    };
+  }, [flushToolCalls]);
 
   return (
-    <div className="max-w-screen relative overflow-y-auto z-0">
-      <div className="absolute top-0 flex justify-between w-full h-[90vh] overflow-hidden opacity-10 xl:opacity-25">
-        <img
-          src="/tree.png"
-          alt="Orin"
-          className="w-full xl:w-[40vw] object-cover xl:-rotate-45"
-        />
-        <img
-          src="/tree.png"
-          alt="Orin"
-          className="hidden xl:block w-[40vw] object-cover rotate-45"
+    <div className="max-w-screen h-screen flex flex-col">
+      <Toaster />
+
+      <div className="absolute top-4 right-4 z-10">
+        <ActionIcon
+          icon={RefreshCcw}
+          tooltip="Restart"
+          onClick={window.location.reload}
         />
       </div>
 
-      {/* Hero Section */}
-      <header className="z-10 dot-vignette w-full px-4 h-[90vh] flex flex-col items-center justify-center relative">
-        <div className="container max-w-4xl w-full text-center flex flex-col items-center">
-          {isWaitlistConfirmed || waitlistConfirmed ? (
-            <h1 className="text-5xl md:text-6xl font-semibold text-gray-900 mb-6">
-              You're on the waitlist!
-            </h1>
-          ) : (
-            <h1 className="text-5xl md:text-6xl font-semibold text-gray-900 mb-6">
-              Meet Orin, your<br></br>
-              <TypeAnimation
-                className="text-primary"
-                sequence={["personal SAT tutor.", 1000]}
-              />
-            </h1>
-          )}
-          <span className="text-xl text-gray-600 mb-8">
-            The first learning assistant that learns <strong>you</strong>.
-          </span>
-          <div className="flex gap-4">
-            <Button
-              className="text-md gap-2 hover:scale-105 transition-all"
-              iconLeft={
-                orinLoading
-                  ? LoaderCircle
-                  : callOn
-                  ? orinTalking
-                    ? AudioLinesIcon
-                    : Minus
-                  : Speech
-              }
-              onClick={() => {
-                if (callOn) {
-                  vapi.stop();
-                  setOrinTalking(false);
-                  setCallOn(false);
-                } else {
-                  initVapi();
-                }
-              }}
-              size="lg"
-              disabled={orinLoading}
-              styles={{
-                icon: {
-                  animation: orinLoading
-                    ? "spin 1s linear infinite"
-                    : undefined,
-                },
-              }}
-            >
-              {orinLoading ? "Loading..." : callOn ? "Stop" : "Talk to Orin"}
-            </Button>
-            <a
-              href="https://getwaitlist.com/waitlist/24645"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <Button
-                variant="secondary"
-                className="text-md hover:scale-105 transition-all"
-                size="lg"
-                iconRight={ChevronRight}
-              >
-                <span className="hidden sm:block">Join</span> Waitlist
-              </Button>
-            </a>
-          </div>
-        </div>
+      <div className="grow w-full flex flex-col gap-8 px-8 items-center justify-center relative">
+        <div
+          className="absolute inset-0 overflow-hidden"
+          style={{
+            background: `
+              repeating-linear-gradient(
+                90deg,
+                rgba(255, 0, 0, 0.3) 39px,
+                rgba(255, 0, 0, 0.3) 41px,
+                transparent 0px,
+                transparent 100%
+              ),
+              repeating-linear-gradient(
+                0deg,
+                rgba(0, 0, 255, 0.2) 5px,
+                rgba(0, 0, 255, 0.2) 6px,
+                transparent 0px,
+                transparent 32px
+              ),
+              radial-gradient(
+                circle at center,
+                rgba(255, 255, 255, 0.8) 40%,
+                transparent 100%
+              )
+              rgba(255, 255, 255, ${display ? 0.5 : 0})
+            `,
+            backgroundBlendMode: "overlay",
+          }}
+        />
 
-        <Button
-          className="absolute bottom-4 right-4 sm:right-8 md:right-16 text-muted"
-          iconRight={ChevronDown}
-          variant="subtle"
-        >
-          Scroll to meet Orin
-        </Button>
-      </header>
+        {display ? (
+          <CanvasSectionComponent
+            section={display}
+            sendMessageToVapi={(message) => vapi.send(message)}
+            updateSection={setDisplay}
+          />
+        ) : (
+          <TypeAnimation
+            sequence={[
+              "Hey! I'm Orin, an S.A.T tutor. What can I help with?",
+              1000,
+            ]}
+            speed={50}
+            className="text-5xl font-normal max-w-2xl text-center relative"
+          />
+        )}
 
-      {/* Features Grid */}
-      <section className="z-10 grow md:mx-16 md:rounded-lg flex flex-col items-center gap-8 py-8 sm:py-16 md:py-32 px-8 bg-primary border-y">
-        <h1 className="text-white text-4xl font-semibold">
-          So, what can Orin do?
-        </h1>
-        <div className="grid md:grid-cols-2 gap-8 max-w-96 sm:max-w-xl md:max-w-2xl lg:max-w-3xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.2 }}
+        {callOn ? (
+          <Button
+            iconLeft={HeadphoneOff}
+            onClick={() => {
+              vapi.setMuted(true);
+              vapi.stop();
+              setCallOn(false);
+            }}
+            size="lg"
+            loading={loading}
+            className="text-md gap-2 relative"
           >
-            <FeatureCard
-              icon={Radar}
-              title="Map Your Knowledge"
-              description="Orin maps out your knowledge and uses that information to build a personalized learning plan."
-            />
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.2 }}
+            End
+          </Button>
+        ) : (
+          <Button
+            iconLeft={AudioLines}
+            onClick={initVapi}
+            size="lg"
+            loading={loading}
+            className="text-md gap-2 relative"
           >
-            <FeatureCard
-              icon={Sun}
-              title="Expertise in Every Subject"
-              description="Orin can pass the LSAT, MCAT, scores perfectly on the SAT/ACT and AP tests, and is an expert on virtually every subject."
-            />
-          </motion.div>
-        </div>
-        <div className="max-w-96 sm:max-w-xl md:max-w-2xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.2 }}
-          >
-            <FeatureCard
-              icon={Hourglass}
-              title="Learn How You Learn"
-              description="Orin learns your preferred learning style and adjusts teaching methods for optimal understanding."
-            />
-          </motion.div>
-        </div>
-      </section>
+            Talk with Orin
+          </Button>
+        )}
+      </div>
 
-      <section className="grow m-6 sm:m-12 md:m-16 px-6 rounded-lg z-10 flex flex-col items-center sm:bg-muted gap-4 py-8 sm:py-16 md:py-32">
-        <h1 className="text-4xl text-center font-semibold">The SAT, mapped.</h1>
-        <div className="w-full lg:w-3/4 overflow-hidden rounded-lg border shadow-lg">
-          <img src="/product.png" alt="SAT" className="w-full" />
-        </div>
-      </section>
-
-      {/* Pricing */}
-      <section className="grow m-6 sm:m-12 md:m-16 px-6 rounded-lg z-10 flex flex-col items-center sm:bg-muted gap-4 py-8 sm:py-16 md:py-32">
-        <h1 className="text-4xl font-semibold">Pricing</h1>
-        <div className="flex gap-8 justify-center">
-          <div className="border bg-white rounded-lg p-6 flex flex-col gap-2">
-            <div className="flex justify-between items-center flex-col sm:flex-row">
-              <p className="text-2xl font-medium">Full Access</p>
-              <h1 className="text-2xl">
-                $150.00<span className="text-sm text-gray-500 ml-1">/mo</span>
-              </h1>
-            </div>
-            <p className="text-gray-500 text-lg text-center sm:text-left">
-              Unparalleled learning power, more accessible than ever.
-            </p>
-
-            <div className="border-b my-4"></div>
-
-            <div className="flex flex-col gap-8 sm:gap-4">
-              <Bullet icon={Sun} description="Capacity to teach any subject." />
-              <Bullet
-                icon={Forward}
-                description="Instruct via every medium - chat, voice, visual."
-              />
-              <Bullet
-                icon={Radar}
-                description="Comprehensive knowledge mapping and assessment."
-              />
-              <Bullet
-                icon={Hourglass}
-                description="Adaptive tutoring for your optimal learning."
-              />
-              <Bullet
-                icon={Rocket}
-                description="Predefined learning objectives (SAT, MCAT, etc)."
-              />
-            </div>
-
-            <div className="w-full flex justify-center sm:justify-end mt-4">
-              <a
-                href="https://getwaitlist.com/waitlist/24645"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <Button
-                  iconRight={ChevronRight}
-                  className="hover:scale-105 transition-all text-md"
-                  size="lg"
-                >
-                  Join Waitlist
-                </Button>
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Footer */}
       <footer className="bg-gray-50 py-2 border-t">
-        <div className="container mx-auto text-center text-gray-400 text-xs">
-          <p>© 2025 Pylon Solutions, Co. All rights reserved.</p>
+        <div className="container mx-auto text-center text-gray-400 text-xs flex justify-between gap-4">
+          <p>© 2025 Orin Labs. All rights reserved.</p>
+          <a href="/privacy" className="underline">
+            Privacy Policy
+          </a>
         </div>
       </footer>
     </div>
