@@ -51,7 +51,7 @@ const GraphSection = BaseSection.extend({
   explainer_text: z
     .string()
     .describe(
-      "The text that will be displayed to the user to explain the graph."
+      "The text that will be displayed to the user to explain the graph. Can use Markdown and LaTex."
     ),
   x_min: z
     .number()
@@ -162,7 +162,9 @@ const TableSection = BaseSection.extend({
 
 const CopyLinkSection = BaseSection.extend({
   type: z.literal("copy_link"),
-  url: z.string().describe("The URL to copy to the clipboard."),
+  url: z
+    .string()
+    .describe("The url to show on the screen. The user can copy it from here."),
 });
 
 const CANVAS_SECTION_TYPES = [
@@ -260,6 +262,7 @@ export type MultipleChoiceSection = z.infer<typeof MultipleChoiceSection>;
 export type ShortAnswerSection = z.infer<typeof ShortAnswerSection>;
 export type PlotSection = z.infer<typeof PlotSection>;
 export type TableSection = z.infer<typeof TableSection>;
+export type CopyLinkSection = z.infer<typeof CopyLinkSection>;
 export type ToolCallWithArgs = {
   id: string;
   type: "function";
@@ -270,8 +273,8 @@ export type ToolCallWithArgs = {
     | { name: "new_plot_section"; arguments: PlotSection }
     | { name: "new_short_answer_section"; arguments: ShortAnswerSection }
     | { name: "new_table_section"; arguments: TableSection }
-    | { name: "copy_link"; arguments: { url: string } }
-    | { name: "redirect-to-url"; arguments: { url: string } };
+    | { name: "redirect-to-url"; arguments: { url: string } }
+    | { name: "new_copy_link_section"; arguments: CopyLinkSection };
 };
 
 export type CanvasSection =

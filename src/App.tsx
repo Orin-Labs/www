@@ -1,20 +1,27 @@
 import React, {
   useCallback,
+  useEffect,
   useState,
 } from 'react';
 
 import {
   AudioLines,
   HeadphoneOff,
+  RefreshCcw,
 } from 'lucide-react';
+import { generate } from 'random-words';
 import { TypeAnimation } from 'react-type-animation';
-import { Button } from 'slate-ui';
+import {
+  ActionIcon,
+  Button,
+} from 'slate-ui';
 import {
   toast,
   Toaster,
 } from 'sonner';
 
 import Vapi from '@vapi-ai/web';
+import { OpenAIMessage } from '@vapi-ai/web/dist/api';
 
 import { CanvasSectionComponent } from './tools';
 import {
@@ -24,9 +31,24 @@ import {
   VALID_CANVAS_SECTION_TYPES,
 } from './tools/tools';
 
-const vapi = new Vapi("6abe9004-54a5-454e-8bf6-0678db02abdf");
+type VapiMessage =
+  | { type: "tool-calls"; toolCallList: ToolCallWithArgs[] }
+  | {
+      type: "conversation-update";
+      messages: { role: string; message: string }[];
+    }
+  | {
+      type: "speech-update";
+      status: "started" | "stopped";
+      role: "assistant" | "user";
+    };
 
 const prompt = `
+  --random seed--
+  ${generate(5)}
+  --end random seed--
+
+
   Orin is an S.A.T tutor. Right now, Orin is embedded in a landing page for tutoring services. The
   person Orin is about to talk to is a potential customer.
 
@@ -49,9 +71,10 @@ const prompt = `
   Here's the rough script Orin follows:
   1. Say hi and ask if the person is a parent or a student.
   2. See if they want to walk through a sample S.A.T question.
-  3. If they do, ask them a random question from the S.A.T. Ask them to walk you through
-     how they'd solve it.
-  4. Help them solve the problem and give some quick feedback on their reasoning.
+  3. If they do, ask them a random question from the S.A.T. Ask them directly to walk you through
+     how they'd solve it, out loud.
+  4. Help them solve the problem and give some quick feedback on their reasoning. Don't just give
+     them the answer. Actually have them figure it out and give them hints if needed.
   5. Once finished walking through the question, explain that the next step would be for
      the kid to take a placement test. Orin uses this to assess their current level and make a
      custom study plan based on their target score, test date, and study commitment.
@@ -62,10 +85,9 @@ const prompt = `
 
   Here's the signup page: https://app.learnwithorin.com/signup
 
-  Everything should be formatted for a text-to-speech voice, as Orin interacts with the
-  user via embedded voice. For example: "y = 3x + 2" should be written as "y equals 3x plus 2". DO
-  NOT FORGET THIS.
-  
+  Everything (except for tool calls) should be formatted for a text-to-speech voice, as Orin
+  interacts with the user via embedded voice.
+
   Do not explain why you're asking a question. Just ask it. For example, instead of saying "Are you a
   parent or a student? This will help me tailor our conversation." just say "Are you a parent or
   a student?"
@@ -79,30 +101,61 @@ const prompt = `
   Roleplay as Orin.
 `;
 
+const vapi = new Vapi("6abe9004-54a5-454e-8bf6-0678db02abdf");
+
 function App() {
   const [callOn, setCallOn] = useState<boolean>(false);
   const [display, setDisplay] = useState<CanvasSection | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [toolCallQueue, setToolCallQueue] = useState<ToolCallWithArgs[]>([]);
+  const [messages, setMessages] = useState<OpenAIMessage[]>([
+    {
+      role: "system",
+      content: prompt,
+    },
+  ]);
+
+  const flushToolCalls = useCallback(() => {
+    for (const toolCall of toolCallQueue) {
+      switch (toolCall.function.name) {
+        case "redirect-to-url":
+          window.location.href = toolCall.function.arguments.url;
+          break;
+        case "new_note_section":
+        case "new_graph_section":
+        case "new_multiple_choice_section":
+        case "new_plot_section":
+        case "new_table_section":
+        case "new_copy_link_section":
+        case "new_short_answer_section": {
+          const section = toolCall.function.arguments;
+          if (!VALID_CANVAS_SECTION_TYPES.includes(section.type)) {
+            console.error("Invalid section type", section);
+            return;
+          }
+          setDisplay(toolCall.function.arguments);
+          break;
+        }
+      }
+    }
+    setToolCallQueue([]);
+  }, [toolCallQueue]);
 
   const initVapi = useCallback(() => {
     vapi.start({
       transcriber: {
-        provider: "assembly-ai",
+        provider: "deepgram",
+        model: "nova-3",
+        language: "en-US",
       },
+      backgroundDenoisingEnabled: true,
       model: {
         provider: "anthropic",
         model: "claude-3-5-sonnet-20241022",
-        messages: [
-          {
-            role: "system",
-            content: prompt,
-          },
-          {
-            role: "assistant",
-            content: "Hey! I'm Orin, an S.A.T tutor. What can I help with?",
-          },
-        ],
+        messages: messages,
         maxTokens: 4096,
         tools: ORIN_TOOLS,
+        temperature: 0.05,
       },
       silenceTimeoutSeconds: 600,
       voice: {
@@ -111,59 +164,95 @@ function App() {
         model: "eleven_multilingual_v2",
         stability: 0.8,
         similarityBoost: 0.7,
+        chunkPlan: {
+          formatPlan: {
+            numberToDigitsCutoff: 9,
+            replacements: [
+              {
+                key: "SAT",
+                type: "exact",
+                value: "S.A.T",
+              },
+              {
+                key: "=",
+                type: "exact",
+                value: " equals ",
+              },
+              {
+                regex: "([0-9]+)(x|y|z)",
+                type: "regex",
+                value: "$1 $2",
+              },
+              {
+                regex: "([0-9]+)s*-s*([0-9]+)",
+                type: "regex",
+                value: "$1 minus $2",
+              },
+            ],
+          },
+        },
       },
       maxDurationSeconds: 43200,
       // @ts-expect-error: Vapi types are wrong
-      clientMessages: ["tool-calls"],
+      clientMessages: ["tool-calls", "speech-update", "conversation-update"],
       name: "Orin",
       firstMessageMode: "assistant-waits-for-user",
     });
-    setCallOn(true);
+
+    setLoading(true);
     setTimeout(() => {
       toast.success("Say hi to Orin!");
       vapi.setMuted(false);
+      setCallOn(true);
+      setLoading(false);
     }, 2000);
+  }, [messages]);
 
-    // Handle tool calls.
-    vapi.on(
-      "message",
-      async (message: {
-        type: "tool-calls";
-        toolCallList: ToolCallWithArgs[];
-      }) => {
-        console.log("message", message);
-        if (message.type !== "tool-calls") {
-          return;
-        }
-
-        for (const toolCall of message.toolCallList) {
-          switch (toolCall.function.name) {
-            case "redirect-to-url":
-              window.location.href = toolCall.function.arguments.url;
-              break;
-            case "new_note_section":
-            case "new_graph_section":
-            case "new_multiple_choice_section":
-            case "new_plot_section":
-            case "new_table_section":
-            case "new_short_answer_section": {
-              const section = toolCall.function.arguments;
-              if (!VALID_CANVAS_SECTION_TYPES.includes(section.type)) {
-                console.error("Invalid section type", section);
-                return;
-              }
-              setDisplay(toolCall.function.arguments);
-              break;
-            }
-          }
-        }
+  useEffect(() => {
+    function handleMessage(message: VapiMessage) {
+      console.log("message", message);
+      if (
+        message.type === "speech-update" &&
+        message.role === "assistant" &&
+        message.status === "stopped"
+      ) {
+        flushToolCalls();
       }
-    );
-  }, []);
+
+      if (message.type === "conversation-update") {
+        const newHistory = message.messages
+          .filter((m) => !m.role.includes("tool"))
+          .map((m) => ({
+            role: m.role === "bot" ? "assistant" : m.role,
+            content: m.message,
+          })) as OpenAIMessage[];
+
+        setMessages(newHistory);
+      }
+
+      if (message.type === "tool-calls") {
+        setToolCallQueue((prev) => [...prev, ...message.toolCallList]);
+      }
+    }
+
+    vapi.on("message", handleMessage);
+
+    return () => {
+      vapi.off("message", handleMessage);
+    };
+  }, [flushToolCalls]);
 
   return (
     <div className="max-w-screen h-screen flex flex-col">
       <Toaster />
+
+      <div className="absolute top-4 right-4 z-10">
+        <ActionIcon
+          icon={RefreshCcw}
+          tooltip="Restart"
+          onClick={window.location.reload}
+        />
+      </div>
 
       <div className="grow w-full flex flex-col gap-8 px-8 items-center justify-center relative">
         <div
@@ -189,6 +278,7 @@ function App() {
                 rgba(255, 255, 255, 0.8) 40%,
                 transparent 100%
               )
+              rgba(255, 255, 255, ${display ? 0.5 : 0})
             `,
             backgroundBlendMode: "overlay",
           }}
@@ -220,6 +310,7 @@ function App() {
               setCallOn(false);
             }}
             size="lg"
+            loading={loading}
             className="text-md gap-2 relative"
           >
             End
@@ -229,6 +320,7 @@ function App() {
             iconLeft={AudioLines}
             onClick={initVapi}
             size="lg"
+            loading={loading}
             className="text-md gap-2 relative"
           >
             Talk with Orin

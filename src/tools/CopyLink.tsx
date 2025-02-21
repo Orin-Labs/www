@@ -13,8 +13,10 @@ export function CopyLink({ url }: { url: string }) {
   const [copied, setCopied] = useState(false);
   return (
     <div className="flex gap-2 items-center">
-      <TextInput value={url} />
+      <TextInput value={url} className="w-[300px]" />
       <Button
+        variant={copied ? "secondary" : "primary"}
+        disabled={copied}
         onClick={() => {
           navigator.clipboard.writeText(url);
           setCopied(true);

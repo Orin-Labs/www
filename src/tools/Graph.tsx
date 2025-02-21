@@ -8,7 +8,6 @@ import {
   GraphingCalculator,
 } from 'desmos-react';
 import Markdown from 'react-markdown';
-import rehypeKatex from 'rehype-katex';
 import remarkMath from 'remark-math';
 
 export interface GraphProps {
@@ -45,12 +44,8 @@ export function Graph({
   }, [latexEquations, xMin, xMax, yMin, yMax]);
 
   return (
-    <div className="grid grid-cols-2 gap-2">
-      <Markdown
-        className="markdown"
-        remarkPlugins={[remarkMath]}
-        rehypePlugins={[rehypeKatex]}
-      >
+    <div className="grid grid-cols-2 gap-8">
+      <Markdown className="markdown" remarkPlugins={[remarkMath]}>
         {explainerText}
       </Markdown>
       <GraphingCalculator

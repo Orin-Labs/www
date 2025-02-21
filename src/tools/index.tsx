@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import {
   ChartPie,
   Check,
+  Copy,
   LineChart,
   LucideIcon,
   Notebook,
@@ -39,6 +40,7 @@ const SECTION_TYPE_META: Record<
   graph: { icon: LineChart, title: "Graph" },
   plot: { icon: ChartPie, title: "Plot" },
   table: { icon: TableIcon, title: "Table" },
+  copy_link: { icon: Copy, title: "Copy Link" },
 };
 
 export interface CanvasSectionComponentProps {
@@ -59,7 +61,7 @@ export function CanvasSectionComponent({
           return (
             <Markdown
               className="markdown text-muted"
-              remarkPlugins={[[remarkMath, { singleDollarTextMath: false }]]}
+              remarkPlugins={[remarkMath]}
               rehypePlugins={[rehypeKatex]}
             >
               {section.content.replace(/\\n/g, "\n")}
@@ -109,7 +111,7 @@ export function CanvasSectionComponent({
             Object.fromEntries(
               section.columns
                 .map((column: any, j: number) => [column, row[j]])
-                .filter(([column, value]: [any, any]) => column && value)
+                .filter(([column, value]) => column && value)
             )
           );
           return (
@@ -163,7 +165,9 @@ export function CanvasSectionComponent({
     <motion.div
       initial={{ opacity: 0.5, x: -50 }}
       whileInView={{ opacity: 1, x: 0 }}
-      className={cn("p-4 flex flex-col gap-2 px-8 z-10 transition-colors")}
+      className={cn(
+        "p-4 flex bg-white border rounded-lg flex-col gap-2 z-10 transition-colors"
+      )}
       key={section.id}
     >
       <div className="flex justify-between items-center">
