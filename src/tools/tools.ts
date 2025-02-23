@@ -17,11 +17,10 @@ const BaseSection = z.object({
 
 const NoteSection = BaseSection.extend({
   type: z.literal("note"),
-  content: z
-    .string()
-    .describe(
-      "The content of the note. This will be rendered in Markdown. Use $$...$$ (MUST USE DOUBLE DOLLARS) for LaTeX equations."
-    ),
+  content: z.string().describe(
+    `The content of the note. This will be rendered in Markdown. Use $<my latex here>$ for
+      LaTeX equations. Escape normal dollar sign usage like '$100' by using \\$100. (just one slash)`
+  ),
 });
 
 const GraphSection = BaseSection.extend({

@@ -1,21 +1,35 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useState,
+} from 'react';
 
-import { AudioLines, HeadphoneOff, RefreshCcw } from "lucide-react";
-import { generate } from "random-words";
-import { TypeAnimation } from "react-type-animation";
-import { ActionIcon, Button } from "slate-ui";
-import { toast, Toaster } from "sonner";
+import {
+  AudioLines,
+  HeadphoneOff,
+  RefreshCcw,
+} from 'lucide-react';
+import { generate } from 'random-words';
+import { TypeAnimation } from 'react-type-animation';
+import {
+  ActionIcon,
+  Button,
+} from 'slate-ui';
+import {
+  toast,
+  Toaster,
+} from 'sonner';
 
-import Vapi from "@vapi-ai/web";
-import { OpenAIMessage } from "@vapi-ai/web/dist/api";
+import Vapi from '@vapi-ai/web';
+import { OpenAIMessage } from '@vapi-ai/web/dist/api';
 
-import { CanvasSectionComponent } from "./tools";
+import { CanvasSectionComponent } from './tools';
 import {
   CanvasSection,
   ORIN_TOOLS,
   ToolCallWithArgs,
   VALID_CANVAS_SECTION_TYPES,
-} from "./tools/tools";
+} from './tools/tools';
 
 type VapiMessage =
   | { type: "tool-calls"; toolCallList: ToolCallWithArgs[] }

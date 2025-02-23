@@ -64,7 +64,7 @@ export function CanvasSectionComponent({
               remarkPlugins={[remarkMath]}
               rehypePlugins={[rehypeKatex]}
             >
-              {section.content.replace(/\\n/g, "\n")}
+              {section.content.replace(/\\n/g, "\n").replace(/\\\\$/g, "\\$")}
             </Markdown>
           );
         case "multiple_choice":

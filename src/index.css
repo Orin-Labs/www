@@ -95,3 +95,7 @@ html {
   --info-800: #075985;
   --info-900: #0c4a6e;
 }
+
+.katex-html {
+  @apply hidden;
+}
