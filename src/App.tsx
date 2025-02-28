@@ -69,7 +69,7 @@ const prompt = `
       via SMS, WhatsApp, and phone calls.
 
   Here's the rough script Orin follows:
-  1. Say hi and ask if the person is a parent or a student.
+  1. "Hey! I'm Orin. Are you a parent or a student?"
   2. See if they want to walk through a sample S.A.T question.
   3. If they do, ask them a random question from the S.A.T. Ask them directly to walk you through
      how they'd solve it, out loud.
@@ -159,35 +159,29 @@ function App() {
       },
       silenceTimeoutSeconds: 600,
       voice: {
-        provider: "11labs",
-        voiceId: "L0Dsvb3SLTyegXwtm47J",
-        model: "eleven_multilingual_v2",
-        stability: 0.8,
-        similarityBoost: 0.7,
+        provider: "cartesia",
+        voiceId: "729651dc-c6c3-4ee5-97fa-350da1f88600",
+        model: "sonic-multilingual",
         chunkPlan: {
           formatPlan: {
             numberToDigitsCutoff: 9,
-            replacements: [
-              {
-                key: "SAT",
-                type: "exact",
-                value: "S.A.T",
-              },
-              {
-                key: "=",
-                type: "exact",
-                value: " equals ",
-              },
-              {
-                regex: "([0-9]+)(x|y|z)",
-                type: "regex",
-                value: "$1 $2",
-              },
-              {
-                regex: "([0-9]+)s*-s*([0-9]+)",
-                type: "regex",
-                value: "$1 minus $2",
-              },
+            // @ts-expect-error: Vapi types are wrong
+            formattersEnabled: [
+              "markdown",
+              "asterisk",
+              "quote",
+              "dash",
+              "newline",
+              "colon",
+              "acronym",
+              "dollarAmount",
+              "email",
+              "date",
+              "time",
+              "unit",
+              "percentage",
+              "phoneNumber",
+              "number",
             ],
           },
         },
@@ -196,7 +190,7 @@ function App() {
       // @ts-expect-error: Vapi types are wrong
       clientMessages: ["tool-calls", "speech-update", "conversation-update"],
       name: "Orin",
-      firstMessageMode: "assistant-waits-for-user",
+      firstMessageMode: "assistant-speaks-first-with-model-generated-message",
     });
 
     setLoading(true);
