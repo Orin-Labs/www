@@ -29,6 +29,7 @@
     "react-type-animation": "^3.2.0",
     "recharts": "^2.15.1",
     "rehype-katex": "^7.0.1",
+    "remark-breaks": "^4.0.0",
     "remark-math": "^6.0.0",
     "slate-ui": "^1.1.32",
     "sonner": "^1.7.4",

@@ -1,6 +1,6 @@
-import { useCallback } from 'react';
+import { useCallback } from "react";
 
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
 import {
   ChartPie,
   Check,
@@ -10,22 +10,19 @@ import {
   Notebook,
   PenLine,
   TableIcon,
-} from 'lucide-react';
-import Markdown from 'react-markdown';
-import rehypeKatex from 'rehype-katex';
-import remarkMath from 'remark-math';
-import {
-  Badge,
-  cn,
-  Table,
-} from 'slate-ui';
+} from "lucide-react";
+import Markdown from "react-markdown";
+import rehypeKatex from "rehype-katex";
+import remarkBreaks from "remark-breaks";
+import remarkMath from "remark-math";
+import { Badge, cn, Table } from "slate-ui";
 
-import { CopyLink } from './CopyLink';
-import { Graph } from './Graph';
-import { MultipleChoice } from './MultipleChoice';
-import { PlotSectionComponent } from './Plot';
-import { ShortAnswer } from './ShortAnswer';
-import { CanvasSection } from './tools';
+import { CopyLink } from "./CopyLink";
+import { Graph } from "./Graph";
+import { MultipleChoice } from "./MultipleChoice";
+import { PlotSectionComponent } from "./Plot";
+import { ShortAnswer } from "./ShortAnswer";
+import { CanvasSection } from "./tools";
 
 const SECTION_TYPE_META: Record<
   CanvasSection["type"],
@@ -61,7 +58,7 @@ export function CanvasSectionComponent({
           return (
             <Markdown
               className="markdown text-muted"
-              remarkPlugins={[remarkMath]}
+              remarkPlugins={[remarkMath, remarkBreaks]}
               rehypePlugins={[rehypeKatex]}
             >
               {section.content.replace(/\\n/g, "\n").replace(/\\\\$/g, "\\$")}
@@ -166,7 +163,7 @@ export function CanvasSectionComponent({
       initial={{ opacity: 0.5, x: -50 }}
       whileInView={{ opacity: 1, x: 0 }}
       className={cn(
-        "p-4 flex bg-white border rounded-lg flex-col gap-2 z-10 transition-colors"
+        "p-4 flex bg-white border rounded-lg flex-col gap-2 z-10 transition-colors max-w-[700px]"
       )}
       key={section.id}
     >

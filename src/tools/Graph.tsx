@@ -1,14 +1,9 @@
-import {
-  useEffect,
-  useRef,
-} from 'react';
+import { useEffect, useRef } from "react";
 
-import {
-  Expression,
-  GraphingCalculator,
-} from 'desmos-react';
-import Markdown from 'react-markdown';
-import remarkMath from 'remark-math';
+import { Expression, GraphingCalculator } from "desmos-react";
+import Markdown from "react-markdown";
+import remarkBreaks from "remark-breaks";
+import remarkMath from "remark-math";
 
 export interface GraphProps {
   latexEquations: string[];
@@ -45,7 +40,7 @@ export function Graph({
 
   return (
     <div className="grid grid-cols-2 gap-8">
-      <Markdown className="markdown" remarkPlugins={[remarkMath]}>
+      <Markdown className="markdown" remarkPlugins={[remarkMath, remarkBreaks]}>
         {explainerText}
       </Markdown>
       <GraphingCalculator
