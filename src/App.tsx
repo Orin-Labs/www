@@ -63,7 +63,7 @@ function App() {
         ) : (
           <TypeAnimation
             sequence={[
-              "Hey! I'm Orin, an S.A.T tutor. What can I help with?",
+              "Hey! I'm Orin, an S.A.T expert. Are you looking for a tutor?",
               1000,
             ]}
             speed={80}
