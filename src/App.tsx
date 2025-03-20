@@ -227,6 +227,13 @@ function App() {
           />
         </div>
       </motion.div>
+
+      <footer className="absolute bottom-0 left-0 right-0 text-xs mb-1 flex justify-between items-center px-8 text-gray-300">
+        <p>&copy; 2025 Orin. All rights reserved.</p>
+        <a href="/privacy" className="text-gray-300">
+          Privacy Policy
+        </a>
+      </footer>
     </div>
   );
 }
