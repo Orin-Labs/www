@@ -9,10 +9,28 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&family=Geist:wght@100..900&family=Outfit:wght@100..900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&family=Geist:wght@100..900&family=Gowun+Dodum&family=Outfit:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
       rel="stylesheet"
     />
     <title>Orin: Personal Tutor</title>
+    <script>
+      const darkModeMediaQuery = window.matchMedia(
+        "(prefers-color-scheme: dark)"
+      );
+      const isDark = darkModeMediaQuery.matches;
+      document.documentElement.classList.add(isDark ? "dark" : "light");
+
+      // Listen for changes in the color scheme preference
+      darkModeMediaQuery.addEventListener("change", (e) => {
+        const newIsDark = e.matches;
+        document.documentElement.classList.remove("dark", "light");
+        document.documentElement.classList.add(newIsDark ? "dark" : "light");
+      });
+    </script>
   </head>
   <body>
     <div id="root"></div>

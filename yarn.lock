@@ -1221,6 +1221,26 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
+"@calcom/embed-core@1.5.2":
+  version "1.5.2"
+  resolved "https://registry.yarnpkg.com/@calcom/embed-core/-/embed-core-1.5.2.tgz#7f31d7f58913f95b3d70e0c6d7fabbce3be510ab"
+  integrity sha512-y1mpVDfcaVdLJ/CN17c7N2SyJAMiM3u9NYvL5mWFDBe4aa5HLTDc5g/DBbO2oCq859W3bxs11voC/E3KkJH3Iw==
+
+"@calcom/embed-react@^1.5.2":
+  version "1.5.2"
+  resolved "https://registry.yarnpkg.com/@calcom/embed-react/-/embed-react-1.5.2.tgz#670b4e22bf9711241714a216e18e4a4ac0e63cef"
+  integrity sha512-DgY3RySiXOrbIVX1LiV/ucKilG+TkvqhP4/0nLlKPLOlk642cSO30xSu4nOmVgR60FLqMyp7Vlg/Xd6J5ijETg==
+  dependencies:
+    "@calcom/embed-core" "1.5.2"
+    "@calcom/embed-snippet" "1.3.2"
+
+"@calcom/embed-snippet@1.3.2":
+  version "1.3.2"
+  resolved "https://registry.yarnpkg.com/@calcom/embed-snippet/-/embed-snippet-1.3.2.tgz#a34f0938a724d9915e408f47b461bd05bbf84be0"
+  integrity sha512-EmW/ZjaQD0HjLI8yFNA5Mtb8zCOQQnj9RhChujuMijUK8EVyE1KtU9t3xIxm1hBMNHr4R1qMaBo2QYaZqQhzsw==
+  dependencies:
+    "@calcom/embed-core" "1.5.2"
+
 "@csstools/normalize.css@*":
   version "12.1.1"
   resolved "https://registry.yarnpkg.com/@csstools/normalize.css/-/normalize.css-12.1.1.tgz#f0ad221b7280f3fc814689786fd9ee092776ef8f"
@@ -1891,6 +1911,19 @@
   dependencies:
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
+
+"@paper-design/shaders-react@^0.0.23":
+  version "0.0.23"
+  resolved "https://registry.yarnpkg.com/@paper-design/shaders-react/-/shaders-react-0.0.23.tgz#837c48ae4bf191a554669b5975eeb777033fa105"
+  integrity sha512-32dpcCMbWm5djRzTYKmx8mK+LbSvIM6QGTl2W+05JdLRO3XYtyTaSy8Jl6W7d8hO/9dcmEnMdByJfn4Py7gVog==
+  dependencies:
+    "@paper-design/shaders" "0.0.20"
+    react ">=18"
+
+"@paper-design/shaders@0.0.20":
+  version "0.0.20"
+  resolved "https://registry.yarnpkg.com/@paper-design/shaders/-/shaders-0.0.20.tgz#7a4e1769ccd02b4d25edbd09cfd70f81b77ede41"
+  integrity sha512-JHVKX9fF4vU6EZ5QNzxVzPO/xK/jnL947Q3TUwQ2gYv1wiZsirkJ/OiRt721A72KS3MKYcx/1asZ6n28f65fPA==
 
 "@pkgjs/parseargs@^0.11.0":
   version "0.11.0"
@@ -6229,6 +6262,15 @@ framer-motion@^12.0.6:
     motion-utils "^12.0.0"
     tslib "^2.4.0"
 
+framer-motion@^12.5.0:
+  version "12.5.0"
+  resolved "https://registry.yarnpkg.com/framer-motion/-/framer-motion-12.5.0.tgz#3201f92d7a00f7ab636c39fdb619b07247f05a8b"
+  integrity sha512-buPlioFbH9/W7rDzYh1C09AuZHAk2D1xTA1BlounJ2Rb9aRg84OXexP0GLd+R83v0khURdMX7b5MKnGTaSg5iA==
+  dependencies:
+    motion-dom "^12.5.0"
+    motion-utils "^12.5.0"
+    tslib "^2.4.0"
+
 fresh@0.5.2:
   version "0.5.2"
   resolved "https://registry.yarnpkg.com/fresh/-/fresh-0.5.2.tgz#3d8cadd90d976569fa835ab1f8e4b23a105605a7"
@@ -8720,10 +8762,22 @@ motion-dom@^12.0.0:
   dependencies:
     motion-utils "^12.0.0"
 
+motion-dom@^12.5.0:
+  version "12.5.0"
+  resolved "https://registry.yarnpkg.com/motion-dom/-/motion-dom-12.5.0.tgz#38beabafa11c068f09c2b096674b2d46025a0a24"
+  integrity sha512-uH2PETDh7m+Hjd1UQQ56yHqwn83SAwNjimNPE/kC+Kds0t4Yh7+29rfo5wezVFpPOv57U4IuWved5d1x0kNhbQ==
+  dependencies:
+    motion-utils "^12.5.0"
+
 motion-utils@^12.0.0:
   version "12.0.0"
   resolved "https://registry.yarnpkg.com/motion-utils/-/motion-utils-12.0.0.tgz#fabf79f4f1c818720a1b70f615e2a1768f396ac0"
   integrity sha512-MNFiBKbbqnmvOjkPyOKgHUp3Q6oiokLkI1bEwm5QA28cxMZrv0CbbBGDNmhF6DIXsi1pCQBSs0dX8xjeER1tmA==
+
+motion-utils@^12.5.0:
+  version "12.5.0"
+  resolved "https://registry.yarnpkg.com/motion-utils/-/motion-utils-12.5.0.tgz#0e42a6b8030327166ca0d0ea0d5b86d64c21e51d"
+  integrity sha512-+hFFzvimn0sBMP9iPxBa9OtRX35ZQ3py0UHnb8U29VD+d8lQ8zH3dTygJWqK7av2v6yhg7scj9iZuvTS0f4+SA==
 
 motion@^12.0.6:
   version "12.0.6"
@@ -10246,6 +10300,11 @@ react@18.3.1:
   integrity sha512-wS+hAgJShR0KhEvPJArfuPVN1+Hz1t0Y6n5jLrGQbkb4urgPE/0Rve+1kMB1v/oWgHgm4WIcV+i7F2pTVj+2iQ==
   dependencies:
     loose-envify "^1.1.0"
+
+react@>=18:
+  version "19.0.0"
+  resolved "https://registry.yarnpkg.com/react/-/react-19.0.0.tgz#6e1969251b9f108870aa4bff37a0ce9ddfaaabdd"
+  integrity sha512-V8AVnmPIICiWpGfm6GLzCR/W5FXLchHop40W4nXBmdlEceh16rCN8O8LNWm5bh5XUX91fh7KpA+W0TgMKmgTpQ==
 
 read-cache@^1.0.0:
   version "1.0.0"
