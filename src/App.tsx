@@ -93,8 +93,8 @@ function App() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: getDelay() }}
               >
-                <h1>99%</h1>
-                <p className="text-gray-50 text-sm">Success Rate</p>
+                <h1>24/7</h1>
+                <p className="text-gray-50 text-sm">availability</p>
               </motion.div>
             </div>
 
