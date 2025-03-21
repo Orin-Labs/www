@@ -50,7 +50,7 @@ function App() {
             transition={{ duration: 0.5 }}
           >
             <motion.h1
-              className="text-4xl font-bold"
+              className="text-6xl font-bold"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: getDelay() }}
@@ -58,7 +58,7 @@ function App() {
               Learn with Orin.
             </motion.h1>
             <motion.p
-              className="text-gray-50 text-lg"
+              className="text-gray-50 text-2xl"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: getDelay() }}
@@ -66,7 +66,7 @@ function App() {
               Personalized SAT tutoring, powered by AI.
             </motion.p>
 
-            <div className="flex flex-col md:flex-row md:divide-x-2 mt-4">
+            <div className="flex flex-col md:flex-row mt-4">
               <motion.div
                 className="flex flex-col items-center md:pr-6 py-2 border-white"
                 initial={{ opacity: 0, y: 10 }}
@@ -99,7 +99,7 @@ function App() {
             </div>
 
             <motion.p
-              className="text-gray-50 mt-4 italic"
+              className="text-gray-50 italic"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: getDelay() }}
@@ -109,13 +109,13 @@ function App() {
             </motion.p>
 
             <motion.div
-              className="mt-4"
+              className="mt-10"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: getDelay() }}
             >
               <motion.button
-                className="bg-primary-500 text-white flex items-center gap-2 px-4 py-2 rounded-md"
+                className="bg-white text-black mix-blend-screen flex items-center gap-2 px-4 py-2 rounded-md"
                 animate={{
                   y: 0,
                   boxShadow:
