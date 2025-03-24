@@ -1,13 +1,10 @@
-import { useState } from 'react';
+import { useState } from "react";
 
-import {
-  AnimatePresence,
-  motion,
-} from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
+import { AnimatePresence, motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
 
-import Cal from '@calcom/embed-react';
-import { MeshGradient } from '@paper-design/shaders-react';
+import Cal from "@calcom/embed-react";
+import { MeshGradient } from "@paper-design/shaders-react";
 
 export const COLORS = [
   "#ea89c8", // pink
@@ -140,6 +137,12 @@ function App() {
                 }}
                 transition={{ duration: 0.1 }}
                 onClick={() => {
+                  // @ts-ignore
+                  gtag("event", "conversion", {
+                    send_to: "AW-16902826455/6DXjCOCAha8aENfT8vs-",
+                    value: 1.0,
+                    currency: "USD",
+                  });
                   setShow(false);
                   setSpeed(0.5);
                   setTimeout(() => {
