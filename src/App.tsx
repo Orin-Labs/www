@@ -2,7 +2,6 @@ import { useState } from "react";
 
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import posthog from "posthog-js";
 
 import Cal from "@calcom/embed-react";
 import { MeshGradient } from "@paper-design/shaders-react";
@@ -138,13 +137,6 @@ function App() {
                 }}
                 transition={{ duration: 0.1 }}
                 onClick={() => {
-                  // @ts-ignore
-                  gtag("event", "conversion", {
-                    send_to: "AW-16902826455/6DXjCOCAha8aENfT8vs-",
-                    value: 1.0,
-                    currency: "USD",
-                  });
-                  posthog.capture("book_fit_call");
                   setShow(false);
                   setSpeed(0.5);
                   setTimeout(() => {

@@ -32,6 +32,37 @@
       });
     </script>
 
+    <script>
+      setInterval(() => {
+        if (window.Cal) {
+          console.log("hello");
+          window.Cal("on", {
+            action: "bookingSuccessful",
+            callback: (e) => {
+              if (window.hasSentConversion) {
+                return;
+              }
+              window.hasSentConversion = true;
+              if (window.posthog) {
+                posthog.capture("bookingSuccessful", {
+                  bookingId: data.bookingId,
+                  bookingUrl: data.bookingUrl,
+                  bookingName: data.bookingName,
+                  bookingEmail: data.bookingEmail,
+                  bookingPhone: data.bookingPhone,
+                });
+              }
+              gtag("event", "conversion", {
+                send_to: "AW-16902826455/6DXjCOCAha8aENfT8vs-",
+                value: 1.0,
+                currency: "USD",
+              });
+            },
+          });
+        }
+      }, 1000);
+    </script>
+
     <!-- Google tag (gtag.js) -->
     <script
       async
