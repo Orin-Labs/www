@@ -48,10 +48,10 @@ function App() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: getDelay() }}
           >
-            Learn with Orin.
+            Your Expert SAT Tutor
           </motion.h1>
           <motion.p
-            className="text-gray-50 text-2xl"
+            className="text-gray-50 text-2xl mt-2"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: getDelay() }}
@@ -59,35 +59,33 @@ function App() {
             Personalized SAT tutoring, powered by AI.
           </motion.p>
 
-          <div className="flex flex-col md:flex-row mt-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
             <motion.div
-              className="flex flex-col items-center md:pr-6 py-2 border-white"
+              className="flex flex-col items-center py-2 border-white"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: getDelay() }}
             >
               <h1>99%</h1>
-              <p className="text-gray-50 text-sm">success rate</p>
+              <p className="text-gray-50 text-sm">Success Rate</p>
             </motion.div>
             <motion.div
-              className="flex flex-col items-center md:px-6 py-2 border-white"
+              className="flex flex-col md:px-6 py-2 border-white"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: getDelay() }}
             >
-              <h1>100+ hrs</h1>
-              <p className="text-gray-50 text-sm">
-                spent on every student per week
-              </p>
+              <h1>Monthly</h1>
+              <p className="text-gray-50 text-sm">Subscription</p>
             </motion.div>
             <motion.div
-              className="flex flex-col items-center md:pl-6 py-2 border-white"
+              className="flex flex-col items-center col-span-1 sm:col-span-2 md:col-span-1 py-2 border-white"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: getDelay() }}
             >
               <h1>24/7</h1>
-              <p className="text-gray-50 text-sm">availability</p>
+              <p className="text-gray-50 text-sm">Availability</p>
             </motion.div>
           </div>
 
@@ -97,8 +95,9 @@ function App() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: getDelay() }}
           >
-            "It's like having a full-time tutor for the price of a single
-            session."
+            "It's like having a full-time tutor for the{" "}
+            <br className="hidden md:block" /> price of a single session." -
+            Julia
           </motion.p>
 
           <motion.div
