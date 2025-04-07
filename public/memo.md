@@ -1,6 +1,6 @@
 # Orin
 
-I’m [Bryan Houlton](https://www.linkedin.com/in/bryan-houlton/), a solo founder building [Orin](https://www.learnwithorin.com/) - an AI replacement for human tutors.
+I’m [Bryan Houlton](https://www.linkedin.com/in/bryan-houlton/), a solo founder building [Orin](https://www.learnwithorin.com/) - an drop-in AI replacement for human tutors.
 
 Orin books lessons, interfaces with parents, teaches students one-on-one, creates curriculum & homework assignments, and more. I built a demo for the SAT tutoring market and have small number of users using it multiple times per week, one paying $150/mo.
 
