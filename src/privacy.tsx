@@ -1,52 +1,70 @@
-import Markdown from "react-markdown";
+import {
+  useEffect,
+  useState,
+} from 'react';
 
-export default function Privacy() {
+import Markdown from 'react-markdown';
+
+import { MeshGradient } from '@paper-design/shaders-react';
+
+import { COLORS } from './App';
+
+export default function Memo() {
+  const [content, setContent] = useState("");
+
+  useEffect(() => {
+    fetch("/privacy.md")
+      .then((res) => res.text())
+      .then((text) => setContent(text));
+  }, []);
+
   return (
-    <div>
-      <Markdown>
-        {`# PRIVACY POLICY
+    <div className="w-screen h-screen overflow-y-auto relative md:p-16 hind">
+      <div className="absolute top-0 left-0 right-0 bottom-0 z-0 pointer-events-none">
+        <MeshGradient
+          color1={COLORS[0]}
+          color2={COLORS[1]}
+          color3={COLORS[2]}
+          speed={0.05}
+          seed={0}
+          style={{
+            position: "fixed",
+            width: "100%",
+            height: "100%",
+            zIndex: -1,
+          }}
+        />
+      </div>
 
-Effective Date: November 19, 2024
-
-We value your privacy and make every effort to respect your wishes and personal
-information. Please read this policy carefully to understand how we collect,
-use, and manage your phone numbers.
-
-## COLLECTION OF PHONE NUMBERS
-
-We collect your phone numbers only when you voluntarily provide them to us, for
-example, during transactions, inquiries, or when you sign up for our promotional
-messages. You can opt in to receive these SMS messages by providing your phone
-number during our onboarding process.
-
-## USE OF PHONE NUMBERS FOR SMS
-
-Your phone numbers are primarily used to provide you with notifications when
-training is due, and can be used to reply if you have questions about specific
-training materials. SMS messaging charges may be applied by your carrier. We
-will only share your phone number with our SMS provider, subject to their
-privacy policy.
-
-## OPTING OUT OF MARKETING MESSAGES
-
-If at any time you wish to stop receiving messages from us, you can opt out by
-texting STOP.
-
-## PRIVACY OF PHONE NUMBERS
-
-Once you have opted out, we will not send you any more SMS messages, nor will we sell or transfer your phone number to another party.
-
-## CHANGES TO THIS POLICY
-
-We may periodically update this policy. We will notify you about significant
-changes in the way we treat your information by placing a prominent notice on
-our site.
-
-We thank you for your understanding and cooperation. If you have any questions
-or concerns about this policy, please feel free to contact us via the form on
-our site.
-`}
-      </Markdown>
+      <div
+        className="z-10 text-left p-8 md:p-16 md:pt-8 w-fit mx-auto h-fit md:rounded-lg bg-white relative"
+        style={{
+          boxShadow:
+            "12px 12px 24px rgba(0, 0, 0, 0.2), -12px -12px 24px rgba(255, 255, 255, 0.2)",
+        }}
+      >
+        <Markdown
+          className="max-w-4xl mx-auto markdown-body"
+          components={{
+            ol: ({ ...props }) => (
+              <ol
+                className="ml-6 my-4"
+                style={{ listStyle: "revert" }}
+                {...props}
+              />
+            ),
+            ul: ({ ...props }) => (
+              <ul
+                className="ml-6 my-4"
+                style={{ listStyle: "revert" }}
+                {...props}
+              />
+            ),
+          }}
+        >
+          {content}
+        </Markdown>
+      </div>
     </div>
   );
 }
