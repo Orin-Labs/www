@@ -1,15 +1,16 @@
-import "./index.css";
+import './index.css';
 
-import React from "react";
+import React from 'react';
 
-import posthog from "posthog-js";
-import ReactDOM from "react-dom/client";
-import { SlateProvider } from "slate-ui";
-import { Toaster } from "sonner";
+import posthog from 'posthog-js';
+import ReactDOM from 'react-dom/client';
+import { SlateProvider } from 'slate-ui';
+import { Toaster } from 'sonner';
 
-import App from "./App";
-import Privacy from "./privacy";
-import reportWebVitals from "./reportWebVitals";
+import App from './App';
+import Memo from './memo';
+import Privacy from './privacy';
+import reportWebVitals from './reportWebVitals';
 
 if (window.location.hostname !== "localhost") {
   posthog.init("phc_GumBfH2sDPA0iuqX5XN7e0JX2sR7uPUXCmdK3KMoWb0", {
@@ -27,6 +28,7 @@ root.render(
       <Toaster />
       {window.location.pathname === "/" && <App />}
       {window.location.pathname === "/privacy" && <Privacy />}
+      {window.location.pathname === "/memo" && <Memo />}
     </SlateProvider>
   </React.StrictMode>
 );

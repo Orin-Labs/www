@@ -9,6 +9,12 @@ html {
   font-style: normal;
 }
 
+.hind {
+  font-family: "Hind", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
 *::selection {
   background-color: var(--primary-500);
   color: var(--white);
@@ -106,5 +112,22 @@ html {
   pre {
     background-color: var(--gray-700) !important;
     color: var(--white) !important;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply mt-4 mb-2 w-fit pr-4;
+  }
+
+  a {
+    @apply text-blue-500 underline;
+  }
+
+  p {
+    @apply mb-4;
   }
 }
