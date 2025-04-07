@@ -115,12 +115,15 @@ html {
   }
 
   h1,
-  h2,
   h3,
   h4,
   h5,
   h6 {
     @apply mt-4 mb-2 w-fit pr-4;
+  }
+
+  h2 {
+    @apply mt-3 mb-0;
   }
 
   a {
