@@ -6,7 +6,7 @@ Orin books lessons, interfaces with parents, teaches students one-on-one, create
 
 I’m a college dropout and second time founder (ex-YC) who’s first company got acqui-hired.
 
-# Product
+## Product
 
 When buying a tutor, parents want:
 
@@ -19,25 +19,25 @@ Orin is closer to a human tutor than a software platform. All of our marketing, 
 
 The end goal is not build a cheaper tutor, but a _better_ one. He just also happens to be cheaper.
 
-# Timing
+## Timing
 
 Before the rise of intelligent AI models, you simply couldn’t build this kind of product. No amount of Khan Academy quizzes is equivalent to a human tutor, so willingness to pay for that is low.
 
 Now, software can handle an increasing level of ambiguity and edge cases. Products can be built to be more accountable, which is where the spend is.
 
-# Traction
+## Traction
 
 A few weeks ago I soft-launched the product and got a customer paying $150/mo and using it 2-3x/wk. He’s not a friend of mine, just a random 11th grader who’s dad found a post I put out.
 
 In the past week I removed the price tag and ~10 students have signed up. It’s clear that students prefer Orin over a real tutor and. Despite having a _very rough_ experience with the early version of the platform, they continuously attempt to keep using it. I’ve also noticed an uptick in activity at night and on weekends.
 
-# Market
+## Market
 
 The American private tutoring market by itself is ~$25B (50M kids, 10% receive tutoring, ~$400/mo). Globally it’s closer to $125B, and this is still based on an hourly model. Moving to a subscription model will make the market much larger.
 
 Additionally, I’ll be the only company to have deep, contextual data on what a kid knows, how they learn, and what they’re good at. There’s a billion fun uses for this data at scale, so estimating total market size is tough.
 
-# Competition
+## Competition
 
 Most consumer edtech companies (Khan Academy, Udemy, etc) are scaled content distributors. But with the rise of AI, content itself is a dying moat. Instead, the the next wave of edtech companies will be the ones specifically geared towards _teaching_, since you're much closer aligned with the student's outcome.
 
@@ -48,7 +48,7 @@ Our competition is mostly human tutoring aggregated by companies like:
 
 There are many other localized tutoring offerings. Most are $60+/hr for one-on-one, or $1k+ for group prep classes. Orin behaves like the human tutors, but charges monthly.
 
-# Distribution & Financials
+## Distribution & Financials
 
 When I ask users what they would consider too cheap or too expensive for tutoring, they answer in $/hr. So there's a lot of pricing flexibility. We picked $150/mo because that's high enough to ensure that we're only targeting users who would be willing to pay for tutoring, but low enough that we're not pricing out the majority of the market.
 
@@ -58,7 +58,7 @@ Word of mouth is also a huge channel for human tutors - we can offer cash referr
 
 Our projected LTV is still unknown. Ideally, we’ll prioritize markets with longer LTVs, meaning that SAT might actually be the wrong place to start. Either way, it seems that CAC will get paid back almost instantly given the high price.
 
-# Moats
+## Moats
 
 Just like a real tutor, Orin will get better the more you work with him.
 
@@ -66,7 +66,7 @@ He’ll figure out that you like visual explanations in math topics, but learn f
 
 This entrenchment makes it tough to switch. You’ll have to rebuild context somewhere else for a competitor work as well. You can already see this moat in human tutors, but we can actually scale it.
 
-# Raise
+## Raise
 
 If you decide to invest in Orin, you're making two bets:
 
