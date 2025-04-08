@@ -11,8 +11,8 @@ I’m a college dropout and second time founder (ex-YC) whose first company was 
 When buying a tutor, parents want:
 
 1. **A proactive tutor**, not a responsive one. ChatGPT is smart, but you have to pull information out like a textbook. Orin will proactively push information, lessons, and homework to your student.
-2. **An accountable tutor**. Your kid didn’t show up for a lesson? We’ll notify you. Curious how your kid is doing? Just call or text Orin. Orin himself is the interface, just like a human tutor would be.
-3. **A flexible tutor**. Something came up today? Text us and move your lesson to tomorrow. Your kid has sports after school until 8pm every day and would prefer to study at night? No problem.
+2. **An accountable tutor**. Your student didn’t show up for a lesson? We’ll notify you. Curious how your student is doing? Just call or text Orin. Orin himself is the interface, just like a human tutor would be.
+3. **A flexible tutor**. Something came up today? Text us and move your lesson to tomorrow. Your student has sports after school until 8pm every day and would prefer to study at night? No problem.
 4. **An effective tutor**. Do you trust his abilities? Is he correct and relevant? Can he manage a long-term learning plan?
 
 Orin is closer to a human tutor than a software platform. All of our marketing, design, and product work is geared around this.
@@ -33,9 +33,9 @@ In the past week I removed the price tag and ~10 students have signed up. It’s
 
 ## Market
 
-The American private tutoring market by itself is ~$25B (50M kids, 10% receive tutoring, ~$400/mo). Globally, it’s closer to $125B—still based on an hourly model. Moving to a subscription model will make the market much larger.
+The American private tutoring market by itself is ~$25B (50M students, 10% receive tutoring, ~$400/mo). Globally, it’s closer to $125B—still based on an hourly model. Moving to a subscription model will make the market much larger.
 
-Additionally, I’ll be the only company to have deep, contextual data on what a kid knows, how they learn, and what they’re good at. There’s a billion fun uses for this data at scale, so estimating total market size is tough.
+Additionally, I’ll be the only company to have deep, contextual data on what a student knows, how they learn, and what they’re good at. There’s a billion fun uses for this data at scale, so estimating total market size is tough.
 
 ## Competition
 
@@ -62,7 +62,7 @@ Our projected LTV is still unknown. Ideally, we’ll prioritize markets with lon
 
 Just like a real tutor, Orin will get better the more you work with him.
 
-He’ll figure out that you like visual explanations in math topics, but learn fast when diving into examples for science. Orin can spend hundreds of man-hours per week on a single kid behind the scenes, crafting the best next lesson or homework assignment specifically for them.
+He’ll figure out that you like visual explanations in math topics, but learn fast when diving into examples for science. Orin can spend hundreds of man-hours per week on a single student behind the scenes, crafting the best next lesson or homework assignment specifically for them.
 
 This entrenchment makes it tough to switch. You’ll have to rebuild context somewhere else for a competitor to work as well. You can already see this moat in human tutors, but we can actually scale it.
 
