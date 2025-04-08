@@ -1,78 +1,62 @@
 # Orin
 
-I’m [Bryan Houlton](https://www.linkedin.com/in/bryan-houlton/), a solo founder building [Orin](https://www.learnwithorin.com/) - a drop-in AI replacement for human tutors.
+Tutoring is a product that already has PMF.
 
-Orin books lessons, interfaces with parents, teaches students one-on-one, creates curriculum & homework assignments, and more. I built a demo for the SAT tutoring market and have a handful of users who use it multiple times per week, one paying $150/mo.
+The American private tutoring market makes $25B annually, and the world-wide market is closer to $125B. This market spans general tutoring, career specific tutoring, test prep services, and more, with the average tutor costing $40-80/hr—even more for specialized topic areas.
 
-I’m a college dropout and second time founder (ex-YC) whose first company was acqui-hired.
+It’s an incredibly simple product in concept, yet extremely difficult in execution.
 
-## Product
+When you buy tutoring services, you’re rarely buying information. You used to be, but not anymore. Everything a tutor will teach you is available, for free, and only one Google search away.
 
-When buying a tutor, parents want:
+So why do we still spend so much money on tutoring?
 
-1. **A proactive tutor**, not a responsive one. ChatGPT is smart, but you have to pull information out like a textbook. Orin will proactively push information, lessons, and homework to your student.
-2. **An accountable tutor**. Your student didn’t show up for a lesson? We’ll notify you. Curious how your student is doing? Just call or text Orin. Orin himself is the interface, just like a human tutor would be.
-3. **A flexible tutor**. Something came up today? Text us and move your lesson to tomorrow. Your student has sports after school until 8pm every day and would prefer to study at night? No problem.
-4. **An effective tutor**. Do you trust his abilities? Is he correct and relevant? Can he manage a long-term learning plan?
+It turns out, tutors are more than just almanacs. It’s not the content that’s important anymore—it’s the _teaching_.
 
-Orin is closer to a human tutor than a software platform. All of our marketing, design, and product work is geared around this.
+Tutors need to be able to manage schedules, hold students accountable, and provide relevant lesson content or resources. Tutors have to be empathetic, manage parents, plan for the long-term, and have curricular opinions.
 
-The end goal is not to build a cheaper tutor, but a _better_ one. He just also happens to be cheaper.
+Ultimately, we pay tutors to be responsible for our learning journeys. We want to feel confident that we’re making progress in the right direction, guided by the wisdom of an expert.
 
-## Timing
+---
 
-Before the rise of intelligent AI models, you simply couldn’t build this kind of product. No amount of Khan Academy quizzes is equivalent to a human tutor, so willingness to pay for that was low.
+<br />
 
-Now, software can handle an increasing level of ambiguity and edge cases. Products can be built to be more accountable, which is what people pay for.
+Existing edtech products don’t offer this. If you look closely at Khan Academy, Duolingo, Udemy, or Coursera, you’ll find that these companies are actually content providers! They have issues scaling because they can’t solve the one problem we actually buy tutors for. Instead, they act as interactive textbooks.
 
-## Traction
+Before this year, building a replacement for tutors was impossible. Models weren’t good enough teachers, voices were stuck in the uncanny valley, and managing a long-term learning plan was too difficult to scale.
 
-A few weeks ago I soft-launched the product and got a customer paying $150/mo and using it 2-3x/wk. He’s not a friend of mine, just a random 11th grader whose dad found a post I put out.
+Now, everything has changed. Models are getting smarter and cheaper every day, Sesame’s voices have just crossed the uncanny valley, and we’re better than ever at building ambitious application-layer technology.
 
-In the past week I removed the price tag and ~10 students have signed up. It’s clear that students prefer Orin over a real tutor. Even with a _very rough_ experience with the early version of the platform, they keep trying to come back. I’ve also noticed an uptick in activity at night and on weekends.
+Yet we still pay hourly for a tutor.
 
-## Market
+---
 
-The American private tutoring market by itself is ~$25B (50M students, 10% receive tutoring, ~$400/mo). Globally, it’s closer to $125B—still based on an hourly model. Moving to a subscription model will make the market much larger.
+<br />
 
-Additionally, I’ll be the only company to have deep, contextual data on what a student knows, how they learn, and what they’re good at. There’s a billion fun uses for this data at scale, so estimating total market size is tough.
+In the past two months I’ve shipped two demo experiments of my tutor, Orin, to students—some students even paid $150/mo and engaged for four hours every week. From these experiments, I learned a few things:
 
-## Competition
+- **Willingness to pay is extremely high if you build the right product**. Charging $150/mo seemed low to most users—they’re already paying more for alternatives.
+- **With the right product, the distribution is quickly profitable**. CAC seems to be around $100-$150, which will get paid back immediately. My marketing is competing with local tutoring businesses who have worse margins, so there are clear open channels.
+- **The product that people want to pay for is very ambitious.**
+  - Students prefer voice agents, but we need to rebuild the current in-lesson experience.
+  - We need to build a long-term memory to help students navigate their learning journeys over months or years.
+  - We need to build a database of content that can be used in lessons or homework assignments, and be able to handle scheduling edge cases.
 
-Most consumer edtech companies (Khan Academy, Udemy, etc) are scaled content distributors. But with the rise of AI, content itself is a dying moat. Instead, the next wave of edtech companies will be the ones specifically geared towards _teaching_, since you’re more closely aligned with the student's outcome.
+This is a huge opportunity, and someone is going to go after it soon. The existing adage of “_edtech doesn’t pay_” is over, but the world doesn’t realize yet.
 
-Our competition is mostly human tutoring aggregated by companies like:
+---
 
-- [Kaplan](https://www.kaptest.com/sat/courses/sat-tutoring), who sells non-personalized group prep courses for $1.7k-$6k
-- [C2 Education](https://www.c2educate.com/locations/west-portal-san-francisco-ca/), who does hourly [3-on-1 tutoring](https://www.reddit.com/r/Sat/comments/195dq0g/c2_education/) for $60/hr
+<br />
 
-There are many other localized tutoring offerings. Most are $60+/hr for one-on-one, or $1k+ for group prep classes. Orin behaves like the human tutors, but charges monthly.
+I’m committed to being the first mover and am raising $2M on SAFEs at an $18M post.
 
-## Distribution & Financials
+Specifically, I’d like to hire a few of my smartest engineering friends from places like Khan Academy, Clever, Palantir, and Citadel to speed up the development. This is the sci-fi idea that education-minded engineers have been dreaming to build.
 
-When I ask users what they would consider too cheap or too expensive for tutoring, they answer in $/hr. So there's significant pricing flexibility. We picked $150/mo because that's high enough to ensure that we're only targeting users who would be willing to pay for tutoring, but low enough that we're not pricing out the majority of the market.
+The product that people want is very clear and there’s a pathway to building it—it’d just take me way to long to do alone.
 
-With a price of $150/mo and low marginal cost, we can spend an absurd amount of money on CAC and still get a near-instant payback. Based on some initial ad runs, cost per sign up is going to be $40-50. Sign up → paid account conversion is still unclear, but I estimate a total CAC of <$200.
+The first company to build this is going to win a $100B market.
 
-Word of mouth is a powerful channel in tutoring. We can offer cash referrals to students or parents and still be LTV-positive.
+Interested in being a part of it? I’d love to hear from you.
 
-Our projected LTV is still unknown. Ideally, we’ll prioritize markets with longer LTVs, meaning that SAT might actually be the wrong place to start. Either way, it seems that CAC will get paid back almost instantly given the high price.
+<img src="/signature.png" style="max-width: 150px;" />
 
-## Moats
-
-Just like a real tutor, Orin will get better the more you work with him.
-
-He’ll figure out that you like visual explanations in math topics, but learn fast when diving into examples for science. Orin can spend hundreds of man-hours per week on a single student behind the scenes, crafting the best next lesson or homework assignment specifically for them.
-
-This entrenchment makes it tough to switch. You’ll have to rebuild context somewhere else for a competitor to work as well. You can already see this moat in human tutors, but we can actually scale it.
-
-## Raise
-
-If you decide to invest in Orin, you're making two bets:
-
-1. You're betting that the adage of _"edtech doesn't pay"_ is no longer true. It's clear that people pay for education, but before AI, the tech couldn't deliver. We believe that now it can, and are showing that the willingness to pay is actually very high for consumers.
-2. You're making a product bet. It's clear that the market is large and pre-paradigmatic, so the primary risk is execution. Users want this and are willing to pay for it - we just need to build it.
-
-To mitigate that risk, I’m raising a seed round of $3M on SAFEs at a $18M post-money valuation cap to build out the team. I’ve lined up a couple friends from places like Khan Academy, Clever, Palantir, and Citadel that I’d like to aggressively pursue after closing the round.
-
-If you want to be a part of this, I’m [bryan@learnwithorin.com](mailto:bryan@learnwithorin.com).
+<a href="mailto:bryan@learnwithorin.com" style="text-decoration: none;">bryan@learnwithorin.com</a>

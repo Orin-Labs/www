@@ -4,6 +4,7 @@ import {
 } from 'react';
 
 import Markdown from 'react-markdown';
+import rehypeRaw from 'rehype-raw';
 
 import { MeshGradient } from '@paper-design/shaders-react';
 
@@ -45,6 +46,7 @@ export default function Memo() {
       >
         <Markdown
           className="max-w-4xl mx-auto markdown-body"
+          rehypePlugins={[rehypeRaw]}
           components={{
             ol: ({ ...props }) => (
               <ol
