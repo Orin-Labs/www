@@ -6,9 +6,7 @@ The U.S. private tutoring market generates $25B annually, with the global market
 
 It’s an incredibly simple product in concept, yet extremely difficult in execution.
 
-When you buy tutoring services, you’re rarely buying information. Everything a tutor will teach you is available, for free, and only one Google search away.
-
-So why do we still spend so much money on tutoring?
+When you buy tutoring services, you’re rarely buying information. Everything a tutor will teach you is available, for free, and only one Google search away. So why do we still spend so much money on tutoring?
 
 It turns out, tutors are more than just almanacs. It’s not the content that’s important anymore—it’s the _teaching_.
 
@@ -16,13 +14,9 @@ Tutors manage schedules, hold students accountable, and provide tailored lesson 
 
 Ultimately, we pay tutors to guide our learning journeys—to feel confident we're progressing in the right direction with expert support.
 
----
+## Market
 
-<br />
-
-Existing edtech products don't offer this. If you look closely at Khan Academy, Duolingo, Udemy, or Coursera, you'll find that these companies are actually content providers.
-
-They have issues scaling because they can't solve the one problem we actually buy tutors for. At their core, they're just interactive textbooks.
+Existing edtech products don't offer this. If you look closely at Khan Academy, Duolingo, Udemy, or Coursera, you'll find that these companies are actually content providers. They have issues scaling because they can't solve the one problem we actually buy tutors for. At their core, they're just interactive textbooks.
 
 Before this year, building a replacement for tutors was impossible. Models weren’t good enough teachers, voices were stuck in the uncanny valley, and managing a long-term learning plan was too difficult to scale.
 
@@ -30,9 +24,7 @@ Now, everything has changed. Models are getting smarter and cheaper every day, S
 
 _Yet we still pay hourly for a tutor._
 
----
-
-<br />
+## Product
 
 In the past two months I’ve shipped two demo experiments of my tutor, Orin, to students—some students even paid $150/mo and engaged for four hours every week. From these experiments, I learned a few things:
 

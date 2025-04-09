@@ -50,7 +50,7 @@ export default function Memo() {
           transition={{ duration: 0.25 }}
         >
           <Markdown
-            className="max-w-4xl mx-auto markdown-body"
+            className="max-w-3xl mx-auto markdown-body"
             rehypePlugins={[rehypeRaw]}
             components={{
               ol: ({ ...props }) => (
