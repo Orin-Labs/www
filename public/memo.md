@@ -1,12 +1,12 @@
 # Orin
 
-Tutoring is a product that already has PMF.
+**Tutoring is a product that already has PMF.**
 
 The U.S. private tutoring market generates $25B annually, with the global market nearing $125B. This market spans general tutoring, career specific tutoring, test prep services, and more, with the average tutor costing $40-80/hr—even more for specialized topic areas.
 
 It’s an incredibly simple product in concept, yet extremely difficult in execution.
 
-When you buy tutoring services, you’re rarely buying information. You used to be-but not anymore. Everything a tutor will teach you is available, for free, and only one Google search away.
+When you buy tutoring services, you’re rarely buying information. Everything a tutor will teach you is available, for free, and only one Google search away.
 
 So why do we still spend so much money on tutoring?
 
@@ -20,7 +20,9 @@ Ultimately, we pay tutors to guide our learning journeys—to feel confident we'
 
 <br />
 
-Existing edtech products don't offer this. If you look closely at Khan Academy, Duolingo, Udemy, or Coursera, you'll find that these companies are actually content providers! They have issues scaling because they can't solve the one problem we actually buy tutors for. At their core, they're just interactive textbooks.
+Existing edtech products don't offer this. If you look closely at Khan Academy, Duolingo, Udemy, or Coursera, you'll find that these companies are actually content providers.
+
+They have issues scaling because they can't solve the one problem we actually buy tutors for. At their core, they're just interactive textbooks.
 
 Before this year, building a replacement for tutors was impossible. Models weren’t good enough teachers, voices were stuck in the uncanny valley, and managing a long-term learning plan was too difficult to scale.
 
