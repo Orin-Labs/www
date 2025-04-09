@@ -37,9 +37,7 @@ In the past two months I’ve shipped two demo experiments of my tutor, Orin, to
 
 This is a huge opportunity, and someone is going to go after it soon. The existing adage of “_edtech doesn’t pay_” is over—the world just doesn’t realize yet.
 
----
-
-<br />
+## Raise
 
 I’m committed to being the first mover and am raising $3M on SAFEs at an $18M post.
 
