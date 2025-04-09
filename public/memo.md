@@ -16,7 +16,7 @@ Ultimately, we pay tutors to guide our learning journeys—to feel confident we'
 
 ## Market
 
-Existing edtech products don't offer this. If you look closely at Khan Academy, Duolingo, Udemy, or Coursera, you'll find that these companies are actually content providers. They have issues scaling because they can't solve the one problem we actually buy tutors for. At their core, they're just interactive textbooks.
+Existing edtech products don't offer this. If you look closely at Khan Academy, Udemy, or Coursera, you'll find that these companies are actually content providers. They have issues scaling because they can't solve the one problem we actually buy tutors for. At their core, they're just interactive textbooks.
 
 Before this year, building a replacement for tutors was impossible. Models weren’t good enough teachers, voices were stuck in the uncanny valley, and managing a long-term learning plan was too difficult to scale.
 
