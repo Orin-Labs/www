@@ -47,7 +47,7 @@ This is a huge opportunity, and someone is going to go after it soon. The existi
 
 <br />
 
-I’m committed to being the first mover and am raising $2M on SAFEs at an $18M post.
+I’m committed to being the first mover and am raising $3M on SAFEs at an $18M post.
 
 Specifically, I’d like to hire a few of my smartest engineering friends from places like Khan Academy, Clever, Palantir, and Citadel to speed up the development. This is the sci-fi idea that education-minded engineers have been dreaming to build.
 
