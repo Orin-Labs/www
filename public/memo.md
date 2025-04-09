@@ -6,11 +6,11 @@ The U.S. private tutoring market generates $25B annually, with the global market
 
 Tutoring is incredibly simple in concept, yet extremely difficult in execution.
 
-When you buy tutoring services, you’re rarely buying information. Everything a tutor will teach you is available, for free, and only one Google search away. So why do we still spend so much money on tutoring?
+When you buy tutoring services, you’re rarely buying information. Everything a tutor will teach you is available for free, and only one Google search away. So why do we still spend so much money on tutoring?
 
-It turns out, tutors are more than just almanacs. It’s not the content that’s important anymore—it’s the _teaching_.
+Well, tutors are more than just almanacs. It’s not the content that’s important—it’s the _teaching_.
 
-Tutors manage schedules, hold students accountable, and provide tailored lesson content and resources. Tutors have to be empathetic, manage parents, plan for the long-term, and have curricular opinions.
+Great tutors manage schedules, hold students accountable, and provide tailored lesson content and resources. They have to be empathetic, manage parents, plan for the long-term, and have curricular opinions.
 
 Ultimately, we pay tutors to guide our learning journeys—to feel confident we're progressing in the right direction with expert support.
 
