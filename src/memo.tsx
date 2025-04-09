@@ -55,14 +55,14 @@ export default function Memo() {
             components={{
               ol: ({ ...props }) => (
                 <ol
-                  className="ml-6 my-4"
+                  className="ml-6 mb-4 mt-4 [ol:has(ol)>&]:mt-0"
                   style={{ listStyle: "revert" }}
                   {...props}
                 />
               ),
               ul: ({ ...props }) => (
                 <ul
-                  className="ml-6 my-4"
+                  className="ml-6 my-4 [ul:has(ul)>&]:mt-0"
                   style={{ listStyle: "revert" }}
                   {...props}
                 />
