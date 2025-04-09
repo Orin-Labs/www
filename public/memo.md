@@ -4,7 +4,7 @@
 
 The U.S. private tutoring market generates $25B annually, with the global market nearing $125B. This market spans general tutoring, career specific tutoring, test prep services, and more, with the average tutor costing $40-80/hr—even more for specialized topic areas.
 
-It’s an incredibly simple product in concept, yet extremely difficult in execution.
+Tutoring is incredibly simple in concept, yet extremely difficult in execution.
 
 When you buy tutoring services, you’re rarely buying information. Everything a tutor will teach you is available, for free, and only one Google search away. So why do we still spend so much money on tutoring?
 
