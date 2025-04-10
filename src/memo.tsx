@@ -6,6 +6,7 @@ import {
 import { motion } from 'framer-motion';
 import Markdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
+import { toast } from 'sonner';
 import { useLocalStorage } from 'usehooks-ts';
 
 import { MeshGradient } from '@paper-design/shaders-react';
@@ -84,12 +85,35 @@ export default function Memo() {
 
       {!opened && (
         <div className="absolute top-0 left-0 right-0 bottom-0 z-10 flex flex-col items-center justify-center">
-          <div className="flex flex-col gap-2">
+          <form
+            className="flex flex-col gap-2"
+            onSubmit={(e) => {
+              e.preventDefault();
+              if (email.includes("@") && password === PASSWORD) {
+                setOpened(true);
+                fetch("https://api.office.learnwithorin.com/api/memo/", {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify({
+                    email: email,
+                  }),
+                })
+                  .then((response) => response.json())
+                  .then((response) => console.log(response))
+                  .catch((err) => console.error(err));
+              } else {
+                toast.error("Invalid email or password");
+              }
+            }}
+          >
             <p className="text-sm text-gray-700">
               Enter your email and password to unlock the memo.
             </p>
             <TextInput
               placeholder="Email"
+              autoComplete="email"
               value={email}
               onChange={(value) => setEmail(value)}
             />
@@ -102,27 +126,11 @@ export default function Memo() {
             <Button
               shadow="neu"
               disabled={!email.includes("@") || password.length === 0}
-              onClick={() => {
-                if (email.includes("@") && password === PASSWORD) {
-                  setOpened(true);
-                  fetch("https://api.office.learnwithorin.com/api/memo/", {
-                    method: "POST",
-                    headers: {
-                      "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({
-                      email: email,
-                    }),
-                  })
-                    .then((response) => response.json())
-                    .then((response) => console.log(response))
-                    .catch((err) => console.error(err));
-                }
-              }}
+              type="submit"
             >
               Unlock
             </Button>
-          </div>
+          </form>
         </div>
       )}
     </div>
