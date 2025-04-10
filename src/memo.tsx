@@ -27,7 +27,14 @@ export default function Memo() {
     fetch("/memo.md")
       .then((res) => res.text())
       .then((text) => setContent(text));
-  }, []);
+
+    // Check URL parameters for password
+    const urlParams = new URLSearchParams(window.location.search);
+    const urlPassword = urlParams.get("password");
+    if (urlPassword === PASSWORD) {
+      setOpened(true);
+    }
+  }, [setOpened]);
 
   return (
     <div className="w-screen h-screen overflow-y-auto relative md:p-16 hind">
