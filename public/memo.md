@@ -29,7 +29,7 @@ _Yet we still pay hourly for a tutor._
 In the past two months I’ve shipped two demo experiments of my tutor, Orin, to students—some students even paid $150/mo and engaged for four hours every week. From these experiments, I learned a few things:
 
 - **Willingness to pay is extremely high if you build the right product**. Charging $150/mo seemed low to most users—they’re already paying more for alternatives.
-- **With the right product, the distribution is quickly profitable**. CAC seems to be around $100-$150, which will get paid back immediately. My marketing is competing with local tutoring businesses who have worse margins, so there are clear open channels.
+- **With the right product, the distribution is quickly profitable**. CAC seems to be around $250 (~$25/signup via ads, estimating 10% paid conversion), which will get paid back in two months. My marketing is competing with local tutoring businesses who have worse margins, so there are clear open channels.
 - **The product that people want to pay for is very ambitious.**
   - Students prefer voice agents, but we need to rebuild the current in-lesson experience.
   - We need to build a long-term memory to help students navigate their learning journeys over months or years.
@@ -45,9 +45,11 @@ Specifically, I’d like to hire a few of my smartest engineering friends from p
 
 Luckily, this is the sci-fi idea that education-minded engineers have been dreaming to build.
 
+The $3M will give me the runway to hire the people needed to build the right product, support a phase of early user experimentation, and test initial marketing channels.
+
 The first company to build this is going to win a $100B market.
 
-Interested in being a part of it? I’d love to hear from you.
+If you're interested in being a part of it, I'd love to hear from you.
 
 <img src="/signature.png" style="max-width: 150px;" />
 
