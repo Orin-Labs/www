@@ -1,9 +1,12 @@
-import { useState } from "react";
+import { useState } from 'react';
 
-import { AnimatePresence, motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import {
+  AnimatePresence,
+  motion,
+} from 'framer-motion';
+import { ArrowRight } from 'lucide-react';
 
-import { MeshGradient } from "@paper-design/shaders-react";
+import { MeshGradient } from '@paper-design/shaders-react';
 
 export const COLORS = [
   "#ea89c8", // pink
@@ -48,7 +51,7 @@ function App() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: getDelay() }}
           >
-            Your Expert SAT Tutor
+            Your Expert Tutor
           </motion.h1>
           <motion.p
             className="text-gray-50 text-2xl mt-2"
@@ -56,7 +59,7 @@ function App() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: getDelay() }}
           >
-            Personalized SAT tutoring, powered by AI.
+            Personalized tutoring, powered by AI.
           </motion.p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
@@ -85,7 +88,7 @@ function App() {
               transition={{ duration: 0.5, delay: getDelay() }}
             >
               <h1>24/7</h1>
-              <p className="text-gray-50 text-sm">Availability</p>
+              <p className="text-gray-50 text-sm">Scheduling</p>
             </motion.div>
           </div>
 
@@ -140,11 +143,12 @@ function App() {
                     value: 1.0,
                     currency: "USD",
                   });
-                  window.location.href = "https://office.learnwithorin.com";
+                  window.location.href =
+                    "https://getwaitlist.com/waitlist/27320";
                 }, 1000);
               }}
             >
-              Sign up for free
+              Join Waitlist
               <ArrowRight className="w-4 h-4" />
             </motion.button>
           </motion.div>
