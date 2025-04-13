@@ -73,7 +73,7 @@ function App() {
               <p className="text-gray-50 text-sm">Success Rate</p>
             </motion.div>
             <motion.div
-              className="flex flex-col md:px-6 py-2 border-white"
+              className="flex flex-col md:px-2 py-2 border-white"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: getDelay() }}
