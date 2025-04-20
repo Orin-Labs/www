@@ -1,55 +1,20 @@
 # Orin
 
-**Tutoring is a product that already has PMF.**
+In the next 5-10 years, AI is going to completely change how we think about education. **It is now possible to truly scale _personalized_ _teaching_ to every student.** Whether it comes direct to consumer or through public/private institutions, there will exist a software layer responsible for teaching our children. Whoever can build that layer will be in command of one of the most valuable industries on Earth, easily worth over a trillion dollars.
 
-The U.S. private tutoring market generates $25B annually, with the global market nearing $125B. This market spans general tutoring, career specific tutoring, test prep services, and more, with the average tutor costing $40-80/hr—even more for specialized topic areas.
+So, **I’m going to build it**. This problem has plagued me for more than half of my life. Ever since entering a rural middle school I was petitioning school boards and convincing superintendents to let me learn the things the school wasn’t staffed to offer.
 
-Tutoring is incredibly simple in concept, yet extremely difficult in execution.
+Not only is this a personal problem, but I’m also uniquely suited to solve it. I was in high school fivex years ago - I experienced the changes that COVID brought to student-life first hand. Yet I’ve also been in startups for years. I’ve built products and teams 0 to 1, helped scale companies to millions in revenue, and have failed plenty.
 
-When you buy tutoring services, you’re rarely buying information. Everything a tutor will teach you is available for free, and only one Google search away. So why do we still spend so much money on tutoring?
+Now, our task is herculean. Existing models are fantastic, but they are only building blocks of the product we’re making. Designing a system that can benchmark every student and support them through years of continuous learning is no small feat. But with the right team, it’s doable.
 
-Well, tutors are more than just almanacs. It’s not the content that’s important—it’s the _teaching_.
+**I’ve been pulling together some of my most talented friends from companies like Clever, Khan Academy, Chan-Zuckerberg Initiative, Palantir, and more.** I’ve been talking to dozens of families, collected hundreds of dollars in payments for fragmented demo versions of the product, and built an advisory board of industry veterans — some of whom are already investors in the round.
 
-Great tutors manage schedules, hold students accountable, and provide tailored lesson content and resources. They have to be empathetic, manage parents, plan for the long-term, and have curricular opinions.
+This is a unique opportunity of timing, market, and people. **To start, we’re building an AI private tutor named Orin for the $100B private tutoring market.** This will set a high bar for the educational parts of the product — if it isn’t effective, people won’t buy. We’ll be forced to build the hardest part of the product, an effective teacher, first.
 
-Ultimately, we pay tutors to guide our learning journeys—to feel confident we're progressing in the right direction with expert support.
+Once we have an effective teaching system and a growing consumer tutoring business, we’ll launch into schools, giving teachers the ability to deploy a personalized, one-to-one AI teacher for every student in their classroom.
 
-## Market
-
-Existing edtech products don't offer this. If you look closely at Khan Academy, Udemy, or Coursera, you'll find that these companies are actually content providers. They have issues scaling because they can't solve the one problem we actually buy tutors for. At their core, they're just interactive textbooks.
-
-Before this year, building a replacement for tutors was impossible. Models weren’t good enough teachers, voices were stuck in the uncanny valley, and managing a long-term learning plan was too difficult to scale.
-
-Now, everything has changed. Models are getting smarter and cheaper every day, Sesame’s voices have just crossed the uncanny valley, and we’re better than ever at building ambitious application-layer technology.
-
-_Yet we still pay hourly for a tutor._
-
-## Product
-
-In the past two months I’ve shipped two demo experiments of my tutor, Orin, to students—some students even paid $150/mo and engaged for four hours every week. From these experiments, I learned a few things:
-
-- **Willingness to pay is extremely high if you build the right product**. Charging $150/mo seemed low to most users—they’re already paying more for alternatives.
-- **With the right product, the distribution is quickly profitable**. CAC seems to be around $250 (~$25/signup via ads, estimating 10% paid conversion), which will get paid back in two months. My marketing is competing with local tutoring businesses who have worse margins, so there are clear open channels.
-- **The product that people want to pay for is very ambitious.**
-  - Students prefer voice agents, but we need to rebuild the current in-lesson experience.
-  - We need to build a long-term memory to help students navigate their learning journeys over months or years.
-  - We need to build a database of content that can be used in lessons or homework assignments, and handle scheduling edge cases.
-
-This is a huge opportunity, and someone is going to go after it soon. The existing adage of “_edtech doesn’t pay_” is over—the world just doesn’t realize yet.
-
-## Raise
-
-I’m committed to being the first mover and am raising $3M.
-
-Specifically, I’d like to hire a few of my smartest engineering friends from places like Khan Academy, Clever, and Palantir to speed up the development. The product that people want is very clear and there’s a pathway to building it—it’d just take me way too long to do alone.
-
-Luckily, this is the sci-fi idea that education-minded engineers have been dreaming to build.
-
-The $3M will give me the runway to hire the people needed to build the right product, support a phase of early user experimentation, and test initial marketing channels.
-
-The first company to build this is going to win a $100B market.
-
-If you're interested in being a part of it, I'd love to hear from you.
+To accomplish this, **I’m raising a $3M seed round.** I'm already backed by founders of Roboflow, Upright, and early engineers at Clever. If you’d like to invest or work with us, I’d love to hear from you.
 
 <img src="/signature.png" style="max-width: 150px;" />
 
