@@ -4,7 +4,7 @@ In the next 5-10 years, AI is going to completely change how we think about educ
 
 So, **I’m going to build it**. This problem has plagued me for more than half of my life. Ever since entering a rural middle school I was petitioning school boards and convincing superintendents to let me learn the things the school wasn’t staffed to offer.
 
-Not only is this a personal problem, but I’m also uniquely suited to solve it. I was in high school fivex years ago - I experienced the changes that COVID brought to student-life first hand. Yet I’ve also been in startups for years. I’ve built products and teams 0 to 1, helped scale companies to millions in revenue, and have failed plenty.
+Not only is this a personal problem, but I’m also uniquely suited to solve it. I was in high school five years ago - I experienced the changes that COVID brought to student-life first hand. Yet I’ve also been in startups for years. I’ve built products and teams 0 to 1, helped scale companies to millions in revenue, and have failed plenty.
 
 Now, our task is herculean. Existing models are fantastic, but they are only building blocks of the product we’re making. Designing a system that can benchmark every student and support them through years of continuous learning is no small feat. But with the right team, it’s doable.
 
