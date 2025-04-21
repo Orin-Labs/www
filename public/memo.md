@@ -8,7 +8,7 @@ Not only is this a personal problem, but I’m also uniquely suited to solve it.
 
 Now, our task is herculean. Existing models are fantastic, but they are only building blocks of the product we’re making. Designing a system that can benchmark every student and support them through years of continuous learning is no small feat. But with the right team, it’s doable.
 
-**I’ve been pulling together some of my most talented friends from companies like Clever, Khan Academy, Chan-Zuckerberg Initiative, Palantir, and more.** I’ve been talking to dozens of families, collected hundreds of dollars in payments for fragmented demo versions of the product, and built an advisory board of industry veterans — some of whom are already investors in the round.
+**I’ve been pulling together some of my most talented friends from companies like Clever, Khan Academy, Chan-Zuckerberg Initiative, Palantir, and more.** I’ve been talking to dozens of families and collected hundreds of dollars in payments for fragmented demo versions of the product.
 
 This is a unique opportunity of timing, market, and people. **To start, we’re building an AI private tutor named Orin for the $100B private tutoring market.** This will set a high bar for the educational parts of the product — if it isn’t effective, people won’t buy. We’ll be forced to build the hardest part of the product, an effective teacher, first.
 
