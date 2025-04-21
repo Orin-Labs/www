@@ -6,7 +6,7 @@ This problem has plagued me for more than half of my life. Ever since entering a
 
 Not only is this a personal problem, but I’m also uniquely suited to solve it. I was in high school five years ago - I experienced the changes that COVID brought to student-life first hand. Yet I’ve also been in startups for years. I’ve built products and teams 0 to 1, helped scale companies to millions in revenue, and have failed plenty.
 
-Building this is very hard. Existing models are fantastic, but they are only the building blocks of the product we’re making. Designing a system that can take responsibility for a student's learning for years is no small feat. But with the right team, it’s doable.
+**Building this is very hard**. Existing models are fantastic, but they are only the building blocks of the product we’re making. Designing a system that can take responsibility for a student's learning for years is no small feat. But with the right team, it’s doable.
 
 **I’ve been pulling together some of my most talented friends from companies like Clever, Khan Academy, Chan-Zuckerberg Initiative, Palantir, and more.** I’ve been talking to dozens of families and collected hundreds of dollars in payments for fragmented demo versions of the product.
 
