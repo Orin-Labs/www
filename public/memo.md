@@ -1,6 +1,6 @@
 # Orin
 
-In the next 5-10 years, AI is going to completely change how we think about education. **It is now possible to truly scale _personalized_ _teaching_ to every student.** Whether it comes direct to consumer or through public/private institutions, there will exist a software layer responsible for teaching our children. Whoever can build that layer will be in command of one of the most valuable industries on Earth, easily worth over a trillion dollars.
+In the next 5-10 years, AI is going to completely change how we think about education. **It is now possible to truly scale _personalized_ _teaching_ to every student.** Whether it comes direct to consumer or through public/private institutions, there will exist a software layer responsible for teaching our children. Whoever can build that layer will be in command of one of the most valuable industries on Earth.
 
 This problem has plagued me for more than half of my life. Ever since entering a rural middle school I was petitioning school boards and convincing superintendents to let me learn the things the school wasn’t staffed to offer.
 
