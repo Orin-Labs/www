@@ -14,7 +14,7 @@ Not only is this a personal problem, but I’m also uniquely suited to solve it.
 
 Once we have an effective teaching system and a growing consumer tutoring business, we’ll launch into schools, giving teachers the ability to deploy a personalized, one-to-one AI teacher for every student in their classroom.
 
-To accomplish this, **I’m raising a $3M seed round.** I'm already backed by founders of Roboflow, Upright, and early engineers at Clever. If you’d like to invest or work with us, I’d love to hear from you.
+I'm already backed by founders of Roboflow, Upright, and early engineers at Clever. If you’d like to invest or work with us, I’d love to hear from you.
 
 <img src="/signature.png" style="max-width: 150px;" />
 
