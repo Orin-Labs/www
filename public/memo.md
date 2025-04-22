@@ -10,7 +10,7 @@ Not only is this a personal problem, but I’m also uniquely suited to solve it.
 
 **I’ve been pulling together some of my most talented friends from companies like Clever, Khan Academy, Chan-Zuckerberg Initiative, Palantir, and more.** I’ve been talking to dozens of families and collected hundreds of dollars in payments for fragmented demo versions of the product.
 
-**To start, we’re building an AI private tutor named Orin for the $100B private tutoring market.** This will set a high bar for the educational parts of the product — if it isn’t effective, people won’t buy. We’ll be forced to build the hardest part of the product, an effective teacher, first. I have 25 families waiting to onboard once it's built.
+**To start, we’re building an AI private tutor named Orin for the $100B private tutoring market.** This will set a high bar for the educational parts of the product — if it isn’t effective, people won’t buy. We’ll be forced to build the hardest part of the product, an effective teacher, first. I have 50 families waiting to onboard once it's built.
 
 Once we have an effective teaching system and a growing consumer tutoring business, we’ll launch into schools, giving teachers the ability to deploy a personalized, one-to-one AI teacher for every student in their classroom.
 
