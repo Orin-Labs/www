@@ -116,20 +116,25 @@ function App() {
                   className="flex flex-col items-center gap-2"
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10, transition: { duration: 0.2 } }}
                   transition={{ duration: 0.5 }}
+                  key="invite-text-container"
                 >
                   <label className="text-gray-50 text-sm">
                     Enter your invite code
                   </label>
-                  <motion.input
+                  <input
                     className="bg-transparent placeholder:text-gray-100 text-white outline-none p-2 rounded-md border-white border"
                     placeholder="ABC-123"
                     autoFocus
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.2 }}
                     key="invite-text"
                   />
+                  <button
+                    className="text-gray-50 text-sm"
+                    onClick={() => setShowInviteText(false)}
+                  >
+                    Back
+                  </button>
                 </motion.div>
               ) : (
                 <motion.div
@@ -138,6 +143,7 @@ function App() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5 }}
                   exit={{ opacity: 0, y: -10, transition: { duration: 0.2 } }}
+                  key="invite-button-container"
                 >
                   <motion.button
                     className="bg-white text-black mix-blend-screen flex items-center gap-2 px-4 py-2 rounded-md"
