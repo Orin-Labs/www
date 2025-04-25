@@ -29,6 +29,7 @@ const getDelay = () => {
 
 function App() {
   const [speed, setSpeed] = useState(0.02);
+  const [showInviteText, setShowInviteText] = useState(false);
 
   return (
     <div className="bg-gray-100 dark:bg-gray-900 w-screen text-center h-screen flex items-center justify-center relative text-white">
@@ -99,58 +100,97 @@ function App() {
             transition={{ duration: 0.5, delay: getDelay() }}
           >
             "Orin is the most effective tutor we've{" "}
-            <br className="hidden md:block" /> ever had." -
-            Julian, Sophomore Parent
+            <br className="hidden md:block" /> ever had." - Julian, Sophomore
+            Parent
           </motion.p>
 
           <motion.div
-            className="mt-10"
+            className="mt-10 flex flex-col gap-2 items-center"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: getDelay() }}
           >
-            <motion.button
-              className="bg-white text-black mix-blend-screen flex items-center gap-2 px-4 py-2 rounded-md"
-              animate={{
-                y: 0,
-                boxShadow:
-                  "2px 2px 8px rgba(0, 0, 0, 0.15), -2px -2px 8px rgba(255, 255, 255, 0.15)",
-              }}
-              whileHover={{
-                boxShadow:
-                  "3px 3px 8px rgba(0, 0, 0, 0.2), -3px -3px 8px rgba(255, 255, 255, 0.2)",
-                transition: {
-                  duration: 0.1,
-                  delay: 0,
-                },
-              }}
-              whileTap={{
-                y: 2,
-                boxShadow:
-                  "1px 1px 4px rgba(0, 0, 0, 0.15), -1px -1px 4px rgba(255, 255, 255, 0.15)",
-                transition: {
-                  duration: 0.1,
-                  delay: 0,
-                },
-              }}
-              transition={{ duration: 0.1 }}
-              onClick={() => {
-                setSpeed(0.5);
-                setTimeout(() => {
-                  // @ts-ignore
-                  window.gtag("event", "conversion", {
-                    send_to: "AW-16902826455/6DXjCOCAha8aENfT8vs-",
-                    value: 1.0,
-                    currency: "USD",
-                  });
-                  window.location.href =
-                    "https://getwaitlist.com/waitlist/27320";
-                }, 1000);
-              }}
-            >
-              Apply for Early Access
-              <ArrowRight className="w-4 h-4" />
-            </motion.button>
+            <AnimatePresence mode="wait">
+              {showInviteText ? (
+                <motion.div
+                  className="flex flex-col items-center gap-2"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <label className="text-gray-50 text-sm">
+                    Enter your invite code
+                  </label>
+                  <motion.input
+                    className="bg-transparent placeholder:text-gray-100 text-white outline-none p-2 rounded-md border-white border"
+                    placeholder="ABC-123"
+                    autoFocus
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.2 }}
+                    key="invite-text"
+                  />
+                </motion.div>
+              ) : (
+                <motion.div
+                  className="flex flex-col items-center gap-2"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5 }}
+                  exit={{ opacity: 0, y: -10, transition: { duration: 0.2 } }}
+                >
+                  <motion.button
+                    className="bg-white text-black mix-blend-screen flex items-center gap-2 px-4 py-2 rounded-md"
+                    animate={{
+                      y: 0,
+                      boxShadow:
+                        "2px 2px 8px rgba(0, 0, 0, 0.15), -2px -2px 8px rgba(255, 255, 255, 0.15)",
+                    }}
+                    whileHover={{
+                      boxShadow:
+                        "3px 3px 8px rgba(0, 0, 0, 0.2), -3px -3px 8px rgba(255, 255, 255, 0.2)",
+                      transition: {
+                        duration: 0.1,
+                        delay: 0,
+                      },
+                    }}
+                    whileTap={{
+                      y: 2,
+                      boxShadow:
+                        "1px 1px 4px rgba(0, 0, 0, 0.15), -1px -1px 4px rgba(255, 255, 255, 0.15)",
+                      transition: {
+                        duration: 0.1,
+                        delay: 0,
+                      },
+                    }}
+                    transition={{ duration: 0.1 }}
+                    onClick={() => {
+                      setSpeed(0.5);
+                      setTimeout(() => {
+                        // @ts-ignore
+                        window.gtag("event", "conversion", {
+                          send_to: "AW-16902826455/6DXjCOCAha8aENfT8vs-",
+                          value: 1.0,
+                          currency: "USD",
+                        });
+                        window.location.href =
+                          "https://getwaitlist.com/waitlist/27320";
+                      }, 1000);
+                    }}
+                  >
+                    Apply for Early Access
+                    <ArrowRight className="w-4 h-4" />
+                  </motion.button>
+                  <motion.button
+                    className="text-white mix-blend-screen flex items-center gap-2 px-4 py-2 rounded-md"
+                    onClick={() => setShowInviteText(true)}
+                    key="invite-button"
+                  >
+                    I have an invite code
+                  </motion.button>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </motion.div>
         </motion.div>
       </AnimatePresence>
