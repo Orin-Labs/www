@@ -51,7 +51,7 @@ function App() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: getDelay() }}
           >
-            Your Expert Tutor
+            The most powerful tutor ever created.
           </motion.h1>
           <motion.p
             className="text-gray-50 text-2xl mt-2"
@@ -59,17 +59,17 @@ function App() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: getDelay() }}
           >
-            Personalized tutoring, powered by AI.
+            Powering the top students from 100+ districts.
           </motion.p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
+          <div className="grid grid-cols-2 md:grid-cols-3">
             <motion.div
               className="flex flex-col items-center py-2 border-white"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: getDelay() }}
             >
-              <h1>99%</h1>
+              <h1>99.9%</h1>
               <p className="text-gray-50 text-sm">Success Rate</p>
             </motion.div>
             <motion.div
@@ -78,11 +78,11 @@ function App() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: getDelay() }}
             >
-              <h1>Monthly</h1>
-              <p className="text-gray-50 text-sm">Subscription</p>
+              <h1>Top 5%</h1>
+              <p className="text-gray-50 text-sm">of students</p>
             </motion.div>
             <motion.div
-              className="flex flex-col items-center col-span-1 sm:col-span-2 md:col-span-1 py-2 border-white"
+              className="flex flex-col items-center col-span-2 md:col-span-1 py-2 border-white"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: getDelay() }}
@@ -98,9 +98,9 @@ function App() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: getDelay() }}
           >
-            "It's like having a full-time tutor for the{" "}
-            <br className="hidden md:block" /> price of a single session." -
-            Julia
+            "Orin is the most effective tutor we've{" "}
+            <br className="hidden md:block" /> ever had." -
+            Julian, Sophomore Parent
           </motion.p>
 
           <motion.div
@@ -148,7 +148,7 @@ function App() {
                 }, 1000);
               }}
             >
-              Join Waitlist
+              Apply for Early Access
               <ArrowRight className="w-4 h-4" />
             </motion.button>
           </motion.div>
