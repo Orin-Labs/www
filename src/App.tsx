@@ -70,9 +70,9 @@ function App() {
   }, []);
 
   return (
-    <div className="bg-gray-100 dark:bg-gray-900 w-screen text-center h-screen flex items-center justify-center relative text-white">
+    <div className="bg-gray-100 dark:bg-gray-900 overflow-y-auto w-screen text-center h-screen flex items-center justify-center relative text-white">
       <motion.div
-        className="relative z-10 flex flex-col gap-12 items-center justify-center p-6"
+        className="relative z-10 flex h-full flex-col gap-4 items-center justify-center px-6 md:py-6"
         animate={{
           opacity: 1,
           y: 0,
@@ -88,7 +88,7 @@ function App() {
           key="call-not-started"
         >
           <motion.h1
-            className="text-6xl font-bold"
+            className="text-4xl md:text-6xl font-bold"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: getDelay() }}
@@ -96,7 +96,7 @@ function App() {
             The most powerful tutor ever created.
           </motion.h1>
           <motion.p
-            className="text-gray-50 text-2xl mt-2"
+            className="text-gray-50 text-xl md:text-2xl mt-2"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: getDelay() }}
@@ -104,7 +104,7 @@ function App() {
             Powering the top students from districts across the country.
           </motion.p>
 
-          <div className="grid grid-cols-2 md:grid-cols-3">
+          <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
             <motion.div
               className="flex flex-col items-center py-2 border-white"
               initial={{ opacity: 0, y: 10 }}
@@ -187,7 +187,7 @@ function App() {
                 exit={{ opacity: 0, y: -10, transition: { duration: 0.2 } }}
                 key="invite-button-container"
               >
-                <div className="flex gap-2 items-center">
+                <div className="flex flex-col md:flex-row gap-2 items-center">
                   <motion.button
                     className="bg-white text-black mix-blend-screen flex items-center gap-2 px-4 py-2 rounded-md"
                     animate={{
@@ -278,7 +278,7 @@ function App() {
                       }, 1000);
                     }}
                   >
-                    Apply for Early Access
+                    Apply
                     <ArrowRight className="w-4 h-4" />
                   </motion.button>
                 </div>
@@ -349,7 +349,7 @@ function App() {
         </div>
       </motion.div>
 
-      <footer className="absolute bottom-0 left-0 right-0 text-xs mb-1 flex justify-between items-center px-8 text-gray-300">
+      <footer className="hidden md:flex absolute bottom-0 left-0 right-0 text-xs mb-1 justify-between items-center px-8 text-gray-300">
         <p>&copy; 2025 Orin Labs. All rights reserved.</p>
         <a href="/privacy" className="text-gray-300">
           Privacy Policy
