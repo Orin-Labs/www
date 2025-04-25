@@ -1,12 +1,24 @@
-import { useState } from 'react';
+import {
+  useCallback,
+  useEffect,
+  useState,
+} from 'react';
 
 import {
   AnimatePresence,
   motion,
 } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
+import {
+  ArrowRight,
+  LoaderCircle,
+  Phone,
+  X,
+} from 'lucide-react';
 
 import { MeshGradient } from '@paper-design/shaders-react';
+import Vapi from '@vapi-ai/web';
+
+const vapi = new Vapi("6abe9004-54a5-454e-8bf6-0678db02abdf");
 
 export const COLORS = [
   "#ea89c8", // pink
@@ -30,21 +42,50 @@ const getDelay = () => {
 function App() {
   const [speed, setSpeed] = useState(0.02);
   const [showInviteText, setShowInviteText] = useState(false);
+  const [isCalling, setIsCalling] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const startCall = useCallback(async () => {
+    setIsLoading(true);
+    await vapi.start("8e109bed-8611-4fcc-ae8b-9d0a3c18e3fb");
+  }, []);
+
+  useEffect(() => {
+    const handleStart = () => {
+      setIsCalling(true);
+      setIsLoading(false);
+    };
+    const handleEnd = () => {
+      setIsCalling(false);
+      setIsLoading(false);
+    };
+
+    vapi.on("call-start", handleStart);
+    vapi.on("call-end", handleEnd);
+
+    return () => {
+      vapi.off("call-start", handleStart);
+      vapi.off("call-end", handleEnd);
+    };
+  }, []);
 
   return (
     <div className="bg-gray-100 dark:bg-gray-900 w-screen text-center h-screen flex items-center justify-center relative text-white">
-      <AnimatePresence mode="wait">
+      <motion.div
+        className="relative z-10 flex flex-col gap-12 items-center justify-center p-6"
+        animate={{
+          opacity: 1,
+          y: 0,
+        }}
+        exit={{
+          opacity: 0,
+          y: 10,
+        }}
+        transition={{ duration: 0.5 }}
+      >
         <motion.div
-          className="relative z-10 flex flex-col gap-2 items-center justify-center p-6"
-          animate={{
-            opacity: 1,
-            y: 0,
-          }}
-          exit={{
-            opacity: 0,
-            y: 10,
-          }}
-          transition={{ duration: 0.5 }}
+          className="flex flex-col items-center gap-2"
+          key="call-not-started"
         >
           <motion.h1
             className="text-6xl font-bold"
@@ -60,7 +101,7 @@ function App() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: getDelay() }}
           >
-            Powering the top students from 100+ districts.
+            Powering the top students from districts across the country.
           </motion.p>
 
           <div className="grid grid-cols-2 md:grid-cols-3">
@@ -103,48 +144,101 @@ function App() {
             <br className="hidden md:block" /> ever had." - Julian, Sophomore
             Parent
           </motion.p>
+        </motion.div>
 
-          <motion.div
-            className="mt-10 flex flex-col gap-2 items-center"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: getDelay() }}
-          >
-            <AnimatePresence mode="wait">
-              {showInviteText ? (
-                <motion.div
-                  className="flex flex-col items-center gap-2"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10, transition: { duration: 0.2 } }}
-                  transition={{ duration: 0.5 }}
-                  key="invite-text-container"
+        <motion.div
+          className="flex flex-col gap-2 items-center"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: getDelay() }}
+        >
+          <AnimatePresence mode="wait">
+            {showInviteText ? (
+              <motion.div
+                className="flex flex-col items-center gap-2"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10, transition: { duration: 0.2 } }}
+                transition={{ duration: 0.5 }}
+                key="invite-text-container"
+              >
+                <label className="text-gray-50 text-sm">
+                  Enter your invite code
+                </label>
+                <input
+                  className="bg-transparent placeholder:text-gray-100 text-white outline-none p-2 rounded-md border-white border"
+                  placeholder="ABC-123"
+                  autoFocus
+                  key="invite-text"
+                />
+                <button
+                  className="text-gray-50 text-sm"
+                  onClick={() => setShowInviteText(false)}
                 >
-                  <label className="text-gray-50 text-sm">
-                    Enter your invite code
-                  </label>
-                  <input
-                    className="bg-transparent placeholder:text-gray-100 text-white outline-none p-2 rounded-md border-white border"
-                    placeholder="ABC-123"
-                    autoFocus
-                    key="invite-text"
-                  />
-                  <button
-                    className="text-gray-50 text-sm"
-                    onClick={() => setShowInviteText(false)}
+                  Back
+                </button>
+              </motion.div>
+            ) : (
+              <motion.div
+                className="flex flex-col items-center gap-2"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                exit={{ opacity: 0, y: -10, transition: { duration: 0.2 } }}
+                key="invite-button-container"
+              >
+                <div className="flex gap-2 items-center">
+                  <motion.button
+                    className="bg-white text-black mix-blend-screen flex items-center gap-2 px-4 py-2 rounded-md"
+                    animate={{
+                      y: 0,
+                      boxShadow:
+                        "2px 2px 8px rgba(0, 0, 0, 0.15), -2px -2px 8px rgba(255, 255, 255, 0.15)",
+                    }}
+                    whileHover={{
+                      boxShadow:
+                        "3px 3px 8px rgba(0, 0, 0, 0.2), -3px -3px 8px rgba(255, 255, 255, 0.2)",
+                      transition: {
+                        duration: 0.1,
+                        delay: 0,
+                      },
+                    }}
+                    whileTap={{
+                      y: 2,
+                      boxShadow:
+                        "1px 1px 4px rgba(0, 0, 0, 0.15), -1px -1px 4px rgba(255, 255, 255, 0.15)",
+                      transition: {
+                        duration: 0.1,
+                        delay: 0,
+                      },
+                    }}
+                    transition={{ duration: 0.1 }}
+                    onClick={() => {
+                      if (isCalling) {
+                        vapi.stop();
+                        setIsCalling(false);
+                      } else {
+                        setSpeed(0.5);
+                        startCall();
+                        setTimeout(() => {
+                          setSpeed(0);
+                        }, 1000);
+                      }
+                    }}
                   >
-                    Back
-                  </button>
-                </motion.div>
-              ) : (
-                <motion.div
-                  className="flex flex-col items-center gap-2"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5 }}
-                  exit={{ opacity: 0, y: -10, transition: { duration: 0.2 } }}
-                  key="invite-button-container"
-                >
+                    {isLoading ? (
+                      <LoaderCircle className="w-4 h-4 animate-spin" />
+                    ) : isCalling ? (
+                      <X className="w-4 h-4" />
+                    ) : (
+                      <Phone className="w-4 h-4" />
+                    )}
+                    {isLoading
+                      ? "Loading..."
+                      : isCalling
+                      ? "Stop"
+                      : "Talk to Orin"}
+                  </motion.button>
                   <motion.button
                     className="bg-white text-black mix-blend-screen flex items-center gap-2 px-4 py-2 rounded-md"
                     animate={{
@@ -187,19 +281,19 @@ function App() {
                     Apply for Early Access
                     <ArrowRight className="w-4 h-4" />
                   </motion.button>
-                  <motion.button
-                    className="text-white mix-blend-screen flex items-center gap-2 px-4 py-2 rounded-md"
-                    onClick={() => setShowInviteText(true)}
-                    key="invite-button"
-                  >
-                    I have an invite code
-                  </motion.button>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </motion.div>
+                </div>
+                <motion.button
+                  className="text-white mix-blend-screen flex items-center gap-2 px-4 py-2 rounded-md"
+                  onClick={() => setShowInviteText(true)}
+                  key="invite-button"
+                >
+                  I have an invite code
+                </motion.button>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </motion.div>
-      </AnimatePresence>
+      </motion.div>
 
       <motion.div
         className="absolute inset-0 md:p-6 dark:hidden block"
