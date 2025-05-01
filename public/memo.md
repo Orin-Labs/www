@@ -7,7 +7,3 @@
 **To start, we’re launching an AI private tutor named Orin for the $100B private tutoring market.** We manage the full learning journey on behalf of parents - how to benchmark a student, how to track progress, and how to teach them best. Parents place responsibility on us and families are waiting to onboard at $150/mo.
 
 We're backed by early engineers from Clever as well as the founders of Roboflow, Upright, and more. **If you’d like to invest or work with us, we'd love to hear from you.**
-
-<img src="/signature.png" style="max-width: 120px;" />
-
-<a href="mailto:bryan@learnwithorin.com" style="text-decoration: none;">bryan@learnwithorin.com</a>

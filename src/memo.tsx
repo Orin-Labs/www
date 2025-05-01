@@ -37,7 +37,7 @@ export default function Memo() {
   }, [setOpened]);
 
   return (
-    <div className="w-screen h-screen overflow-y-auto flex flex-col items-center justify-center relative md:p-16 hind">
+    <div className="w-screen h-screen overflow-y-auto md:flex md:flex-col md:items-center md:justify-center relative md:p-16 hind">
       <div className="absolute top-0 left-0 right-0 bottom-0 z-0 pointer-events-none">
         <MeshGradient
           color1={COLORS[0]}
@@ -56,7 +56,7 @@ export default function Memo() {
 
       {content && opened && (
         <motion.div
-          className="z-10 text-left p-4 md:p-8 w-fit mx-auto h-fit md:rounded-lg bg-white relative"
+          className="z-10 text-left min-h-full p-4 md:p-8 w-fit mx-auto h-fit md:rounded-lg bg-white relative flex flex-col items-start md:justify-between"
           style={{
             boxShadow:
               "12px 12px 24px rgba(0, 0, 0, 0.2), -12px -12px 24px rgba(255, 255, 255, 0.2)",
@@ -87,6 +87,21 @@ export default function Memo() {
           >
             {content}
           </Markdown>
+
+          <div className="flex flex-col justify-center">
+            <img
+              alt="signature"
+              src="/signature.png"
+              style={{ maxWidth: "120px" }}
+            />
+
+            <a
+              href="mailto:bryan@learnwithorin.com"
+              className="text-blue-500 underline md:mr-8"
+            >
+              bryan@learnwithorin.com
+            </a>
+          </div>
         </motion.div>
       )}
 
