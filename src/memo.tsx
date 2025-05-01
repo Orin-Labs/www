@@ -37,7 +37,7 @@ export default function Memo() {
   }, [setOpened]);
 
   return (
-    <div className="w-screen h-screen overflow-y-auto relative md:p-16 hind">
+    <div className="w-screen h-screen overflow-y-auto flex flex-col items-center justify-center relative md:p-16 hind">
       <div className="absolute top-0 left-0 right-0 bottom-0 z-0 pointer-events-none">
         <MeshGradient
           color1={COLORS[0]}
