@@ -56,7 +56,7 @@ export default function Memo() {
 
       {content && opened && (
         <motion.div
-          className="z-10 text-left min-h-full p-4 md:p-8 w-fit mx-auto h-fit md:rounded-lg bg-white relative flex flex-col items-start md:justify-between"
+          className="z-10 text-left min-h-full md:min-h-fit p-4 md:p-8 w-fit mx-auto h-fit md:rounded-lg bg-white relative flex flex-col items-start"
           style={{
             boxShadow:
               "12px 12px 24px rgba(0, 0, 0, 0.2), -12px -12px 24px rgba(255, 255, 255, 0.2)",
