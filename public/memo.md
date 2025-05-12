@@ -6,4 +6,4 @@
 
 **To start, we’re launching an AI private tutor named Orin for the $100B private tutoring market.** We manage the full learning journey on behalf of parents - how to benchmark a student, how to track progress, and how to teach them best. Parents place responsibility on us and families are waiting to onboard at $150/mo.
 
-We're backed by early engineers from Clever as well as the founders of Roboflow, Upright, and more. **If you want to build the future of education, we'd love to hear from you.**
+Founded by two experienced YC alumni ($50M+ raised), we're backed by early engineers from Clever as well as the founders of Roboflow, Upright, and more. **If you want to build the future of education, we'd love to hear from you.**
