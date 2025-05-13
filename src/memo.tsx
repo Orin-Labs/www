@@ -1,19 +1,16 @@
-import {
-  useEffect,
-  useState,
-} from 'react';
+import { useEffect, useState } from "react";
 
-import { motion } from 'framer-motion';
-import Markdown from 'react-markdown';
-import rehypeRaw from 'rehype-raw';
-import { toast } from 'sonner';
-import { useLocalStorage } from 'usehooks-ts';
+import { motion } from "framer-motion";
+import Markdown from "react-markdown";
+import rehypeRaw from "rehype-raw";
+import { toast } from "sonner";
+import { useLocalStorage } from "usehooks-ts";
 
-import { MeshGradient } from '@paper-design/shaders-react';
+import { MeshGradient } from "@paper-design/shaders-react";
 
-import { COLORS } from './App';
-import { Button } from './Button';
-import { TextInput } from './TextInput';
+import { COLORS } from "./App";
+import { Button } from "./Button";
+import { TextInput } from "./TextInput";
 
 const PASSWORD = "manatee15";
 
@@ -89,11 +86,19 @@ export default function Memo() {
           </Markdown>
 
           <div className="flex flex-col justify-center">
-            <img
-              alt="signature"
-              src="/signature.png"
-              style={{ maxWidth: "120px" }}
-            />
+            <div className="flex items-center gap-2">
+              <img
+                alt="signature"
+                src="/signature_b.png"
+                style={{ maxWidth: "120px" }}
+              />
+              &
+              <img
+                alt="signature"
+                src="/signature_t.png"
+                style={{ maxWidth: "120px" }}
+              />
+            </div>
 
             <a
               href="mailto:bryan@learnwithorin.com"
