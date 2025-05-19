@@ -95,12 +95,6 @@ export default function Memo() {
                 src="/signature_b.png"
                 style={{ maxWidth: "120px" }}
               />
-              &
-              <img
-                alt="signature"
-                src="/signature_t.png"
-                style={{ maxWidth: "120px" }}
-              />
             </div>
 
             <a
