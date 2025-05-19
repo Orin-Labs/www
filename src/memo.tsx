@@ -1,16 +1,19 @@
-import { useEffect, useState } from "react";
+import {
+  useEffect,
+  useState,
+} from 'react';
 
-import { motion } from "framer-motion";
-import Markdown from "react-markdown";
-import rehypeRaw from "rehype-raw";
-import { toast } from "sonner";
-import { useLocalStorage } from "usehooks-ts";
+import { motion } from 'framer-motion';
+import Markdown from 'react-markdown';
+import rehypeRaw from 'rehype-raw';
+import { toast } from 'sonner';
+import { useLocalStorage } from 'usehooks-ts';
 
-import { MeshGradient } from "@paper-design/shaders-react";
+import { MeshGradient } from '@paper-design/shaders-react';
 
-import { COLORS } from "./App";
-import { Button } from "./Button";
-import { TextInput } from "./TextInput";
+import { COLORS } from './App';
+import { Button } from './Button';
+import { TextInput } from './TextInput';
 
 const PASSWORD = "manatee15";
 
