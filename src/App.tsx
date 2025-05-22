@@ -273,8 +273,7 @@ function App() {
                           value: 1.0,
                           currency: "USD",
                         });
-                        window.location.href =
-                          "https://getwaitlist.com/waitlist/27320";
+                        window.location.href = "https://tally.so/r/3j24VY";
                       }, 1000);
                     }}
                   >
