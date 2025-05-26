@@ -1,14 +1,11 @@
-import { useState } from 'react';
+import { useState } from "react";
 
-import { motion } from 'framer-motion';
-import { AsYouType } from 'libphonenumber-js';
-import {
-  ArrowRight,
-  Loader2,
-} from 'lucide-react';
-import { toast } from 'sonner';
+import { motion } from "framer-motion";
+import { AsYouType } from "libphonenumber-js";
+import { ArrowRight, Loader2 } from "lucide-react";
+import { toast } from "sonner";
 
-import { MeshGradient } from '@paper-design/shaders-react';
+import { MeshGradient } from "@paper-design/shaders-react";
 
 export const COLORS = [
   "#ea89c8", // pink
@@ -78,8 +75,8 @@ function App() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: getDelay() }}
             >
-              <h1>99.9%</h1>
-              <p className="text-gray-50 text-sm">Success Rate</p>
+              <h1>6-12</h1>
+              <p className="text-gray-50 text-sm">grade range</p>
             </motion.div>
             <motion.div
               className="flex flex-col md:px-2 py-2 border-white"
@@ -96,8 +93,8 @@ function App() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: getDelay() }}
             >
-              <h1>24/7</h1>
-              <p className="text-gray-50 text-sm">Scheduling</p>
+              <h1>99%</h1>
+              <p className="text-gray-50 text-sm">success rate</p>
             </motion.div>
           </div>
 
