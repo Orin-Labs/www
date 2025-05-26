@@ -39,7 +39,7 @@ function App() {
   return (
     <div className="bg-gray-100 dark:bg-gray-900 overflow-y-auto w-screen text-center h-screen flex items-center justify-center relative text-white">
       <motion.div
-        className="relative z-10 flex h-full flex-col gap-4 items-center justify-center px-6 md:py-6"
+        className="relative z-10 flex h-full flex-col gap-8 items-center justify-center px-6 md:py-6"
         animate={{
           opacity: 1,
           y: 0,
@@ -60,7 +60,7 @@ function App() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: getDelay() }}
           >
-            The most powerful tutor ever created.
+            Academic excellence, handled.
           </motion.h1>
           <motion.p
             className="text-gray-50 text-xl md:text-2xl mt-2"
@@ -68,10 +68,10 @@ function App() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: getDelay() }}
           >
-            Powering the top students from districts across the country.
+            Hi! I'm Orin, the most effective AI tutor ever created.
           </motion.p>
 
-          <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
+          <div className="grid grid-cols-2 gap-4 my-8 md:my-0 md:grid-cols-3">
             <motion.div
               className="flex flex-col items-center py-2 border-white"
               initial={{ opacity: 0, y: 10 }}
@@ -87,8 +87,8 @@ function App() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: getDelay() }}
             >
-              <h1>Top 5%</h1>
-              <p className="text-gray-50 text-sm">of students</p>
+              <h1>100+</h1>
+              <p className="text-gray-50 text-sm">districts served</p>
             </motion.div>
             <motion.div
               className="flex flex-col items-center col-span-2 md:col-span-1 py-2 border-white"
@@ -107,9 +107,9 @@ function App() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: getDelay() }}
           >
-            "Orin is the most effective tutor we've{" "}
-            <br className="hidden md:block" /> ever had." - Julian, Sophomore
-            Parent
+            "Orin is just incredible. I never thought AI would{" "}
+            <br className="hidden md:block" /> be this powerful." - Julian,
+            Sophomore Parent
           </motion.p>
         </motion.div>
 
@@ -156,7 +156,10 @@ function App() {
                 });
             }}
           >
-            <div className="flex flex-col md:flex-row gap-2 items-center">
+            <label htmlFor="phone-number" className="text-gray-50 text-sm">
+              Enter your phone number for a free lesson
+            </label>
+            <div className="flex gap-2 items-center">
               <motion.input
                 type="tel"
                 className="bg-transparent placeholder:text-gray-100 text-white outline-none p-2 rounded-md border-white border"
