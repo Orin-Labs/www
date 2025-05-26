@@ -75,7 +75,7 @@ function App() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: getDelay() }}
             >
-              <h1>6-12</h1>
+              <h1>6-12th</h1>
               <p className="text-gray-50 text-sm">grade range</p>
             </motion.div>
             <motion.div
