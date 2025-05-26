@@ -1,24 +1,14 @@
-import {
-  useCallback,
-  useEffect,
-  useState,
-} from 'react';
+import { useState } from 'react';
 
-import {
-  AnimatePresence,
-  motion,
-} from 'framer-motion';
+import { motion } from 'framer-motion';
+import { AsYouType } from 'libphonenumber-js';
 import {
   ArrowRight,
-  LoaderCircle,
-  Phone,
-  X,
+  Loader2,
 } from 'lucide-react';
+import { toast } from 'sonner';
 
 import { MeshGradient } from '@paper-design/shaders-react';
-import Vapi from '@vapi-ai/web';
-
-const vapi = new Vapi("6abe9004-54a5-454e-8bf6-0678db02abdf");
 
 export const COLORS = [
   "#ea89c8", // pink
@@ -32,6 +22,8 @@ export const DARK_COLORS = [
   "#2457FF", // blue
 ];
 
+const formatter = new AsYouType("US");
+
 let delay = 0;
 const getDelay = () => {
   const temp = delay;
@@ -41,33 +33,8 @@ const getDelay = () => {
 
 function App() {
   const [speed, setSpeed] = useState(0.02);
-  const [showInviteText, setShowInviteText] = useState(false);
-  const [isCalling, setIsCalling] = useState(false);
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-
-  const startCall = useCallback(async () => {
-    setIsLoading(true);
-    await vapi.start("8e109bed-8611-4fcc-ae8b-9d0a3c18e3fb");
-  }, []);
-
-  useEffect(() => {
-    const handleStart = () => {
-      setIsCalling(true);
-      setIsLoading(false);
-    };
-    const handleEnd = () => {
-      setIsCalling(false);
-      setIsLoading(false);
-    };
-
-    vapi.on("call-start", handleStart);
-    vapi.on("call-end", handleEnd);
-
-    return () => {
-      vapi.off("call-start", handleStart);
-      vapi.off("call-end", handleEnd);
-    };
-  }, []);
 
   return (
     <div className="bg-gray-100 dark:bg-gray-900 overflow-y-auto w-screen text-center h-screen flex items-center justify-center relative text-white">
@@ -152,145 +119,101 @@ function App() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: getDelay() }}
         >
-          <AnimatePresence mode="wait">
-            {showInviteText ? (
-              <motion.div
-                className="flex flex-col items-center gap-2"
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10, transition: { duration: 0.2 } }}
-                transition={{ duration: 0.5 }}
-                key="invite-text-container"
+          <motion.form
+            className="flex flex-col items-center gap-2"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            exit={{ opacity: 0, y: -10, transition: { duration: 0.2 } }}
+            key="invite-button-container"
+            onSubmit={(e) => {
+              e.preventDefault();
+              if (isLoading) return;
+
+              setIsLoading(true);
+              setSpeed(0.05);
+              fetch("https://api.learnwithorin.com/api/entities/signup/", {
+                method: "POST",
+                body: JSON.stringify({
+                  phone_number: formatter.getNumberValue(),
+                }),
+                headers: {
+                  "Content-Type": "application/json",
+                },
+              })
+                .then((res) => res.json())
+                .then((data) => {
+                  setSpeed(0.02);
+                  if (data.message === "Success") {
+                    toast.info("Great! Orin will be in touch soon.");
+                    setPhoneNumber("");
+                  } else {
+                    toast.error(data.message);
+                  }
+                })
+                .finally(() => {
+                  setIsLoading(false);
+                });
+            }}
+          >
+            <div className="flex flex-col md:flex-row gap-2 items-center">
+              <motion.input
+                type="tel"
+                className="bg-transparent placeholder:text-gray-100 text-white outline-none p-2 rounded-md border-white border"
+                placeholder="Your Phone number"
+                autoFocus
+                disabled={isLoading}
+                value={phoneNumber}
+                onChange={(e) => {
+                  formatter.reset();
+                  const formattedNumber = formatter.input(e.target.value);
+                  setPhoneNumber(formattedNumber);
+
+                  // @ts-ignore
+                  window.gtag("event", "conversion", {
+                    send_to: "AW-16902826455/6DXjCOCAha8aENfT8vs-",
+                    value: 1.0,
+                    currency: "USD",
+                  });
+                }}
+                key="invite-text"
+              />
+              <motion.button
+                type="submit"
+                className="bg-white text-black mix-blend-screen flex justify-center items-center gap-2 h-10 w-10 rounded-md"
+                animate={{
+                  y: 0,
+                  boxShadow:
+                    "2px 2px 8px rgba(0, 0, 0, 0.15), -2px -2px 8px rgba(255, 255, 255, 0.15)",
+                }}
+                whileHover={{
+                  boxShadow:
+                    "3px 3px 8px rgba(0, 0, 0, 0.2), -3px -3px 8px rgba(255, 255, 255, 0.2)",
+                  transition: {
+                    duration: 0.1,
+                    delay: 0,
+                  },
+                }}
+                whileTap={{
+                  y: 2,
+                  boxShadow:
+                    "1px 1px 4px rgba(0, 0, 0, 0.15), -1px -1px 4px rgba(255, 255, 255, 0.15)",
+                  transition: {
+                    duration: 0.1,
+                    delay: 0,
+                  },
+                }}
+                transition={{ duration: 0.1 }}
+                disabled={isLoading}
               >
-                <label className="text-gray-50 text-sm">
-                  Enter your invite code
-                </label>
-                <input
-                  className="bg-transparent placeholder:text-gray-100 text-white outline-none p-2 rounded-md border-white border"
-                  placeholder="ABC-123"
-                  autoFocus
-                  key="invite-text"
-                />
-                <button
-                  className="text-gray-50 text-sm"
-                  onClick={() => setShowInviteText(false)}
-                >
-                  Back
-                </button>
-              </motion.div>
-            ) : (
-              <motion.div
-                className="flex flex-col items-center gap-2"
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                exit={{ opacity: 0, y: -10, transition: { duration: 0.2 } }}
-                key="invite-button-container"
-              >
-                <div className="flex flex-col md:flex-row gap-2 items-center">
-                  <motion.button
-                    className="bg-white text-black mix-blend-screen flex items-center gap-2 px-4 py-2 rounded-md"
-                    animate={{
-                      y: 0,
-                      boxShadow:
-                        "2px 2px 8px rgba(0, 0, 0, 0.15), -2px -2px 8px rgba(255, 255, 255, 0.15)",
-                    }}
-                    whileHover={{
-                      boxShadow:
-                        "3px 3px 8px rgba(0, 0, 0, 0.2), -3px -3px 8px rgba(255, 255, 255, 0.2)",
-                      transition: {
-                        duration: 0.1,
-                        delay: 0,
-                      },
-                    }}
-                    whileTap={{
-                      y: 2,
-                      boxShadow:
-                        "1px 1px 4px rgba(0, 0, 0, 0.15), -1px -1px 4px rgba(255, 255, 255, 0.15)",
-                      transition: {
-                        duration: 0.1,
-                        delay: 0,
-                      },
-                    }}
-                    transition={{ duration: 0.1 }}
-                    onClick={() => {
-                      if (isCalling) {
-                        vapi.stop();
-                        setIsCalling(false);
-                      } else {
-                        setSpeed(0.5);
-                        startCall();
-                        setTimeout(() => {
-                          setSpeed(0);
-                        }, 1000);
-                      }
-                    }}
-                  >
-                    {isLoading ? (
-                      <LoaderCircle className="w-4 h-4 animate-spin" />
-                    ) : isCalling ? (
-                      <X className="w-4 h-4" />
-                    ) : (
-                      <Phone className="w-4 h-4" />
-                    )}
-                    {isLoading
-                      ? "Loading..."
-                      : isCalling
-                      ? "Stop"
-                      : "Talk to Orin"}
-                  </motion.button>
-                  <motion.button
-                    className="bg-white text-black mix-blend-screen flex items-center gap-2 px-4 py-2 rounded-md"
-                    animate={{
-                      y: 0,
-                      boxShadow:
-                        "2px 2px 8px rgba(0, 0, 0, 0.15), -2px -2px 8px rgba(255, 255, 255, 0.15)",
-                    }}
-                    whileHover={{
-                      boxShadow:
-                        "3px 3px 8px rgba(0, 0, 0, 0.2), -3px -3px 8px rgba(255, 255, 255, 0.2)",
-                      transition: {
-                        duration: 0.1,
-                        delay: 0,
-                      },
-                    }}
-                    whileTap={{
-                      y: 2,
-                      boxShadow:
-                        "1px 1px 4px rgba(0, 0, 0, 0.15), -1px -1px 4px rgba(255, 255, 255, 0.15)",
-                      transition: {
-                        duration: 0.1,
-                        delay: 0,
-                      },
-                    }}
-                    transition={{ duration: 0.1 }}
-                    onClick={() => {
-                      setSpeed(0.5);
-                      setTimeout(() => {
-                        // @ts-ignore
-                        window.gtag("event", "conversion", {
-                          send_to: "AW-16902826455/6DXjCOCAha8aENfT8vs-",
-                          value: 1.0,
-                          currency: "USD",
-                        });
-                        window.location.href = "https://tally.so/r/3j24VY";
-                      }, 1000);
-                    }}
-                  >
-                    Apply
-                    <ArrowRight className="w-4 h-4" />
-                  </motion.button>
-                </div>
-                <motion.button
-                  className="text-white mix-blend-screen flex items-center gap-2 px-4 py-2 rounded-md"
-                  onClick={() => setShowInviteText(true)}
-                  key="invite-button"
-                >
-                  I have an invite code
-                </motion.button>
-              </motion.div>
-            )}
-          </AnimatePresence>
+                {isLoading ? (
+                  <Loader2 className="w-4 h-4 animate-spin" />
+                ) : (
+                  <ArrowRight className="w-4 h-4" />
+                )}
+              </motion.button>
+            </div>
+          </motion.form>
         </motion.div>
       </motion.div>
 
