@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { AsYouType } from "libphonenumber-js";
 import { ArrowRight, Loader2 } from "lucide-react";
 import { toast } from "sonner";
@@ -19,6 +19,28 @@ export const DARK_COLORS = [
   "#2457FF", // blue
 ];
 
+const testimonials = [
+  {
+    quote:
+      "Orin is just incredible. I never thought AI // would be this powerful.",
+    source: "Julian's mom",
+  },
+  {
+    quote:
+      "The personalized approach is exactly what my daughter needed. // Her grades have improved dramatically.",
+    source: "Emma's mom",
+  },
+  {
+    quote:
+      "Orin adapts to my son's learning style perfectly.// It's like having a private tutor available 24/7.",
+    source: "Jaron's parents",
+  },
+  {
+    quote: "Somehow everything is handled. //I'm so impressed.",
+    source: "Sarah's dad",
+  },
+];
+
 const formatter = new AsYouType("US");
 
 let delay = 0;
@@ -32,6 +54,14 @@ function App() {
   const [speed, setSpeed] = useState(0.02);
   const [phoneNumber, setPhoneNumber] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [currentTestimonial, setCurrentTestimonial] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
+    }, 10000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div className="bg-gray-100 dark:bg-gray-900 overflow-y-auto w-screen text-center h-screen flex items-center justify-center relative text-white">
@@ -68,7 +98,7 @@ function App() {
             Hi! I'm Orin, the most effective AI tutor ever created.
           </motion.p>
 
-          <div className="grid grid-cols-2 gap-4 my-8 md:my-0 md:grid-cols-3">
+          <div className="grid grid-cols-2 gap-4 my-8 md:my-4 md:grid-cols-3">
             <motion.div
               className="flex flex-col items-center py-2 border-white"
               initial={{ opacity: 0, y: 10 }}
@@ -98,16 +128,48 @@ function App() {
             </motion.div>
           </div>
 
-          <motion.p
-            className="text-gray-50 italic"
+          <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.5, delay: getDelay() }}
           >
-            "Orin is just incredible. I never thought AI would{" "}
-            <br className="hidden md:block" /> be this powerful." - Julian,
-            Sophomore Parent
-          </motion.p>
+            <AnimatePresence mode="wait">
+              <motion.p
+                key={currentTestimonial}
+                className="text-gray-50 italic block"
+                initial={{
+                  opacity: 0,
+                  y: 10,
+                }}
+                animate={{
+                  opacity: 1,
+                  y: 0,
+                }}
+                exit={{
+                  opacity: 0,
+                  y: -10,
+                }}
+                transition={{ duration: 0.25 }}
+              >
+                {testimonials[currentTestimonial].quote
+                  .split("//")
+                  .map((line, index) => (
+                    <span key={index}>
+                      {line}
+                      {index !==
+                        testimonials[currentTestimonial].quote.split("//")
+                          .length -
+                          1 && <br className="hidden md:block" />}
+                    </span>
+                  ))}
+                <br />
+                <span className="text-gray-50 text-sm">
+                  - {testimonials[currentTestimonial].source}
+                </span>
+              </motion.p>
+            </AnimatePresence>
+          </motion.div>
         </motion.div>
 
         <motion.div
