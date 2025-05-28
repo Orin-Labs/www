@@ -152,6 +152,7 @@ function App() {
                 }}
                 transition={{ duration: 0.25 }}
               >
+                "
                 {testimonials[currentTestimonial].quote
                   .split("//")
                   .map((line, index) => (
@@ -163,8 +164,9 @@ function App() {
                           1 && <br className="hidden md:block" />}
                     </span>
                   ))}
+                "
                 <br />
-                <span className="text-gray-50 text-sm">
+                <span className="text-gray-50 text-sm not-italic">
                   - {testimonials[currentTestimonial].source}
                 </span>
               </motion.p>
