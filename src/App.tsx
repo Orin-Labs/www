@@ -208,6 +208,16 @@ function App() {
                   if (data.message === "Success") {
                     toast.info("Great! Orin will be in touch soon.");
                     setPhoneNumber("");
+
+                    // @ts-ignore
+                    fbq("track", "Lead");
+
+                    // @ts-ignore
+                    window.gtag("event", "conversion", {
+                      send_to: "AW-16902826455/6DXjCOCAha8aENfT8vs-",
+                      value: 1.0,
+                      currency: "USD",
+                    });
                   } else {
                     toast.error(data.message);
                   }
