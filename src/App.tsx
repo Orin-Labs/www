@@ -335,9 +335,13 @@ function App() {
         </div>
       </motion.div>
 
-      <footer className="hidden md:flex absolute bottom-0 left-0 right-0 text-xs mb-1 justify-between items-center px-8 text-gray-300">
-        <p>&copy; 2025 Orin Labs. All rights reserved.</p>
-        <a href="/privacy" className="text-gray-300">
+      <footer className="hidden md:grid grid-cols-3 absolute bottom-0 left-0 right-0 text-xs mb-1 justify-between items-center px-8 text-gray-300">
+        <p className="text-left">&copy; 2025 Orin Labs. All rights reserved.</p>
+        <p className="text-center">
+          By entering your phone number, you agree to be reached out to by Orin
+          Labs.
+        </p>
+        <a href="/privacy" className="text-gray-300 text-right">
           Privacy Policy
         </a>
       </footer>
