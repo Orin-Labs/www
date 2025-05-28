@@ -1,11 +1,21 @@
-import { useEffect, useState } from "react";
+import {
+  useEffect,
+  useState,
+} from 'react';
 
-import { AnimatePresence, motion } from "framer-motion";
-import { AsYouType } from "libphonenumber-js";
-import { ArrowRight, Loader2 } from "lucide-react";
-import { toast } from "sonner";
+import {
+  AnimatePresence,
+  motion,
+} from 'framer-motion';
+import { AsYouType } from 'libphonenumber-js';
+import {
+  ArrowRight,
+  Loader2,
+} from 'lucide-react';
+import posthog from 'posthog-js';
+import { toast } from 'sonner';
 
-import { MeshGradient } from "@paper-design/shaders-react";
+import { MeshGradient } from '@paper-design/shaders-react';
 
 export const COLORS = [
   "#ea89c8", // pink
@@ -218,6 +228,8 @@ function App() {
                       value: 1.0,
                       currency: "USD",
                     });
+
+                    posthog.capture("input_phone_number");
                   } else {
                     toast.error(data.message);
                   }
