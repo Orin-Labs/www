@@ -201,12 +201,15 @@ function App() {
               e.preventDefault();
               if (isLoading) return;
 
+              const isGoogleAds = window.location.search.includes("gclid");
+
               setIsLoading(true);
               setSpeed(0.05);
               fetch("https://api.learnwithorin.com/api/entities/signup/", {
                 method: "POST",
                 body: JSON.stringify({
                   phone_number: formatter.getNumberValue(),
+                  source: isGoogleAds ? "google_ads" : undefined,
                 }),
                 headers: {
                   "Content-Type": "application/json",
