@@ -202,6 +202,7 @@ function App() {
               if (isLoading) return;
 
               const isGoogleAds = window.location.search.includes("gclid");
+              const isFacebookAds = window.location.search.includes("fbclid");
 
               setIsLoading(true);
               setSpeed(0.05);
@@ -209,7 +210,11 @@ function App() {
                 method: "POST",
                 body: JSON.stringify({
                   phone_number: formatter.getNumberValue(),
-                  source: isGoogleAds ? "google_ads" : undefined,
+                  source: isGoogleAds
+                    ? "google_ads"
+                    : isFacebookAds
+                    ? "facebook_ads"
+                    : undefined,
                 }),
                 headers: {
                   "Content-Type": "application/json",
