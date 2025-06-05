@@ -1,21 +1,12 @@
-import {
-  useEffect,
-  useState,
-} from 'react';
+import { useEffect, useState } from "react";
 
-import {
-  AnimatePresence,
-  motion,
-} from 'framer-motion';
-import { AsYouType } from 'libphonenumber-js';
-import {
-  ArrowRight,
-  Loader2,
-} from 'lucide-react';
-import posthog from 'posthog-js';
-import { toast } from 'sonner';
+import { AnimatePresence, motion } from "framer-motion";
+import { AsYouType } from "libphonenumber-js";
+import { ArrowRight, Loader2 } from "lucide-react";
+import posthog from "posthog-js";
+import { toast } from "sonner";
 
-import { MeshGradient } from '@paper-design/shaders-react';
+import { MeshGradient } from "@paper-design/shaders-react";
 
 export const COLORS = [
   "#ea89c8", // pink
@@ -59,6 +50,24 @@ const getDelay = () => {
   delay += 0.05;
   return temp;
 };
+
+function getSource() {
+  const utmSource = new URLSearchParams(window.location.search).get(
+    "utm_source"
+  );
+  if (utmSource === "koah") {
+    return "koah";
+  }
+  const hasGclid = window.location.search.includes("gclid");
+  if (hasGclid) {
+    return "google_ads";
+  }
+  const hasFbclid = window.location.search.includes("fbclid");
+  if (hasFbclid) {
+    return "facebook_ads";
+  }
+  return undefined;
+}
 
 function App() {
   const [speed, setSpeed] = useState(0.02);
@@ -201,20 +210,13 @@ function App() {
               e.preventDefault();
               if (isLoading) return;
 
-              const isGoogleAds = window.location.search.includes("gclid");
-              const isFacebookAds = window.location.search.includes("fbclid");
-
               setIsLoading(true);
               setSpeed(0.05);
               fetch("https://api.learnwithorin.com/api/entities/signup/", {
                 method: "POST",
                 body: JSON.stringify({
                   phone_number: formatter.getNumberValue(),
-                  source: isGoogleAds
-                    ? "google_ads"
-                    : isFacebookAds
-                    ? "facebook_ads"
-                    : undefined,
+                  source: getSource(),
                 }),
                 headers: {
                   "Content-Type": "application/json",
