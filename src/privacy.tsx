@@ -7,7 +7,7 @@ import Markdown from 'react-markdown';
 
 import { MeshGradient } from '@paper-design/shaders-react';
 
-import { COLORS } from './App';
+import { COLORS } from './constants/colors';
 
 export default function Memo() {
   const [content, setContent] = useState("");
