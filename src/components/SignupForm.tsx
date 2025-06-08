@@ -3,6 +3,7 @@ import {
   ArrowRight,
   Loader2,
 } from 'lucide-react';
+import { useMediaQuery } from 'react-responsive';
 
 import { useCopyVariation } from '../hooks/useCopyVariation';
 import { useSignupForm } from '../hooks/useSignupForm';
@@ -11,6 +12,8 @@ export function SignupForm() {
   const { phoneNumber, isLoading, handleSubmit, handlePhoneChange } =
     useSignupForm();
   const { cta } = useCopyVariation();
+
+  const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
 
   return (
     <motion.form
@@ -30,7 +33,7 @@ export function SignupForm() {
           type="tel"
           className="bg-transparent placeholder:text-gray-100 text-white outline-none p-2 rounded-md border-white border"
           placeholder="Your Phone number"
-          autoFocus
+          autoFocus={!isMobile}
           disabled={isLoading}
           value={phoneNumber}
           onChange={handlePhoneChange}
