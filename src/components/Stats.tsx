@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
 
 let delay = 0;
 const getDelay = () => {
@@ -26,7 +26,7 @@ export function Stats() {
         transition={{ duration: 0.5, delay: getDelay() }}
       >
         <h1>100+</h1>
-        <p className="text-gray-50 text-sm">districts served</p>
+        <p className="text-gray-50 text-sm">families trust Orin</p>
       </motion.div>
       <motion.div
         className="flex flex-col items-center col-span-2 md:col-span-1 py-2 border-white"
