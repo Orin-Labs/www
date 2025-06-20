@@ -3,10 +3,13 @@
 @tailwind utilities;
 
 html {
-  overflow-y: hidden;
   font-family: "Gowun Dodum", sans-serif;
   font-weight: 400;
   font-style: normal;
+}
+
+body {
+  @apply overflow-y-auto bg-gray-50 dark:bg-gray-900;
 }
 
 .hind {

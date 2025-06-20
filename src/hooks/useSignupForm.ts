@@ -30,10 +30,10 @@ export function useSignupForm() {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [speed, setSpeed] = useState(0.02);
+  const [submitted, setSubmitted] = useState(false);
   const { cta } = useCopyVariation();
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
     if (isLoading) return;
 
     setIsLoading(true);
@@ -60,7 +60,7 @@ export function useSignupForm() {
       if (data.message === "Success") {
         toast.info("Great! Orin will be in touch soon.");
         setPhoneNumber("");
-
+        setSubmitted(true);
         // @ts-ignore
         fbq("track", "Lead");
 
@@ -75,6 +75,7 @@ export function useSignupForm() {
           cta_variation: cta,
         });
       } else {
+        setSubmitted(false);
         toast.error(data.message);
       }
     } finally {
@@ -82,9 +83,9 @@ export function useSignupForm() {
     }
   };
 
-  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handlePhoneChange = (number: string) => {
     formatter.reset();
-    const formattedNumber = formatter.input(e.target.value);
+    const formattedNumber = formatter.input(number);
     setPhoneNumber(formattedNumber);
 
     // @ts-ignore
@@ -99,6 +100,7 @@ export function useSignupForm() {
     phoneNumber,
     isLoading,
     speed,
+    submitted,
     handleSubmit,
     handlePhoneChange,
   };

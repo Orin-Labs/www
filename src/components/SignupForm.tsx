@@ -1,4 +1,7 @@
-import { motion } from 'framer-motion';
+import {
+  HTMLMotionProps,
+  motion,
+} from 'framer-motion';
 import {
   ArrowRight,
   Loader2,
@@ -6,24 +9,34 @@ import {
 import { useMediaQuery } from 'react-responsive';
 
 import { useCopyVariation } from '../hooks/useCopyVariation';
-import { useSignupForm } from '../hooks/useSignupForm';
 
-export function SignupForm() {
-  const { phoneNumber, isLoading, handleSubmit, handlePhoneChange } =
-    useSignupForm();
+interface SignupFormProps extends Omit<HTMLMotionProps<"form">, "onSubmit"> {
+  phoneNumber: string;
+  isLoading: boolean;
+  handlePhoneChange: (number: string) => void;
+  onSubmit: (phoneNumber: string) => void;
+}
+
+export function SignupForm({
+  phoneNumber,
+  isLoading,
+  handlePhoneChange,
+  onSubmit,
+  ...props
+}: SignupFormProps) {
   const { cta } = useCopyVariation();
 
   const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
 
   return (
     <motion.form
-      className="flex flex-col items-center gap-2"
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      exit={{ opacity: 0, y: -10, transition: { duration: 0.2 } }}
+      className="flex flex-col gap-2 items-center"
       key="invite-button-container"
-      onSubmit={handleSubmit}
+      onSubmit={(e) => {
+        e.preventDefault();
+        onSubmit(phoneNumber);
+      }}
+      {...props}
     >
       <label htmlFor="phone-number" className="text-gray-50 text-sm">
         {cta}
@@ -36,7 +49,7 @@ export function SignupForm() {
           autoFocus={!isMobile}
           disabled={isLoading}
           value={phoneNumber}
-          onChange={handlePhoneChange}
+          onChange={(e) => handlePhoneChange(e.target.value)}
           key="invite-text"
         />
         <motion.button
