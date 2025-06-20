@@ -2,7 +2,8 @@ import {
   HTMLMotionProps,
   motion,
 } from 'framer-motion';
-import { cn } from 'slate-ui';
+
+import { cn } from './utils';
 
 export type ButtonProps = HTMLMotionProps<"button"> & {
   shadow?: "float" | "neu";

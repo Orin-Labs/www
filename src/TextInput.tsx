@@ -2,7 +2,8 @@ import {
   HTMLMotionProps,
   motion,
 } from 'framer-motion';
-import { cn } from 'slate-ui';
+
+import { cn } from './utils';
 
 export interface TextInputProps
   extends Omit<HTMLMotionProps<"input">, "onChange"> {

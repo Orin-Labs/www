@@ -4,7 +4,6 @@ import React from 'react';
 
 import posthog from 'posthog-js';
 import ReactDOM from 'react-dom/client';
-import { SlateProvider } from 'slate-ui';
 import { Toaster } from 'sonner';
 
 import App from './App';
@@ -25,12 +24,10 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <SlateProvider>
-      <Toaster />
-      {window.location.pathname === "/" && <App />}
-      {window.location.pathname === "/privacy" && <Privacy />}
-      {window.location.pathname === "/memo" && <Memo />}
-    </SlateProvider>
+    <Toaster />
+    {window.location.pathname === "/" && <App />}
+    {window.location.pathname === "/privacy" && <Privacy />}
+    {window.location.pathname === "/memo" && <Memo />}
   </React.StrictMode>
 );
 
