@@ -83,13 +83,13 @@ const allCards: Card[] = [
   testimonials[0], // Mr. Beast testimonial
   {
     type: "image",
-    src: "/public/gif1.gif",
+    src: "/gif1.gif",
     alt: "Student engaged in learning",
   },
   testimonials[1], // Noah testimonial
   {
     type: "image",
-    src: "/public/gif2.gif",
+    src: "/gif2.gif",
     alt: "Student engaged in learning",
   },
   <div className="absolute inset-0 rounded-lg overflow-hidden flex items-center justify-center">
@@ -119,14 +119,14 @@ const allCards: Card[] = [
   </div>,
   {
     type: "image",
-    src: "/public/gif3.gif",
+    src: "/gif3.gif",
     alt: "Student engaged in learning",
   },
   testimonials[4], // Harry Potter testimonial
 
   {
     type: "image",
-    src: "/public/gif4.gif",
+    src: "/gif4.gif",
     alt: "Student engaged in learning",
   },
   testimonials[3], // Jasmine testimonial
