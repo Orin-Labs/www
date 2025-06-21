@@ -108,7 +108,7 @@ export function SeamlessCoordination({
         </div>
 
         {/* Phone Component */}
-        <motion.div className="flex-1 h-full flex justify-center relative rounded-lg overflow-hidden py-12">
+        <motion.div className="flex-1 h-full flex justify-center relative rounded-lg overflow-hidden py-12 px-4">
           <BackgroundGradient speed={speed} />
           <div
             className={cn(
