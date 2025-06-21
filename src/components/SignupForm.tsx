@@ -48,7 +48,7 @@ export function SignupForm({
 
   return (
     <motion.form
-      className="flex flex-col gap-4 items-center z-10 w-full max-w-md"
+      className="flex flex-col gap-4 items-center px-4 z-10 w-full max-w-md"
       key="invite-button-container"
       onSubmit={(e) => {
         e.preventDefault();

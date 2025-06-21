@@ -52,7 +52,7 @@ export function CTASection({
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-4xl md:text-5xl font-bold z-10 text-center"
+          className="text-4xl md:text-5xl font-bold z-10 text-center mx-2"
         >
           {cta}
         </motion.h2>
@@ -60,7 +60,7 @@ export function CTASection({
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="text-xl z-10 leading-relaxed"
+          className="text-xl z-10 leading-relaxed mx-2"
         >
           Orin will reach out to you with a free 2 week trial.
           <br />
