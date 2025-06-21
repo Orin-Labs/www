@@ -1,11 +1,7 @@
 import React, { HTMLProps } from 'react';
 
 import { motion } from 'framer-motion';
-import {
-  Mic,
-  Triangle,
-  VideoOff,
-} from 'lucide-react';
+import { Triangle } from 'lucide-react';
 
 import { cn } from '../utils';
 import { BackgroundGradient } from './BackgroundGradient';
@@ -96,26 +92,6 @@ const allCards: Card[] = [
     <Triangle className="w-14 h-14 text-white z-10 animate-ping absolute" />
     <Triangle className="w-16 h-16 text-white z-10 mt-2" />
     <BackgroundGradient speed={0.5} />
-
-    <div className="absolute bottom-2 right-2 backdrop-blur-sm rounded-full bg-neutral-900/50 flex z-10 text-white">
-      <div
-        className={cn(
-          "rounded-full p-2 transition-all duration-150",
-          "bg-neutral-900/0"
-        )}
-      >
-        <Mic className="w-3 h-3" />
-      </div>
-
-      <div
-        className={cn(
-          "rounded-full p-2 transition-all duration-150",
-          "bg-neutral-900/0"
-        )}
-      >
-        <VideoOff className="w-3 h-3" />
-      </div>
-    </div>
   </div>,
   {
     type: "image",
