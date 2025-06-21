@@ -249,6 +249,8 @@ export function HowItWorks({ speed, className }: HowItWorksProps) {
                   src="/lesson.png"
                   alt="lesson"
                   className="w-full h-full object-cover rounded-lg"
+                  loading="eager"
+                  decoding="async"
                 />
               ) : (
                 <MessageVisualization messages={step.messages!} />
