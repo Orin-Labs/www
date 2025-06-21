@@ -9,6 +9,35 @@ import {
 import { useMediaQuery } from 'react-responsive';
 import { toast } from 'sonner';
 
+import { Button } from '../Button';
+
+interface SubmittedVariantProps {
+  onReset: () => void;
+}
+
+function SubmittedVariant({ onReset }: SubmittedVariantProps) {
+  return (
+    <motion.div
+      className="flex flex-col gap-6 items-center px-4 z-10 w-full max-w-md text-center"
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.6 }}
+    >
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.3 }}
+      >
+        <h3 className="text-2xl font-bold text-white mb-2">Thank You!</h3>
+      </motion.div>
+
+      <Button type="button" bg="transparent" onClick={onReset} shadow="neu">
+        Submit Another
+      </Button>
+    </motion.div>
+  );
+}
+
 interface SignupFormProps extends Omit<HTMLMotionProps<"form">, "onSubmit"> {
   phoneNumber: string;
   email: string;
@@ -16,12 +45,14 @@ interface SignupFormProps extends Omit<HTMLMotionProps<"form">, "onSubmit"> {
   studentName: string;
   studentGrade: string;
   isLoading: boolean;
+  submitted: boolean;
   handlePhoneChange: (number: string) => void;
   setEmail: (email: string) => void;
   setParentName: (name: string) => void;
   setStudentName: (name: string) => void;
   setStudentGrade: (grade: string) => void;
   onSubmit: (phoneNumber: string) => void;
+  onReset: () => void;
 }
 
 function isValidEmail(email: string) {
@@ -35,15 +66,21 @@ export function SignupForm({
   studentName,
   studentGrade,
   isLoading,
+  submitted,
   handlePhoneChange,
   setEmail,
   setParentName,
   setStudentName,
   setStudentGrade,
   onSubmit,
+  onReset,
   ...props
 }: SignupFormProps) {
   const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
+
+  if (submitted) {
+    return <SubmittedVariant onReset={onReset} />;
+  }
 
   return (
     <motion.form
@@ -59,9 +96,11 @@ export function SignupForm({
           !studentGrade
         ) {
           toast.error("Please fill out all fields");
+          return;
         }
         if (!isValidEmail(email)) {
           toast.error("Please enter a valid email");
+          return;
         }
         onSubmit(phoneNumber);
       }}

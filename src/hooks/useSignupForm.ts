@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { AsYouType } from 'libphonenumber-js';
 import posthog from 'posthog-js';
 import { toast } from 'sonner';
+import useLocalStorageState from 'use-local-storage-state';
 
 import { useCopyVariation } from './useCopyVariation';
 
@@ -34,7 +35,9 @@ export function useSignupForm() {
   const [studentGrade, setStudentGrade] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [speed, setSpeed] = useState(0.02);
-  const [submitted, setSubmitted] = useState(false);
+  const [submitted, setSubmitted] = useLocalStorageState("signup-submitted", {
+    defaultValue: false,
+  });
   const { cta } = useCopyVariation();
 
   const handleSubmit = async () => {
@@ -108,6 +111,15 @@ export function useSignupForm() {
     });
   };
 
+  const handleReset = () => {
+    setSubmitted(false);
+    setPhoneNumber("");
+    setEmail("");
+    setParentName("");
+    setStudentName("");
+    setStudentGrade("");
+  };
+
   return {
     phoneNumber,
     email,
@@ -119,6 +131,7 @@ export function useSignupForm() {
     submitted,
     handleSubmit,
     handlePhoneChange,
+    handleReset,
     setEmail,
     setParentName,
     setStudentName,

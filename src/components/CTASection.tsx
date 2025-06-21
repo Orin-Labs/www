@@ -15,12 +15,14 @@ interface CTASectionProps extends Omit<HTMLProps<HTMLElement>, "onSubmit"> {
   studentName: string;
   studentGrade: string;
   isLoading: boolean;
+  submitted: boolean;
   handlePhoneChange: (value: string) => void;
   setEmail: (value: string) => void;
   setParentName: (value: string) => void;
   setStudentName: (value: string) => void;
   setStudentGrade: (value: string) => void;
   onSubmit: (phoneNumber: string) => void;
+  onReset: () => void;
 }
 
 export function CTASection({
@@ -32,12 +34,14 @@ export function CTASection({
   studentName,
   studentGrade,
   isLoading,
+  submitted,
   handlePhoneChange,
   setEmail,
   setParentName,
   setStudentName,
   setStudentGrade,
   onSubmit,
+  onReset,
   className,
   ...props
 }: CTASectionProps) {
@@ -74,12 +78,14 @@ export function CTASection({
           studentName={studentName}
           studentGrade={studentGrade}
           isLoading={isLoading}
+          submitted={submitted}
           handlePhoneChange={handlePhoneChange}
           setEmail={setEmail}
           setParentName={setParentName}
           setStudentName={setStudentName}
           setStudentGrade={setStudentGrade}
           onSubmit={onSubmit}
+          onReset={onReset}
         />
 
         <BackgroundGradient speed={speed} />

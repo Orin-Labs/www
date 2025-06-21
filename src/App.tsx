@@ -30,7 +30,9 @@ function App() {
     setStudentName,
     setStudentGrade,
     speed,
+    submitted,
     handleSubmit,
+    handleReset,
   } = useSignupForm();
   const { headline, subheadline, cta } = useCopyVariation();
   const [scrollY, setScrollY] = useState(0);
@@ -95,12 +97,14 @@ function App() {
         studentName={studentName}
         studentGrade={studentGrade}
         isLoading={isLoading}
+        submitted={submitted}
         handlePhoneChange={handlePhoneChange}
         setEmail={setEmail}
         setParentName={setParentName}
         setStudentName={setStudentName}
         setStudentGrade={setStudentGrade}
         onSubmit={handleSubmit}
+        onReset={handleReset}
       />
 
       {/* Scroll for more info */}
