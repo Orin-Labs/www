@@ -4,90 +4,19 @@ import {
   useState,
 } from 'react';
 
-import {
-  motion,
-  TargetAndTransition,
-  Transition,
-} from 'framer-motion';
-import {
-  ArrowRightIcon,
-  ChevronDownIcon,
-  Pause,
-  Play,
-} from 'lucide-react';
-import { useSound } from 'use-sound';
+import { motion } from 'framer-motion';
+import { ChevronDownIcon } from 'lucide-react';
 
-import { Button } from './Button';
-import { BackgroundGradient } from './components/BackgroundGradient';
-import {
-  Message,
-  Phone,
-} from './components/Phone';
-import { SignupForm } from './components/SignupForm';
+import { CTASection } from './components/CTASection';
+import { Hero } from './components/Hero';
+import { HowItWorks } from './components/HowItWorks';
+import { SeamlessCoordination } from './components/SeamlessCoordination';
 import { SocialProof } from './components/SocialProof';
 import { useCopyVariation } from './hooks/useCopyVariation';
 import { useSignupForm } from './hooks/useSignupForm';
 import { cn } from './utils';
 
-const delayed = (
-  delay: number
-): {
-  initial: TargetAndTransition;
-  animate: TargetAndTransition;
-  transition: Transition;
-} => ({
-  initial: { opacity: 0, y: 10 },
-  animate: { opacity: 1, y: 0 },
-  transition: {
-    delay,
-    duration: 0.5,
-  },
-});
-
-const coordinationMessages: Message[] = [
-  {
-    id: "coord1",
-    text: "Hi Sarah! Just wanted to check in on how Charlie's math session went yesterday. How did he feel about the algebra concepts we covered?",
-    isFromUser: false,
-    timestamp: new Date(),
-  },
-  {
-    id: "coord2",
-    text: "it went really well! he said you explained it much better than his teacher. he's actually excited for the next session",
-    isFromUser: true,
-    timestamp: new Date(),
-  },
-  {
-    id: "coord3",
-    text: "That's fantastic! I'm so glad he's feeling more confident. I noticed he struggled with quadratic equations, so I've prepared some extra practice problems for our next session.",
-    isFromUser: false,
-    timestamp: new Date(),
-  },
-  {
-    id: "coord3b",
-    text: "When works best for you this week?",
-    isFromUser: false,
-    timestamp: new Date(),
-  },
-  {
-    id: "coord4",
-    text: "can you do thursday at 4 again?",
-    isFromUser: true,
-    timestamp: new Date(),
-  },
-  {
-    id: "coord5",
-    text: "Perfect! I've got Charlie booked for Thursday at 4pm. I'll send you both a reminder 30 minutes before, and we'll focus on those quadratic equations. See you then! 📚",
-    isFromUser: false,
-    timestamp: new Date(),
-  },
-];
-
 function App() {
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [play, { stop }] = useSound("/intro.wav", {
-    onend: () => setIsPlaying(false),
-  });
   const {
     phoneNumber,
     email,
@@ -141,189 +70,35 @@ function App() {
 
   return (
     <>
-      {/* Gradient container. */}
-      <section className="w-screen h-screen md:p-6 text-white">
-        <div className="w-full h-full md:rounded-lg overflow-hidden relative flex flex-col justify-center items-center gap-4">
-          <motion.h1
-            {...delayed(0)}
-            className="text-6xl md:text-7xl font-bold z-10 text-center"
-          >
-            {headline}
-          </motion.h1>
-          <motion.h3
-            {...delayed(0.1)}
-            className="text-3xl md:text-4xl mb-12 max-w-xl z-10"
-          >
-            {subheadline}
-          </motion.h3>
+      {/* Hero Section */}
+      <Hero headline={headline} subheadline={subheadline} speed={speed} />
 
-          <motion.button
-            className={cn(
-              "w-32 h-32 rounded-full flex justify-center items-center z-10 bg-transparent transition-shadow duration-50",
-              `shadow-[4px_4px_8px_#00000044,_-4px_-4px_8px_#ffffff99] active:shadow-[2px_2px_1px_#00000022,_-2px_-2px_1px_#ffffff44]
-            dark:shadow-none`
-            )}
-            {...delayed(0.2)}
-            onClick={() => {
-              if (isPlaying) {
-                stop();
-              } else {
-                play();
-              }
-              setIsPlaying(!isPlaying);
-            }}
-          >
-            {isPlaying ? (
-              <Pause className="w-12 h-12 text-white" strokeWidth={1.5} />
-            ) : (
-              <Play className="w-12 h-12 text-white" strokeWidth={1.5} />
-            )}
-          </motion.button>
-          <motion.small {...delayed(0.3)} className="text-white z-10">
-            Hear introduction
-          </motion.small>
-
-          <motion.div
-            className="flex flex-col gap-2 items-center z-10 mt-8"
-            {...delayed(0.4)}
-          >
-            <Button
-              shadow="neu"
-              bg="transparent"
-              className="gap-2"
-              onClick={() => {
-                document.getElementById("cta-section")?.scrollIntoView({
-                  behavior: "smooth",
-                });
-              }}
-            >
-              Free 2 week trial
-              <ArrowRightIcon className="w-4 h-4" />
-            </Button>
-            <small className="text-white">No credit card required</small>
-          </motion.div>
-
-          <BackgroundGradient speed={speed} />
-          <div
-            className={cn(
-              "absolute inset-0 rounded-lg pointer-events-none z-10",
-              "shadow-[inset_2px_2px_8px_#00000044,_inset_-2px_-2px_8px_#ffffffbb] dark:shadow-none"
-            )}
-          />
-        </div>
-      </section>
+      {/* How It Works Section */}
+      <HowItWorks speed={speed} className="border-t border-gray-100" />
 
       {/* Social Proof Section */}
-      <SocialProof className="mt-12" />
+      <SocialProof className="border-t border-gray-100" />
 
       {/* Seamless Coordination Section */}
-      <section className="w-full bg-white border-y border-gray-100 md:h-screen min-h-[500px] p-4 py-8 md:p-16">
-        <div className="grid grid-cols-1 h-full lg:grid-cols-2 items-center gap-16">
-          {/* Text Content */}
-          <div className="flex-1 space-y-6 flex flex-col justify-center p-8 md:p-0">
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="text-4xl md:text-5xl font-bold text-gray-900"
-            >
-              Seamless Coordination
-            </motion.h2>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-xl text-gray-600 leading-relaxed"
-            >
-              Stay connected with Orin through SMS or email.
-            </motion.p>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="space-y-4"
-            >
-              <div className="flex items-center gap-3">
-                <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                <span className="text-gray-700">
-                  Real-time progress updates
-                </span>
-              </div>
-              <div className="flex items-center gap-3">
-                <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                <span className="text-gray-700">
-                  Flexible scheduling coordination
-                </span>
-              </div>
-              <div className="flex items-center gap-3">
-                <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                <span className="text-gray-700">
-                  Quick questions and clarifications
-                </span>
-              </div>
-            </motion.div>
-          </div>
-
-          {/* Phone Component */}
-          <motion.div className="flex-1 h-full flex justify-center relative rounded-lg overflow-hidden py-12">
-            <BackgroundGradient speed={speed} />
-            <div
-              className={cn(
-                "absolute inset-0 rounded-lg pointer-events-none z-10",
-                "shadow-[inset_2px_2px_8px_#00000044,_inset_-2px_-2px_8px_#ffffffbb] dark:shadow-none"
-              )}
-            />
-            <Phone messages={coordinationMessages} />
-          </motion.div>
-        </div>
-      </section>
+      <SeamlessCoordination speed={speed} />
 
       {/* CTA Section */}
-      <section id="cta-section" className="w-screen h-screen md:p-6 text-white">
-        <div className="w-full h-full md:rounded-lg overflow-hidden relative text-center flex flex-col justify-center items-center gap-4">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-4xl md:text-5xl font-bold z-10 text-center"
-          >
-            {cta}
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-xl z-10 leading-relaxed"
-          >
-            Orin will reach out to you with a free 2 week trial.
-            <br />
-            No credit card required.
-          </motion.p>
-
-          <SignupForm
-            phoneNumber={phoneNumber}
-            email={email}
-            parentName={parentName}
-            studentName={studentName}
-            studentGrade={studentGrade}
-            isLoading={isLoading}
-            handlePhoneChange={handlePhoneChange}
-            setEmail={setEmail}
-            setParentName={setParentName}
-            setStudentName={setStudentName}
-            setStudentGrade={setStudentGrade}
-            onSubmit={handleSubmit}
-          />
-
-          <BackgroundGradient speed={speed} />
-          <div
-            className={cn(
-              "absolute inset-0 rounded-lg pointer-events-none z-10",
-              "shadow-[inset_2px_2px_8px_#00000044,_inset_-2px_-2px_8px_#ffffffbb] dark:shadow-none"
-            )}
-          />
-        </div>
-      </section>
+      <CTASection
+        cta={cta}
+        speed={speed}
+        phoneNumber={phoneNumber}
+        email={email}
+        parentName={parentName}
+        studentName={studentName}
+        studentGrade={studentGrade}
+        isLoading={isLoading}
+        handlePhoneChange={handlePhoneChange}
+        setEmail={setEmail}
+        setParentName={setParentName}
+        setStudentName={setStudentName}
+        setStudentGrade={setStudentGrade}
+        onSubmit={handleSubmit}
+      />
 
       {/* Scroll for more info */}
       <motion.button

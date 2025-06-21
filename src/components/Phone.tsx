@@ -190,7 +190,7 @@ const BubbleRight = (props: HTMLProps<SVGSVGElement>) => (
   </svg>
 );
 
-function MessageComponent({ message }: { message: Message }) {
+export function MessageComponent({ message }: { message: Message }) {
   if (message.isFromUser) {
     return (
       <div className="flex justify-end">
