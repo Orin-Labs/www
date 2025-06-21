@@ -12,7 +12,10 @@ import {
 import {
   ArrowRightIcon,
   ChevronDownIcon,
+  Pause,
+  Play,
 } from 'lucide-react';
+import { useSound } from 'use-sound';
 
 import { Button } from './Button';
 import { BackgroundGradient } from './components/BackgroundGradient';
@@ -81,6 +84,10 @@ const coordinationMessages: Message[] = [
 ];
 
 function App() {
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [play, { stop }] = useSound("/intro.wav", {
+    onend: () => setIsPlaying(false),
+  });
   const {
     phoneNumber,
     email,
@@ -145,14 +152,40 @@ function App() {
           </motion.h1>
           <motion.h3
             {...delayed(0.1)}
-            className="text-3xl md:text-4xl max-w-xl z-10"
+            className="text-3xl md:text-4xl mb-4 max-w-xl z-10"
           >
             {subheadline}
           </motion.h3>
 
+          <motion.button
+            className={cn(
+              "w-32 h-32 rounded-full flex justify-center items-center z-10 bg-transparent transition-shadow duration-50",
+              `shadow-[4px_4px_8px_#00000044,_-4px_-4px_8px_#ffffff99] active:shadow-[2px_2px_1px_#00000022,_-2px_-2px_1px_#ffffff44]
+            dark:shadow-none`
+            )}
+            {...delayed(0.2)}
+            onClick={() => {
+              if (isPlaying) {
+                stop();
+              } else {
+                play();
+              }
+              setIsPlaying(!isPlaying);
+            }}
+          >
+            {isPlaying ? (
+              <Pause className="w-12 h-12 text-white" strokeWidth={1.5} />
+            ) : (
+              <Play className="w-12 h-12 text-white" strokeWidth={1.5} />
+            )}
+          </motion.button>
+          <motion.small {...delayed(0.3)} className="text-white z-10">
+            Hear introduction
+          </motion.small>
+
           <motion.div
             className="flex flex-col gap-2 items-center z-10 mt-8"
-            {...delayed(0.2)}
+            {...delayed(0.4)}
           >
             <Button
               shadow="neu"
