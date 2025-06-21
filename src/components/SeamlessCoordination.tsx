@@ -66,7 +66,7 @@ export function SeamlessCoordination({
   return (
     <section
       className={cn(
-        "w-full bg-white border-y border-gray-100 md:h-screen min-h-[500px] p-4 py-8 md:p-16",
+        "w-full bg-white dark:bg-gray-900 border-y border-gray-100 dark:border-gray-800 md:h-screen min-h-[500px] p-4 py-8 md:p-16",
         className
       )}
       {...props}
@@ -78,7 +78,7 @@ export function SeamlessCoordination({
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-4xl md:text-5xl font-bold text-gray-900"
+            className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white"
           >
             Seamless Coordination
           </motion.h2>
@@ -86,7 +86,7 @@ export function SeamlessCoordination({
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-xl text-gray-600 leading-relaxed"
+            className="text-xl text-gray-600 dark:text-gray-400 leading-relaxed"
           >
             Stay connected with Orin through SMS or email.
           </motion.p>
@@ -99,7 +99,9 @@ export function SeamlessCoordination({
             {features.map((feature, index) => (
               <div key={index} className="flex items-center gap-3">
                 <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                <span className="text-gray-700">{feature}</span>
+                <span className="text-gray-700 dark:text-gray-300">
+                  {feature}
+                </span>
               </div>
             ))}
           </motion.div>

@@ -74,10 +74,13 @@ function App() {
       <Hero headline={headline} subheadline={subheadline} speed={speed} />
 
       {/* How It Works Section */}
-      <HowItWorks speed={speed} className="border-t border-gray-100" />
+      <HowItWorks
+        speed={speed}
+        className="border-t border-gray-100 dark:border-gray-800"
+      />
 
       {/* Social Proof Section */}
-      <SocialProof className="border-t border-gray-100" />
+      <SocialProof className="border-t border-gray-100 dark:border-gray-800" />
 
       {/* Seamless Coordination Section */}
       <SeamlessCoordination speed={speed} />
@@ -115,7 +118,7 @@ function App() {
         }}
         className={cn(
           "fixed bg-neutral-800 dark:bg-neutral-200 right-4 bottom-4 rounded-lg",
-          "px-2 py-1 w-fit mx-auto text-center text-white flex items-center gap-2 z-50",
+          "px-2 py-1 w-fit mx-auto text-center text-white dark:text-black flex items-center gap-2 z-50",
           scrollY > 0 ? "pointer-events-none" : "pointer-events-auto"
         )}
       >

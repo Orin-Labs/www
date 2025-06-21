@@ -120,7 +120,7 @@ export const SocialProof = ({
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3 }}
           viewport={{ once: true }}
-          className="text-center text-6xl mb-2 font-bold"
+          className="text-center text-6xl mb-2 font-bold dark:text-white"
         >
           Loved by 100+ families
         </motion.h1>
@@ -129,7 +129,7 @@ export const SocialProof = ({
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3 }}
           viewport={{ once: true }}
-          className="text-center mb-12 text-lg text-gray-500"
+          className="text-center mb-12 text-lg text-gray-500 dark:text-gray-300"
         >
           Orin has over 13,000 hours of tutoring experience.
         </motion.p>
@@ -147,14 +147,13 @@ export const SocialProof = ({
                 y: 0,
                 transition: { duration: 0.3 },
               }}
-              whileHover={{
-                boxShadow: "2px 2px 2px #00000022, -2px -2px 2px #ffffff77",
-                y: 2,
-              }}
               viewport={{ once: true }}
-              className={`bg-white dark:bg-neutral-800 rounded-lg p-6 relative min-h-60`}
+              className={cn(
+                "bg-white dark:bg-neutral-800 rounded-lg p-6 relative min-h-60 transition-shadow duration-200",
+                "shadow-[2px_2px_4px_#00000044,_-2px_-2px_4px_#ffffff99] hover:shadow-[2px_2px_2px_#00000022,_-2px_-2px_2px_#ffffff77]",
+                "dark:shadow-[4px_4px_4px_#00000044,_-4px_-4px_4px_#44444422] dark:hover:shadow-[2px_2px_1px_#00000022,_-2px_-2px_1px_#44444411]"
+              )}
               animate={{
-                boxShadow: "2px 2px 4px #00000044, -2px -2px 4px #ffffff99",
                 y: 0,
               }}
             >
@@ -172,9 +171,7 @@ export const SocialProof = ({
                   className="w-full h-full object-cover aspect-video absolute top-0 left-0 rounded-lg"
                 />
               ) : (
-                // Handle TestimonialCard
                 <>
-                  {/* Pull quote for scannability */}
                   <div className="mb-3">
                     <p className="text-lg font-semibold text-blue-600 dark:text-blue-400 italic">
                       "{(card as TestimonialCard).pullQuote}"
