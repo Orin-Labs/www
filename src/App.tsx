@@ -152,7 +152,7 @@ function App() {
           </motion.h1>
           <motion.h3
             {...delayed(0.1)}
-            className="text-3xl md:text-4xl mb-4 max-w-xl z-10"
+            className="text-3xl md:text-4xl mb-12 max-w-xl z-10"
           >
             {subheadline}
           </motion.h3>
