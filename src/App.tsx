@@ -184,7 +184,7 @@ function App() {
       <SocialProof className="mt-12" />
 
       {/* Seamless Coordination Section */}
-      <section className="w-full bg-white border-y border-gray-100 md:h-screen min-h-[500px] md:p-16">
+      <section className="w-full bg-white border-y border-gray-100 md:h-screen min-h-[500px] p-4 py-8 md:p-16">
         <div className="grid grid-cols-1 h-full lg:grid-cols-2 items-center gap-16">
           {/* Text Content */}
           <div className="flex-1 space-y-6 flex flex-col justify-center p-8 md:p-0">
@@ -232,7 +232,7 @@ function App() {
           </div>
 
           {/* Phone Component */}
-          <motion.div className="flex-1 h-full flex justify-center relative md:rounded-lg overflow-hidden py-12">
+          <motion.div className="flex-1 h-full flex justify-center relative rounded-lg overflow-hidden py-12">
             <BackgroundGradient speed={speed} />
             <div
               className={cn(
@@ -247,7 +247,7 @@ function App() {
 
       {/* CTA Section */}
       <section id="cta-section" className="w-screen h-screen md:p-6 text-white">
-        <div className="w-full h-full md:rounded-lg overflow-hidden relative flex flex-col justify-center items-center gap-4">
+        <div className="w-full h-full md:rounded-lg overflow-hidden relative text-center flex flex-col justify-center items-center gap-4">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -256,6 +256,16 @@ function App() {
           >
             {cta}
           </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="text-xl z-10 leading-relaxed"
+          >
+            Fill out this form and Orin will reach out to you.
+            <br />
+            No credit card required.
+          </motion.p>
 
           <SignupForm
             phoneNumber={phoneNumber}

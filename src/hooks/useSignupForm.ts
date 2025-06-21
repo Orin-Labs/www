@@ -45,7 +45,7 @@ export function useSignupForm() {
 
     try {
       const response = await fetch(
-        "https://api.learnwithorin.com/api/entities/signup/",
+        "https://api.1learnwithorin.com/api/entities/signup/",
         {
           method: "POST",
           body: JSON.stringify({
