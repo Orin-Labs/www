@@ -66,7 +66,7 @@ export function Hero({
         </motion.h1>
         <motion.h3
           {...delayed(0.1)}
-          className="text-3xl md:text-4xl mb-12 max-w-xl z-10"
+          className="text-3xl md:text-4xl mb-12 max-w-xl z-10 text-center"
         >
           {subheadline}
         </motion.h3>
