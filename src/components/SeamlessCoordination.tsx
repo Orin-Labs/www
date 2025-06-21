@@ -86,7 +86,7 @@ export function SeamlessCoordination({
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-xl text-gray-600 dark:text-gray-400 leading-relaxed"
+            className="text-xl text-gray-600 dark:text-gray-200 leading-relaxed"
           >
             Stay connected with Orin through SMS or email.
           </motion.p>
