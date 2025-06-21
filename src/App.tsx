@@ -262,7 +262,7 @@ function App() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="text-xl z-10 leading-relaxed"
           >
-            Fill out this form and Orin will reach out to you.
+            Orin will reach out to you with a free 2 week trial.
             <br />
             No credit card required.
           </motion.p>
