@@ -30,7 +30,7 @@ export function Button({
           "shadow-[0px_0px_6px_1px_#a5a5a5] active:shadow-[0px_0px_4px_1px_#a5a5a5] dark:shadow-[0px_0px_6px_1px_#302d2d] dark:active:shadow-[0px_0px_4px_1px_#302d2d]",
         shadow === "neu" &&
           `shadow-[2px_2px_4px_#00000044,_-2px_-2px_4px_#ffffff99] active:shadow-[2px_2px_1px_#00000022,_-2px_-2px_1px_#ffffff44]`,
-        `dark:shadow-[4px_4px_8px_#00000044,_-4px_-4px_8px_#ffffff55] dark:active:shadow-[2px_2px_1px_#00000022,_-2px_-2px_1px_#ffffff33]`,
+        `dark:shadow-[4px_4px_4px_#00000044,_-4px_-4px_4px_#ffffff22] dark:active:shadow-[2px_2px_1px_#00000022,_-2px_-2px_1px_#ffffff22]`,
         className
       )}
       disabled={disabled}
