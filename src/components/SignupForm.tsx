@@ -2,7 +2,6 @@ import {
   HTMLMotionProps,
   motion,
 } from 'framer-motion';
-import { isValidPhoneNumber } from 'libphonenumber-js';
 import {
   ArrowRight,
   Loader2,
@@ -60,9 +59,6 @@ export function SignupForm({
           !studentGrade
         ) {
           toast.error("Please fill out all fields");
-        }
-        if (!isValidPhoneNumber(phoneNumber)) {
-          toast.error("Please enter a valid phone number");
         }
         if (!isValidEmail(email)) {
           toast.error("Please enter a valid email");
