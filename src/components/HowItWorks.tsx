@@ -84,23 +84,6 @@ const MessageVisualization = ({ messages }: { messages: Message[] }) => (
   </div>
 );
 
-// Image placeholder component
-const ImagePlaceholder = () => (
-  <div className="flex justify-center">
-    <div className="w-[375px] h-[300px] bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl flex items-center justify-center border-2 border-dashed border-blue-300">
-      <div className="text-center">
-        <div className="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
-          <span className="text-white text-2xl">📹</span>
-        </div>
-        <p className="text-blue-600 font-medium">Lesson Image Placeholder</p>
-        <p className="text-sm text-blue-500 mt-1">
-          Replace with your lesson image
-        </p>
-      </div>
-    </div>
-  </div>
-);
-
 // Step content component
 const StepContent = ({
   number,
@@ -262,7 +245,11 @@ export function HowItWorks({ speed, className }: HowItWorksProps) {
           const visualization = (
             <StepVisualization rightAligned={isRightAligned}>
               {step.isImagePlaceholder ? (
-                <ImagePlaceholder />
+                <img
+                  src="/lesson.png"
+                  alt="lesson"
+                  className="w-full h-full object-cover rounded-lg"
+                />
               ) : (
                 <MessageVisualization messages={step.messages!} />
               )}
