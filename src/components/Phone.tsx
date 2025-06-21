@@ -271,7 +271,7 @@ export function Phone({
         {messages.map((message, index) => (
           <motion.div
             key={message.id}
-            initial={{ opacity: 0, x: -10 }}
+            initial={{ opacity: 0, x: message.isFromUser ? 10 : -10 }}
             whileInView={{
               opacity: 1,
               x: 0,

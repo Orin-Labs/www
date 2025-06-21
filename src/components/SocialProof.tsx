@@ -169,7 +169,7 @@ export const SocialProof = ({
               whileInView={{
                 opacity: 1,
                 y: 0,
-                transition: { duration: 0.3, delay: index * 0.1 },
+                transition: { duration: 0.3 },
               }}
               whileHover={{
                 boxShadow: "2px 2px 2px #00000022, -2px -2px 2px #ffffff77",

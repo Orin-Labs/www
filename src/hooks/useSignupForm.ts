@@ -28,6 +28,10 @@ function getSource() {
 
 export function useSignupForm() {
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [email, setEmail] = useState("");
+  const [parentName, setParentName] = useState("");
+  const [studentName, setStudentName] = useState("");
+  const [studentGrade, setStudentGrade] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [speed, setSpeed] = useState(0.02);
   const [submitted, setSubmitted] = useState(false);
@@ -46,6 +50,10 @@ export function useSignupForm() {
           method: "POST",
           body: JSON.stringify({
             phone_number: formatter.getNumberValue(),
+            email: email,
+            parent_name: parentName,
+            student_name: studentName,
+            student_grade: studentGrade,
             source: getSource(),
           }),
           headers: {
@@ -60,6 +68,10 @@ export function useSignupForm() {
       if (data.message === "Success") {
         toast.info("Great! Orin will be in touch soon.");
         setPhoneNumber("");
+        setEmail("");
+        setParentName("");
+        setStudentName("");
+        setStudentGrade("");
         setSubmitted(true);
         // @ts-ignore
         fbq("track", "Lead");
@@ -98,10 +110,18 @@ export function useSignupForm() {
 
   return {
     phoneNumber,
+    email,
+    parentName,
+    studentName,
+    studentGrade,
     isLoading,
     speed,
     submitted,
     handleSubmit,
     handlePhoneChange,
+    setEmail,
+    setParentName,
+    setStudentName,
+    setStudentGrade,
   };
 }

@@ -1,5 +1,6 @@
 import {
   useEffect,
+  useMemo,
   useState,
 } from 'react';
 
@@ -19,19 +20,15 @@ import {
   Message,
   Phone,
 } from './components/Phone';
+import { SignupForm } from './components/SignupForm';
 import { SocialProof } from './components/SocialProof';
 import { useCopyVariation } from './hooks/useCopyVariation';
 import { useSignupForm } from './hooks/useSignupForm';
 import { cn } from './utils';
 
-let delay = 0;
-const getDelay = () => {
-  const temp = delay;
-  delay += 0.05;
-  return temp;
-};
-
-const delayed = (): {
+const delayed = (
+  delay: number
+): {
   initial: TargetAndTransition;
   animate: TargetAndTransition;
   transition: Transition;
@@ -39,7 +36,7 @@ const delayed = (): {
   initial: { opacity: 0, y: 10 },
   animate: { opacity: 1, y: 0 },
   transition: {
-    delay: getDelay(),
+    delay,
     duration: 0.5,
   },
 });
@@ -84,17 +81,55 @@ const coordinationMessages: Message[] = [
 ];
 
 function App() {
-  const { phoneNumber, isLoading, handlePhoneChange, speed, handleSubmit } =
-    useSignupForm();
+  const {
+    phoneNumber,
+    email,
+    parentName,
+    studentName,
+    studentGrade,
+    isLoading,
+    handlePhoneChange,
+    setEmail,
+    setParentName,
+    setStudentName,
+    setStudentGrade,
+    speed,
+    handleSubmit,
+  } = useSignupForm();
   const { headline, subheadline, cta } = useCopyVariation();
   const [scrollY, setScrollY] = useState(0);
 
+  // Memoize scroll button animation props
+  const scrollButtonProps = useMemo(
+    () => ({
+      initial: { opacity: 0, y: 10 },
+      animate: {
+        opacity: scrollY === 0 ? 1 : 0,
+        y: scrollY === 0 ? 0 : 10,
+      },
+      transition: { duration: 0.3 },
+    }),
+    [scrollY]
+  );
+
   useEffect(() => {
+    let ticking = false;
     const handleScroll = () => {
-      setScrollY(window.scrollY);
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          setScrollY(window.scrollY);
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Ensure page starts at the top
+  useEffect(() => {
+    window.scrollTo(0, 0);
   }, []);
 
   return (
@@ -103,13 +138,13 @@ function App() {
       <section className="w-screen h-screen md:p-6 text-white">
         <div className="w-full h-full md:rounded-lg overflow-hidden relative flex flex-col justify-center items-center gap-4">
           <motion.h1
-            {...delayed()}
+            {...delayed(0)}
             className="text-6xl md:text-7xl font-bold z-10 text-center"
           >
             {headline}
           </motion.h1>
           <motion.h3
-            {...delayed()}
+            {...delayed(0.1)}
             className="text-3xl md:text-4xl max-w-xl z-10"
           >
             {subheadline}
@@ -117,9 +152,18 @@ function App() {
 
           <motion.div
             className="flex flex-col gap-2 items-center z-10 mt-8"
-            {...delayed()}
+            {...delayed(0.2)}
           >
-            <Button shadow="neu" bg="transparent" className="gap-2">
+            <Button
+              shadow="neu"
+              bg="transparent"
+              className="gap-2"
+              onClick={() => {
+                document.getElementById("cta-section")?.scrollIntoView({
+                  behavior: "smooth",
+                });
+              }}
+            >
               Free 2 week trial
               <ArrowRightIcon className="w-4 h-4" />
             </Button>
@@ -127,6 +171,12 @@ function App() {
           </motion.div>
 
           <BackgroundGradient speed={speed} />
+          <div
+            className={cn(
+              "absolute inset-0 rounded-lg pointer-events-none z-10",
+              "shadow-[inset_2px_2px_8px_#00000044,_inset_-2px_-2px_8px_#ffffffbb] dark:shadow-none"
+            )}
+          />
         </div>
       </section>
 
@@ -195,22 +245,60 @@ function App() {
         </div>
       </section>
 
+      {/* CTA Section */}
+      <section id="cta-section" className="w-screen h-screen md:p-6 text-white">
+        <div className="w-full h-full md:rounded-lg overflow-hidden relative flex flex-col justify-center items-center gap-4">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="text-4xl md:text-5xl font-bold z-10 text-center"
+          >
+            {cta}
+          </motion.h2>
+
+          <SignupForm
+            phoneNumber={phoneNumber}
+            email={email}
+            parentName={parentName}
+            studentName={studentName}
+            studentGrade={studentGrade}
+            isLoading={isLoading}
+            handlePhoneChange={handlePhoneChange}
+            setEmail={setEmail}
+            setParentName={setParentName}
+            setStudentName={setStudentName}
+            setStudentGrade={setStudentGrade}
+            onSubmit={handleSubmit}
+          />
+
+          <BackgroundGradient speed={speed} />
+          <div
+            className={cn(
+              "absolute inset-0 rounded-lg pointer-events-none z-10",
+              "shadow-[inset_2px_2px_8px_#00000044,_inset_-2px_-2px_8px_#ffffffbb] dark:shadow-none"
+            )}
+          />
+        </div>
+      </section>
+
       {/* Scroll for more info */}
       <motion.button
-        initial={{ opacity: 0, y: 10 }}
-        animate={{
-          opacity: scrollY > 0 ? 0 : 1,
-          y: scrollY > 0 ? 10 : 0,
-        }}
-        onClick={() => {
-          window.scrollTo({
-            top: 800,
-            behavior: "smooth",
-          });
+        {...scrollButtonProps}
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          // Only allow scrolling if we're at the top of the page
+          if (scrollY === 0) {
+            document.getElementById("cta-section")?.scrollIntoView({
+              behavior: "smooth",
+            });
+          }
         }}
         className={cn(
           "fixed bg-neutral-800 dark:bg-neutral-200 right-4 bottom-4 rounded-lg",
-          "px-2 py-1 w-fit mx-auto text-center text-white flex items-center gap-2"
+          "px-2 py-1 w-fit mx-auto text-center text-white flex items-center gap-2 z-50",
+          scrollY > 0 ? "pointer-events-none" : "pointer-events-auto"
         )}
       >
         Scroll
