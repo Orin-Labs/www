@@ -20,6 +20,15 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ["Inter", ...primaryTheme.fontFamily.sans],
+        system: [
+          "-apple-system",
+          "BlinkMacSystemFont",
+          "SF Pro Text",
+          "SF Pro Display",
+          "Helvetica Neue",
+          "Arial",
+          "sans-serif",
+        ],
       },
       colors: {
         white: "var(--white)",

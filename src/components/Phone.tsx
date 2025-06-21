@@ -221,16 +221,13 @@ export function Phone({
   return (
     <motion.div
       className={cn(
-        "w-[375px] h-[812px] bg-white z-10 rounded-[36px] overflow-hidden flex flex-col",
+        "w-[375px] h-[812px] bg-white z-10 rounded-[36px] overflow-hidden flex flex-col font-system",
         `shadow-[2px_2px_6px_#00000077,_-2px_-2px_6px_#ffffff99] dark:shadow-none`,
         className
       )}
       initial={{ opacity: 0, scale: 0.95, y: 10 }}
       whileInView={{ opacity: 1, scale: 1, y: 0 }}
       transition={{ duration: 0.8, delay: 0.3 }}
-      style={{
-        fontFamily: "SF Pro Text",
-      }}
       {...props}
     >
       {/* Fixed top bar that things can scroll under*/}

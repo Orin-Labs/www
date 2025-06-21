@@ -40,10 +40,7 @@ const FloatingMessage = ({
         initial={{ opacity: 0, x: 20 }}
         whileInView={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.5, delay }}
-        className="flex justify-end mb-3"
-        style={{
-          fontFamily: "SF Pro Text",
-        }}
+        className="flex justify-end mb-3 font-system"
       >
         <div className="ml-2 relative rounded-[18px] max-w-[280px] bg-[#0078FF] px-4 py-2 text-white shadow-lg">
           <p className="text-sm">{message.text}</p>
@@ -57,10 +54,7 @@ const FloatingMessage = ({
       initial={{ opacity: 0, x: -20 }}
       whileInView={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.5, delay }}
-      className="flex justify-start mb-3"
-      style={{
-        fontFamily: "SF Pro Text",
-      }}
+      className="flex justify-start mb-3 font-system"
     >
       <div className="mr-2 relative rounded-[18px] max-w-[280px] bg-[#E9E9EB] dark:bg-[#414141] px-4 py-2 text-black dark:text-white shadow-lg">
         <p className="text-sm">{message.text}</p>
