@@ -11,11 +11,11 @@ export const COPY_VARIATIONS = {
   },
   variation2: {
     headline: "Tutoring for middle schoolers",
-    subheadline: "Unlimited tutoring for $99/month",
+    subheadline: "Unlimited 3rd-8th grade tutoring - $99/mo",
     cta: "Get your own Orin",
   },
   variation3: {
-    headline: "Excel with Orin",
+    headline: "Learn with Orin",
     subheadline: "Private tutoring for 3rd-8th graders",
     cta: "Get your own Orin",
   },
