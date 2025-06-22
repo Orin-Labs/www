@@ -10,6 +10,7 @@ import { ChevronDownIcon } from 'lucide-react';
 import { CTASection } from './components/CTASection';
 import { Hero } from './components/Hero';
 import { HowItWorks } from './components/HowItWorks';
+import { Pricing } from './components/Pricing';
 import { SeamlessCoordination } from './components/SeamlessCoordination';
 import { SocialProof } from './components/SocialProof';
 import { useCopyVariation } from './hooks/useCopyVariation';
@@ -86,6 +87,12 @@ function App() {
 
       {/* Seamless Coordination Section */}
       <SeamlessCoordination speed={speed} />
+
+      {/* Pricing Section */}
+      <Pricing
+        speed={speed}
+        className="border-t border-gray-100 dark:border-gray-800"
+      />
 
       {/* CTA Section */}
       <CTASection

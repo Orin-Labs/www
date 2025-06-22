@@ -18,6 +18,7 @@ import { useSound } from 'use-sound';
 import { Button } from '../Button';
 import { cn } from '../utils';
 import { BackgroundGradient } from './BackgroundGradient';
+import { RotatingText } from './RotatingText';
 
 const delayed = (
   delay: number
@@ -57,16 +58,16 @@ export function Hero({
       className={cn("w-screen h-screen md:p-6 text-white", className)}
       {...props}
     >
-      <div className="w-full h-full md:rounded-lg overflow-hidden relative flex flex-col justify-center items-center gap-4">
+      <div className="w-full h-full md:rounded-lg overflow-hidden relative flex flex-col justify-center items-center gap-4 px-2 md:px-4">
         <motion.h1
           {...delayed(0)}
           className="text-6xl md:text-7xl font-bold z-10 text-center"
         >
-          {headline}
+          {headline === "ROTATING_HEADLINE" ? <RotatingText /> : headline}
         </motion.h1>
         <motion.h3
           {...delayed(0.1)}
-          className="text-3xl md:text-4xl mb-12 max-w-xl z-10 text-center"
+          className="text-3xl md:text-4xl mb-12 z-10 text-center"
         >
           {subheadline}
         </motion.h3>
