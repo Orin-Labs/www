@@ -44,6 +44,7 @@ interface SignupFormProps extends Omit<HTMLMotionProps<"form">, "onSubmit"> {
   parentName: string;
   studentName: string;
   studentGrade: string;
+  promoCode: string;
   isLoading: boolean;
   submitted: boolean;
   handlePhoneChange: (number: string) => void;
@@ -51,6 +52,7 @@ interface SignupFormProps extends Omit<HTMLMotionProps<"form">, "onSubmit"> {
   setParentName: (name: string) => void;
   setStudentName: (name: string) => void;
   setStudentGrade: (grade: string) => void;
+  setPromoCode: (code: string) => void;
   onSubmit: (phoneNumber: string) => void;
   onReset: () => void;
 }
@@ -65,6 +67,7 @@ export function SignupForm({
   parentName,
   studentName,
   studentGrade,
+  promoCode,
   isLoading,
   submitted,
   handlePhoneChange,
@@ -72,6 +75,7 @@ export function SignupForm({
   setParentName,
   setStudentName,
   setStudentGrade,
+  setPromoCode,
   onSubmit,
   onReset,
   ...props
@@ -253,6 +257,18 @@ export function SignupForm({
           )}
         </motion.button>
       </div>
+
+      <motion.input
+        type="text"
+        className="bg-transparent placeholder:text-[#ffffff99] text-white outline-none p-3 rounded-md border-white border w-full"
+        placeholder="Promo Code (optional)"
+        disabled={isLoading}
+        value={promoCode}
+        onChange={(e) => setPromoCode(e.target.value)}
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.7 }}
+      />
     </motion.form>
   );
 }

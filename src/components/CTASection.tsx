@@ -14,6 +14,7 @@ interface CTASectionProps extends Omit<HTMLProps<HTMLElement>, "onSubmit"> {
   parentName: string;
   studentName: string;
   studentGrade: string;
+  promoCode: string;
   isLoading: boolean;
   submitted: boolean;
   handlePhoneChange: (value: string) => void;
@@ -21,6 +22,7 @@ interface CTASectionProps extends Omit<HTMLProps<HTMLElement>, "onSubmit"> {
   setParentName: (value: string) => void;
   setStudentName: (value: string) => void;
   setStudentGrade: (value: string) => void;
+  setPromoCode: (value: string) => void;
   onSubmit: (phoneNumber: string) => void;
   onReset: () => void;
 }
@@ -33,6 +35,7 @@ export function CTASection({
   parentName,
   studentName,
   studentGrade,
+  promoCode,
   isLoading,
   submitted,
   handlePhoneChange,
@@ -40,6 +43,7 @@ export function CTASection({
   setParentName,
   setStudentName,
   setStudentGrade,
+  setPromoCode,
   onSubmit,
   onReset,
   className,
@@ -77,6 +81,7 @@ export function CTASection({
           parentName={parentName}
           studentName={studentName}
           studentGrade={studentGrade}
+          promoCode={promoCode}
           isLoading={isLoading}
           submitted={submitted}
           handlePhoneChange={handlePhoneChange}
@@ -84,6 +89,7 @@ export function CTASection({
           setParentName={setParentName}
           setStudentName={setStudentName}
           setStudentGrade={setStudentGrade}
+          setPromoCode={setPromoCode}
           onSubmit={onSubmit}
           onReset={onReset}
         />

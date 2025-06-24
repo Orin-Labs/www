@@ -33,6 +33,7 @@ export function useSignupForm() {
   const [parentName, setParentName] = useState("");
   const [studentName, setStudentName] = useState("");
   const [studentGrade, setStudentGrade] = useState("");
+  const [promoCode, setPromoCode] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [speed, setSpeed] = useState(0.02);
   const [submitted, setSubmitted] = useLocalStorageState("signup-submitted", {
@@ -57,6 +58,7 @@ export function useSignupForm() {
             parent_name: parentName,
             student_name: studentName,
             student_grade: studentGrade,
+            promo_code: promoCode || undefined,
             source: getSource(),
           }),
           headers: {
@@ -75,6 +77,7 @@ export function useSignupForm() {
         setParentName("");
         setStudentName("");
         setStudentGrade("");
+        setPromoCode("");
         setSubmitted(true);
         // @ts-ignore
         fbq("track", "Lead");
@@ -118,6 +121,7 @@ export function useSignupForm() {
     setParentName("");
     setStudentName("");
     setStudentGrade("");
+    setPromoCode("");
   };
 
   return {
@@ -126,6 +130,7 @@ export function useSignupForm() {
     parentName,
     studentName,
     studentGrade,
+    promoCode,
     isLoading,
     speed,
     submitted,
@@ -136,5 +141,6 @@ export function useSignupForm() {
     setParentName,
     setStudentName,
     setStudentGrade,
+    setPromoCode,
   };
 }

@@ -24,12 +24,14 @@ function App() {
     parentName,
     studentName,
     studentGrade,
+    promoCode,
     isLoading,
     handlePhoneChange,
     setEmail,
     setParentName,
     setStudentName,
     setStudentGrade,
+    setPromoCode,
     speed,
     submitted,
     handleSubmit,
@@ -103,6 +105,7 @@ function App() {
         parentName={parentName}
         studentName={studentName}
         studentGrade={studentGrade}
+        promoCode={promoCode}
         isLoading={isLoading}
         submitted={submitted}
         handlePhoneChange={handlePhoneChange}
@@ -110,6 +113,7 @@ function App() {
         setParentName={setParentName}
         setStudentName={setStudentName}
         setStudentGrade={setStudentGrade}
+        setPromoCode={setPromoCode}
         onSubmit={handleSubmit}
         onReset={handleReset}
       />
