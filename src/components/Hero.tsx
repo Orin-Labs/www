@@ -1,24 +1,12 @@
-import {
-  HTMLProps,
-  useState,
-} from 'react';
+import { HTMLProps, useEffect, useRef, useState } from "react";
 
-import {
-  motion,
-  TargetAndTransition,
-  Transition,
-} from 'framer-motion';
-import {
-  ArrowRightIcon,
-  Pause,
-  Play,
-} from 'lucide-react';
-import { useSound } from 'use-sound';
+import { motion, TargetAndTransition, Transition } from "framer-motion";
+import { ArrowRightIcon, Pause, Play } from "lucide-react";
 
-import { Button } from '../Button';
-import { cn } from '../utils';
-import { BackgroundGradient } from './BackgroundGradient';
-import { RotatingText } from './RotatingText';
+import { Button } from "../Button";
+import { cn } from "../utils";
+import { BackgroundGradient } from "./BackgroundGradient";
+import { RotatingText } from "./RotatingText";
 
 const delayed = (
   delay: number
@@ -48,16 +36,34 @@ export function Hero({
   className,
   ...props
 }: HeroProps) {
+  const audioRef = useRef<HTMLAudioElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [play, { stop }] = useSound("/intro.wav", {
-    onend: () => setIsPlaying(false),
-  });
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    const handlePlay = () => setIsPlaying(true);
+    const handlePause = () => setIsPlaying(false);
+    const handleEnded = () => setIsPlaying(false);
+
+    audio.addEventListener("play", handlePlay);
+    audio.addEventListener("pause", handlePause);
+    audio.addEventListener("ended", handleEnded);
+
+    return () => {
+      audio.removeEventListener("play", handlePlay);
+      audio.removeEventListener("pause", handlePause);
+      audio.removeEventListener("ended", handleEnded);
+    };
+  }, []);
 
   return (
     <section
       className={cn("w-screen h-screen md:p-6 text-white", className)}
       {...props}
     >
+      <audio ref={audioRef} src="/intro.wav" />
       <div className="w-full h-full md:rounded-lg overflow-hidden relative flex flex-col justify-center items-center gap-4 px-2 md:px-4">
         <motion.h1
           {...delayed(0)}
@@ -81,11 +87,10 @@ export function Hero({
           {...delayed(0.2)}
           onClick={() => {
             if (isPlaying) {
-              stop();
+              audioRef.current?.pause();
             } else {
-              play();
+              audioRef.current?.play();
             }
-            setIsPlaying(!isPlaying);
           }}
         >
           {isPlaying ? (
