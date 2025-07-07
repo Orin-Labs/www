@@ -16,6 +16,7 @@ import {
   Twitter,
 } from 'lucide-react';
 import posthog from 'posthog-js';
+import { useNavigate } from 'react-router-dom';
 import {
   Navigation,
   Pagination,
@@ -118,9 +119,14 @@ function SocialShareButton({
 interface BlogCarouselProps {
   currentBlogId: string;
   currentBlogTitle: string;
+  navigate: (path: string) => void;
 }
 
-function BlogCarousel({ currentBlogId, currentBlogTitle }: BlogCarouselProps) {
+function BlogCarousel({
+  currentBlogId,
+  currentBlogTitle,
+  navigate,
+}: BlogCarouselProps) {
   const otherBlogs = BLOG_POSTS.filter((post) => post.id !== currentBlogId);
 
   const handleBlogClick = (blog: BlogPost, index: number) => {
@@ -132,7 +138,7 @@ function BlogCarousel({ currentBlogId, currentBlogTitle }: BlogCarouselProps) {
       carousel_position: index,
     });
 
-    window.location.href = `/blog/${blog.slug}`;
+    navigate(`/blog/${blog.slug}`);
   };
 
   const handleSlideChange = (swiper: any) => {
@@ -306,6 +312,7 @@ function BlogCarousel({ currentBlogId, currentBlogTitle }: BlogCarouselProps) {
 }
 
 export function BlogLayout({ children, className }: BlogLayoutProps) {
+  const navigate = useNavigate();
   const slug = window.location.pathname.split("/").pop();
   const entry = BLOG_POSTS.find((post) => post.slug === slug);
   console.log("entry", entry);
@@ -438,6 +445,7 @@ export function BlogLayout({ children, className }: BlogLayoutProps) {
             <BlogCarousel
               currentBlogId={entry.id}
               currentBlogTitle={entry.title}
+              navigate={navigate}
             />
           )}
         </main>

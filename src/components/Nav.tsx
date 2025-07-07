@@ -1,6 +1,10 @@
 import { HTMLProps } from 'react';
 
 import { ArrowRightIcon } from 'lucide-react';
+import {
+  Link,
+  useNavigate,
+} from 'react-router-dom';
 
 import { Button } from '../Button';
 import { cn } from '../utils';
@@ -56,41 +60,68 @@ export default function Nav({
   className,
   ...props
 }: HTMLProps<HTMLDivElement>) {
+  const navigate = useNavigate();
+
   return (
     <header
       className={cn("w-full flex items-center justify-between p-4", className)}
       {...props}
     >
       <div className="flex items-center gap-2">
-        <a href="/">
+        <Link to="/">
           <h1 className="text-2xl font-bold text-gray-800">Learn with Orin</h1>
-        </a>
+        </Link>
       </div>
       <nav>
         <div className="flex items-center gap-4">
-          {NAV_ITEMS.map((item) => (
-            <a
-              key={item.label}
-              href={item.href}
-              onClick={(e) => {
-                if (item.onClick) {
-                  e.preventDefault();
-                  item.onClick();
-                }
-              }}
-              className={cn(
-                "p-2 rounded-lg hover:bg-slate-200 transition-all duration-300",
-                "hover:text-indigo-800 text-gray-700",
-                item.breakpoint === "sm" && "hidden sm:block",
-                item.breakpoint === "md" && "hidden md:block",
-                item.breakpoint === "lg" && "hidden lg:block",
-                item.breakpoint === "xl" && "hidden xl:block",
-                item.breakpoint === "2xl" && "hidden 2xl:block"
-              )}
-            >
-              {item.label}
-            </a>
-          ))}
+          {NAV_ITEMS.map((item) => {
+            const isInternalLink =
+              item.href.startsWith("/") && !item.href.includes("#");
+
+            if (isInternalLink) {
+              return (
+                <Link
+                  key={item.label}
+                  to={item.href}
+                  className={cn(
+                    "p-2 rounded-lg hover:bg-slate-200 transition-all duration-300",
+                    "hover:text-indigo-800 text-gray-700",
+                    item.breakpoint === "sm" && "hidden sm:block",
+                    item.breakpoint === "md" && "hidden md:block",
+                    item.breakpoint === "lg" && "hidden lg:block",
+                    item.breakpoint === "xl" && "hidden xl:block",
+                    item.breakpoint === "2xl" && "hidden 2xl:block"
+                  )}
+                >
+                  {item.label}
+                </Link>
+              );
+            }
+
+            return (
+              <a
+                key={item.label}
+                href={item.href}
+                onClick={(e) => {
+                  if (item.onClick) {
+                    e.preventDefault();
+                    item.onClick();
+                  }
+                }}
+                className={cn(
+                  "p-2 rounded-lg hover:bg-slate-200 transition-all duration-300",
+                  "hover:text-indigo-800 text-gray-700",
+                  item.breakpoint === "sm" && "hidden sm:block",
+                  item.breakpoint === "md" && "hidden md:block",
+                  item.breakpoint === "lg" && "hidden lg:block",
+                  item.breakpoint === "xl" && "hidden xl:block",
+                  item.breakpoint === "2xl" && "hidden 2xl:block"
+                )}
+              >
+                {item.label}
+              </a>
+            );
+          })}
 
           <Button
             shadow="neu"
@@ -102,7 +133,7 @@ export default function Nav({
                   behavior: "smooth",
                 });
               } else {
-                window.location.href = "/?scrollTo=cta-section";
+                navigate("/?scrollTo=cta-section");
               }
             }}
           >

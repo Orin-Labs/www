@@ -2,6 +2,7 @@ import { HTMLProps } from 'react';
 
 import { ArrowRightIcon } from 'lucide-react';
 import posthog from 'posthog-js';
+import { useNavigate } from 'react-router-dom';
 
 import { Button } from '@/Button';
 import { cn } from '@/utils';
@@ -14,6 +15,8 @@ type AdProps = {
 } & HTMLProps<HTMLDivElement>;
 
 export const Ad = ({ title, description, className, ...props }: AdProps) => {
+  const navigate = useNavigate();
+
   const handleCTAClick = () => {
     // Track CTA click
     posthog.capture("blog_cta_clicked", {
@@ -29,14 +32,14 @@ export const Ad = ({ title, description, className, ...props }: AdProps) => {
         behavior: "smooth",
       });
     } else {
-      window.location.href = "/?scrollTo=cta-section";
+      navigate("/?scrollTo=cta-section");
     }
   };
 
   return (
     <div
       className={cn(
-        "bg-white rounded-lg shadow-md py-8 px-4 relative overflow-hidden",
+        "bg-white rounded-lg shadow-md py-8 md:py-4 px-4 relative overflow-hidden",
         className
       )}
       {...props}

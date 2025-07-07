@@ -4,11 +4,15 @@ import React from 'react';
 
 import posthog from 'posthog-js';
 import ReactDOM from 'react-dom/client';
+import {
+  BrowserRouter,
+  Route,
+  Routes,
+} from 'react-router-dom';
 import { Toaster } from 'sonner';
 
 import App from './App';
 import BlogRouter from './blog/blog-router';
-import Memo from './memo';
 import Privacy from './privacy';
 import reportWebVitals from './reportWebVitals';
 
@@ -24,38 +28,16 @@ const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 
-// Helper function to get the current route
-const getCurrentRoute = () => {
-  const path = window.location.pathname;
-  return path;
-};
-
-// Route component mapping
-const getRouteComponent = () => {
-  const route = getCurrentRoute();
-
-  switch (route) {
-    case "/":
-      return <App />;
-    case "/privacy":
-      return <Privacy />;
-    case "/memo":
-      return <Memo />;
-    default:
-      // Handle all blog routes with the blog router
-      if (route.startsWith("/blog")) {
-        return <BlogRouter path={route} />;
-      }
-
-      // If no route matches, show the home page
-      return <App />;
-  }
-};
-
 root.render(
   <React.StrictMode>
-    <Toaster />
-    {getRouteComponent()}
+    <BrowserRouter>
+      <Toaster />
+      <Routes>
+        <Route path="/" element={<App />} />
+        <Route path="/privacy" element={<Privacy />} />
+        <Route path="/blog/*" element={<BlogRouter />} />
+      </Routes>
+    </BrowserRouter>
   </React.StrictMode>
 );
 

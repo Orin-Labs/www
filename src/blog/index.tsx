@@ -2,6 +2,7 @@ import React from 'react';
 
 import { motion } from 'framer-motion';
 import posthog from 'posthog-js';
+import { useNavigate } from 'react-router-dom';
 
 import { Footer } from '../components/Footer';
 import Nav from '../components/Nav';
@@ -9,6 +10,7 @@ import { Odyssey } from '../components/Odyssey';
 import { getAllBlogPosts } from './blog-data';
 
 export default function BlogIndex() {
+  const navigate = useNavigate();
   const blogPosts = getAllBlogPosts();
 
   // Track blog index view
@@ -40,8 +42,8 @@ export default function BlogIndex() {
       page_path: window.location.pathname,
     });
 
-    // Navigate to blog post
-    window.location.href = `/blog/${post.slug}`;
+    // Navigate to blog post using React Router
+    navigate(`/blog/${post.slug}`);
   };
 
   return (
