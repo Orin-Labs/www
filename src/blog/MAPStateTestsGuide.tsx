@@ -325,7 +325,7 @@ export default function MAPStateTestsGuide() {
         data-driven education landscape.
       </motion.div>
 
-      <div className="bg-gray-50 border border-gray-200 rounded-lg p-6 mb-8">
+      <div className="bg-white border border-gray-200 rounded-lg p-6 mb-8">
         <NumberedList
           title="📥 5-Point Score Decoder"
           items={scoreDecoderItems}
