@@ -177,6 +177,16 @@ function BlogCarousel({ currentBlogId, currentBlogTitle }: BlogCarouselProps) {
             el: ".swiper-pagination-custom",
           }}
           onSlideChange={handleSlideChange}
+          breakpoints={{
+            640: {
+              slidesPerView: 1,
+              spaceBetween: 20,
+            },
+            768: {
+              slidesPerView: 2,
+              spaceBetween: 20,
+            },
+          }}
           className="blog-carousel-swiper"
         >
           {otherBlogs.map((blog, index) => (
