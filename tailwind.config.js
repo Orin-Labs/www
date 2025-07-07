@@ -2,6 +2,8 @@ import tailwindCssAnimate from 'tailwindcss-animate';
 import primaryTheme from 'tailwindcss/defaultTheme';
 import plugin from 'tailwindcss/plugin';
 
+import typography from '@tailwindcss/typography';
+
 module.exports = {
   darkMode: ["class"],
   content: [
@@ -237,6 +239,7 @@ module.exports = {
   },
   plugins: [
     tailwindCssAnimate,
+    typography,
     plugin(function ({ addBase }) {
       addBase({
         h1: { fontSize: "2em" },

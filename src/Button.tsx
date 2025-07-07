@@ -21,10 +21,10 @@ export function Button({
   return (
     <motion.button
       className={cn(
-        "px-3 py-2 rounded-lg flex items-center justify-center text-white",
-        bg === "gray" && "bg-gray-800",
+        "px-3 py-2 rounded-lg flex items-center justify-center",
+        bg === "gray" && "bg-gray-800 text-white hover:bg-gray-900",
         bg === "transparent" && "bg-transparent",
-        bg === "white" && "bg-white",
+        bg === "white" && "bg-white text-gray-900",
         "disabled:cursor-not-allowed transition-all duration-50 active:translate-y-0.5 disabled:!shadow-none",
         shadow === "float" &&
           "shadow-[0px_0px_6px_1px_#a5a5a5] active:shadow-[0px_0px_4px_1px_#a5a5a5] dark:shadow-[0px_0px_6px_1px_#302d2d] dark:active:shadow-[0px_0px_4px_1px_#302d2d]",

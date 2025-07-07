@@ -33,8 +33,10 @@ export function Pricing({ speed, className, ...props }: PricingProps) {
 
   return (
     <section
+      id="pricing"
       className={cn(
         "w-screen min-h-screen md:p-6 bg-white dark:bg-gray-900",
+        "border-b border-gray-100 dark:border-gray-700",
         className
       )}
       {...props}

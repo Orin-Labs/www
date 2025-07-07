@@ -3,7 +3,7 @@ import {
   motion,
 } from 'framer-motion';
 
-import { cn } from './utils';
+import { cn } from '../utils';
 
 export interface TextInputProps
   extends Omit<HTMLMotionProps<"input">, "onChange"> {

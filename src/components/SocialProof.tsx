@@ -113,7 +113,11 @@ export const SocialProof = ({
   ...props
 }: HTMLProps<HTMLDivElement>) => {
   return (
-    <div className={cn("w-full py-12 md:py-24 px-6", className)} {...props}>
+    <div
+      id="testimonials"
+      className={cn("w-full py-12 md:py-24 px-6", className)}
+      {...props}
+    >
       <div className="max-w-6xl mx-auto">
         <motion.h1
           initial={{ opacity: 0, y: 20 }}

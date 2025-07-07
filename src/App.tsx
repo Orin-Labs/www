@@ -68,9 +68,14 @@ function App() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Ensure page starts at the top
   useEffect(() => {
-    window.scrollTo(0, 0);
+    const urlParams = new URLSearchParams(window.location.search);
+    const scrollTo = urlParams.get("scrollTo");
+    if (scrollTo) {
+      document.getElementById(scrollTo)?.scrollIntoView({ behavior: "smooth" });
+    } else {
+      window.scrollTo(0, 0);
+    }
   }, []);
 
   return (

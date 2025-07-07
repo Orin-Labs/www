@@ -1,12 +1,26 @@
-import { HTMLProps, useEffect, useRef, useState } from "react";
+import {
+  HTMLProps,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 
-import { motion, TargetAndTransition, Transition } from "framer-motion";
-import { ArrowRightIcon, Pause, Play } from "lucide-react";
+import {
+  motion,
+  TargetAndTransition,
+  Transition,
+} from 'framer-motion';
+import {
+  ArrowRightIcon,
+  Pause,
+  Play,
+} from 'lucide-react';
 
-import { Button } from "../Button";
-import { cn } from "../utils";
-import { BackgroundGradient } from "./BackgroundGradient";
-import { RotatingText } from "./RotatingText";
+import { Button } from '../Button';
+import { cn } from '../utils';
+import { BackgroundGradient } from './BackgroundGradient';
+import Nav from './Nav';
+import { RotatingText } from './RotatingText';
 
 const delayed = (
   delay: number
@@ -60,11 +74,16 @@ export function Hero({
 
   return (
     <section
-      className={cn("w-screen h-screen md:p-6 text-white", className)}
+      className={cn(
+        "w-screen h-screen flex flex-col md:p-6 !pt-0 text-white",
+        className
+      )}
       {...props}
     >
+      <Nav />
+
       <audio ref={audioRef} src="/intro.wav" />
-      <div className="w-full h-full md:rounded-lg overflow-hidden relative flex flex-col justify-center items-center gap-4 px-2 md:px-4">
+      <div className="w-full grow md:rounded-lg overflow-hidden relative flex flex-col justify-center items-center gap-4 px-2 md:px-4">
         <motion.h1
           {...delayed(0)}
           className="text-6xl md:text-7xl font-bold z-10 text-center"

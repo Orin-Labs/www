@@ -4,21 +4,6 @@ export const COPY_VARIATIONS = {
     subheadline: "Unlimited tutoring for $99/month",
     cta: "Get your own Orin",
   },
-  variation1: {
-    headline: "ROTATING_HEADLINE", // This will be handled specially in the Hero component
-    subheadline: "$99/mo, unlimited tutoring",
-    cta: "Get your own Orin",
-  },
-  variation2: {
-    headline: "Tutoring for middle schoolers",
-    subheadline: "Unlimited 3rd-8th grade tutoring - $99/mo",
-    cta: "Get your own Orin",
-  },
-  variation3: {
-    headline: "Learn with Orin",
-    subheadline: "Private tutoring for 3rd-8th graders",
-    cta: "Get your own Orin",
-  },
 } as const;
 
 export type CopyVariation = keyof typeof COPY_VARIATIONS;

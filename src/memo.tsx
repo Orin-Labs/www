@@ -12,8 +12,8 @@ import { useLocalStorage } from 'usehooks-ts';
 import { MeshGradient } from '@paper-design/shaders-react';
 
 import { Button } from './Button';
+import { TextInput } from './components/TextInput';
 import { COLORS } from './constants/colors';
-import { TextInput } from './TextInput';
 
 const PASSWORD = "manatee15";
 

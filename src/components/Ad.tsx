@@ -1,0 +1,54 @@
+import { HTMLProps } from 'react';
+
+import { ArrowRightIcon } from 'lucide-react';
+
+import { Button } from '@/Button';
+import { cn } from '@/utils';
+
+import { BackgroundGradient } from './BackgroundGradient';
+
+type AdProps = {
+  title: string;
+  description: string;
+} & HTMLProps<HTMLDivElement>;
+
+export const Ad = ({ title, description, className, ...props }: AdProps) => {
+  return (
+    <div
+      className={cn(
+        "bg-white rounded-lg shadow-md py-8 md:py-4 px-4 relative overflow-hidden",
+        className
+      )}
+      {...props}
+    >
+      <div
+        className="z-10 text-center flex flex-col gap-4 justify-center items-center text-white"
+        style={{
+          fontFamily: "Gowun Dodum",
+        }}
+      >
+        <h3 className="text-4xl font-bold z-10">{title}</h3>
+        <p className="text-xl z-10">{description}</p>
+        <Button
+          shadow="neu"
+          bg="gray"
+          className="gap-2 z-10"
+          onClick={() => {
+            if (window.location.pathname === "/") {
+              document.getElementById("cta-section")?.scrollIntoView({
+                behavior: "smooth",
+              });
+            } else {
+              window.location.href = "/?scrollTo=cta-section";
+            }
+          }}
+        >
+          Free 2 Week Trial
+          <ArrowRightIcon className="w-4 h-4" />
+        </Button>
+      </div>
+
+      <BackgroundGradient speed={0.2} />
+    </div>
+  );
+};
