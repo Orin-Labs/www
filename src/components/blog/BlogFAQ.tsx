@@ -4,6 +4,7 @@ import {
   AnimatePresence,
   motion,
 } from 'framer-motion';
+import posthog from 'posthog-js';
 
 import { cn } from '../../utils';
 
@@ -26,7 +27,17 @@ export function BlogFAQ({
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const toggleFAQ = (index: number) => {
+    const isOpening = openIndex !== index;
     setOpenIndex(openIndex === index ? null : index);
+
+    // Track FAQ interaction
+    posthog.capture("blog_faq_clicked", {
+      faq_question: items[index].question,
+      faq_index: index,
+      faq_action: isOpening ? "open" : "close",
+      page_path: window.location.pathname,
+      blog_post_id: window.location.pathname.split("/").pop(),
+    });
   };
 
   return (

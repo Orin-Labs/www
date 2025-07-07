@@ -1,4 +1,7 @@
+import React from 'react';
+
 import { motion } from 'framer-motion';
+import posthog from 'posthog-js';
 
 import { Footer } from '../components/Footer';
 import Nav from '../components/Nav';
@@ -7,6 +10,39 @@ import { getAllBlogPosts } from './blog-data';
 
 export default function BlogIndex() {
   const blogPosts = getAllBlogPosts();
+
+  // Track blog index view
+  React.useEffect(() => {
+    posthog.capture("blog_index_viewed", {
+      total_blog_posts: blogPosts.length,
+      page_path: window.location.pathname,
+      referrer: document.referrer,
+      blog_posts_available: blogPosts.map((post) => ({
+        id: post.id,
+        title: post.title,
+        slug: post.slug,
+        date: post.date.toISOString(),
+      })),
+    });
+  }, [blogPosts]);
+
+  const handleBlogPostClick = (post: any, index: number) => {
+    // Track blog post click
+    posthog.capture("blog_post_clicked", {
+      blog_post_id: post.id,
+      blog_post_title: post.title,
+      blog_post_slug: post.slug,
+      blog_post_author: post.author,
+      blog_post_date: post.date.toISOString(),
+      blog_post_reading_time: post.readingTime,
+      click_position: index + 1,
+      total_posts_visible: blogPosts.length,
+      page_path: window.location.pathname,
+    });
+
+    // Navigate to blog post
+    window.location.href = `/blog/${post.slug}`;
+  };
 
   return (
     <div className="min-h-screen bg-white">
@@ -42,7 +78,7 @@ export default function BlogIndex() {
                 whileHover={{ scale: 1.01, transition: { duration: 0.1 } }}
                 whileTap={{ scale: 0.99, transition: { duration: 0.1 } }}
                 transition={{ duration: 0.4, delay: index * 0.1 }}
-                onClick={() => (window.location.href = `/blog/${post.slug}`)}
+                onClick={() => handleBlogPostClick(post, index)}
               >
                 {/* Post Header */}
                 <div className="p-6 border-b border-gray-100">

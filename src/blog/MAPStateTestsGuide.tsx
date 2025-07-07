@@ -5,6 +5,7 @@ import {
   ArrowRight,
   FileText,
 } from 'lucide-react';
+import posthog from 'posthog-js';
 
 import { Button } from '@/Button';
 import {
@@ -252,6 +253,53 @@ export default function MAPStateTestsGuide() {
       className: "text-center",
     },
   ];
+
+  // Track page load and engagement
+  React.useEffect(() => {
+    const startTime = Date.now();
+
+    posthog.capture("map_state_tests_guide_started", {
+      blog_post_id: "map-state-tests-guide",
+      blog_post_title: "The Complete MAP & State Tests Guide for Grades 6-8",
+      start_time: startTime,
+    });
+
+    // Track scroll depth
+    const handleScroll = () => {
+      const scrollPercentage = Math.round(
+        (window.scrollY /
+          (document.documentElement.scrollHeight - window.innerHeight)) *
+          100
+      );
+
+      if (scrollPercentage > 0 && scrollPercentage % 25 === 0) {
+        posthog.capture("blog_scroll_depth", {
+          blog_post_id: "map-state-tests-guide",
+          scroll_percentage: scrollPercentage,
+          timestamp: Date.now(),
+        });
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    // Track time spent when leaving page
+    const handleBeforeUnload = () => {
+      const timeSpent = Date.now() - startTime;
+      posthog.capture("map_state_tests_guide_time_spent", {
+        blog_post_id: "map-state-tests-guide",
+        time_spent_ms: timeSpent,
+        time_spent_minutes: Math.round(timeSpent / 60000),
+      });
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, []);
 
   return (
     <BlogLayout>

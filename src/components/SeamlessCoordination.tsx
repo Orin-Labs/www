@@ -66,12 +66,12 @@ export function SeamlessCoordination({
   return (
     <section
       className={cn(
-        "w-full bg-white dark:bg-gray-900 border-t border-gray-100 dark:border-gray-800 md:h-screen min-h-[500px] p-4 py-8 md:p-16",
+        "w-full bg-white dark:bg-gray-900 border-t border-gray-100 dark:border-gray-800 md:h-screen min-h-[500px] py-8 md:p-16",
         className
       )}
       {...props}
     >
-      <div className="grid grid-cols-1 h-full lg:grid-cols-2 items-center gap-16">
+      <div className="grid grid-cols-1 h-full md:grid-cols-2 items-center gap-16">
         {/* Text Content */}
         <div className="flex-1 space-y-6 flex flex-col justify-center p-8 md:p-0">
           <motion.h2
@@ -108,13 +108,13 @@ export function SeamlessCoordination({
         </div>
 
         {/* Phone Component */}
-        <motion.div className="flex-1 h-full flex justify-center relative rounded-lg overflow-hidden py-12">
+        <motion.div className="flex-1 h-full flex justify-center relative rounded-lg overflow-hidden py-12 px-4">
           <div className="hidden md:block">
             <BackgroundGradient speed={speed} />
           </div>
           <div
             className={cn(
-              "absolute inset-0 rounded-lg pointer-events-none z-10",
+              "absolute inset-0 rounded-lg pointer-events-none z-10 hidden md:block",
               "shadow-[inset_2px_2px_8px_#00000044,_inset_-2px_-2px_8px_#ffffffbb] dark:shadow-none"
             )}
           />

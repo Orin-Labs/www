@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
+import posthog from 'posthog-js';
 import { useHover } from 'usehooks-ts';
 
 import { cn } from '../../utils';
@@ -17,14 +18,30 @@ interface BlogCardProps {
   metadata?: Record<string, string>;
 }
 
-function BlogCard({ card }: { card: BlogCardProps }) {
+function BlogCard({ card, index }: { card: BlogCardProps; index: number }) {
   const ref = useRef<HTMLButtonElement>(null);
   const isHovered = useHover(ref);
+
+  const handleClick = () => {
+    // Track card click
+    posthog.capture("blog_card_clicked", {
+      card_title: card.title,
+      card_subtitle: card.subtitle,
+      card_index: index,
+      page_path: window.location.pathname,
+      blog_post_id: window.location.pathname.split("/").pop(),
+    });
+
+    // Execute original action if exists
+    if (card.action?.onClick) {
+      card.action.onClick();
+    }
+  };
 
   return (
     <motion.button
       ref={ref}
-      onClick={card.action?.onClick}
+      onClick={handleClick}
       initial={{ opacity: 0, y: 20 }}
       whileHover={{ scale: 1.02, transition: { duration: 0.1 } }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -114,7 +131,7 @@ export function BlogCardGrid({
 
       <div className={cn("grid gap-6", gridCols[columns])}>
         {cards.map((card, index) => (
-          <BlogCard key={index} card={card} />
+          <BlogCard key={index} card={card} index={index} />
         ))}
       </div>
     </motion.div>

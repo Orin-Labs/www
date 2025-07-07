@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { motion } from 'framer-motion';
+import posthog from 'posthog-js';
 
 import { Ad } from '@/components/Ad';
 import {
@@ -298,6 +299,53 @@ const sortButtons = [
 ];
 
 export default function MathSurvivalGuide() {
+  // Track page load and engagement
+  React.useEffect(() => {
+    const startTime = Date.now();
+
+    posthog.capture("math_survival_guide_started", {
+      blog_post_id: "math-survival-guide",
+      blog_post_title: "Middle School Math Survival Guide for Parents",
+      start_time: startTime,
+    });
+
+    // Track scroll depth
+    const handleScroll = () => {
+      const scrollPercentage = Math.round(
+        (window.scrollY /
+          (document.documentElement.scrollHeight - window.innerHeight)) *
+          100
+      );
+
+      if (scrollPercentage > 0 && scrollPercentage % 25 === 0) {
+        posthog.capture("blog_scroll_depth", {
+          blog_post_id: "math-survival-guide",
+          scroll_percentage: scrollPercentage,
+          timestamp: Date.now(),
+        });
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    // Track time spent when leaving page
+    const handleBeforeUnload = () => {
+      const timeSpent = Date.now() - startTime;
+      posthog.capture("math_survival_guide_time_spent", {
+        blog_post_id: "math-survival-guide",
+        time_spent_ms: timeSpent,
+        time_spent_minutes: Math.round(timeSpent / 60000),
+      });
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, []);
+
   return (
     <BlogLayout>
       <motion.h1
