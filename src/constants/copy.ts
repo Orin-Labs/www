@@ -29,16 +29,16 @@ export const PRICING_COPY = {
   subheadline: "Choose the plan that works best for your family",
   monthly: {
     title: "Monthly",
-    price: "$99",
+    price: "$49",
     period: "per month",
     description: "Perfect for trying out Orin",
   },
   yearly: {
     title: "Yearly",
-    price: "$899",
+    price: "$399",
     period: "per year",
-    description: "Save $289 with annual billing",
-    savings: "Save $289",
+    description: "Save $200 with annual billing",
+    savings: "Save $200",
   },
   features: [
     "Unlimited tutoring sessions",
