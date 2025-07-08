@@ -5,7 +5,6 @@ import plugin from 'tailwindcss/plugin';
 import typography from '@tailwindcss/typography';
 
 module.exports = {
-  darkMode: ["class"],
   content: [
     "./src/**/*.{ts,tsx}",
     "./index.html",

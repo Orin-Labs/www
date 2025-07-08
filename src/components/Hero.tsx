@@ -118,8 +118,7 @@ export function Hero({
         <motion.button
           className={cn(
             "w-32 h-32 rounded-full flex justify-center items-center z-10 bg-transparent transition-shadow duration-50",
-            `shadow-[4px_4px_8px_#00000044,_-4px_-4px_8px_#ffffff99] active:shadow-[2px_2px_1px_#00000022,_-2px_-2px_1px_#ffffff44]`,
-            `dark:shadow-[4px_4px_4px_#00000044,_-4px_-4px_4px_#ffffff22] dark:active:shadow-[2px_2px_1px_#00000022,_-2px_-2px_1px_#ffffff22]`
+            `shadow-[4px_4px_8px_#00000044,_-4px_-4px_8px_#ffffff99] active:shadow-[2px_2px_1px_#00000022,_-2px_-2px_1px_#ffffff44]`
           )}
           {...delayed(0.2)}
           onClick={() => {
@@ -164,7 +163,7 @@ export function Hero({
         <div
           className={cn(
             "absolute inset-0 rounded-lg pointer-events-none z-10",
-            "shadow-[inset_2px_2px_8px_#00000044,_inset_-2px_-2px_8px_#ffffffbb] dark:shadow-none"
+            "shadow-[inset_2px_2px_8px_#00000044,_inset_-2px_-2px_8px_#ffffffbb]"
           )}
         />
       </div>

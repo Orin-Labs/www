@@ -35,8 +35,8 @@ export function Pricing({ speed, className, ...props }: PricingProps) {
     <section
       id="pricing"
       className={cn(
-        "w-screen min-h-screen md:p-6 bg-white dark:bg-gray-900",
-        "border-b border-gray-100 dark:border-gray-700",
+        "w-screen min-h-screen md:p-6 bg-white",
+        "border-b border-gray-100",
         className
       )}
       {...props}
@@ -52,13 +52,13 @@ export function Pricing({ speed, className, ...props }: PricingProps) {
           {/* Header */}
           <motion.h2
             variants={itemVariants}
-            className="text-4xl md:text-5xl font-bold mb-4 text-gray-900 dark:text-white"
+            className="text-4xl md:text-5xl font-bold mb-4 text-gray-900"
           >
             {PRICING_COPY.headline}
           </motion.h2>
           <motion.p
             variants={itemVariants}
-            className="text-xl text-gray-600 dark:text-gray-300 mb-12"
+            className="text-xl text-gray-600 mb-12"
           >
             {PRICING_COPY.subheadline}
           </motion.p>
@@ -69,25 +69,25 @@ export function Pricing({ speed, className, ...props }: PricingProps) {
             className="grid md:grid-cols-2 gap-8 max-w-2xl mx-auto"
           >
             {/* Monthly Plan */}
-            <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 border border-gray-200 dark:border-gray-700 shadow-lg hover:shadow-xl transition-all duration-300">
+            <div className="bg-white rounded-2xl p-8 border border-gray-200 shadow-lg hover:shadow-xl transition-all duration-300">
               <div className="text-center">
-                <h3 className="text-2xl font-bold mb-2 text-gray-900 dark:text-white">
+                <h3 className="text-2xl font-bold mb-2 text-gray-900">
                   {PRICING_COPY.monthly.title}
                 </h3>
                 <div className="mb-4">
-                  <span className="text-4xl font-bold text-gray-900 dark:text-white">
+                  <span className="text-4xl font-bold text-gray-900">
                     {PRICING_COPY.monthly.price}
                   </span>
-                  <span className="text-gray-600 dark:text-gray-400 ml-2">
+                  <span className="text-gray-600 ml-2">
                     {PRICING_COPY.monthly.period}
                   </span>
                 </div>
-                <p className="text-gray-600 dark:text-gray-400 mb-6">
+                <p className="text-gray-600 mb-6">
                   {PRICING_COPY.monthly.description}
                 </p>
                 <button
                   onClick={handleGetStarted}
-                  className="w-full py-3 rounded-lg font-medium transition-all duration-300 bg-gray-900 dark:bg-white text-white dark:text-black hover:bg-gray-800 dark:hover:bg-gray-100 shadow-lg"
+                  className="w-full py-3 rounded-lg font-medium transition-all duration-300 bg-gray-900 text-white hover:bg-gray-800 shadow-lg"
                 >
                   Get Started
                 </button>
@@ -95,30 +95,30 @@ export function Pricing({ speed, className, ...props }: PricingProps) {
             </div>
 
             {/* Yearly Plan */}
-            <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 border border-gray-200 dark:border-gray-700 shadow-lg hover:shadow-xl transition-all duration-300 relative">
+            <div className="bg-white rounded-2xl p-8 border border-gray-200 shadow-lg hover:shadow-xl transition-all duration-300 relative">
               <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
                 <span className="bg-emerald-500 text-white text-sm px-4 py-1 rounded-full font-medium">
                   {PRICING_COPY.yearly.savings}
                 </span>
               </div>
               <div className="text-center">
-                <h3 className="text-2xl font-bold mb-2 text-gray-900 dark:text-white">
+                <h3 className="text-2xl font-bold mb-2 text-gray-900">
                   {PRICING_COPY.yearly.title}
                 </h3>
                 <div className="mb-4">
-                  <span className="text-4xl font-bold text-gray-900 dark:text-white">
+                  <span className="text-4xl font-bold text-gray-900">
                     {PRICING_COPY.yearly.price}
                   </span>
-                  <span className="text-gray-600 dark:text-gray-400 ml-2">
+                  <span className="text-gray-600 ml-2">
                     {PRICING_COPY.yearly.period}
                   </span>
                 </div>
-                <p className="text-gray-600 dark:text-gray-400 mb-6">
+                <p className="text-gray-600 mb-6">
                   {PRICING_COPY.yearly.description}
                 </p>
                 <button
                   onClick={handleGetStarted}
-                  className="w-full py-3 rounded-lg font-medium transition-all duration-300 bg-gray-900 dark:bg-white text-white dark:text-black hover:bg-gray-800 dark:hover:bg-gray-100 shadow-lg"
+                  className="w-full py-3 rounded-lg font-medium transition-all duration-300 bg-gray-900 text-white hover:bg-gray-800 shadow-lg"
                 >
                   Get Started
                 </button>

@@ -1,10 +1,10 @@
-import { HTMLProps } from "react";
+import { HTMLProps } from 'react';
 
-import { motion } from "framer-motion";
+import { motion } from 'framer-motion';
 
-import { cn } from "../utils";
-import { BackgroundGradient } from "./BackgroundGradient";
-import { SignupForm } from "./SignupForm";
+import { cn } from '../utils';
+import { BackgroundGradient } from './BackgroundGradient';
+import { SignupForm } from './SignupForm';
 
 interface CTASectionProps extends Omit<HTMLProps<HTMLElement>, "onSubmit"> {
   cta: string;
@@ -101,7 +101,7 @@ export function CTASection({
         <div
           className={cn(
             "absolute inset-0 rounded-lg pointer-events-none z-10",
-            "shadow-[inset_2px_2px_8px_#00000044,_inset_-2px_-2px_8px_#ffffffbb] dark:shadow-none"
+            "shadow-[inset_2px_2px_8px_#00000044,_inset_-2px_-2px_8px_#ffffffbb]"
           )}
         />
       </div>

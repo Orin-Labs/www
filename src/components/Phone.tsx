@@ -222,7 +222,7 @@ export function Phone({
     <motion.div
       className={cn(
         "w-[375px] h-[812px] bg-white z-10 rounded-[36px] overflow-hidden flex flex-col font-system",
-        `shadow-[2px_2px_6px_#00000077,_-2px_-2px_6px_#ffffff99] dark:shadow-none`,
+        `shadow-[2px_2px_6px_#00000077,_-2px_-2px_6px_#ffffff99]`,
         className
       )}
       initial={{ opacity: 0, scale: 0.95, y: 10 }}

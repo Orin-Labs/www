@@ -1,11 +1,11 @@
-import React, { useRef } from "react";
+import React, { useRef } from 'react';
 
-import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
-import posthog from "posthog-js";
-import { useHover } from "usehooks-ts";
+import { motion } from 'framer-motion';
+import { ArrowRight } from 'lucide-react';
+import posthog from 'posthog-js';
+import { useHover } from 'usehooks-ts';
 
-import { cn } from "@utils";
+import { cn } from '@utils';
 
 export interface GridCardProps {
   title: string;
@@ -57,8 +57,6 @@ function GridCard({ card, index }: { card: GridCardProps; index: number }) {
         "rounded-lg",
         "shadow-[2px_2px_8px_#00000022,_-2px_-2px_8px_#ffffff99]",
         "hover:shadow-[4px_4px_12px_#00000033,_-4px_-4px_12px_#ffffffaa]",
-        "dark:shadow-[4px_4px_4px_#00000044,_-4px_-4px_4px_#ffffff22]",
-        "dark:hover:shadow-[6px_6px_8px_#00000055,_-6px_-6px_8px_#ffffff33]",
         "hover:-translate-y-1 relative overflow-hidden text-white"
       )}
     >
