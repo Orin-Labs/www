@@ -195,7 +195,7 @@ export const SocialProof = ({
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3 }}
           viewport={{ once: true }}
-          className="text-center text-6xl mb-2 font-bold dark:text-white"
+          className="text-center text-6xl mb-2 font-bold"
         >
           Loved by 100+ families
         </motion.h1>
@@ -204,7 +204,7 @@ export const SocialProof = ({
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3 }}
           viewport={{ once: true }}
-          className="text-center mb-12 text-lg text-gray-500 dark:text-gray-300"
+          className="text-center mb-12 text-lg text-gray-500"
         >
           Orin has over 13,000 hours of tutoring experience.
         </motion.p>
@@ -224,9 +224,7 @@ export const SocialProof = ({
               }}
               viewport={{ once: true }}
               className={cn(
-                "bg-white dark:bg-neutral-800 rounded-lg p-6 relative min-h-60 transition-shadow duration-200",
-                "shadow-[2px_2px_4px_#00000044,_-2px_-2px_4px_#ffffff99] hover:shadow-[2px_2px_2px_#00000022,_-2px_-2px_2px_#ffffff77]",
-                "dark:shadow-[4px_4px_4px_#00000044,_-4px_-4px_4px_#44444422] dark:hover:shadow-[2px_2px_1px_#00000022,_-2px_-2px_1px_#44444411]"
+                "bg-gray-50 rounded-lg p-6 relative min-h-60 transition-shadow duration-200 border border-gray-200"
               )}
               animate={{
                 y: 0,
@@ -247,16 +245,16 @@ export const SocialProof = ({
               ) : (
                 <>
                   <div className="mb-3">
-                    <p className="text-lg font-semibold text-blue-600 dark:text-blue-400 italic">
+                    <p className="text-lg font-semibold text-blue-600 italic">
                       "{(card as TestimonialCard).pullQuote}"
                     </p>
                   </div>
 
-                  <blockquote className="text-base text-gray-800 dark:text-gray-200 mb-4 leading-relaxed italic">
+                  <blockquote className="text-base text-gray-800 mb-4 leading-relaxed italic">
                     "{(card as TestimonialCard).quote}"
                   </blockquote>
 
-                  <footer className="text-sm text-gray-600 dark:text-gray-400">
+                  <footer className="text-sm text-gray-600">
                     — {(card as TestimonialCard).author},{" "}
                     {(card as TestimonialCard).location}
                   </footer>

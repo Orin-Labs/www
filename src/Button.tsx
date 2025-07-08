@@ -27,10 +27,9 @@ export function Button({
         bg === "white" && "bg-white text-gray-900",
         "disabled:cursor-not-allowed transition-all duration-50 active:translate-y-0.5 disabled:!shadow-none",
         shadow === "float" &&
-          "shadow-[0px_0px_6px_1px_#a5a5a5] active:shadow-[0px_0px_4px_1px_#a5a5a5] dark:shadow-[0px_0px_6px_1px_#302d2d] dark:active:shadow-[0px_0px_4px_1px_#302d2d]",
+          "shadow-[0px_0px_6px_1px_#a5a5a5] active:shadow-[0px_0px_4px_1px_#a5a5a5]",
         shadow === "neu" &&
           `shadow-[2px_2px_4px_#00000044,_-2px_-2px_4px_#ffffff99] active:shadow-[2px_2px_1px_#00000022,_-2px_-2px_1px_#ffffff44]`,
-        `dark:shadow-[4px_4px_4px_#00000044,_-4px_-4px_4px_#ffffff22] dark:active:shadow-[2px_2px_1px_#00000022,_-2px_-2px_1px_#ffffff22]`,
         className
       )}
       disabled={disabled}

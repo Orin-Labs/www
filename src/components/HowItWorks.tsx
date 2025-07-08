@@ -1,10 +1,15 @@
-import { HTMLProps, useEffect, useRef, useState } from "react";
+import {
+  HTMLProps,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 
-import { motion } from "framer-motion";
+import { motion } from 'framer-motion';
 
-import { cn } from "../utils";
-import { BackgroundGradient } from "./BackgroundGradient";
-import { Message } from "./Phone";
+import { cn } from '../utils';
+import { BackgroundGradient } from './BackgroundGradient';
+import { Message } from './Phone';
 
 // Lazy loading image component
 const LazyImage = ({
@@ -85,7 +90,7 @@ const GradientNumberBadge = ({
     <div
       className={cn(
         "absolute inset-0 rounded-full pointer-events-none z-10",
-        "shadow-[inset_2px_2px_8px_#00000044,_inset_-2px_-2px_8px_#ffffffbb] dark:shadow-none"
+        "shadow-[inset_2px_2px_8px_#00000044,_inset_-2px_-2px_8px_#ffffffbb]"
       )}
     />
     <span className="text-white text-xl font-bold z-20 relative">{number}</span>
@@ -122,7 +127,7 @@ const FloatingMessage = ({
       transition={{ duration: 0.5, delay }}
       className="flex justify-start mb-3 font-system"
     >
-      <div className="mr-2 relative rounded-[18px] max-w-[280px] bg-[#E9E9EB] dark:bg-[#414141] px-4 py-2 text-black dark:text-white shadow-lg">
+      <div className="mr-2 relative rounded-[18px] max-w-[280px] bg-[#E9E9EB] px-4 py-2 text-black shadow-lg">
         <p className="text-sm">{message.text}</p>
       </div>
     </motion.div>
@@ -164,13 +169,9 @@ const StepContent = ({
   >
     <div className="flex items-center gap-4">
       <GradientNumberBadge number={number} speed={speed} />
-      <h3 className="text-3xl font-bold text-gray-900 dark:text-white">
-        {title}
-      </h3>
+      <h3 className="text-3xl font-bold text-gray-900">{title}</h3>
     </div>
-    <p className="text-lg text-gray-600 leading-relaxed dark:text-gray-400">
-      {description}
-    </p>
+    <p className="text-lg text-gray-600 leading-relaxed">{description}</p>
   </motion.div>
 );
 
@@ -269,12 +270,7 @@ const stepData = [
 
 export function HowItWorks({ speed, className }: HowItWorksProps) {
   return (
-    <section
-      className={cn(
-        "w-full py-16 md:py-24 bg-gray-50 dark:bg-neutral-900",
-        className
-      )}
-    >
+    <section className={cn("w-full py-16 md:py-24 bg-gray-50", className)}>
       <div className="max-w-7xl mx-auto px-4 md:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -282,10 +278,10 @@ export function HowItWorks({ speed, className }: HowItWorksProps) {
           transition={{ duration: 0.6 }}
           className="text-center mb-20"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
             How It Works
           </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             Your personalized AI tutor is ready in three simple steps
           </p>
         </motion.div>
