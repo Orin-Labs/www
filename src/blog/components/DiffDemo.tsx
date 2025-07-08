@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { DiffExample } from './components/DiffExample';
+import { DiffExample } from '@blog/components/DiffExample';
 
 export const DiffDemo: React.FC = () => {
   return (

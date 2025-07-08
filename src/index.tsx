@@ -16,7 +16,7 @@ import Privacy from './privacy';
 import reportWebVitals from './reportWebVitals';
 
 // Lazy load blog components to reduce initial bundle size
-const BlogRouter = React.lazy(() => import("./blog/blog-router"));
+const BlogRouter = React.lazy(() => import("@blog/router"));
 
 // Defer PostHog initialization to improve initial page load
 window.addEventListener("load", function () {

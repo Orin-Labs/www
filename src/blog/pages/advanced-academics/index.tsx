@@ -1,8 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { motion } from 'framer-motion';
+import {
+  AlertTriangle,
+  Calculator,
+  Globe,
+  GraduationCap,
+  Heart,
+  HelpCircle,
+} from 'lucide-react';
 import posthog from 'posthog-js';
 
+import { GridCardProps } from '@/blog/components/BlogCardGrid';
 import {
   Alert,
   BlogCardGrid,
@@ -14,10 +23,9 @@ import {
   DecisionTree,
   GPAScale,
   Odyssey,
-  ProsConsGrid,
   ProviderGrid,
   ScenarioGrid,
-} from '@components';
+} from '@blog/components';
 
 // Decision Tree Configuration
 const questions = [
@@ -49,7 +57,7 @@ const getDecisionResult = (answers: boolean[]) => {
   const yesCount = answers.filter(Boolean).length;
   const noCount = answers.length - yesCount;
 
-  if (yesCount === 4) {
+  if (yesCount === 3) {
     return {
       type: "success" as const,
       title: "🎉 Green Light!",
@@ -93,7 +101,7 @@ const getDecisionResult = (answers: boolean[]) => {
 
 export default function STEMElectivesGuide() {
   // Track page load and engagement
-  React.useEffect(() => {
+  useEffect(() => {
     const startTime = Date.now();
 
     posthog.capture("stem_electives_guide_started", {
@@ -173,10 +181,11 @@ export default function STEMElectivesGuide() {
     },
   ];
 
-  const stemPrograms = [
+  const stemPrograms: GridCardProps[] = [
     {
       title: "FIRST Robotics",
       subtitle: "Grades 6-8",
+      imageUrl: "https://firstintexas.org/wp-content/uploads/2022/09/FRC5.jpg",
       description:
         "Programming, mechanical design, and teamwork through competitive robotics challenges.",
       metadata: { Time: "8-12 hours/week", Cost: "$200-500" },
@@ -188,6 +197,7 @@ export default function STEMElectivesGuide() {
     {
       title: "VEX Robotics",
       subtitle: "Year-round competition",
+      imageUrl: "https://cdn.rit.edu/images/news/2021-04/MMET-RIT.jpg",
       description:
         "CAD design, sensors, and autonomous programming with flexible scheduling.",
       metadata: { Time: "6-10 hours/week", Cost: "$150-400" },
@@ -199,6 +209,7 @@ export default function STEMElectivesGuide() {
     {
       title: "Project Lead the Way",
       subtitle: "PLTW Engineering",
+      imageUrl: "https://blog.mtparanschool.com/hubfs/PTLW%20ms%20LR-5994.jpg",
       description:
         "Engineering design process and 3D modeling through structured curriculum.",
       metadata: {
@@ -213,6 +224,8 @@ export default function STEMElectivesGuide() {
     {
       title: "Maker Spaces",
       subtitle: "Creative engineering",
+      imageUrl:
+        "https://www.makerspaces.com/wp-content/uploads/2018/12/Ultimate-Makerspace-Guide-Header.jpg",
       description:
         "Problem-solving and creativity through hands-on projects and collaboration.",
       metadata: { Time: "2-4 hours/week", Cost: "$50-200/year" },
@@ -222,8 +235,10 @@ export default function STEMElectivesGuide() {
       },
     },
     {
-      title: "CTY Summer Programs",
-      subtitle: "Johns Hopkins",
+      title: "Summer Programs",
+      subtitle: "Various Locations",
+      imageUrl:
+        "https://www.bostontechmom.com/wp-content/uploads/2022/04/young-girls-playing-with-catapult.jpg",
       description:
         "Intensive 3-week programs in advanced math, science, and computer science.",
       metadata: { Time: "3 weeks", Cost: "$3,000-5,000" },
@@ -235,6 +250,8 @@ export default function STEMElectivesGuide() {
     {
       title: "Northwestern CTD",
       subtitle: "Summer programs",
+      imageUrl:
+        "https://images.unsplash.com/photo-1706466614730-855420835cdd?q=80&w=1480&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       description:
         "Accelerated learning in STEM fields with residential and online options for gifted students.",
       metadata: { Time: "2-3 weeks", Cost: "$2,500-4,500" },
@@ -250,6 +267,8 @@ export default function STEMElectivesGuide() {
     {
       title: "📂 Hosted Projects",
       subtitle: "Showcase your work",
+      imageUrl:
+        "https://images.unsplash.com/photo-1553877522-43269d4ea984?q=80&w=1470&auto=format&fit=crop",
       description:
         "Problem statements, solution approaches, tools used, and lessons learned from each project.",
       metadata: { "Key Benefit": "Demonstrates problem-solving skills" },
@@ -261,6 +280,8 @@ export default function STEMElectivesGuide() {
     {
       title: "💻 Code Samples",
       subtitle: "Programming portfolio",
+      imageUrl:
+        "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?q=80&w=1470&auto=format&fit=crop",
       description:
         "Commented code, version control, testing documentation, and collaboration evidence.",
       metadata: { "Key Benefit": "Shows technical competency" },
@@ -276,6 +297,8 @@ export default function STEMElectivesGuide() {
     {
       title: "🏆 Competition Results",
       subtitle: "Achievement showcase",
+      imageUrl:
+        "https://images.unsplash.com/photo-1523050854058-8df90110c9d1?q=80&w=1470&auto=format&fit=crop",
       description:
         "Robotics competitions, science fairs, math contests, and programming challenges.",
       metadata: { "Key Benefit": "Validates skills objectively" },
@@ -364,34 +387,40 @@ export default function STEMElectivesGuide() {
         "If my student takes Algebra 1 in 8th grade, what math do they take senior year?",
       answer:
         "The typical sequence becomes: Algebra 1 (8th) → Geometry (9th) → Algebra 2 (10th) → Pre-Calculus (11th) → AP Calculus (12th). This opens doors to advanced math courses and demonstrates sustained rigor to colleges.",
+      icon: Calculator,
     },
     {
       question:
         "Do colleges really care about middle school high school credits?",
       answer:
         "Yes and no. The credits themselves matter less than the pattern they establish. Colleges see sustained academic challenge and success in accelerated coursework as positive indicators of college readiness and intellectual curiosity.",
+      icon: GraduationCap,
     },
     {
       question:
         "What if my student struggles with their first high school credit?",
       answer:
         "Don't panic. Focus on support strategies: tutoring, study groups, teacher communication. If the struggle continues, consider whether the acceleration timeline needs adjustment for future courses. Early intervention is key.",
+      icon: AlertTriangle,
     },
     {
       question:
         "Are online high school credits viewed differently than in-person credits?",
       answer:
         "Quality online programs from accredited providers are generally viewed equally. However, verify that your target high schools and colleges accept credits from your chosen online provider before enrollment.",
+      icon: Globe,
     },
     {
       question: "Should we prioritize math acceleration or foreign language?",
       answer:
         "Consider your student's strengths and interests. Math acceleration has more prerequisites and builds sequentially. Foreign language requires consistent practice but offers more flexibility in timing and doesn't create as rigid a pathway.",
+      icon: HelpCircle,
     },
     {
       question: "How do we balance acceleration with social development?",
       answer:
         "Monitor your student's social connections and stress levels. If acceleration isolates them from peers or creates excessive pressure, consider enrichment within grade-level courses instead. Social-emotional development is equally important.",
+      icon: Heart,
     },
   ];
 
@@ -403,15 +432,6 @@ export default function STEMElectivesGuide() {
 
   return (
     <BlogLayout>
-      <motion.h1
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="text-4xl md:text-5xl font-bold mb-8 text-center z-10 relative"
-      >
-        🔬 STEM Electives & High School Credit Options in Middle School
-      </motion.h1>
-
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -433,56 +453,104 @@ export default function STEMElectivesGuide() {
         how technology is reshaping educational pathways is crucial for making
         informed choices.
       </motion.div>
-      <hr className="my-8" />
 
       <BlogSection
-        title="🎯 Decision Matrix"
-        className="flex flex-col gap-4 items-center"
+        title="The Big Decision"
+        description="Should your student take high school credits in middle school?"
       >
-        <ProsConsGrid
-          pros={{
-            title: "Take High School Credits IF:",
-            items: strategicAdvantages,
-          }}
-          cons={{
-            title: "Skip High School Credits IF:",
-            items: hiddenCosts,
-          }}
-        />
-      </BlogSection>
-      <hr className="my-8" />
-
-      <BlogSection title="Step 1 - Decision Flowchart—Your Visual Guide">
-        <DecisionTree questions={questions} getResult={getDecisionResult} />
-      </BlogSection>
-
-      <BlogSection title="Step 2 - Why Middle School Credits Matter">
         <ScenarioGrid
           scenarios={[
             {
-              title: "Strategic Advantages",
-              description: "Benefits of early credit acceleration",
+              title: "Signs they're ready:",
               details: strategicAdvantages,
               color: "green",
             },
             {
-              title: "Hidden Costs",
-              description: "Potential challenges to consider",
+              title: "Signs they're not ready:",
               details: hiddenCosts,
               color: "red",
             },
-            {
-              title: "Bottom Line",
-              description: "Key considerations for decision making",
-              details: [
-                "Middle school credits work best for students who are naturally ready, not those being pushed to keep up",
-                "The key is honest assessment of readiness versus external pressure",
-                "With AI-powered assessment tools now available, parents have more data than ever to make informed decisions about academic acceleration",
-              ],
-              color: "blue",
-            },
           ]}
         />
+      </BlogSection>
+
+      <BlogSection
+        title="Step 1 - Decision Flowchart"
+        description="A visual guide to help you make a decision about whether to take high school credits in middle school."
+      >
+        <DecisionTree
+          title="Deciding on High School Credits?"
+          questions={questions}
+          getResult={getDecisionResult}
+          imageUrl="https://images.unsplash.com/photo-1706466614730-855420835cdd?q=80&w=1480&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+        />
+      </BlogSection>
+
+      <BlogSection
+        title="Step 2 - Why Middle School Credits Matter"
+        description="Benefits and potential challenges of taking high school credits in middle school."
+      >
+        <div className="space-y-6">
+          <div>
+            <h3 className="text-xl font-bold mb-3">Strategic Advantages</h3>
+            <p className="text-gray-700 mb-4">
+              Early credit acceleration offers several compelling benefits for
+              the right student. When a child is genuinely ready for advanced
+              coursework, taking high school credits in middle school can create
+              significant academic momentum. This approach allows students to
+              complete graduation requirements early, opening up opportunities
+              for more advanced electives, dual enrollment, or specialized
+              programs in high school. It also demonstrates sustained academic
+              commitment to colleges and can provide valuable time for exploring
+              interests or pursuing other activities.
+            </p>
+            <p className="text-gray-700">
+              The strategic advantages include{" "}
+              {strategicAdvantages.join(", ").toLowerCase()}. These benefits
+              work together to create a more flexible and enriched high school
+              experience for students who are truly prepared for the challenge.
+            </p>
+          </div>
+
+          <div>
+            <h3 className="text-xl font-bold mb-3">Hidden Costs</h3>
+            <p className="text-gray-700 mb-4">
+              However, the decision to accelerate isn't without risks. When
+              students aren't developmentally ready, the pressure of advanced
+              coursework can lead to burnout, anxiety, and a negative
+              relationship with learning. The hidden costs often manifest as
+              increased stress, reduced time for other important developmental
+              activities, and potential gaps in foundational knowledge that
+              become apparent later in more advanced courses.
+            </p>
+            <p className="text-gray-700">
+              Key challenges to consider include{" "}
+              {hiddenCosts.join(", ").toLowerCase()}. These factors can
+              significantly impact a student's academic confidence and long-term
+              success if not carefully managed.
+            </p>
+          </div>
+
+          <div>
+            <h3 className="text-xl font-bold mb-3">Bottom Line</h3>
+            <p className="text-gray-700 mb-4">
+              The fundamental principle is that middle school credits work best
+              for students who are naturally ready, not those being pushed to
+              keep up with peers or external expectations. The key lies in
+              honest assessment of readiness versus external pressure—a
+              distinction that requires careful reflection and sometimes
+              difficult conversations about what's truly best for the individual
+              child.
+            </p>
+            <p className="text-gray-700">
+              Fortunately, with AI-powered assessment tools now available,
+              parents have more data than ever to make informed decisions about
+              academic acceleration. These tools can help identify genuine
+              readiness versus social pressure, providing objective insights to
+              guide what is ultimately a deeply personal family decision.
+            </p>
+          </div>
+        </div>
       </BlogSection>
 
       <BlogSection title="Step 3 - Algebra 1 vs. Math 8—The Deep Dive">
@@ -521,26 +589,30 @@ export default function STEMElectivesGuide() {
       </BlogSection>
 
       <BlogSection title="Step 4 - Foreign Language & Online Credits">
-        <ProsConsGrid
+        <ScenarioGrid
           title="Foreign Language Decision Framework"
-          pros={{
-            title: "Foreign Language PROS",
-            items: [
-              "Complete 4-year language requirement early",
-              "Cultural enrichment and cognitive benefits",
-              "Demonstrates sustained commitment to challenge",
-              "Practical real-world communication skills",
-            ],
-          }}
-          cons={{
-            title: "Foreign Language CONS",
-            items: [
-              "Daily practice required for retention",
-              "May be only middle schooler in HS class",
-              "Scheduling conflicts with other electives",
-              "Cost factor: $200-800 for online programs",
-            ],
-          }}
+          scenarios={[
+            {
+              title: "The Benefits",
+              color: "green",
+              details: [
+                "Complete 4-year language requirement early",
+                "Cultural enrichment and cognitive benefits",
+                "Demonstrates sustained commitment to challenge",
+                "Practical real-world communication skills",
+              ],
+            },
+            {
+              title: "The Challenges",
+              color: "red",
+              details: [
+                "Daily practice required for retention",
+                "May be only middle schooler in HS class",
+                "Scheduling conflicts with other electives",
+                "Cost factor: $200-800 for online programs",
+              ],
+            },
+          ]}
         />
 
         <ProviderGrid

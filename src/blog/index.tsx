@@ -1,156 +1,149 @@
-import React from 'react';
+import { useCallback } from 'react';
 
-import { motion } from 'framer-motion';
+import {
+  HTMLMotionProps,
+  motion,
+} from 'framer-motion';
+import { ArrowRightIcon } from 'lucide-react';
 import posthog from 'posthog-js';
 import { useNavigate } from 'react-router-dom';
 
-import { Footer } from '../components/Footer';
-import Nav from '../components/Nav';
-import { Odyssey } from '../components/Odyssey';
-import { getAllBlogPosts } from './blog-data';
+import { Odyssey } from '@blog/components';
+import {
+  FloatingNav,
+  Footer,
+} from '@components';
+import { cn } from '@utils';
 
-export default function BlogIndex() {
+import {
+  BlogPost,
+  getReadingTime,
+  POSTS,
+} from './data';
+
+interface BlogCardProps extends HTMLMotionProps<"button"> {
+  post: BlogPost;
+}
+
+export function BlogCard({ post, className, ...props }: BlogCardProps) {
   const navigate = useNavigate();
-  const blogPosts = getAllBlogPosts();
 
-  // Track blog index view
-  React.useEffect(() => {
-    posthog.capture("blog_index_viewed", {
-      total_blog_posts: blogPosts.length,
-      page_path: window.location.pathname,
-      referrer: document.referrer,
-      blog_posts_available: blogPosts.map((post) => ({
-        id: post.id,
-        title: post.title,
-        slug: post.slug,
-        date: post.date.toISOString(),
-      })),
-    });
-  }, [blogPosts]);
-
-  const handleBlogPostClick = (post: any, index: number) => {
-    // Track blog post click
+  const handleClick = useCallback(() => {
+    // Track pillar click
     posthog.capture("blog_post_clicked", {
-      blog_post_id: post.id,
-      blog_post_title: post.title,
-      blog_post_slug: post.slug,
-      blog_post_author: post.author,
-      blog_post_date: post.date.toISOString(),
-      blog_post_reading_time: post.readingTime,
-      click_position: index + 1,
-      total_posts_visible: blogPosts.length,
+      pillar_id: post.id,
+      pillar_title: post.title,
+      pillar_slug: post.slug,
       page_path: window.location.pathname,
     });
-
-    // Navigate to blog post using React Router
-    navigate(`/blog/${post.slug}`);
-  };
+    navigate(post.slug);
+  }, [post, navigate]);
 
   return (
+    <motion.button
+      className={cn(
+        "min-h-72 relative rounded-lg border border-gray-200 overflow-hidden",
+        className
+      )}
+      onClick={handleClick}
+      initial={{
+        scale: 1,
+        backgroundPosition: "50% 50%",
+      }}
+      animate={{
+        backgroundPosition: "50% 50%",
+      }}
+      whileHover={{
+        backgroundPosition: "55% 55%",
+        scale: 1.005,
+        transition: {
+          duration: 0.1,
+        },
+      }}
+      whileTap={{
+        scale: 0.99,
+        transition: {
+          duration: 0.1,
+        },
+      }}
+      style={{
+        backgroundImage: `url(${post.image})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+      {...props}
+    >
+      <div className="z-10 flex flex-col justify-between items-stretch gap-4 p-8 bg-[#0000008d] text-white h-full w-full">
+        <div className="flex flex-col gap-2 items-start text-left">
+          <h3 className="text-3xl md:text-4xl font-bold">{post.title}</h3>
+          <p className="text-gray-200 text-md md:text-lg">{post.excerpt}</p>
+          {post.subArticles?.length && (
+            <p className="text-gray-200 text-sm md:text-md">
+              {post.subArticles?.length} articles: {getReadingTime(post)}m of
+              reading
+            </p>
+          )}
+          <p className="text-gray-200 text-sm md:text-md">
+            Posted on{" "}
+            {post.date.toLocaleDateString("en-US", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })}
+          </p>
+        </div>
+        <div className="flex justify-end">
+          <div
+            className={cn(
+              "bg-white text-black px-4 py-2 rounded-md flex items-center gap-2"
+            )}
+          >
+            Read More
+            <ArrowRightIcon className="w-4 h-4" />
+          </div>
+        </div>
+      </div>
+    </motion.button>
+  );
+}
+
+export default function BlogIndex() {
+  return (
     <div className="min-h-screen bg-white">
-      <Nav />
+      {/* Floating Navigation */}
+      <FloatingNav isVisible={true} />
 
       {/* Main Content */}
-      <div className="border-t border-gray-200 w-full pt-16 bg-gray-50">
-        <main className="mx-auto flex flex-col gap-12 px-4 py-8 pb-24 max-w-6xl">
+      <div className="w-full pt-48">
+        <main className="mx-auto flex flex-col gap-4 px-4 max-w-6xl">
           {/* Blog Header */}
           <motion.div
-            className="text-center"
+            className="text-left flex flex-col"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4 }}
           >
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-4">
               Orin's Blog
             </h1>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Helpful insights, tips, and resources for parents of middle school
-              students on their learning journey.
+            <p className="text-2xl text-gray-600">
+              Comprehensive guides and expert insights for parents navigating
+              middle school academics.
             </p>
           </motion.div>
 
-          {/* Blog Posts Grid */}
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {blogPosts.map((post, index) => (
-              <motion.article
-                key={post.id}
-                className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow cursor-pointer group"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                whileHover={{ scale: 1.01, transition: { duration: 0.1 } }}
-                whileTap={{ scale: 0.99, transition: { duration: 0.1 } }}
-                transition={{ duration: 0.4, delay: index * 0.1 }}
-                onClick={() => handleBlogPostClick(post, index)}
-              >
-                {/* Post Header */}
-                <div className="p-6 border-b border-gray-100">
-                  <div className="flex items-center gap-4 text-sm text-gray-500 mb-3">
-                    <time className="flex items-center gap-1">
-                      <svg
-                        width="14"
-                        height="14"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                      >
-                        <circle cx="12" cy="12" r="10" />
-                        <polyline points="12,6 12,12 16,14" />
-                      </svg>
-                      {new Date(post.date).toLocaleDateString("en-US", {
-                        year: "numeric",
-                        month: "long",
-                        day: "numeric",
-                      })}
-                    </time>
-                    <span className="text-gray-300">•</span>
-                    <span>{post.readingTime}</span>
-                  </div>
-
-                  <h2 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors line-clamp-2">
-                    {post.title}
-                  </h2>
-                </div>
-
-                {/* Post Content */}
-                <div className="p-6">
-                  <p className="text-gray-700 leading-relaxed mb-4 line-clamp-3">
-                    {post.excerpt}
-                  </p>
-
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-sm">
-                        {post.author.charAt(0)}
-                      </div>
-                      <span className="text-sm text-gray-600">
-                        {post.author}
-                      </span>
-                    </div>
-
-                    <span className="text-blue-600 hover:text-blue-800 transition-colors font-medium flex items-center gap-1">
-                      Read more
-                      <svg
-                        width="14"
-                        height="14"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                      >
-                        <path d="M5 12h14M12 5l7 7-7 7" />
-                      </svg>
-                    </span>
-                  </div>
-                </div>
-              </motion.article>
-            ))}
+          <div className="grid grid-cols-6 md:grid-cols-12 gap-4">
+            <BlogCard post={POSTS[0]} className="col-span-6" />
+            <div className="col-span-6 flex flex-col gap-4">
+              <BlogCard post={POSTS[1]} />
+              <BlogCard post={POSTS[2]} />
+            </div>
           </div>
 
-          <Odyssey />
+          <Odyssey bg="#00000080" />
         </main>
 
-        <Footer className="bg-white" />
+        <Footer className="bg-white mt-24" />
       </div>
     </div>
   );

@@ -1,18 +1,17 @@
-import { HTMLProps } from 'react';
+import React from 'react';
 
 import { ArrowRightIcon } from 'lucide-react';
 import posthog from 'posthog-js';
 import { useNavigate } from 'react-router-dom';
 
 import { Button } from '@/Button';
-import { cn } from '@/utils';
-
-import { BackgroundGradient } from './BackgroundGradient';
+import { BackgroundGradient } from '@components/BackgroundGradient';
+import { cn } from '@utils';
 
 type AdProps = {
   title: string;
   description: string;
-} & HTMLProps<HTMLDivElement>;
+} & React.HTMLProps<HTMLDivElement>;
 
 export const Ad = ({ title, description, className, ...props }: AdProps) => {
   const navigate = useNavigate();
@@ -39,7 +38,7 @@ export const Ad = ({ title, description, className, ...props }: AdProps) => {
   return (
     <div
       className={cn(
-        "bg-white rounded-lg shadow-md py-8 md:py-4 px-4 relative overflow-hidden",
+        "bg-white rounded-lg shadow-md py-8 lg:py-16 px-4 relative overflow-hidden",
         className
       )}
       {...props}

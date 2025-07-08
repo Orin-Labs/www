@@ -1,13 +1,14 @@
-import {
-  useEffect,
-  useRef,
-} from 'react';
+import React, { useEffect, useRef } from "react";
 
-import { cn } from '../utils';
-import { BackgroundGradient } from './BackgroundGradient';
+import { motion } from "framer-motion";
+import { useHover } from "usehooks-ts";
 
-export function Odyssey() {
+import { BackgroundGradient } from "@components/BackgroundGradient";
+import { cn } from "@utils";
+
+export function Odyssey({ bg = "transparent" }: { bg?: string }) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const isHovered = useHover(containerRef);
 
   useEffect(() => {
     // Defer loading of Beehiiv scripts until component is in view
@@ -42,13 +43,23 @@ export function Odyssey() {
   }, []);
 
   return (
-    <div
+    <motion.div
       ref={containerRef}
       className={cn(
-        "bg-white w-full max-w-full border border-gray-200 pt-8 md:pt-0 rounded-lg overflow-hidden justify-center",
-        "relative shadow-lg hover:scale-105 transition-all duration-300 hidden md:flex"
+        "w-full max-w-full border border-gray-200 pt-8 md:pt-0 rounded-lg overflow-hidden justify-center",
+        "relative shadow-lg hidden md:flex"
       )}
+      whileHover={{
+        scale: 1.005,
+        transition: {
+          duration: 0.1,
+        },
+      }}
     >
+      <div
+        className="absolute inset-0 z-10"
+        style={{ backgroundColor: bg }}
+      ></div>
       <iframe
         title="Subscribe to Orin's Blog"
         src="https://subscribe-forms.beehiiv.com/1df3b255-c4c1-4e5b-80e8-5e9105565a3e"
@@ -63,7 +74,8 @@ export function Odyssey() {
           zIndex: 10,
         }}
       />
-      <BackgroundGradient speed={0.01} />
-    </div>
+
+      <BackgroundGradient speed={isHovered ? 0.25 : 0.01} />
+    </motion.div>
   );
 }

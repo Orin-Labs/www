@@ -2,7 +2,7 @@ import React from 'react';
 
 import { motion } from 'framer-motion';
 
-import { cn } from '../../utils';
+import { cn } from '@utils';
 
 interface ChecklistItem {
   id: string;
@@ -28,14 +28,9 @@ export function BlogChecklist({
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
-      className={cn(
-        "bg-white p-6 rounded-lg border-2 border-gray-200 mb-6",
-        "shadow-[2px_2px_8px_#00000044,_-2px_-2px_8px_#ffffff99]",
-        "dark:shadow-[4px_4px_4px_#00000044,_-4px_-4px_4px_#ffffff22]",
-        className
-      )}
+      className={cn("p-6 rounded-lg border border-gray-200", className)}
     >
-      <h3 className="text-xl font-bold mb-4">{title}</h3>
+      <h3 className="text-xl lg:text-2xl font-bold mb-4">{title}</h3>
       {description && (
         <p className="mb-4 italic text-gray-600">{description}</p>
       )}
@@ -48,8 +43,8 @@ export function BlogChecklist({
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.4, delay: index * 0.1 }}
             className={cn(
-              "flex items-center space-x-3 p-2 hover:bg-pink-50 rounded cursor-pointer transition-colors",
-              "group"
+              "flex items-center space-x-3 p-2 rounded-lg cursor-pointer transition-colors",
+              "group hover:bg-pink-100"
             )}
           >
             <input

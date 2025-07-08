@@ -1,13 +1,10 @@
-import { HTMLProps } from 'react';
+import { HTMLProps } from "react";
 
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
 
-import { cn } from '../utils';
-import { BackgroundGradient } from './BackgroundGradient';
-import {
-  Message,
-  Phone,
-} from './Phone';
+import { cn } from "../utils";
+import { BackgroundGradient } from "./BackgroundGradient";
+import { Message, Phone } from "./Phone";
 
 interface SeamlessCoordinationProps extends HTMLProps<HTMLElement> {
   speed: number;
@@ -66,7 +63,7 @@ export function SeamlessCoordination({
   return (
     <section
       className={cn(
-        "w-full bg-white dark:bg-gray-900 border-t border-gray-100 dark:border-gray-800 md:h-screen min-h-[500px] py-8 md:p-16",
+        "w-full bg-gray-50 dark:bg-gray-900 border-t border-gray-100 dark:border-gray-800 md:h-screen min-h-[500px] py-8 md:p-16",
         className
       )}
       {...props}

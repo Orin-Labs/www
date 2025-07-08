@@ -1,10 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { motion } from 'framer-motion';
+import {
+  BookOpen,
+  Calculator,
+  Clock,
+  HelpCircle,
+  UserPlus,
+  Users,
+} from 'lucide-react';
 import posthog from 'posthog-js';
 
-import { Ad } from '@/components/Ad';
+import type { WeeklyPlannerItem } from '@blog/components';
 import {
+  Ad,
   BlogCallout,
   BlogCardGrid,
   BlogChecklist,
@@ -16,8 +25,7 @@ import {
   Odyssey,
   SortableTable,
   WeeklyPlanner,
-  WeeklyPlannerItem,
-} from '@components';
+} from '@blog/components';
 
 const gamesData = [
   [
@@ -105,6 +113,8 @@ const partnershipTechniques = [
   {
     title: '🗣️ The "Think Aloud" Method',
     subtitle: "Verbalize the process",
+    imageUrl:
+      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=1470&auto=format&fit=crop",
     description:
       "Have your student verbalize their thinking process step by step.",
     metadata: { "Key Benefit": "Reveals thinking patterns" },
@@ -112,12 +122,16 @@ const partnershipTechniques = [
   {
     title: "❓ Strategic Questioning",
     subtitle: "Guide with questions",
+    imageUrl:
+      "https://images.unsplash.com/photo-1606027216412-019e7a6200e1?q=80&w=1470&auto=format&fit=crop",
     description: "Guide with questions instead of giving answers directly.",
     metadata: { "Key Benefit": "Builds problem-solving skills" },
   },
   {
     title: '🎓 The "Teaching Back" Technique',
     subtitle: "Student teaches you",
+    imageUrl:
+      "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1470&auto=format&fit=crop",
     description:
       "Once your student solves a problem, have them teach it to you.",
     metadata: { "Key Benefit": "Reinforces understanding" },
@@ -157,6 +171,8 @@ const youtubeChannels = [
   {
     title: "Khan Academy",
     subtitle: "7.8M subscribers",
+    imageUrl:
+      "https://www.civicsrenewalnetwork.org/wp-content/uploads/2020/08/kahn-5a5a5a.png",
     description:
       "Clear, methodical explanations with visual aids. Perfect for step-by-step learning.",
     metadata: { "Avg Video": "8-12 minutes" },
@@ -168,6 +184,8 @@ const youtubeChannels = [
   {
     title: "Professor Leonard",
     subtitle: "1.2M subscribers",
+    imageUrl:
+      "https://yt3.googleusercontent.com/ytc/AIdro_nyh5Rcni3aAuRdzgNu94gXscRTualKeWoj-j7g--M3Iw=s900-c-k-c0x00ffffff-no-rj",
     description: "Engaging classroom-style lessons with personality and humor.",
     metadata: { "Avg Video": "25-40 minutes" },
     action: {
@@ -177,19 +195,10 @@ const youtubeChannels = [
     },
   },
   {
-    title: "Math Antics",
-    subtitle: "3.1M subscribers",
-    description:
-      "Animated explanations perfect for visual learners and younger students. Bite-sized lessons great for quick concept reviews and homework help.",
-    metadata: { "Avg Video": "8-15 minutes" },
-    action: {
-      text: "Check it out",
-      onClick: () => window.open("https://youtube.com/@mathantics", "_blank"),
-    },
-  },
-  {
     title: "Organic Chemistry Tutor",
     subtitle: "5.9M subscribers",
+    imageUrl:
+      "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?q=80&w=1470&auto=format&fit=crop",
     description:
       "Comprehensive problem-solving with multiple examples per concept.",
     metadata: { "Avg Video": "15-30 minutes" },
@@ -202,6 +211,8 @@ const youtubeChannels = [
   {
     title: "Mashup Math",
     subtitle: "890K subscribers",
+    imageUrl:
+      "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?q=80&w=1470&auto=format&fit=crop",
     description:
       "Creative, colorful presentations that make math feel accessible and fun.",
     metadata: { "Avg Video": "5-8 minutes" },
@@ -255,31 +266,37 @@ const faqItems = [
       "My student was great at elementary math but struggles now. What happened?",
     answer:
       "This is completely normal! Middle school math represents a significant cognitive shift from arithmetic to algebraic thinking. Elementary math focuses on concrete operations, while middle school introduces abstract concepts like variables, negative numbers, and complex fractions. The key is patience and addressing any foundational gaps early.",
+    icon: BookOpen,
   },
   {
     question: "How much time should my student spend on math homework daily?",
     answer:
       "Most middle schoolers should spend 20-45 minutes on math homework, depending on the assignment and their skill level. If homework consistently takes more than an hour, contact the teacher—there may be underlying comprehension issues that need addressing.",
+    icon: Clock,
   },
   {
     question: "Should I help with homework or let them struggle?",
     answer:
       "Strike a balance. Guide them through the thinking process rather than providing answers. Ask questions like 'What do you think the first step should be?' or 'What information do we have?' This builds problem-solving skills while providing support.",
+    icon: HelpCircle,
   },
   {
     question: "When should I consider getting a tutor?",
     answer:
       "Consider tutoring if your student consistently struggles for more than 2-3 weeks with new concepts, shows signs of math anxiety, or if grades drop significantly. Early intervention prevents small gaps from becoming large ones. Tutoring with Orin is a low cost, unlimited tutoring option.",
+    icon: UserPlus,
   },
   {
     question: "Are calculator and online tools cheating?",
     answer:
       "Not when used appropriately! Calculators and apps like Desmos are legitimate tools that professionals use daily. The key is ensuring your student understands the underlying concepts and doesn't become dependent on tools for basic operations.",
+    icon: Calculator,
   },
   {
     question: "How can I support my student if I'm not good at math myself?",
     answer:
       "Your support doesn't require mathematical expertise! Focus on organization, encouragement, and creating a positive learning environment. Use the resources in this guide, and remember that your belief in your student's ability to learn is more important than your ability to solve the problems yourself.",
+    icon: Users,
   },
 ];
 
@@ -300,7 +317,7 @@ const sortButtons = [
 
 export default function MathSurvivalGuide() {
   // Track page load and engagement
-  React.useEffect(() => {
+  useEffect(() => {
     const startTime = Date.now();
 
     posthog.capture("math_survival_guide_started", {
@@ -348,15 +365,6 @@ export default function MathSurvivalGuide() {
 
   return (
     <BlogLayout>
-      <motion.h1
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="text-4xl md:text-5xl font-bold text-center z-10 relative"
-      >
-        🧮 Middle School Math Survival Guide for Parents
-      </motion.h1>
-
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

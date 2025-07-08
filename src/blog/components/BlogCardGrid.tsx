@@ -1,15 +1,16 @@
-import React, { useRef } from 'react';
+import React, { useRef } from "react";
 
-import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
-import posthog from 'posthog-js';
-import { useHover } from 'usehooks-ts';
+import { motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
+import posthog from "posthog-js";
+import { useHover } from "usehooks-ts";
 
-import { cn } from '../../utils';
+import { cn } from "@utils";
 
-interface BlogCardProps {
+export interface GridCardProps {
   title: string;
   subtitle?: string;
+  imageUrl: string;
   description: string;
   action?: {
     text: string;
@@ -18,7 +19,7 @@ interface BlogCardProps {
   metadata?: Record<string, string>;
 }
 
-function BlogCard({ card, index }: { card: BlogCardProps; index: number }) {
+function GridCard({ card, index }: { card: GridCardProps; index: number }) {
   const ref = useRef<HTMLButtonElement>(null);
   const isHovered = useHover(ref);
 
@@ -47,41 +48,41 @@ function BlogCard({ card, index }: { card: BlogCardProps; index: number }) {
       whileInView={{ opacity: 1, y: 0 }}
       whileTap={{ scale: 0.98, transition: { duration: 0.1 } }}
       transition={{ duration: 0.4, delay: 0.1 }}
+      style={{
+        backgroundImage: `url(${card.imageUrl})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
       className={cn(
-        "bg-white border border-gray-200 backdrop-blur-sm rounded-lg",
+        "rounded-lg",
         "shadow-[2px_2px_8px_#00000022,_-2px_-2px_8px_#ffffff99]",
         "hover:shadow-[4px_4px_12px_#00000033,_-4px_-4px_12px_#ffffffaa]",
         "dark:shadow-[4px_4px_4px_#00000044,_-4px_-4px_4px_#ffffff22]",
         "dark:hover:shadow-[6px_6px_8px_#00000055,_-6px_-6px_8px_#ffffff33]",
-        "hover:-translate-y-1"
+        "hover:-translate-y-1 relative overflow-hidden text-white"
       )}
     >
-      <div className="flex flex-col h-full text-left">
-        <div className="flex-1 p-6">
-          <h4 className="font-bold text-lg text-gray-900 mb-2">{card.title}</h4>
-          {card.subtitle && (
-            <p className="text-sm text-gray-600 mb-2">{card.subtitle}</p>
-          )}
+      <div className="flex flex-col h-full text-left text-gray-100 bg-[#000000bb] p-6">
+        <div className="flex-1">
+          <h3 className="text-2xl mb-2 text-white">{card.title}</h3>
+          {card.subtitle && <p className="text-sm mb-2">{card.subtitle}</p>}
           {card.metadata && (
             <div className="mb-3 space-y-1">
               {Object.entries(card.metadata).map(([key, value]) => (
-                <p key={key} className="text-sm text-gray-500">
+                <p key={key} className="text-sm">
                   <strong>{key}:</strong> {value}
                 </p>
               ))}
             </div>
           )}
-          <p className="text-sm text-gray-700 leading-relaxed">
-            {card.description}
-          </p>
+          <p className="text-sm leading-relaxed">{card.description}</p>
         </div>
 
         {card.action && (
           <div
             className={cn(
-              "w-full shadow-none flex justify-between items-center text-white",
-              "border-gray-200 border-t p-3 transition-colors rounded-b-lg",
-              isHovered ? "bg-gray-900" : "bg-gray-800"
+              "ml-auto mt-4 text-white flex justify-between items-center text-sm",
+              "px-3 py-2 w-fit transition-colors rounded-lg gap-2"
             )}
           >
             {card.action.text}
@@ -100,7 +101,7 @@ function BlogCard({ card, index }: { card: BlogCardProps; index: number }) {
 
 interface BlogCardGridProps {
   title?: string;
-  cards: BlogCardProps[];
+  cards: GridCardProps[];
   columns?: 1 | 2 | 3 | 4;
   className?: string;
 }
@@ -131,7 +132,7 @@ export function BlogCardGrid({
 
       <div className={cn("grid gap-6", gridCols[columns])}>
         {cards.map((card, index) => (
-          <BlogCard key={index} card={card} index={index} />
+          <GridCard key={index} card={card} index={index} />
         ))}
       </div>
     </motion.div>
