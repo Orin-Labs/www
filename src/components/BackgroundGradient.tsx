@@ -25,7 +25,7 @@ const animationConfig = {
     opacity: 1,
     filter: "blur(0px) saturate(1) brightness(0.85)",
   },
-  transition: { duration: 0.5 },
+  transition: { duration: 0.5, delay: 0.1 },
 };
 
 const darkAnimationConfig = {

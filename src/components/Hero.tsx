@@ -84,12 +84,9 @@ export function Hero({
 
       <audio ref={audioRef} src="/intro.wav" />
       <div className="w-full grow md:rounded-lg overflow-hidden relative flex flex-col justify-center items-center gap-4 px-2 md:px-4">
-        <motion.h1
-          {...delayed(0)}
-          className="text-6xl md:text-7xl font-bold z-10 text-center"
-        >
+        <h1 className="text-6xl md:text-7xl font-bold z-10 text-center">
           {headline === "ROTATING_HEADLINE" ? <RotatingText /> : headline}
-        </motion.h1>
+        </h1>
         <motion.h3
           {...delayed(0.1)}
           className="text-3xl md:text-4xl mb-12 z-10 text-center"
