@@ -1,4 +1,9 @@
-import React, { HTMLProps } from 'react';
+import React, {
+  HTMLProps,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 
 import { motion } from 'framer-motion';
 import { Triangle } from 'lucide-react';
@@ -108,6 +113,72 @@ const allCards: Card[] = [
   testimonials[3], // Jasmine testimonial
 ];
 
+// Lazy loading image component
+const LazyImage = ({
+  src,
+  alt,
+  className,
+}: {
+  src: string;
+  alt: string;
+  className?: string;
+}) => {
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [isInView, setIsInView] = useState(false);
+  const imgRef = useRef<HTMLImageElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsInView(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "200px" } // Much larger margin to delay loading further
+    );
+
+    if (imgRef.current) {
+      observer.observe(imgRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  // Only load GIFs when user explicitly scrolls near them
+  const handleLoadGif = () => {
+    setIsInView(true);
+  };
+
+  return (
+    <div ref={imgRef} className={cn("w-full h-full", className)}>
+      {!isInView && (
+        <div
+          className="w-full h-full bg-gradient-to-br from-blue-100 to-purple-100 rounded-lg absolute top-0 left-0 flex items-center justify-center cursor-pointer"
+          onClick={handleLoadGif}
+        >
+          <div className="text-center text-gray-600">
+            <div className="text-4xl mb-2">🎬</div>
+            <div className="text-sm">Click to load animation</div>
+          </div>
+        </div>
+      )}
+      {isInView && (
+        <img
+          src={src}
+          alt={alt}
+          className="w-full h-full object-cover aspect-video absolute top-0 left-0 rounded-lg"
+          onLoad={() => setIsLoaded(true)}
+          style={{ opacity: isLoaded ? 1 : 0, transition: "opacity 0.5s" }}
+        />
+      )}
+      {isInView && !isLoaded && (
+        <div className="w-full h-full bg-gray-200 animate-pulse rounded-lg absolute top-0 left-0" />
+      )}
+    </div>
+  );
+};
+
 export const SocialProof = ({
   className,
   ...props
@@ -169,10 +240,9 @@ export const SocialProof = ({
                 "type" in card &&
                 card.type === "image" ? (
                 // Handle ImageCard
-                <img
+                <LazyImage
                   src={(card as ImageCard).src}
                   alt={(card as ImageCard).alt}
-                  className="w-full h-full object-cover aspect-video absolute top-0 left-0 rounded-lg"
                 />
               ) : (
                 <>

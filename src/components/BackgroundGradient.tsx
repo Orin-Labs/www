@@ -19,13 +19,13 @@ const gradientStyle = {
 const animationConfig = {
   initial: {
     opacity: 0,
-    filter: "blur(10px) saturate(0) brightness(0.5)",
+    filter: "blur(5px) saturate(0.5) brightness(0.7)",
   },
   animate: {
     opacity: 1,
     filter: "blur(0px) saturate(1) brightness(0.85)",
   },
-  transition: { duration: 0.5, delay: 0.1 },
+  transition: { duration: 0.8, delay: 0.2 },
 };
 
 const darkAnimationConfig = {
