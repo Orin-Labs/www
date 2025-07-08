@@ -3,7 +3,10 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
-import React from 'react';
+import React, {
+  useEffect,
+  useState,
+} from 'react';
 
 import { motion } from 'framer-motion';
 import {
@@ -32,6 +35,7 @@ import {
 } from '@/blog/blog-data';
 
 import { cn } from '../../utils';
+import FloatingNav from '../FloatingNav';
 import { Footer } from '../Footer';
 import Nav from '../Nav';
 
@@ -313,9 +317,32 @@ function BlogCarousel({
 
 export function BlogLayout({ children, className }: BlogLayoutProps) {
   const navigate = useNavigate();
-  const slug = window.location.pathname.split("/").pop();
-  const entry = BLOG_POSTS.find((post) => post.slug === slug);
-  console.log("entry", entry);
+  const [scrollY, setScrollY] = useState(0);
+
+  // Get current blog post from URL
+  const currentPath = window.location.pathname;
+  const currentSlug = currentPath.split("/").pop();
+  const entry = BLOG_POSTS.find((post) => post.slug === currentSlug);
+
+  const shareUrl = `${window.location.origin}${currentPath}`;
+  const shareTitle = entry?.title || "Check out this blog post";
+  const shareDescription =
+    entry?.excerpt || "Helpful insights for parents of middle school students";
+
+  useEffect(() => {
+    let ticking = false;
+    const handleScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          setScrollY(window.scrollY);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   // Track blog post view
   React.useEffect(() => {
@@ -333,16 +360,13 @@ export function BlogLayout({ children, className }: BlogLayoutProps) {
     }
   }, [entry]);
 
-  const shareUrl = window.location.href;
-  const shareTitle = entry?.title || "Orin Blog Post";
-  const shareDescription =
-    entry?.excerpt ||
-    "Helpful insights and resources for middle school students and parents.";
-
   return (
     <div
       className={cn("min-h-screen relative flex flex-col h-screen", className)}
     >
+      {/* Floating Navigation */}
+      <FloatingNav isVisible={scrollY > 150} />
+
       <Nav className="bg-white" />
 
       <div className="flex-grow overflow-y-auto w-full border-t border-gray-200">

@@ -1,8 +1,12 @@
-import React from 'react';
+import React, {
+  useEffect,
+  useState,
+} from 'react';
 
 import { motion } from 'framer-motion';
 
 import { cn } from '../../utils';
+import FloatingNav from '../FloatingNav';
 import Nav from '../Nav';
 
 interface BlogHeroProps {
@@ -20,8 +24,28 @@ export function BlogHero({
   className = "",
   speed = 0.2,
 }: BlogHeroProps) {
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    let ticking = false;
+    const handleScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          setScrollY(window.scrollY);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <div className="relative min-h-[60vh] flex flex-col overflow-hidden">
+      {/* Floating Navigation */}
+      <FloatingNav isVisible={scrollY > 150} />
+
       <Nav />
 
       <div

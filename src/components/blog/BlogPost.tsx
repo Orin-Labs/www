@@ -1,7 +1,12 @@
-import { ReactNode } from 'react';
+import {
+  ReactNode,
+  useEffect,
+  useState,
+} from 'react';
 
 import { motion } from 'framer-motion';
 
+import FloatingNav from '../FloatingNav';
 import Nav from '../Nav';
 
 interface BlogPostProps {
@@ -21,8 +26,28 @@ export function BlogPost({
   children,
   className = "",
 }: BlogPostProps) {
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    let ticking = false;
+    const handleScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          setScrollY(window.scrollY);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <div className="min-h-screen bg-gray-50">
+      {/* Floating Navigation */}
+      <FloatingNav isVisible={scrollY > 150} />
+
       <Nav />
 
       <main className="max-w-4xl mx-auto px-4 py-8">

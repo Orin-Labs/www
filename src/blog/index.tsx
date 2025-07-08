@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import posthog from 'posthog-js';
 import { useNavigate } from 'react-router-dom';
 
+import FloatingNav from '../components/FloatingNav';
 import { Footer } from '../components/Footer';
 import Nav from '../components/Nav';
 import { Odyssey } from '../components/Odyssey';
@@ -12,6 +13,7 @@ import { getAllBlogPosts } from './blog-data';
 export default function BlogIndex() {
   const navigate = useNavigate();
   const blogPosts = getAllBlogPosts();
+  const [scrollY, setScrollY] = React.useState(0);
 
   // Track blog index view
   React.useEffect(() => {
@@ -27,6 +29,21 @@ export default function BlogIndex() {
       })),
     });
   }, [blogPosts]);
+
+  React.useEffect(() => {
+    let ticking = false;
+    const handleScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          setScrollY(window.scrollY);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const handleBlogPostClick = (post: any, index: number) => {
     // Track blog post click
@@ -48,6 +65,9 @@ export default function BlogIndex() {
 
   return (
     <div className="min-h-screen bg-white">
+      {/* Floating Navigation */}
+      <FloatingNav isVisible={scrollY > 150} />
+
       <Nav />
 
       {/* Main Content */}

@@ -19,6 +19,7 @@ import {
 import { Button } from '../Button';
 import { cn } from '../utils';
 import { BackgroundGradient } from './BackgroundGradient';
+import FloatingNav from './FloatingNav';
 import Nav from './Nav';
 import { RotatingText } from './RotatingText';
 
@@ -53,6 +54,7 @@ export function Hero({
 }: HeroProps) {
   const audioRef = useRef<HTMLAudioElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
     const audio = audioRef.current;
@@ -73,6 +75,21 @@ export function Hero({
     };
   }, []);
 
+  useEffect(() => {
+    let ticking = false;
+    const handleScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          setScrollY(window.scrollY);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <section
       className={cn(
@@ -81,6 +98,9 @@ export function Hero({
       )}
       {...props}
     >
+      {/* Floating Navigation */}
+      <FloatingNav isVisible={scrollY > 150} />
+
       <Nav />
 
       <audio ref={audioRef} src="/intro.wav" />
