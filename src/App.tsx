@@ -8,6 +8,7 @@ import { motion } from 'framer-motion';
 import { ChevronDownIcon } from 'lucide-react';
 
 import { CTASection } from './components/CTASection';
+import FloatingNav from './components/FloatingNav';
 import { Hero } from './components/Hero';
 import { HowItWorks } from './components/HowItWorks';
 import { Pricing } from './components/Pricing';
@@ -80,6 +81,9 @@ function App() {
 
   return (
     <>
+      {/* Floating Navigation */}
+      <FloatingNav isVisible={scrollY > 150} />
+
       {/* Hero Section */}
       <Hero headline={headline} subheadline={subheadline} speed={speed} />
 

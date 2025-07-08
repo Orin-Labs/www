@@ -7,6 +7,7 @@ export { DiffExample } from './DiffExample';
 export { CodeDiff, DiffTable, FeatureDiff } from './DiffTable';
 export { CurriculumRoadmap } from './CurriculumRoadmap';
 export { DecisionTree } from './DecisionTree';
+export { default as FloatingNav } from './FloatingNav';
 export { Footer } from './Footer';
 export { GPAScale } from './GPAScale';
 export { Hero } from './Hero';
