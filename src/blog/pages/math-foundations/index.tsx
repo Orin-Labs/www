@@ -105,6 +105,8 @@ const partnershipTechniques = [
   {
     title: '🗣️ The "Think Aloud" Method',
     subtitle: "Verbalize the process",
+    imageUrl:
+      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=1470&auto=format&fit=crop",
     description:
       "Have your student verbalize their thinking process step by step.",
     metadata: { "Key Benefit": "Reveals thinking patterns" },
@@ -112,12 +114,16 @@ const partnershipTechniques = [
   {
     title: "❓ Strategic Questioning",
     subtitle: "Guide with questions",
+    imageUrl:
+      "https://images.unsplash.com/photo-1606027216412-019e7a6200e1?q=80&w=1470&auto=format&fit=crop",
     description: "Guide with questions instead of giving answers directly.",
     metadata: { "Key Benefit": "Builds problem-solving skills" },
   },
   {
     title: '🎓 The "Teaching Back" Technique',
     subtitle: "Student teaches you",
+    imageUrl:
+      "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1470&auto=format&fit=crop",
     description:
       "Once your student solves a problem, have them teach it to you.",
     metadata: { "Key Benefit": "Reinforces understanding" },
@@ -157,6 +163,8 @@ const youtubeChannels = [
   {
     title: "Khan Academy",
     subtitle: "7.8M subscribers",
+    imageUrl:
+      "https://www.civicsrenewalnetwork.org/wp-content/uploads/2020/08/kahn-5a5a5a.png",
     description:
       "Clear, methodical explanations with visual aids. Perfect for step-by-step learning.",
     metadata: { "Avg Video": "8-12 minutes" },
@@ -168,6 +176,8 @@ const youtubeChannels = [
   {
     title: "Professor Leonard",
     subtitle: "1.2M subscribers",
+    imageUrl:
+      "https://yt3.googleusercontent.com/ytc/AIdro_nyh5Rcni3aAuRdzgNu94gXscRTualKeWoj-j7g--M3Iw=s900-c-k-c0x00ffffff-no-rj",
     description: "Engaging classroom-style lessons with personality and humor.",
     metadata: { "Avg Video": "25-40 minutes" },
     action: {
@@ -177,19 +187,10 @@ const youtubeChannels = [
     },
   },
   {
-    title: "Math Antics",
-    subtitle: "3.1M subscribers",
-    description:
-      "Animated explanations perfect for visual learners and younger students. Bite-sized lessons great for quick concept reviews and homework help.",
-    metadata: { "Avg Video": "8-15 minutes" },
-    action: {
-      text: "Check it out",
-      onClick: () => window.open("https://youtube.com/@mathantics", "_blank"),
-    },
-  },
-  {
     title: "Organic Chemistry Tutor",
     subtitle: "5.9M subscribers",
+    imageUrl:
+      "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?q=80&w=1470&auto=format&fit=crop",
     description:
       "Comprehensive problem-solving with multiple examples per concept.",
     metadata: { "Avg Video": "15-30 minutes" },
@@ -202,6 +203,8 @@ const youtubeChannels = [
   {
     title: "Mashup Math",
     subtitle: "890K subscribers",
+    imageUrl:
+      "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?q=80&w=1470&auto=format&fit=crop",
     description:
       "Creative, colorful presentations that make math feel accessible and fun.",
     metadata: { "Avg Video": "5-8 minutes" },

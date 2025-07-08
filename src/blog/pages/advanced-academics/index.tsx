@@ -259,6 +259,8 @@ export default function STEMElectivesGuide() {
     {
       title: "📂 Hosted Projects",
       subtitle: "Showcase your work",
+      imageUrl:
+        "https://images.unsplash.com/photo-1553877522-43269d4ea984?q=80&w=1470&auto=format&fit=crop",
       description:
         "Problem statements, solution approaches, tools used, and lessons learned from each project.",
       metadata: { "Key Benefit": "Demonstrates problem-solving skills" },
@@ -270,6 +272,8 @@ export default function STEMElectivesGuide() {
     {
       title: "💻 Code Samples",
       subtitle: "Programming portfolio",
+      imageUrl:
+        "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?q=80&w=1470&auto=format&fit=crop",
       description:
         "Commented code, version control, testing documentation, and collaboration evidence.",
       metadata: { "Key Benefit": "Shows technical competency" },
@@ -285,6 +289,8 @@ export default function STEMElectivesGuide() {
     {
       title: "🏆 Competition Results",
       subtitle: "Achievement showcase",
+      imageUrl:
+        "https://images.unsplash.com/photo-1523050854058-8df90110c9d1?q=80&w=1470&auto=format&fit=crop",
       description:
         "Robotics competitions, science fairs, math contests, and programming challenges.",
       metadata: { "Key Benefit": "Validates skills objectively" },
