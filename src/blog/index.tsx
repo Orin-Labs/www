@@ -15,7 +15,7 @@ interface BlogCardProps extends HTMLMotionProps<"button"> {
   post: BlogPost;
 }
 
-function BlogCard({ post, className, ...props }: BlogCardProps) {
+export function BlogCard({ post, className, ...props }: BlogCardProps) {
   const navigate = useNavigate();
 
   const handleClick = useCallback(() => {

@@ -67,7 +67,7 @@ export const POSTS: BlogPost[] = [
   },
   {
     id: "math-foundations-pillar",
-    title: "Middle-School Math Survival Guide",
+    title: "Middle-School Math Playbook",
     excerpt:
       "Everything parents need to support their middle schooler through the challenging transition to advanced mathematics.",
     date: new Date("2025-07-07"),
@@ -104,7 +104,7 @@ export const POSTS: BlogPost[] = [
   },
   {
     id: "advanced-academics-pillar",
-    title: "STEM Electives & High-School Credit Options in Middle School",
+    title: "High School Credit Options in Middle School",
     excerpt:
       "Navigate the complex decisions around academic acceleration and advanced coursework for middle school students.",
     date: new Date("2025-05-29"),

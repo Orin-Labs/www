@@ -38,7 +38,7 @@ export const Ad = ({ title, description, className, ...props }: AdProps) => {
   return (
     <div
       className={cn(
-        "bg-white rounded-lg shadow-md py-8 md:py-4 px-4 relative overflow-hidden",
+        "bg-white rounded-lg shadow-md py-8 lg:py-16 px-4 relative overflow-hidden",
         className
       )}
       {...props}

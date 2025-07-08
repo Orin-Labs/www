@@ -1,9 +1,17 @@
-import React, { useEffect } from "react";
+import React, { useEffect } from 'react';
 
-import { motion } from "framer-motion";
-import posthog from "posthog-js";
+import { motion } from 'framer-motion';
+import {
+  BookOpen,
+  Calculator,
+  Clock,
+  HelpCircle,
+  UserPlus,
+  Users,
+} from 'lucide-react';
+import posthog from 'posthog-js';
 
-import type { WeeklyPlannerItem } from "@blog/components";
+import type { WeeklyPlannerItem } from '@blog/components';
 import {
   Ad,
   BlogCallout,
@@ -17,7 +25,7 @@ import {
   Odyssey,
   SortableTable,
   WeeklyPlanner,
-} from "@blog/components";
+} from '@blog/components';
 
 const gamesData = [
   [
@@ -258,31 +266,37 @@ const faqItems = [
       "My student was great at elementary math but struggles now. What happened?",
     answer:
       "This is completely normal! Middle school math represents a significant cognitive shift from arithmetic to algebraic thinking. Elementary math focuses on concrete operations, while middle school introduces abstract concepts like variables, negative numbers, and complex fractions. The key is patience and addressing any foundational gaps early.",
+    icon: BookOpen,
   },
   {
     question: "How much time should my student spend on math homework daily?",
     answer:
       "Most middle schoolers should spend 20-45 minutes on math homework, depending on the assignment and their skill level. If homework consistently takes more than an hour, contact the teacher—there may be underlying comprehension issues that need addressing.",
+    icon: Clock,
   },
   {
     question: "Should I help with homework or let them struggle?",
     answer:
       "Strike a balance. Guide them through the thinking process rather than providing answers. Ask questions like 'What do you think the first step should be?' or 'What information do we have?' This builds problem-solving skills while providing support.",
+    icon: HelpCircle,
   },
   {
     question: "When should I consider getting a tutor?",
     answer:
       "Consider tutoring if your student consistently struggles for more than 2-3 weeks with new concepts, shows signs of math anxiety, or if grades drop significantly. Early intervention prevents small gaps from becoming large ones. Tutoring with Orin is a low cost, unlimited tutoring option.",
+    icon: UserPlus,
   },
   {
     question: "Are calculator and online tools cheating?",
     answer:
       "Not when used appropriately! Calculators and apps like Desmos are legitimate tools that professionals use daily. The key is ensuring your student understands the underlying concepts and doesn't become dependent on tools for basic operations.",
+    icon: Calculator,
   },
   {
     question: "How can I support my student if I'm not good at math myself?",
     answer:
       "Your support doesn't require mathematical expertise! Focus on organization, encouragement, and creating a positive learning environment. Use the resources in this guide, and remember that your belief in your student's ability to learn is more important than your ability to solve the problems yourself.",
+    icon: Users,
   },
 ];
 

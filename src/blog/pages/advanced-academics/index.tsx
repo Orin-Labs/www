@@ -1,9 +1,17 @@
-import React, { useEffect } from "react";
+import React, { useEffect } from 'react';
 
-import { motion } from "framer-motion";
-import posthog from "posthog-js";
+import { motion } from 'framer-motion';
+import {
+  AlertTriangle,
+  Calculator,
+  Globe,
+  GraduationCap,
+  Heart,
+  HelpCircle,
+} from 'lucide-react';
+import posthog from 'posthog-js';
 
-import { GridCardProps } from "@/blog/components/BlogCardGrid";
+import { GridCardProps } from '@/blog/components/BlogCardGrid';
 import {
   Alert,
   BlogCardGrid,
@@ -17,7 +25,7 @@ import {
   Odyssey,
   ProviderGrid,
   ScenarioGrid,
-} from "@blog/components";
+} from '@blog/components';
 
 // Decision Tree Configuration
 const questions = [
@@ -379,34 +387,40 @@ export default function STEMElectivesGuide() {
         "If my student takes Algebra 1 in 8th grade, what math do they take senior year?",
       answer:
         "The typical sequence becomes: Algebra 1 (8th) → Geometry (9th) → Algebra 2 (10th) → Pre-Calculus (11th) → AP Calculus (12th). This opens doors to advanced math courses and demonstrates sustained rigor to colleges.",
+      icon: Calculator,
     },
     {
       question:
         "Do colleges really care about middle school high school credits?",
       answer:
         "Yes and no. The credits themselves matter less than the pattern they establish. Colleges see sustained academic challenge and success in accelerated coursework as positive indicators of college readiness and intellectual curiosity.",
+      icon: GraduationCap,
     },
     {
       question:
         "What if my student struggles with their first high school credit?",
       answer:
         "Don't panic. Focus on support strategies: tutoring, study groups, teacher communication. If the struggle continues, consider whether the acceleration timeline needs adjustment for future courses. Early intervention is key.",
+      icon: AlertTriangle,
     },
     {
       question:
         "Are online high school credits viewed differently than in-person credits?",
       answer:
         "Quality online programs from accredited providers are generally viewed equally. However, verify that your target high schools and colleges accept credits from your chosen online provider before enrollment.",
+      icon: Globe,
     },
     {
       question: "Should we prioritize math acceleration or foreign language?",
       answer:
         "Consider your student's strengths and interests. Math acceleration has more prerequisites and builds sequentially. Foreign language requires consistent practice but offers more flexibility in timing and doesn't create as rigid a pathway.",
+      icon: HelpCircle,
     },
     {
       question: "How do we balance acceleration with social development?",
       answer:
         "Monitor your student's social connections and stress levels. If acceleration isolates them from peers or creates excessive pressure, consider enrichment within grade-level courses instead. Social-emotional development is equally important.",
+      icon: Heart,
     },
   ];
 

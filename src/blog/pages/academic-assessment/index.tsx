@@ -1,11 +1,15 @@
-import React, { useEffect } from "react";
+import React, { useEffect } from 'react';
 
-import { motion } from "framer-motion";
-import { ArrowRight, Brain, Target, TrendingUp } from "lucide-react";
-import posthog from "posthog-js";
-
-import { Button } from "@/Button";
+import { motion } from 'framer-motion';
 import {
+  Brain,
+  TrendingUp,
+} from 'lucide-react';
+import posthog from 'posthog-js';
+
+import { FAQItem } from '@/blog/components/BlogFAQ';
+import {
+  Ad,
   BlogCardGrid,
   BlogChecklist,
   BlogFAQ,
@@ -13,10 +17,8 @@ import {
   BlogSection,
   ComparisonTable,
   NumberedList,
-  Odyssey,
   ScenarioGrid,
-  SocialShareButtons,
-} from "@blog/components";
+} from '@blog/components';
 
 export default function MAPStateTestsCompleteGuide() {
   const gradeExpectations = [
@@ -200,54 +202,64 @@ export default function MAPStateTestsCompleteGuide() {
     },
   ];
 
-  const faqItems = [
+  const faqItems: FAQItem[] = [
     {
       question: "What is MAP testing and how does it work?",
       answer:
         "MAP (Measures of Academic Progress) is a computer-adaptive assessment that adjusts question difficulty based on student responses. If a student answers correctly, the next question becomes slightly more challenging; if incorrect, it becomes easier. This approach provides a more accurate picture of what students know and are ready to learn next, regardless of grade level.",
+      icon: Brain,
     },
     {
       question: "How do I interpret my child's RIT scores?",
       answer:
         "RIT scores are on a stable scale typically ranging from 140-300. For middle school, expect scores between 200-250. The key is understanding that RIT scores show absolute achievement—what your child actually knows—rather than just comparing them to others. Growth in RIT scores over time is more important than any single score.",
+      icon: Brain,
     },
     {
       question: "Why does my child sometimes score lower on MAP tests?",
       answer:
         "MAP tests are designed to be challenging—students typically get about 50% of questions correct. This isn't failure; it's the adaptive system finding their optimal difficulty level. Factors like test conditions, student motivation, curriculum changes, or natural learning curves can affect scores.",
+      icon: Brain,
     },
     {
       question: "How do MAP scores connect to state testing?",
       answer:
         "MAP scores often predict state test performance because they measure similar skills. Schools often use MAP data to: identify students who may need additional support before state testing, adjust instruction to address learning gaps, and celebrate growth and achievement throughout the year. The ongoing nature of MAP testing provides more actionable data than annual state assessments.",
+      icon: Brain,
     },
     {
       question: "Should I be concerned if my child's scores went down?",
       answer:
         "Not necessarily. Score fluctuations can happen due to various factors including test conditions, student motivation, or curriculum changes. Look at trends over multiple testing windows rather than single scores. Sometimes a temporary dip precedes significant growth as students tackle more challenging material.",
+      icon: Brain,
     },
     {
       question: "How can I support my child's MAP performance at home?",
       answer:
         "Focus on consistent academic support rather than test prep. Encourage regular reading across genres, practice math facts for fluency, support homework completion, and create a learning-focused home environment. The best preparation is quality instruction and engagement throughout the year.",
+      icon: Brain,
     },
     {
       question: "What's the difference between achievement and growth?",
       answer:
         "Achievement shows where your student is right now compared to grade-level expectations, while growth shows how much they've improved over time. A student starting below grade level but showing consistent growth is often on a stronger trajectory than one who starts high but plateaus.",
+      icon: Brain,
     },
     {
       question: "How often are MAP tests given?",
       answer:
         "Most schools administer MAP tests 2-3 times per year (fall, winter, spring). This frequency allows tracking of growth over time and helps teachers adjust instruction. The tests typically take 45-60 minutes per subject.",
+      icon: Brain,
     },
     {
       question: "Can students retake MAP tests?",
       answer:
         "MAP tests are typically administered on set school schedules, and individual retakes aren't standard practice. However, speak with your child's teacher about additional assessment options or ways to demonstrate growth between testing periods.",
+      icon: Brain,
     },
     {
       question: "Do MAP scores determine high school placement?",
+      icon: Brain,
       answer:
         "Many schools use MAP data alongside other factors for course placement and program decisions. However, scores alone don't determine academic outcomes—teachers consider multiple data points including classroom performance, work habits, and student motivation.",
     },
@@ -507,8 +519,8 @@ export default function MAPStateTestsCompleteGuide() {
 
       {/* Action Plan */}
       <BlogSection title="Your Action Plan: Moving Forward">
-        <div className="prose prose-lg max-w-none mb-8">
-          <p className="text-lg leading-relaxed mb-6">
+        <div className="prose prose-lg max-w-none">
+          <p className="text-lg leading-relaxed">
             Understanding MAP testing and state assessments empowers you to
             support your middle schooler effectively. Here's your comprehensive
             action plan:
@@ -522,12 +534,9 @@ export default function MAPStateTestsCompleteGuide() {
         />
       </BlogSection>
 
-      {/* FAQ */}
-      <BlogFAQ items={faqItems} />
-
       {/* Conclusion */}
       <BlogSection title="Conclusion: Embracing the Journey">
-        <div className="prose prose-lg max-w-none mb-8">
+        <div className="prose prose-lg max-w-none">
           <p className="text-lg leading-relaxed mb-6">
             MAP testing and state assessments are tools designed to support your
             student's educational journey. While the numbers and percentiles
@@ -553,77 +562,14 @@ export default function MAPStateTestsCompleteGuide() {
           </p>
         </div>
 
-        <div className="bg-gradient-to-r from-blue-50 to-purple-50 border border-blue-200 rounded-lg p-6 text-center">
-          <Target className="w-12 h-12 mx-auto mb-4 text-blue-600" />
-          <p className="text-lg font-semibold text-blue-900 mb-4">
-            Ready to support your student's MAP success?
-          </p>
-          <Button
-            bg="gray"
-            shadow="neu"
-            className="bg-blue-600 text-white hover:bg-blue-700"
-            onClick={() => window.open("https://incortical.com", "_blank")}
-          >
-            Get Personalized Support with Orin
-            <ArrowRight className="w-4 h-4 ml-2" />
-          </Button>
-        </div>
+        <Ad
+          title="Ready to support your student's MAP success?"
+          description="Get personalized support with Orin"
+        />
       </BlogSection>
 
-      {/* Social Share */}
-      <div className="mt-12 pt-8 border-t border-gray-200">
-        <SocialShareButtons
-          title="All About MAP & State Tests in Grades 6-8: A Parent's Complete Guide"
-          url={window.location.href}
-          description="A comprehensive guide to understanding MAP testing and state assessments for middle school students"
-          blogPostId="map-state-tests-complete-guide"
-        />
-      </div>
-
-      {/* Related Articles */}
-      <div className="mt-12 pt-8 border-t border-gray-200">
-        <h2 className="text-2xl font-bold mb-6">Related Articles</h2>
-        <div className="grid md:grid-cols-2 gap-6">
-          <div className="bg-white border border-gray-200 rounded-lg p-6">
-            <h3 className="font-bold mb-2">Understanding RIT Scores</h3>
-            <p className="text-gray-600 mb-4">
-              Deep dive into MAP score interpretation and what the numbers
-              really mean for your student.
-            </p>
-            <Button
-              bg="gray"
-              shadow="neu"
-              className="text-gray-900"
-              onClick={() =>
-                (window.location.href =
-                  "/blog/academic-assessment/understanding-rit-scores")
-              }
-            >
-              Read More
-            </Button>
-          </div>
-          <div className="bg-white border border-gray-200 rounded-lg p-6">
-            <h3 className="font-bold mb-2">State Test Prep Strategies</h3>
-            <p className="text-gray-600 mb-4">
-              Practical strategies for preparing your middle schooler for state
-              assessments.
-            </p>
-            <Button
-              bg="gray"
-              shadow="neu"
-              className="text-gray-900"
-              onClick={() =>
-                (window.location.href =
-                  "/blog/academic-assessment/state-test-prep-strategies")
-              }
-            >
-              Read More
-            </Button>
-          </div>
-        </div>
-      </div>
-
-      <Odyssey />
+      {/* FAQ */}
+      <BlogFAQ items={faqItems} />
     </BlogLayout>
   );
 }

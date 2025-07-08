@@ -13,7 +13,9 @@ import { getBlogPostBySlug } from "@blog/data";
 import { FloatingNav } from "@components";
 import { cn } from "@utils";
 
+import { BlogCard } from "../";
 import { BlogSidebar } from "./BlogSidebar";
+import { SocialShareButtons } from "./SocialShareButtons";
 
 interface BlogLayoutProps {
   children: React.ReactNode;
@@ -122,6 +124,22 @@ export function BlogLayout({ children, className }: BlogLayoutProps) {
 
               {children}
             </motion.div>
+
+            <SocialShareButtons
+              title={entry?.title}
+              url={window.location.href}
+              description={entry?.excerpt}
+              blogPostId={entry?.slug}
+            />
+
+            {/* Related Posts */}
+            {entry?.subArticles && (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {entry.subArticles.map((article) => (
+                  <BlogCard post={article} />
+                ))}
+              </div>
+            )}
           </main>
         </div>
       </div>

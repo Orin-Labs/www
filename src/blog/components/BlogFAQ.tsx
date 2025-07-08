@@ -4,13 +4,18 @@ import {
   AnimatePresence,
   motion,
 } from 'framer-motion';
+import {
+  ChevronDownIcon,
+  LucideIcon,
+} from 'lucide-react';
 import posthog from 'posthog-js';
 
 import { cn } from '@utils';
 
-interface FAQItem {
+export interface FAQItem {
   question: string;
   answer: string;
+  icon: LucideIcon;
 }
 
 interface BlogFAQProps {
@@ -45,55 +50,50 @@ export function BlogFAQ({
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
-      className={cn(className)}
+      className={cn(className, "flex flex-col gap-2")}
     >
-      <h2 className="text-2xl font-bold text-gray-900 mb-6">{title}</h2>
+      <h2 className="text-2xl font-bold text-gray-900">{title}</h2>
+      {items.map(({ question, answer, icon: Icon }, index) => (
+        <div key={index} className={cn("flex gap-4 w-full")}>
+          <div className="p-2 border rounded-lg h-fit border-gray-200 mt-1">
+            <Icon className="w-4 h-4" />
+          </div>
 
-      <div className="space-y-4">
-        {items.map((item, index) => (
-          <motion.div
-            key={index}
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: index * 0.1 }}
-            className={cn(
-              "border border-gray-200 rounded-lg overflow-hidden",
-              "shadow-[2px_2px_4px_#00000022,_-2px_-2px_4px_#ffffff99]",
-              "dark:shadow-[2px_2px_2px_#00000044,_-2px_-2px_2px_#ffffff22]"
-            )}
-          >
+          <div className="grow flex flex-col">
             <button
-              className={cn(
-                "w-full text-left bg-white hover:bg-gray-50 p-4 font-bold transition-colors relative",
-                "focus:outline-none border-b flex items-center justify-between"
-              )}
+              className="flex items-center justify-between gap-2 w-full hover:bg-gray-50 transition-colors duration-200 rounded-lg p-2"
               onClick={() => toggleFAQ(index)}
             >
-              {item.question}
-              <motion.span
-                className="text-2xl"
-                animate={{ rotate: openIndex === index ? 45 : 0 }}
-                transition={{ duration: 0.2 }}
+              <h3 className="text-lg font-bold text-gray-900">{question}</h3>
+              <div
+                className="text-left w-fit focus:outline-none"
+                onClick={() => toggleFAQ(index)}
+                aria-expanded={openIndex === index}
+                aria-controls={`faq-answer-${index}`}
               >
-                +
-              </motion.span>
+                <ChevronDownIcon className="w-4 h-4" />
+              </div>
             </button>
+
             <AnimatePresence>
               {openIndex === index && (
                 <motion.div
+                  id={`faq-answer-${index}`}
                   initial={{ height: 0, opacity: 0 }}
                   animate={{ height: "auto", opacity: 1 }}
                   exit={{ height: 0, opacity: 0 }}
-                  transition={{ duration: 0.3 }}
-                  className="bg-white overflow-hidden"
+                  transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+                  className="overflow-hidden px-2"
                 >
-                  <div className="p-4">{item.answer}</div>
+                  <div className="py-2">
+                    <p className="text-gray-600">{answer}</p>
+                  </div>
                 </motion.div>
               )}
             </AnimatePresence>
-          </motion.div>
-        ))}
-      </div>
+          </div>
+        </div>
+      ))}
     </motion.div>
   );
 }
