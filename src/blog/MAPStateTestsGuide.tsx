@@ -411,7 +411,7 @@ export default function MAPStateTestsGuide() {
           with little growth, or lower score with big gains?
         </p>
 
-        <div className="bg-gray-50 border border-gray-200 rounded-lg p-6 mb-8">
+        <div className="bg-white border border-gray-200 rounded-lg p-6 mb-8">
           <h3 className="text-2xl font-bold mb-4 text-gray-800">
             🎯 Growth Wins Every Time
           </h3>
@@ -419,7 +419,7 @@ export default function MAPStateTestsGuide() {
             Research shows that students who demonstrate consistent growth—even
             if starting behind—outperform high-scoring students who plateau.
           </p>
-          <div className="bg-white border border-gray-200 rounded-lg p-4 mb-4">
+          <div className="bg-gray-50 border border-gray-200 rounded-lg p-4 mb-4">
             <h4 className="font-bold mb-2 text-gray-800">
               Typical Growth Expectations:
             </h4>
