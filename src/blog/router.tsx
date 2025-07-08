@@ -6,24 +6,23 @@ import {
   useLocation,
 } from 'react-router-dom';
 
-import { getBlogPostBySlug } from './blog-data';
-import BlogIndex from './index';
+import { getBlogPostBySlug } from '@blog/data';
+import BlogIndex from '@blog/index';
 
 export default function BlogRouter() {
-  const location = useLocation();
-
   return (
     <Routes>
       <Route path="/" element={<BlogIndex />} />
-      <Route path="/:slug" element={<BlogPost />} />
+      <Route path="/*" element={<BlogPost />} />
     </Routes>
   );
 }
 
 function BlogPost() {
   const location = useLocation();
-  const slug = location.pathname.split("/").pop();
-  const blogPost = getBlogPostBySlug(slug || "");
+  // Remove '/blog/' from the path to get the slug
+  const slug = location.pathname.replace("/blog/", "");
+  const blogPost = getBlogPostBySlug(slug);
 
   if (blogPost) {
     const PostComponent = blogPost.component;

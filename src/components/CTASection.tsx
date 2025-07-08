@@ -1,10 +1,10 @@
-import { HTMLProps } from 'react';
+import { HTMLProps } from "react";
 
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
 
-import { cn } from '../utils';
-import { BackgroundGradient } from './BackgroundGradient';
-import { SignupForm } from './SignupForm';
+import { cn } from "../utils";
+import { BackgroundGradient } from "./BackgroundGradient";
+import { SignupForm } from "./SignupForm";
 
 interface CTASectionProps extends Omit<HTMLProps<HTMLElement>, "onSubmit"> {
   cta: string;
@@ -52,7 +52,10 @@ export function CTASection({
   return (
     <section
       id="cta-section"
-      className={cn("w-screen h-screen md:p-6 text-white", className)}
+      className={cn(
+        "w-screen h-screen bg-gray-50 md:p-6 text-white",
+        className
+      )}
       {...props}
     >
       <div className="w-full h-full md:rounded-lg overflow-hidden relative text-center flex flex-col justify-center items-center gap-4">

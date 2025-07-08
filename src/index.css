@@ -9,7 +9,7 @@ html {
 }
 
 body {
-  @apply overflow-y-auto bg-gray-50 dark:bg-gray-900;
+  @apply overflow-y-auto bg-white dark:bg-gray-900;
 }
 
 .hind {
@@ -148,4 +148,13 @@ body {
   p {
     @apply mb-4;
   }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Gowun Dodum", sans-serif;
 }

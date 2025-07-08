@@ -1,13 +1,10 @@
-import React from 'react';
+import React, { useEffect } from "react";
 
-import { motion } from 'framer-motion';
-import {
-  ArrowRight,
-  FileText,
-} from 'lucide-react';
-import posthog from 'posthog-js';
+import { motion } from "framer-motion";
+import { ArrowRight, FileText } from "lucide-react";
+import posthog from "posthog-js";
 
-import { Button } from '@/Button';
+import { Button } from "@/Button";
 import {
   BlogCardGrid,
   BlogChecklist,
@@ -17,8 +14,8 @@ import {
   ComparisonTable,
   NumberedList,
   Odyssey,
-  ProsConsGrid,
-} from '@components';
+  ScenarioGrid,
+} from "@blog/components";
 
 export default function MAPStateTestsGuide() {
   const gradeExpectations = [
@@ -255,7 +252,7 @@ export default function MAPStateTestsGuide() {
   ];
 
   // Track page load and engagement
-  React.useEffect(() => {
+  useEffect(() => {
     const startTime = Date.now();
 
     posthog.capture("map_state_tests_guide_started", {
@@ -303,15 +300,6 @@ export default function MAPStateTestsGuide() {
 
   return (
     <BlogLayout>
-      <motion.h1
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="text-4xl md:text-5xl font-bold mb-8 text-center z-10 relative"
-      >
-        📊 The Complete MAP & State Tests Guide for Grades 6-8
-      </motion.h1>
-
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -350,23 +338,27 @@ export default function MAPStateTestsGuide() {
           MAP tests produce two key numbers you need to understand:
         </p>
 
-        <ProsConsGrid
-          pros={{
-            title: "RIT Score (Rasch unIT)",
-            items: [
-              "Think of this as your student's academic coordinate on a massive learning map",
-              "Unlike grade-level tests that max out, RIT scores can grow infinitely",
-              "A 6th grader reading at a 9th-grade level will have a high RIT score that reflects their true ability",
-            ],
-          }}
-          cons={{
-            title: "Percentile Rank",
-            items: [
-              "This compares your student to others nationwide",
-              "It's not about passing or failing—it's about relative performance",
-              "50th percentile means exactly average performance",
-            ],
-          }}
+        <ScenarioGrid
+          scenarios={[
+            {
+              title: "RIT Score (Rasch unIT)",
+              details: [
+                "Think of this as your student's academic coordinate on a massive learning map",
+                "Unlike grade-level tests that max out, RIT scores can grow infinitely",
+                "A 6th grader reading at a 9th-grade level will have a high RIT score that reflects their true ability",
+              ],
+              color: "green",
+            },
+            {
+              title: "Percentile Rank",
+              details: [
+                "This compares your student to others nationwide",
+                "It's not about passing or failing—it's about relative performance",
+                "50th percentile means exactly average performance",
+              ],
+              color: "red",
+            },
+          ]}
         />
 
         <h3 className="text-2xl font-bold mb-4 mt-8">

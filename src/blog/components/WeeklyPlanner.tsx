@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 export type DayOfWeek =
   | "Monday"
@@ -58,7 +58,7 @@ export const WeeklyPlanner: React.FC<WeeklyPlannerProps> = ({
         {daysWithTasks.map((day) => (
           <div
             key={day}
-            className="bg-white rounded-xl p-5 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-gray-100"
+            className="bg-white rounded-lg p-5 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-gray-100"
           >
             <div className="flex items-center mb-4">
               <span className="text-2xl mr-3">{dayEmojis[day]}</span>

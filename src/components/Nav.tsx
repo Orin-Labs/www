@@ -1,13 +1,10 @@
-import { HTMLProps } from 'react';
+import { HTMLProps } from "react";
 
-import { ArrowRightIcon } from 'lucide-react';
-import {
-  Link,
-  useNavigate,
-} from 'react-router-dom';
+import { ArrowRightIcon } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
 
-import { Button } from '../Button';
-import { cn } from '../utils';
+import { Button } from "../Button";
+import { cn } from "../utils";
 
 type NavItem = {
   label: string;
@@ -78,21 +75,16 @@ export default function Nav({
             const isInternalLink =
               item.href.startsWith("/") && !item.href.includes("#");
 
+            const className = cn(
+              "p-2 rounded-lg hover:underline text-gray-700",
+              item.breakpoint === "sm" && "hidden sm:block",
+              item.breakpoint === "md" && "hidden md:block",
+              item.breakpoint === "lg" && "hidden lg:block"
+            );
+
             if (isInternalLink) {
               return (
-                <Link
-                  key={item.label}
-                  to={item.href}
-                  className={cn(
-                    "p-2 rounded-lg hover:bg-slate-200 transition-all duration-300",
-                    "hover:text-indigo-800 text-gray-700",
-                    item.breakpoint === "sm" && "hidden sm:block",
-                    item.breakpoint === "md" && "hidden md:block",
-                    item.breakpoint === "lg" && "hidden lg:block",
-                    item.breakpoint === "xl" && "hidden xl:block",
-                    item.breakpoint === "2xl" && "hidden 2xl:block"
-                  )}
-                >
+                <Link key={item.label} to={item.href} className={className}>
                   {item.label}
                 </Link>
               );
@@ -108,15 +100,7 @@ export default function Nav({
                     item.onClick();
                   }
                 }}
-                className={cn(
-                  "p-2 rounded-lg hover:bg-slate-200 transition-all duration-300",
-                  "hover:text-indigo-800 text-gray-700",
-                  item.breakpoint === "sm" && "hidden sm:block",
-                  item.breakpoint === "md" && "hidden md:block",
-                  item.breakpoint === "lg" && "hidden lg:block",
-                  item.breakpoint === "xl" && "hidden xl:block",
-                  item.breakpoint === "2xl" && "hidden 2xl:block"
-                )}
+                className={className}
               >
                 {item.label}
               </a>

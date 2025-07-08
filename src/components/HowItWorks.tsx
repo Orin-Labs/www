@@ -1,15 +1,10 @@
-import {
-  HTMLProps,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import { HTMLProps, useEffect, useRef, useState } from "react";
 
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
 
-import { cn } from '../utils';
-import { BackgroundGradient } from './BackgroundGradient';
-import { Message } from './Phone';
+import { cn } from "../utils";
+import { BackgroundGradient } from "./BackgroundGradient";
+import { Message } from "./Phone";
 
 // Lazy loading image component
 const LazyImage = ({
@@ -276,7 +271,7 @@ export function HowItWorks({ speed, className }: HowItWorksProps) {
   return (
     <section
       className={cn(
-        "w-full py-16 md:py-24 bg-white dark:bg-neutral-900",
+        "w-full py-16 md:py-24 bg-gray-50 dark:bg-neutral-900",
         className
       )}
     >

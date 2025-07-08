@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useEffect } from "react";
 
-import { motion } from 'framer-motion';
-import posthog from 'posthog-js';
+import { motion } from "framer-motion";
+import posthog from "posthog-js";
 
-import { Ad } from '@/components/Ad';
+import type { WeeklyPlannerItem } from "@blog/components";
 import {
+  Ad,
   BlogCallout,
   BlogCardGrid,
   BlogChecklist,
@@ -16,8 +17,7 @@ import {
   Odyssey,
   SortableTable,
   WeeklyPlanner,
-  WeeklyPlannerItem,
-} from '@components';
+} from "@blog/components";
 
 const gamesData = [
   [
@@ -300,7 +300,7 @@ const sortButtons = [
 
 export default function MathSurvivalGuide() {
   // Track page load and engagement
-  React.useEffect(() => {
+  useEffect(() => {
     const startTime = Date.now();
 
     posthog.capture("math_survival_guide_started", {
@@ -348,15 +348,6 @@ export default function MathSurvivalGuide() {
 
   return (
     <BlogLayout>
-      <motion.h1
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="text-4xl md:text-5xl font-bold text-center z-10 relative"
-      >
-        🧮 Middle School Math Survival Guide for Parents
-      </motion.h1>
-
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

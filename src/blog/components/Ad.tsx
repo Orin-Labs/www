@@ -1,18 +1,17 @@
-import { HTMLProps } from 'react';
+import React from 'react';
 
 import { ArrowRightIcon } from 'lucide-react';
 import posthog from 'posthog-js';
 import { useNavigate } from 'react-router-dom';
 
 import { Button } from '@/Button';
-import { cn } from '@/utils';
-
-import { BackgroundGradient } from './BackgroundGradient';
+import { BackgroundGradient } from '@components/BackgroundGradient';
+import { cn } from '@utils';
 
 type AdProps = {
   title: string;
   description: string;
-} & HTMLProps<HTMLDivElement>;
+} & React.HTMLProps<HTMLDivElement>;
 
 export const Ad = ({ title, description, className, ...props }: AdProps) => {
   const navigate = useNavigate();

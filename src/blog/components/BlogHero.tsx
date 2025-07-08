@@ -5,9 +5,11 @@ import React, {
 
 import { motion } from 'framer-motion';
 
-import { cn } from '../../utils';
-import FloatingNav from '../FloatingNav';
-import Nav from '../Nav';
+import {
+  FloatingNav,
+  Nav,
+} from '@components';
+import { cn } from '@utils';
 
 interface BlogHeroProps {
   title: string;

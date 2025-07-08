@@ -6,7 +6,7 @@ import {
 } from 'framer-motion';
 import posthog from 'posthog-js';
 
-import { cn } from '../../utils';
+import { cn } from '@utils';
 
 interface FAQItem {
   question: string;

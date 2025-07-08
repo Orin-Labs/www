@@ -6,8 +6,10 @@ import {
 
 import { motion } from 'framer-motion';
 
-import FloatingNav from '../FloatingNav';
-import Nav from '../Nav';
+import {
+  FloatingNav,
+  Nav,
+} from '@components';
 
 interface BlogPostProps {
   title: string;

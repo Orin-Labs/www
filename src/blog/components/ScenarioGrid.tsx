@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 interface ScenarioItem {
   title: string;
@@ -20,12 +20,12 @@ export const ScenarioGrid: React.FC<ScenarioGridProps> = ({
 }) => {
   const getColorClasses = (color: string) => {
     const colorMap = {
-      green: "bg-green-50 border-green-200 text-green-800",
-      red: "bg-red-50 border-red-200 text-red-800",
-      blue: "bg-blue-50 border-blue-200 text-blue-800",
-      yellow: "bg-yellow-50 border-yellow-200 text-yellow-800",
-      purple: "bg-purple-50 border-purple-200 text-purple-800",
-      gray: "bg-gray-50 border-gray-200 text-gray-800",
+      green: "border-green-200 text-green-800",
+      red: "border-red-200 text-red-800",
+      blue: "border-blue-200 text-blue-800",
+      yellow: "border-yellow-200 text-yellow-800",
+      purple: "border-purple-200 text-purple-800",
+      gray: "border-gray-200 text-gray-800",
     };
     return colorMap[color as keyof typeof colorMap] || colorMap.gray;
   };
@@ -43,11 +43,13 @@ export const ScenarioGrid: React.FC<ScenarioGridProps> = ({
               scenario.color
             )}`}
           >
-            <h4 className="font-bold mb-2">{scenario.title}</h4>
+            <h3 className="font-bold mb-2">{scenario.title}</h3>
             {scenario.description && (
-              <p className="text-sm mb-3 opacity-90">{scenario.description}</p>
+              <p className="text-sm mb-3 opacity-90 text-gray-800">
+                {scenario.description}
+              </p>
             )}
-            <ul className="text-sm space-y-1">
+            <ul className="text-sm space-y-1 text-gray-800">
               {scenario.details.map((detail, detailIndex) => (
                 <li key={detailIndex}>• {detail}</li>
               ))}
