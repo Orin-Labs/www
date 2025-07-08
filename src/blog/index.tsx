@@ -1,15 +1,25 @@
-import { useCallback } from "react";
+import { useCallback } from 'react';
 
-import { HTMLMotionProps, motion } from "framer-motion";
-import { ArrowRightIcon } from "lucide-react";
-import posthog from "posthog-js";
-import { useNavigate } from "react-router-dom";
+import {
+  HTMLMotionProps,
+  motion,
+} from 'framer-motion';
+import { ArrowRightIcon } from 'lucide-react';
+import posthog from 'posthog-js';
+import { useNavigate } from 'react-router-dom';
 
-import { Odyssey } from "@blog/components";
-import { FloatingNav, Footer } from "@components";
-import { cn } from "@utils";
+import { Odyssey } from '@blog/components';
+import {
+  FloatingNav,
+  Footer,
+} from '@components';
+import { cn } from '@utils';
 
-import { BlogPost, getReadingTime, POSTS } from "./data";
+import {
+  BlogPost,
+  getReadingTime,
+  POSTS,
+} from './data';
 
 interface BlogCardProps extends HTMLMotionProps<"button"> {
   post: BlogPost;
@@ -104,7 +114,7 @@ export default function BlogIndex() {
       <FloatingNav isVisible={true} />
 
       {/* Main Content */}
-      <div className="border-t border-gray-200 w-full pt-48">
+      <div className="w-full pt-48">
         <main className="mx-auto flex flex-col gap-4 px-4 max-w-6xl">
           {/* Blog Header */}
           <motion.div
@@ -133,7 +143,7 @@ export default function BlogIndex() {
           <Odyssey bg="#00000080" />
         </main>
 
-        <Footer className="bg-white" />
+        <Footer className="bg-white mt-24" />
       </div>
     </div>
   );
