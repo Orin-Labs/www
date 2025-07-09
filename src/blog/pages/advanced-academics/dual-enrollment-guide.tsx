@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react';
 
-import { BlogLayout } from "@blog/components";
+import { BlogLayout } from '@blog/components';
 
-export default function DualEnrollmentGuide() {
+export function DualEnrollmentGuide() {
   return (
     <BlogLayout>
       <div className="prose prose-lg max-w-none">

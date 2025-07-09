@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import {
   BookOpen,
+  Brain,
   Calculator,
   Clock,
   HelpCircle,
@@ -14,7 +15,7 @@ import posthog from 'posthog-js';
 import type { WeeklyPlannerItem } from '@blog/components';
 import {
   Ad,
-  BlogCallout,
+  Alert,
   BlogCardGrid,
   BlogChecklist,
   BlogFAQ,
@@ -315,7 +316,7 @@ const sortButtons = [
   "Sort by Grade",
 ];
 
-export default function MathSurvivalGuide() {
+export function MathSurvivalGuide() {
   // Track page load and engagement
   useEffect(() => {
     const startTime = Date.now();
@@ -399,13 +400,11 @@ export default function MathSurvivalGuide() {
         available when we were students.
       </motion.div>
 
-      <BlogCallout variant="gradient">
-        <NumberedList
-          title="📥 Top 5 Quick Wins"
-          items={quickWins}
-          itemClassName="border-white text-white"
-        />
-      </BlogCallout>
+      <NumberedList
+        title="📥 Top 5 Quick Wins"
+        items={quickWins}
+        itemClassName="border-white text-white"
+      />
 
       <BlogSection title="Step 1 - Curriculum Road-map">
         <p className="mb-6">
@@ -488,11 +487,16 @@ export default function MathSurvivalGuide() {
           intervention more accessible than ever.
         </p>
 
-        <BlogCallout variant="warning" className="mb-8">
-          🧠 Stanford MRI Study: Math anxiety activates the same brain regions
-          as physical pain, but targeted interventions can reduce this response
-          by up to 40% in just 8 weeks.
-        </BlogCallout>
+        <Alert
+          type="warning"
+          title="Stanford MRI Study"
+          icon={Brain}
+          className="mt-4"
+        >
+          Math anxiety activates the same brain regions as physical pain, but
+          targeted interventions can reduce this response by up to 40% in just 8
+          weeks.
+        </Alert>
 
         <BlogChecklist
           title="Math Anxiety Action Checklist"
@@ -535,3 +539,6 @@ export default function MathSurvivalGuide() {
     </BlogLayout>
   );
 }
+
+export * from "./algebra-readiness-checklist";
+export * from "./fraction-mastery-guide";

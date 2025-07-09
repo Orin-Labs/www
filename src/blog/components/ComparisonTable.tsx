@@ -1,9 +1,8 @@
-import React from "react";
+import React from 'react';
 
-import { cn } from "@/utils";
+import { cn } from '@/utils';
 
 interface ComparisonTableProps {
-  title?: string;
   columns: {
     header: string;
     key: string;
@@ -14,18 +13,12 @@ interface ComparisonTableProps {
 }
 
 export const ComparisonTable: React.FC<ComparisonTableProps> = ({
-  title,
   columns,
   data,
   className = "",
 }) => {
   return (
-    <div className={`overflow-x-auto rounded-lg shadow-lg ${className}`}>
-      {title && (
-        <div className="p-4 border-b border-gray-200">
-          <h3 className="text-xl font-bold text-gray-800">{title}</h3>
-        </div>
-      )}
+    <div className={`overflow-x-auto rounded-lg shadow ${className}`}>
       <table className="w-full border-separate border-spacing-0">
         <thead>
           <tr className="bg-gray-900 text-white">
@@ -33,7 +26,7 @@ export const ComparisonTable: React.FC<ComparisonTableProps> = ({
               <th
                 key={index}
                 className={cn(
-                  "border-r border-gray-700 px-4 py-3",
+                  "border-r border-gray-700 px-4 py-3 font-normal",
                   column.className || "text-left",
                   index === 0 && "rounded-tl-lg border-l",
                   index === columns.length - 1 && "rounded-tr-lg"

@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react';
 
-import { BlogLayout } from "@blog/components";
+import { BlogLayout } from '@blog/components';
 
-export default function FractionMasteryGuide() {
+export function FractionMasteryGuide() {
   return (
     <BlogLayout>
       <div className="prose prose-lg max-w-none">

@@ -23,12 +23,9 @@ export const NumberedList: React.FC<NumberedListProps> = ({
       {title && (
         <h2 className="text-3xl font-bold mb-8 text-center">{title}</h2>
       )}
-      <ol className="text-left max-w-lg mx-auto space-y-3">
+      <ol className="text-left mx-auto space-y-3 pl-4">
         {items.map((item, index) => (
-          <li
-            key={index}
-            className={`pb-2 border-b border-current ${itemClassName}`}
-          >
+          <li key={index} className={`pb-2 ${itemClassName}`}>
             {index + 1}. {item.text}
             {item.description && (
               <div className="text-sm mt-1 opacity-80">{item.description}</div>

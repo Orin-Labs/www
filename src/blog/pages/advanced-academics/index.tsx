@@ -99,7 +99,7 @@ const getDecisionResult = (answers: boolean[]) => {
   }
 };
 
-export default function STEMElectivesGuide() {
+export function STEMElectivesGuide() {
   // Track page load and engagement
   useEffect(() => {
     const startTime = Date.now();
@@ -665,7 +665,12 @@ export default function STEMElectivesGuide() {
           ]}
         />
 
-        <Alert type="error" title="CRITICAL WARNING:" className="mt-4">
+        <Alert
+          type="error"
+          title="CRITICAL WARNING:"
+          className="mt-4"
+          icon={AlertTriangle}
+        >
           Every high school credit earned in middle school usually becomes
           permanent. Unlike middle school grades that disappear, these can
           follow students through graduation and college applications. A single
@@ -718,3 +723,6 @@ export default function STEMElectivesGuide() {
     </BlogLayout>
   );
 }
+
+export * from "./dual-enrollment-guide";
+export * from "./gifted-program-navigation";

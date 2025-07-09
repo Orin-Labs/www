@@ -1,21 +1,23 @@
 // Import Swiper styles
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 
-import React, { useEffect } from "react";
+import React, { useEffect } from 'react';
 
-import { motion } from "framer-motion";
-import { ArrowLeftIcon } from "lucide-react";
-import posthog from "posthog-js";
+import { motion } from 'framer-motion';
+import { ArrowLeftIcon } from 'lucide-react';
+import posthog from 'posthog-js';
 
-import { getBlogPostBySlug } from "@blog/data";
-import { FloatingNav } from "@components";
-import { cn } from "@utils";
+import {
+  getBlogPostBySlug,
+  getRelatedPosts,
+} from '@blog/data';
+import { FloatingNav } from '@components';
+import { cn } from '@utils';
 
-import { BlogCard } from "../";
-import { BlogSidebar } from "./BlogSidebar";
-import { SocialShareButtons } from "./SocialShareButtons";
+import { BlogCard } from './BlogCard';
+import { SocialShareButtons } from './SocialShareButtons';
 
 interface BlogLayoutProps {
   children: React.ReactNode;
@@ -54,12 +56,9 @@ export function BlogLayout({ children, className }: BlogLayoutProps) {
       <FloatingNav isVisible={true} />
 
       <div className="flex gap-4 pt-16 grow min-h-0 border-t border-gray-200">
-        {/* Floating Sidebar - positioned outside main content flow */}
-        <BlogSidebar />
-
-        {/* Main Content - with left margin to avoid sidebar overlap */}
+        {/* Main Content */}
         <div className="flex-1 overflow-y-auto grow">
-          <main className="relative z-10 max-w-5xl mx-auto px-4 py-8 md:py-16 md:px-8 lg:px-16 font-sans flex flex-col gap-6">
+          <main className="relative z-10 max-w-4xl mx-auto px-4 py-8 md:py-16 md:px-8 lg:px-16 font-sans flex flex-col gap-6">
             <div className="flex justify-between items-center">
               <button
                 className={cn(
@@ -103,7 +102,21 @@ export function BlogLayout({ children, className }: BlogLayoutProps) {
               transition={{ duration: 0.6 }}
               className="flex flex-col gap-12"
             >
-              <div className="flex flex-col gap-2">
+              {entry?.image && (
+                <motion.div
+                  className="w-full aspect-video relative rounded-lg overflow-hidden"
+                  style={{
+                    backgroundImage: `url(${entry?.image})`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                  }}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6 }}
+                />
+              )}
+
+              <div className="flex flex-col gap-4">
                 <motion.h1
                   className="text-4xl md:text-5xl"
                   style={{
@@ -115,7 +128,7 @@ export function BlogLayout({ children, className }: BlogLayoutProps) {
 
                 {entry && (
                   <motion.p>
-                    <span className="hidden md:block">
+                    <span className="hidden md:block text-gray-500">
                       By <i>{entry.author}</i>
                     </span>
                   </motion.p>
@@ -130,16 +143,17 @@ export function BlogLayout({ children, className }: BlogLayoutProps) {
               url={window.location.href}
               description={entry?.excerpt}
               blogPostId={entry?.slug}
+              className="my-12"
             />
 
             {/* Related Posts */}
-            {entry?.subArticles && (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {entry.subArticles.map((article) => (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {getRelatedPosts(entry)
+                .slice(0, 4)
+                .map((article) => (
                   <BlogCard post={article} />
                 ))}
-              </div>
-            )}
+            </div>
           </main>
         </div>
       </div>

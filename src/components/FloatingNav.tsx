@@ -1,9 +1,12 @@
-import { motion } from "framer-motion";
-import { ArrowRightIcon } from "lucide-react";
-import { Link, useNavigate } from "react-router-dom";
+import { motion } from 'framer-motion';
+import { ArrowRightIcon } from 'lucide-react';
+import {
+  Link,
+  useNavigate,
+} from 'react-router-dom';
 
-import { Button } from "../Button";
-import { cn } from "../utils";
+import { Button } from '../Button';
+import { cn } from '../utils';
 
 type NavItem = {
   label: string;
@@ -67,7 +70,7 @@ export default function FloatingNav({
     <motion.header
       className={cn(
         "fixed top-4 left-4 md:left-8 lg:left-12 right-4 md:right-8 lg:right-12 z-50 rounded-lg flex items-center justify-between px-4 py-3",
-        "bg-[#ffffffdd] backdrop-blur-md border border-gray-200/50 shadow-sm",
+        "bg-[#ffffffdd] backdrop-blur-md border border-gray-100 shadow-sm",
         className
       )}
       initial={{ y: -100, opacity: 0 }}

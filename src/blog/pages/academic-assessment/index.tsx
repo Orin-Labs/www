@@ -1,26 +1,22 @@
 import React, { useEffect } from 'react';
 
-import { motion } from 'framer-motion';
-import {
-  Brain,
-  TrendingUp,
-} from 'lucide-react';
+import { Brain } from 'lucide-react';
 import posthog from 'posthog-js';
 
 import { FAQItem } from '@/blog/components/BlogFAQ';
 import {
   Ad,
+  Alert,
   BlogCardGrid,
   BlogChecklist,
   BlogFAQ,
   BlogLayout,
   BlogSection,
   ComparisonTable,
-  NumberedList,
   ScenarioGrid,
 } from '@blog/components';
 
-export default function MAPStateTestsCompleteGuide() {
+export function MAPStateTestsCompleteGuide() {
   const gradeExpectations = [
     {
       grade: "6th Grade",
@@ -91,8 +87,6 @@ export default function MAPStateTestsCompleteGuide() {
     {
       title: "RIT Score",
       details: [
-        "Your student's absolute achievement level on a stable scale (typically 140-300)",
-        "Equal intervals—difference between 200-210 equals difference between 230-240",
         "Shows exactly what your child knows regardless of grade level",
         "Can be tracked consistently across years and subjects",
       ],
@@ -103,8 +97,6 @@ export default function MAPStateTestsCompleteGuide() {
       details: [
         "Compares your student to others nationally in their grade",
         "65th percentile = better than 65% of students nationwide",
-        "50th percentile = exactly average performance",
-        "Percentiles can fluctuate even when RIT scores improve",
       ],
       color: "green" as const,
     },
@@ -112,8 +104,6 @@ export default function MAPStateTestsCompleteGuide() {
       title: "Growth Percentile",
       details: [
         "Compares your student's growth to others who started at the same level",
-        "Above 50th percentile = above-average growth",
-        "More important than static achievement scores",
         "Shows learning trajectory and potential",
       ],
       color: "purple" as const,
@@ -266,7 +256,7 @@ export default function MAPStateTestsCompleteGuide() {
   ];
 
   const expectationTableColumns = [
-    { header: "Grade", key: "grade", className: "font-semibold" },
+    { header: "Grade", key: "grade", className: "font-semibold text-left" },
     { header: "Reading", key: "reading", className: "text-center" },
     { header: "Mathematics", key: "mathematics", className: "text-center" },
     { header: "Language Usage", key: "language", className: "text-center" },
@@ -298,38 +288,29 @@ export default function MAPStateTestsCompleteGuide() {
 
   return (
     <BlogLayout>
-      {/* Hero Section */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="mb-12"
-      >
-        <div className="bg-gradient-to-r from-blue-50 to-purple-50 border border-blue-200 rounded-lg p-6 mb-8">
-          <p className="text-lg text-gray-700 italic">
-            As your middle schooler navigates the academic landscape, you've
-            likely encountered terms like "MAP testing," "RIT scores," and
-            "state assessments." While these assessments might seem
-            overwhelming, understanding them is crucial for supporting your
-            student's educational journey. The reality is that educational
-            assessment is evolving rapidly, and staying informed helps you
-            advocate effectively for your child.
-          </p>
-        </div>
-      </motion.div>
+      <p className="text-lg text-gray-700 italic">
+        As your middle schooler navigates the academic landscape, you've likely
+        encountered terms like "MAP testing," "RIT scores," and "state
+        assessments." While these assessments might seem overwhelming,
+        understanding them is crucial for supporting your student's educational
+        journey. The reality is that educational assessment is evolving rapidly,
+        and staying informed helps you advocate effectively for your child.
+      </p>
 
       {/* Key Insights */}
-      <div className="bg-white border border-gray-200 rounded-lg p-6 mb-8">
-        <NumberedList
-          title="🎯 Essential MAP Testing Insights"
-          items={keyInsights}
-          itemClassName="border-gray-200 text-gray-800"
-        />
+      <div className="flex flex-col gap-2">
+        <h2 className="text-2xl font-bold">Key Insights</h2>
+        {keyInsights.map((insight, idx) => (
+          <p key={idx} className="text-gray-800">
+            <span className="font-semibold mr-2">{idx + 1}.</span>
+            {insight.text}
+          </p>
+        ))}
       </div>
 
       {/* What is MAP Testing */}
       <BlogSection title="What is MAP Testing?">
-        <div className="prose prose-lg max-w-none mb-8">
+        <div className="prose prose-lg max-w-none">
           <p className="text-lg leading-relaxed mb-6">
             MAP (Measures of Academic Progress) is a computer-adaptive
             assessment created by NWEA (Northwest Evaluation Association) that
@@ -350,29 +331,31 @@ export default function MAPStateTestsCompleteGuide() {
 
         <BlogCardGrid cards={testingBenefits} />
 
-        <div className="mt-8 bg-blue-50 border-l-4 border-blue-400 p-6">
-          <h3 className="text-xl font-bold mb-3 text-blue-900">
-            How MAP Testing Works
-          </h3>
-          <p className="text-blue-800 mb-4">
+        <Alert
+          type="info"
+          title="How MAP Testing Works"
+          className="mt-8"
+          icon={Brain}
+        >
+          <p className="mb-4">
             When your middle schooler sits down for a MAP test, they're engaging
             with a sophisticated system designed to find their "sweet spot"—the
             level where they're getting about 50% of questions correct. This
             might sound concerning, but it's actually ideal.
           </p>
-          <p className="text-blue-800">
+          <p>
             The test typically takes 45-60 minutes per subject and is
             administered 2-3 times per year (fall, winter, and spring). Each
             testing session builds a comprehensive picture of your student's
             academic growth over time.
           </p>
-        </div>
+        </Alert>
       </BlogSection>
 
       {/* Understanding RIT Scores */}
       <BlogSection title="Understanding RIT Scores: The Heart of MAP Testing">
         <div className="prose prose-lg max-w-none">
-          <p className="text-lg leading-relaxed mb-6">
+          <p className="text-lg leading-relaxed">
             RIT stands for Rasch Unit, a stable scale that measures achievement
             and growth. Unlike percentiles, which compare your child to other
             students, RIT scores provide an absolute measure of what your child
@@ -398,21 +381,18 @@ export default function MAPStateTestsCompleteGuide() {
             className="mb-6"
           />
 
-          <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4">
-            <p className="text-yellow-800">
-              <strong>Important:</strong> These ranges represent average
-              performance, but remember that every student's journey is unique.
-              Some students may score above or below these ranges and still be
-              making excellent progress.
-            </p>
-          </div>
+          <Alert type="warning" title="Important:" icon={Brain}>
+            These ranges represent average performance, but remember that every
+            student's journey is unique. Some students may score above or below
+            these ranges and still be making excellent progress.
+          </Alert>
         </div>
       </BlogSection>
 
       {/* Growth vs Achievement */}
       <BlogSection title="Growth vs. Achievement: What Really Matters?">
         <div className="prose prose-lg max-w-none">
-          <p className="text-lg leading-relaxed mb-6">
+          <p className="text-lg leading-relaxed">
             One of the most important concepts for parents to understand is the
             difference between achievement and growth. Achievement tells you
             where your student is right now compared to grade-level
@@ -421,30 +401,24 @@ export default function MAPStateTestsCompleteGuide() {
           </p>
         </div>
 
-        <div className="bg-gradient-to-r from-green-50 to-blue-50 border border-green-200 rounded-lg p-6 mb-8">
-          <h3 className="text-2xl font-bold mb-4 text-green-900">
-            <TrendingUp className="inline-block w-6 h-6 mr-2" />
-            Why Growth Often Matters More
-          </h3>
-          <p className="text-green-800 mb-4">
-            A student who starts the year significantly below grade level but
-            shows consistent growth throughout the year is demonstrating
-            remarkable progress, even if their final score isn't at grade level.
-            Conversely, a student who starts above grade level but shows little
-            growth may need additional challenges or support.
-          </p>
-          <p className="text-green-800">
-            MAP testing excels at measuring growth because it uses the same
-            scale across all grade levels. This means you can track your
-            student's progress year after year, seeing their academic journey
-            unfold in real-time.
-          </p>
-        </div>
+        <p>
+          A student who starts the year significantly below grade level but
+          shows consistent growth throughout the year is demonstrating
+          remarkable progress, even if their final score isn't at grade level.
+          Conversely, a student who starts above grade level but shows little
+          growth may need additional challenges or support.
+        </p>
+        <p>
+          MAP testing excels at measuring growth because it uses the same scale
+          across all grade levels. This means you can track your student's
+          progress year after year, seeing their academic journey unfold in
+          real-time.
+        </p>
       </BlogSection>
 
       {/* How MAP Connects to State Testing */}
       <BlogSection title="How MAP Connects to State Testing">
-        <div className="prose prose-lg max-w-none mb-8">
+        <div className="prose prose-lg max-w-none">
           <p className="text-lg leading-relaxed mb-6">
             While MAP testing provides ongoing insights into your student's
             progress, state tests serve a different purpose. State assessments
@@ -452,7 +426,7 @@ export default function MAPStateTestsCompleteGuide() {
             students are meeting state standards for their grade level.
           </p>
 
-          <h3 className="text-xl font-bold mb-4">
+          <h3 className="text-2xl">
             The Relationship Between MAP and State Tests
           </h3>
           <p className="text-lg leading-relaxed mb-6">
@@ -473,7 +447,7 @@ export default function MAPStateTestsCompleteGuide() {
       {/* Supporting Your Student */}
       <BlogSection title="Beyond the Numbers: Supporting Your Middle Schooler">
         <div className="prose prose-lg max-w-none">
-          <p className="text-lg leading-relaxed mb-6">
+          <p className="text-lg leading-relaxed">
             While understanding scores is important, remember that your student
             is more than any single test result. Here's how to use this
             information constructively:
@@ -482,17 +456,20 @@ export default function MAPStateTestsCompleteGuide() {
 
         <BlogCardGrid cards={supportStrategies} columns={2} />
 
-        <div className="mt-8 bg-purple-50 border-l-4 border-purple-400 p-6">
-          <h3 className="text-xl font-bold mb-3 text-purple-900">
-            <Brain className="inline-block w-6 h-6 mr-2" />
-            The Middle School Context
-          </h3>
-          <p className="text-purple-800 mb-4">
-            Middle school presents unique challenges for assessment. Students
-            are dealing with increased academic demands, social pressures, and
-            significant developmental changes. Understanding this context helps
-            frame testing results appropriately.
-          </p>
+        <Alert
+          type="info"
+          title="The Middle School Context"
+          className="p-6"
+          icon={Brain}
+        >
+          <div className="prose prose-lg max-w-none mb-4">
+            <p className="text-purple-800">
+              Middle school presents unique challenges for assessment. Students
+              are dealing with increased academic demands, social pressures, and
+              significant developmental changes. Understanding this context
+              helps frame testing results appropriately.
+            </p>
+          </div>
           <div className="grid md:grid-cols-3 gap-4">
             <div className="bg-white rounded-lg p-4 border border-purple-200">
               <h4 className="font-bold text-purple-900 mb-2">6th Grade</h4>
@@ -514,7 +491,7 @@ export default function MAPStateTestsCompleteGuide() {
               </p>
             </div>
           </div>
-        </div>
+        </Alert>
       </BlogSection>
 
       {/* Action Plan */}
@@ -573,3 +550,6 @@ export default function MAPStateTestsCompleteGuide() {
     </BlogLayout>
   );
 }
+
+export * from "./understanding-rit-scores";
+export * from "./state-test-prep-strategies";

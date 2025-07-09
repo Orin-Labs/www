@@ -20,6 +20,7 @@ export interface FAQItem {
 
 interface BlogFAQProps {
   title?: string;
+  description?: string;
   items: FAQItem[];
   className?: string;
 }
@@ -27,6 +28,7 @@ interface BlogFAQProps {
 export function BlogFAQ({
   title = "Frequently Asked Questions",
   items,
+  description,
   className,
 }: BlogFAQProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
@@ -53,20 +55,34 @@ export function BlogFAQ({
       className={cn(className, "flex flex-col gap-2")}
     >
       <h2 className="text-2xl font-bold text-gray-900">{title}</h2>
+      <p className="text-gray-600">{description}</p>
       {items.map(({ question, answer, icon: Icon }, index) => (
-        <div key={index} className={cn("flex gap-4 w-full")}>
-          <div className="p-2 border rounded-lg h-fit border-gray-200 mt-1">
+        <div
+          key={index}
+          className={cn(
+            "flex gap-4 px-1 w-full hover:bg-gray-50 cursor-pointer rounded-lg transition-colors duration-200"
+          )}
+          onClick={() => toggleFAQ(index)}
+        >
+          <div
+            className={cn(
+              "p-2 border rounded-lg h-fit border-gray-200 mt-1 transition-colors duration-200",
+              openIndex === index && "bg-gray-900 text-white"
+            )}
+          >
             <Icon className="w-4 h-4" />
           </div>
 
           <div className="grow flex flex-col">
-            <button
-              className="flex items-center justify-between gap-2 w-full hover:bg-gray-50 transition-colors duration-200 rounded-lg p-2"
-              onClick={() => toggleFAQ(index)}
-            >
-              <h3 className="text-lg font-bold text-gray-900">{question}</h3>
+            <button className="flex items-center justify-between gap-2 w-full p-2">
+              <h3 className="text-lg font-bold text-gray-900 m-0">
+                {question}
+              </h3>
               <div
-                className="text-left w-fit focus:outline-none"
+                className={cn(
+                  "text-left w-fit focus:outline-none",
+                  openIndex === index && "rotate-180"
+                )}
                 onClick={() => toggleFAQ(index)}
                 aria-expanded={openIndex === index}
                 aria-controls={`faq-answer-${index}`}
