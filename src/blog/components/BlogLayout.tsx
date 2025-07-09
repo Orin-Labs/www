@@ -8,6 +8,7 @@ import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowLeftIcon } from 'lucide-react';
 import posthog from 'posthog-js';
+import { useNavigate } from 'react-router-dom';
 
 import {
   getBlogPostBySlug,
@@ -28,6 +29,7 @@ export function BlogLayout({ children, className }: BlogLayoutProps) {
   const currentPath = window.location.pathname;
   const currentSlug = currentPath.replace("/blog/", "");
   const entry = getBlogPostBySlug(currentSlug);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (entry) {
@@ -66,15 +68,7 @@ export function BlogLayout({ children, className }: BlogLayoutProps) {
                   "hover:text-gray-700 hover:bg-gray-100 rounded-md p-2"
                 )}
                 onClick={() => {
-                  // Track back button click
-                  if (entry) {
-                    posthog.capture("blog_post_back_clicked", {
-                      blog_post_id: entry.id,
-                      blog_post_title: entry.title,
-                      blog_post_slug: entry.slug,
-                    });
-                  }
-                  window.history.back();
+                  navigate("/blog");
                 }}
               >
                 <ArrowLeftIcon className="w-4 h-4" />
