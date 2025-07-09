@@ -103,7 +103,7 @@ export function Hero({
 
       <Nav />
 
-      <audio ref={audioRef} src="/intro.wav" />
+      <audio ref={audioRef} src="/intro.mp3" />
       <div className="w-full grow md:rounded-lg overflow-hidden relative flex flex-col justify-center items-center gap-4 px-2 md:px-4">
         <h1 className="text-6xl md:text-7xl font-bold z-10 text-center">
           {headline === "ROTATING_HEADLINE" ? <RotatingText /> : headline}
