@@ -4,10 +4,11 @@ const path = require("path");
 // Read blog data to dynamically generate blog post routes
 const getBlogRoutes = () => {
   try {
-    const blogDataPath = path.join(__dirname, "../src/blog/blog-data.ts");
+    const blogDataPath = path.join(__dirname, "../src/blog/data.ts");
     const blogDataContent = fs.readFileSync(blogDataPath, "utf8");
 
-    // Extract slugs from the blog data file
+    // Extract all slugs from the blog data file
+    // This regex matches: slug: "some-slug" or slug: "category/some-slug"
     const slugMatches = blogDataContent.match(/slug: ["']([^"']+)["']/g);
 
     if (slugMatches) {
@@ -21,9 +22,15 @@ const getBlogRoutes = () => {
   } catch (error) {
     console.warn("Could not read blog data file, using fallback routes");
     return [
-      "/blog/stem-electives-guide",
-      "/blog/map-state-tests-guide",
-      "/blog/math-survival-guide",
+      "/blog/academic-assessment",
+      "/blog/academic-assessment/understanding-rit-scores",
+      "/blog/academic-assessment/state-test-prep-strategies",
+      "/blog/math-foundations",
+      "/blog/math-foundations/algebra-readiness-checklist",
+      "/blog/math-foundations/fraction-mastery-guide",
+      "/blog/advanced-academics",
+      "/blog/advanced-academics/dual-enrollment-guide",
+      "/blog/advanced-academics/gifted-program-navigation",
     ];
   }
 };

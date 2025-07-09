@@ -2,37 +2,73 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://learnwithorin.com/</loc>
-    <lastmod>2025-07-09T16:14:46.742Z</lastmod>
+    <lastmod>2025-07-09T16:16:24.206Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://learnwithorin.com/privacy</loc>
-    <lastmod>2025-07-09T16:14:46.742Z</lastmod>
+    <lastmod>2025-07-09T16:16:24.207Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://learnwithorin.com/blog</loc>
-    <lastmod>2025-07-09T16:14:46.742Z</lastmod>
+    <lastmod>2025-07-09T16:16:24.207Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://learnwithorin.com/blog/stem-electives-guide</loc>
-    <lastmod>2025-07-09T16:14:46.742Z</lastmod>
+    <loc>https://learnwithorin.com/blog/academic-assessment</loc>
+    <lastmod>2025-07-09T16:16:24.207Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://learnwithorin.com/blog/map-state-tests-guide</loc>
-    <lastmod>2025-07-09T16:14:46.742Z</lastmod>
+    <loc>https://learnwithorin.com/blog/academic-assessment/understanding-rit-scores</loc>
+    <lastmod>2025-07-09T16:16:24.207Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://learnwithorin.com/blog/math-survival-guide</loc>
-    <lastmod>2025-07-09T16:14:46.742Z</lastmod>
+    <loc>https://learnwithorin.com/blog/academic-assessment/state-test-prep-strategies</loc>
+    <lastmod>2025-07-09T16:16:24.207Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://learnwithorin.com/blog/math-foundations</loc>
+    <lastmod>2025-07-09T16:16:24.207Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://learnwithorin.com/blog/math-foundations/algebra-readiness-checklist</loc>
+    <lastmod>2025-07-09T16:16:24.207Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://learnwithorin.com/blog/math-foundations/fraction-mastery-guide</loc>
+    <lastmod>2025-07-09T16:16:24.207Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://learnwithorin.com/blog/advanced-academics</loc>
+    <lastmod>2025-07-09T16:16:24.207Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://learnwithorin.com/blog/advanced-academics/dual-enrollment-guide</loc>
+    <lastmod>2025-07-09T16:16:24.207Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://learnwithorin.com/blog/advanced-academics/gifted-program-navigation</loc>
+    <lastmod>2025-07-09T16:16:24.207Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
