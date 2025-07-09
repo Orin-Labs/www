@@ -518,7 +518,7 @@ export function MathSurvivalGuide() {
           try several to find what resonates with your student:
         </p>
 
-        <BlogCardGrid cards={youtubeChannels} />
+        <BlogCardGrid cards={youtubeChannels} columns={2} />
 
         <p className="mt-6">
           <strong>Pro tip:</strong> Watch videos together initially, then
