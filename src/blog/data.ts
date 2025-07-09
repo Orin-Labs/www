@@ -29,7 +29,7 @@ export interface BlogPost {
 export const POSTS: BlogPost[] = [
   {
     id: "academic-assessment-pillar",
-    title: "Guide to MAP and State Tests",
+    title: "MAP & State Tests",
     excerpt:
       "The complete guide to understanding, preparing for, and using assessment data to support your middle schooler.",
     date: new Date("2025-06-17"),
