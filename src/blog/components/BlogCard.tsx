@@ -4,7 +4,7 @@ import { HTMLMotionProps, motion } from "framer-motion";
 import { ArrowRightIcon } from "lucide-react";
 import { Link } from "react-router-dom";
 
-import { BlogPost, getReadingTime } from "@blog/data";
+import { BlogPost } from "@blog/data";
 import { cn } from "@utils";
 
 interface BlogCardProps extends HTMLMotionProps<"button"> {
@@ -62,7 +62,7 @@ export function BlogCard({ post, className, ...props }: BlogCardProps) {
               <p className="text-gray-200 text-sm md:text-md">
                 {post.underConstruction
                   ? "Coming soon"
-                  : `${getReadingTime(post)} min read`}
+                  : `${post.readingTime} min read`}
               </p>
               {!post.underConstruction && (
                 <p className="text-gray-200 text-sm md:text-md">
