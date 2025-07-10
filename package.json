@@ -64,7 +64,7 @@
     "serve": "NODE_ENV=production tsx server.js",
     "test": "vite test",
     "eject": "react-scripts eject",
-    "generate-sitemap": "node scripts/generate-sitemap.js",
+    "generate-sitemap": "tsx scripts/generate-sitemap.js",
     "build:sitemap": "yarn generate-sitemap && yarn build"
   },
   "eslintConfig": {

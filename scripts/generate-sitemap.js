@@ -1,46 +1,34 @@
-const fs = require("fs");
-const path = require("path");
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-// Read blog data to dynamically generate blog post routes
-const getBlogRoutes = () => {
-  try {
-    const blogDataPath = path.join(__dirname, "../src/blog/data.ts");
-    const blogDataContent = fs.readFileSync(blogDataPath, "utf8");
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-    // Extract all slugs from the blog data file
-    // This regex matches: slug: "some-slug" or slug: "category/some-slug"
-    const slugMatches = blogDataContent.match(/slug: ["']([^"']+)["']/g);
+// Import blog metadata directly
+const getBlogRoutes = async () => {
+  const { BLOG_META } = await import("../src/blog/meta-data.ts");
 
-    if (slugMatches) {
-      const slugs = slugMatches.map(
-        (match) => match.match(/slug: ["']([^"']+)["']/)[1]
-      );
-      return slugs.map((slug) => `/blog/${slug}`);
+  const routes = [];
+
+  // Process each pillar
+  for (const pillar of BLOG_META) {
+    // Add the pillar route
+    routes.push(`/blog/${pillar.slug}`);
+
+    // Add sub-article routes if they exist
+    if (pillar.subArticles) {
+      for (const subArticle of pillar.subArticles) {
+        routes.push(`/blog/${pillar.slug}/${subArticle.slug}`);
+      }
     }
-
-    return [];
-  } catch (error) {
-    console.warn("Could not read blog data file, using fallback routes");
-    return [
-      "/blog/academic-assessment",
-      "/blog/academic-assessment/understanding-rit-scores",
-      "/blog/academic-assessment/state-test-prep-strategies",
-      "/blog/math-foundations",
-      "/blog/math-foundations/algebra-readiness-checklist",
-      "/blog/math-foundations/fraction-mastery-guide",
-      "/blog/advanced-academics",
-      "/blog/advanced-academics/dual-enrollment-guide",
-      "/blog/advanced-academics/gifted-program-navigation",
-    ];
   }
+
+  return routes;
 };
 
 // Define your static routes
 const staticRoutes = ["/", "/privacy", "/blog"];
-
-// Get all routes (static + dynamic blog routes)
-const blogRoutes = getBlogRoutes();
-const allRoutes = [...staticRoutes, ...blogRoutes];
 
 // Generate sitemap XML
 const generateSitemap = (baseUrl, routes) => {
@@ -61,13 +49,27 @@ ${routes
   return sitemap;
 };
 
-// Generate and save sitemap
-const baseUrl = "https://learnwithorin.com";
-const sitemapContent = generateSitemap(baseUrl, allRoutes);
-const outputPath = path.join(__dirname, "../public/sitemap.xml");
+// Main function to generate sitemap
+const main = async () => {
+  try {
+    // Get all routes (static + dynamic blog routes)
+    const blogRoutes = await getBlogRoutes();
+    const allRoutes = [...staticRoutes, ...blogRoutes];
 
-fs.writeFileSync(outputPath, sitemapContent);
-console.log("Sitemap generated successfully at ./public/sitemap.xml");
-console.log(`Generated sitemap with ${allRoutes.length} routes`);
-console.log(`Static routes: ${staticRoutes.length}`);
-console.log(`Blog routes: ${blogRoutes.length}`);
+    // Generate and save sitemap
+    const baseUrl = "https://learnwithorin.com";
+    const sitemapContent = generateSitemap(baseUrl, allRoutes);
+    const outputPath = path.join(__dirname, "../public/sitemap.xml");
+
+    fs.writeFileSync(outputPath, sitemapContent);
+    console.log("Sitemap generated successfully at ./public/sitemap.xml");
+    console.log(`Generated sitemap with ${allRoutes.length} routes`);
+    console.log(`Static routes: ${staticRoutes.length}`);
+    console.log(`Blog routes: ${blogRoutes.length}`);
+  } catch (error) {
+    console.error("Error generating sitemap:", error);
+    process.exit(1);
+  }
+};
+
+main();
