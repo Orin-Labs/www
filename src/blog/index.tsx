@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 
-import { BlogCard } from "@blog/components";
+import { BlogCard, SEOHead } from "@blog/components";
 import { FloatingNav, Footer } from "@components";
 
 import { getAllBlogPosts } from "./data";
@@ -51,6 +51,22 @@ export default function BlogIndex() {
     <div className="min-h-screen bg-white">
       {/* Floating Navigation */}
       <FloatingNav isVisible={true} />
+
+      <SEOHead
+        post={{
+          name: "Orin's Blog",
+          excerpt:
+            "Comprehensive guides and expert insights for parents navigating middle school academics.",
+          date: new Date(),
+          shortName: "Orin's Blog",
+          slug: "orin-blog",
+          component: () => null,
+          keywords: ["blog", "middle school", "academics", "parenting"],
+          author: "Orin",
+          readingTime: 0,
+          id: "orin-blog",
+        }}
+      />
 
       {/* Main Content */}
       <div className="w-full pt-48">
