@@ -3,7 +3,10 @@ import React from 'react';
 import { ChevronRightIcon } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
-import { BLOG_META } from '@blog/meta-data';
+import {
+  BLOG_META,
+  getFullSlug,
+} from '@blog/meta-data';
 import {
   cn,
   getBySlug,
@@ -39,17 +42,17 @@ export function Breadcrumbs({ currentSlug, className }: BreadcrumbsProps) {
     // This is a sub-article, show: Blog > Parent Pillar > Current Article
     breadcrumbItems.push({
       label: parentPillar.shortName,
-      href: `/blog/${parentPillar.slug}`,
+      href: `/blog/${getFullSlug(parentPillar.slug)}`,
     });
     breadcrumbItems.push({
       label: currentPost.shortName,
-      href: `/blog/${currentPost.slug}`,
+      href: `/blog/${getFullSlug(currentPost.slug)}`,
     });
   } else {
     // This is a pillar post, show: Blog > Current Pillar
     breadcrumbItems.push({
       label: currentPost.shortName,
-      href: `/blog/${currentPost.slug}`,
+      href: `/blog/${getFullSlug(currentPost.slug)}`,
     });
   }
 

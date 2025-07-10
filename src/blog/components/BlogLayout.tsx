@@ -20,7 +20,10 @@ import {
   getBySlug,
 } from '@utils';
 
-import { BLOG_META } from '../meta-data';
+import {
+  BLOG_META,
+  getFullSlug,
+} from '../meta-data';
 import { BlogCard } from './BlogCard';
 import { Breadcrumbs } from './Breadcrumbs';
 import { SocialShareButtons } from './SocialShareButtons';
@@ -41,7 +44,7 @@ export function BlogLayout({ children, className }: BlogLayoutProps) {
         blog_post_id: entry.id,
         blog_post_name: entry.name,
         blog_post_short_name: entry.shortName,
-        blog_post_slug: entry.slug,
+        blog_post_slug: getFullSlug(entry.slug),
         blog_post_author: entry.author,
         blog_post_date: entry.date.toISOString(),
         blog_post_reading_time: entry.readingTime,
@@ -193,7 +196,7 @@ export function BlogLayout({ children, className }: BlogLayoutProps) {
                 title={entry?.name}
                 url={window.location.href}
                 description={entry?.excerpt}
-                blogPostId={entry?.slug}
+                blogPostId={getFullSlug(entry.slug)}
               />
             )}
           </main>
@@ -202,7 +205,7 @@ export function BlogLayout({ children, className }: BlogLayoutProps) {
         {/* Related Posts */}
         <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {getRelatedPosts(entry).map((article) => (
-            <BlogCard post={article} />
+            <BlogCard post={article} key={getFullSlug(article.slug)} />
           ))}
         </div>
       </div>

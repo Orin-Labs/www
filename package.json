@@ -59,7 +59,7 @@
     "zod-to-json-schema": "^3.24.2"
   },
   "scripts": {
-    "dev": "tsx server.js",
+    "dev": "vite",
     "build": "vite build --outDir dist/client",
     "serve": "NODE_ENV=production tsx server.js",
     "test": "vite test",

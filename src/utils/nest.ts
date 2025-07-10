@@ -1,3 +1,5 @@
+import { getFullSlug } from '@/blog/meta-data';
+
 export function flattenItems<T extends { subArticles?: T[] }>(items: T[]): T[] {
   const flattened: T[] = [];
 
@@ -16,7 +18,7 @@ export function getBySlug<T extends { slug: string; subArticles?: T[] }>(
   items: T[]
 ): T | null {
   for (const item of items) {
-    if (item.slug === slug) {
+    if (item.slug === slug || getFullSlug(item.slug) === slug) {
       return item;
     }
     if (item.subArticles) {

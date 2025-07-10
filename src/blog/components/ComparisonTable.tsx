@@ -24,7 +24,7 @@ export const ComparisonTable: React.FC<ComparisonTableProps> = ({
 }) => {
   return (
     <div className={className}>
-      <table className="w-full">
+      <table className="w-full rounded-lg overflow-hidden">
         <thead>
           <tr className="bg-gray-900 text-white">
             {columns.map((column, index) => (
@@ -51,13 +51,7 @@ export const ComparisonTable: React.FC<ComparisonTableProps> = ({
                     "border-b border-r  px-4 py-3",
                     column.className || "",
                     index === 0 && "border-t",
-                    colIndex === 0 && "border-l",
-                    index === data.length - 1 &&
-                      colIndex === 0 &&
-                      "rounded-bl-lg",
-                    index === data.length - 1 &&
-                      colIndex === columns.length - 1 &&
-                      "rounded-br-lg"
+                    colIndex === 0 && "border-l"
                   )}
                 >
                   {parseLinksInText(row[column.key])}

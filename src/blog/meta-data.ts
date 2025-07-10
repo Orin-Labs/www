@@ -50,8 +50,7 @@ export const BLOG_META: BlogMeta[] = [
         date: new Date("2025-06-18"),
         author: "Education Team",
         readingTime: 8,
-        slug: "map-testing-state-assessments-complete-guide/map-score-ranges-explained",
-        underConstruction: true,
+        slug: "map-score-ranges-explained",
         keywords: [
           "map test scores chart",
           "RIT scores",
@@ -75,8 +74,7 @@ export const BLOG_META: BlogMeta[] = [
         date: new Date("2025-06-19"),
         author: "Education Team",
         readingTime: 7,
-        slug: "map-testing-state-assessments-complete-guide/growth-vs-proficiency",
-        underConstruction: true,
+        slug: "growth-vs-proficiency",
         keywords: [
           "map test growth norms",
           "growth percentiles",
@@ -101,7 +99,7 @@ export const BLOG_META: BlogMeta[] = [
         author: "Education Team",
         image: "/blog/pawel-czerwinski-OOFSqPWjCt0-unsplash.jpg",
         readingTime: 8,
-        slug: "map-testing-state-assessments-complete-guide/understanding-rit-scores-guide",
+        slug: "understanding-rit-scores-guide",
         keywords: [
           "RIT scores",
           "MAP testing",
@@ -124,7 +122,7 @@ export const BLOG_META: BlogMeta[] = [
         date: new Date("2025-06-21"),
         author: "Education Team",
         readingTime: 6,
-        slug: "map-testing-state-assessments-complete-guide/seventh-grade-map-practice-pdf",
+        slug: "seventh-grade-map-practice-pdf",
         underConstruction: true,
         keywords: [
           "map practice test 7th grade",
@@ -149,7 +147,7 @@ export const BLOG_META: BlogMeta[] = [
         date: new Date("2025-06-22"),
         author: "Education Team",
         readingTime: 5,
-        slug: "map-testing-state-assessments-complete-guide/nwea-to-state-test-converter",
+        slug: "nwea-to-state-test-converter",
         keywords: [
           "map to staar conversion",
           "NWEA converter",
@@ -173,8 +171,7 @@ export const BLOG_META: BlogMeta[] = [
         date: new Date("2025-06-23"),
         author: "Education Team",
         readingTime: 6,
-        slug: "map-testing-state-assessments-complete-guide/test-day-nutrition-sleep-checklist",
-        underConstruction: true,
+        slug: "test-day-nutrition-sleep-checklist",
         keywords: [
           "best breakfast before test",
           "test day nutrition",
@@ -198,7 +195,7 @@ export const BLOG_META: BlogMeta[] = [
         date: new Date("2025-06-24"),
         author: "Education Team",
         readingTime: 8,
-        slug: "map-testing-state-assessments-complete-guide/discussing-test-results-without-stress",
+        slug: "discussing-test-results-without-stress",
         keywords: [
           "how to talk about test scores",
           "test anxiety",
@@ -235,7 +232,7 @@ export const BLOG_META: BlogMeta[] = [
           "assessment readiness",
         ],
         image: "/blog/susan-wilkinson-F8tGmG1T2rg-unsplash.jpg",
-        slug: "map-testing-state-assessments-complete-guide/state-test-prep-strategies",
+        slug: "state-test-prep-strategies",
       },
     ],
   },
@@ -286,7 +283,7 @@ export const BLOG_META: BlogMeta[] = [
           "mathematical prerequisites",
           "algebra transition",
         ],
-        slug: "middle-school-math-foundations-guide/algebra-readiness-checklist-middle-school",
+        slug: "algebra-readiness-checklist-middle-school",
       },
       {
         id: "fraction-mastery-guide",
@@ -311,7 +308,7 @@ export const BLOG_META: BlogMeta[] = [
         ],
         image: "/blog/blog-1.png",
         readingTime: 9,
-        slug: "middle-school-math-foundations-guide/fraction-mastery-guide-middle-school",
+        slug: "fraction-mastery-guide-middle-school",
       },
       {
         id: "fractions-with-pizza-slices-video",
@@ -336,7 +333,7 @@ export const BLOG_META: BlogMeta[] = [
           "fraction activities",
         ],
         image: "/blog/bia-w-a-PO8Woh4YBD8-unsplash.jpg",
-        slug: "middle-school-math-foundations-guide/fractions-with-pizza-slices-video",
+        slug: "fractions-with-pizza-slices-video",
       },
       {
         id: "integer-rules-cheat-sheet",
@@ -361,7 +358,7 @@ export const BLOG_META: BlogMeta[] = [
           "number operations",
         ],
         image: "/blog/sebastian-svenson-d2w-_1LJioQ-unsplash.jpg",
-        slug: "middle-school-math-foundations-guide/integer-rules-cheat-sheet",
+        slug: "integer-rules-cheat-sheet",
       },
       {
         id: "math-anxiety-solutions",
@@ -386,7 +383,7 @@ export const BLOG_META: BlogMeta[] = [
           "math success",
         ],
         image: "/blog/susan-wilkinson-u8ZT4aQUMhs-unsplash.jpg",
-        slug: "middle-school-math-foundations-guide/math-anxiety-solutions",
+        slug: "math-anxiety-solutions",
       },
       {
         id: "order-of-operations-games",
@@ -411,7 +408,7 @@ export const BLOG_META: BlogMeta[] = [
           "math engagement",
         ],
         image: "/blog/pawel-czerwinski-ERcQ81KaX9g-unsplash.jpg",
-        slug: "middle-school-math-foundations-guide/order-of-operations-games",
+        slug: "order-of-operations-games",
       },
       {
         id: "pre-algebra-vocabulary-flashcards",
@@ -436,7 +433,7 @@ export const BLOG_META: BlogMeta[] = [
           "math literacy",
         ],
         image: "/blog/omid-armin-b50MRxwg_gk-unsplash.jpg",
-        slug: "middle-school-math-foundations-guide/pre-algebra-vocabulary-flashcards",
+        slug: "pre-algebra-vocabulary-flashcards",
       },
       {
         id: "top-youtube-channels-eighth-grade-math",
@@ -461,7 +458,7 @@ export const BLOG_META: BlogMeta[] = [
           "educational YouTube",
         ],
         image: "/blog/mithushi-arya-lXOX3-yTvyQ-unsplash.jpg",
-        slug: "middle-school-math-foundations-guide/top-youtube-channels-eighth-grade-math",
+        slug: "top-youtube-channels-eighth-grade-math",
       },
       {
         id: "weekly-study-planner-template",
@@ -486,7 +483,7 @@ export const BLOG_META: BlogMeta[] = [
           "academic planning",
         ],
         image: "/blog/susan-wilkinson-jaExxGtbfFA-unsplash.jpg",
-        slug: "middle-school-math-foundations-guide/weekly-study-planner-template",
+        slug: "weekly-study-planner-template",
       },
     ],
   },
@@ -512,7 +509,7 @@ export const BLOG_META: BlogMeta[] = [
       "academic enrichment",
     ],
     image: "/blog/john-sin-Q5rtHn9I4oA-unsplash.jpg",
-    slug: "stem-electives-high-school-credit-middle-school",
+    slug: "advanced-academics-middle-school-guide",
     subArticles: [
       {
         id: "dual-enrollment-guide",
@@ -539,7 +536,7 @@ export const BLOG_META: BlogMeta[] = [
           "college readiness",
         ],
         image: "/blog/sebastian-svenson-LpbyDENbQQg-unsplash.jpg",
-        slug: "advanced-academics-middle-school-guide/dual-enrollment-guide-middle-school",
+        slug: "dual-enrollment-guide-middle-school",
       },
       {
         id: "gifted-program-navigation",
@@ -564,7 +561,7 @@ export const BLOG_META: BlogMeta[] = [
           "intellectual giftedness",
         ],
         image: "/blog/laura-vinck-Hyu76loQLdk-unsplash.jpg",
-        slug: "advanced-academics-middle-school-guide/gifted-program-navigation-guide",
+        slug: "gifted-program-navigation",
       },
       {
         id: "algebra-vs-math-8-flowchart",
@@ -589,7 +586,7 @@ export const BLOG_META: BlogMeta[] = [
           "math curriculum",
         ],
         image: "/blog/yassine-ait-tahit-NDtucHeDnWc-unsplash.jpg",
-        slug: "stem-electives-high-school-credit-middle-school/algebra-vs-math-8-flowchart",
+        slug: "algebra-vs-math-8-flowchart",
       },
       {
         id: "gpa-starts-eighth-grade",
@@ -614,7 +611,7 @@ export const BLOG_META: BlogMeta[] = [
           "academic records",
         ],
         image: "/blog/omid-armin-b50MRxwg_gk-unsplash.jpg",
-        slug: "stem-electives-high-school-credit-middle-school/gpa-starts-eighth-grade",
+        slug: "gpa-starts-eighth-grade",
       },
       {
         id: "online-foreign-language-credits",
@@ -639,7 +636,7 @@ export const BLOG_META: BlogMeta[] = [
           "credit acceleration",
         ],
         image: "/blog/susan-wilkinson-F8tGmG1T2rg-unsplash.jpg",
-        slug: "stem-electives-high-school-credit-middle-school/online-foreign-language-credits",
+        slug: "online-foreign-language-credits",
       },
       {
         id: "pltw-vs-first-robotics",
@@ -664,7 +661,7 @@ export const BLOG_META: BlogMeta[] = [
           "engineering skills",
         ],
         image: "/blog/milad-fakurian-PGdW_bHDbpI-unsplash.jpg",
-        slug: "stem-electives-high-school-credit-middle-school/pltw-vs-first-robotics",
+        slug: "pltw-vs-first-robotics",
       },
       {
         id: "stem-portfolio-github-slides",
@@ -689,7 +686,7 @@ export const BLOG_META: BlogMeta[] = [
           "STEM documentation",
         ],
         image: "/blog/john-sin-Q5rtHn9I4oA-unsplash.jpg",
-        slug: "stem-electives-high-school-credit-middle-school/stem-portfolio-github-slides",
+        slug: "stem-portfolio-github-slides",
       },
       {
         id: "summer-programs-high-school-credit",
@@ -714,8 +711,70 @@ export const BLOG_META: BlogMeta[] = [
           "educational programs",
         ],
         image: "/blog/laura-vinck-Hyu76loQLdk-unsplash.jpg",
-        slug: "stem-electives-high-school-credit-middle-school/summer-programs-high-school-credit",
+        slug: "summer-programs-high-school-credit",
       },
     ],
   },
 ];
+
+export function getFullSlug(slug: string): string {
+  // Check if this is a top-level pillar article
+  for (const pillar of BLOG_META) {
+    if (pillar.slug === slug) {
+      return slug;
+    }
+  }
+
+  // Recursively search for sub-articles
+  for (const pillar of BLOG_META) {
+    if (pillar.subArticles) {
+      for (const subArticle of pillar.subArticles) {
+        if (subArticle.slug === slug) {
+          // Found as a sub-article, return parent-slug/sub-slug
+          return `${pillar.slug}/${slug}`;
+        }
+
+        // If sub-article has its own sub-articles, search recursively
+        if (subArticle.subArticles) {
+          const nestedResult = getFullSlugRecursive(
+            slug,
+            subArticle.subArticles,
+            `${pillar.slug}/${subArticle.slug}`
+          );
+          if (nestedResult) {
+            return nestedResult;
+          }
+        }
+      }
+    }
+  }
+
+  // If not found in any nested structure, return the original slug
+  return slug;
+}
+
+// Helper function for recursive search in nested sub-articles
+function getFullSlugRecursive(
+  targetSlug: string,
+  articles: BlogMeta[],
+  currentPath: string
+): string | null {
+  for (const article of articles) {
+    if (article.slug === targetSlug) {
+      return `${currentPath}/${targetSlug}`;
+    }
+
+    if (article.subArticles) {
+      const nestedResult = getFullSlugRecursive(
+        targetSlug,
+        article.subArticles,
+        `${currentPath}/${article.slug}`
+      );
+      if (nestedResult) {
+        return nestedResult;
+      }
+    }
+  }
+
+  return null;
+}

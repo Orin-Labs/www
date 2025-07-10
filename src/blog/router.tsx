@@ -8,7 +8,10 @@ import {
 
 import { getBySlug } from '@/utils';
 import BlogIndex from '@blog/index';
-import { BLOG_META } from '@blog/meta-data';
+import {
+  BLOG_META,
+  getFullSlug,
+} from '@blog/meta-data';
 
 import { getRenderMap } from './data';
 
@@ -55,10 +58,9 @@ function BlogPost() {
   // Remove '/blog/' from the path to get the slug
   const slug = location.pathname.replace("/blog/", "");
   const blogPost = getBySlug(slug, BLOG_META);
-  console.log(blogPost);
 
   if (blogPost) {
-    const Component = getRenderMap(blogPost.slug);
+    const Component = getRenderMap(getFullSlug(blogPost.slug));
     if (Component) {
       return <Component />;
     } else {

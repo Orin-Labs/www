@@ -5,6 +5,7 @@ import { flattenItems } from '@/utils/nest';
 import {
   BLOG_META,
   BlogMeta,
+  getFullSlug,
 } from './meta-data';
 import {
   AlgebraReadinessChecklist,
@@ -73,10 +74,10 @@ export const RENDER_MAP: RenderMap = {
   },
 
   // STEM Electives / Advanced Academics Pillar
-  "stem-electives-high-school-credit-middle-school": {
+  "advanced-academics-middle-school-guide": {
     index: STEMElectivesGuide,
     "dual-enrollment-guide-middle-school": DualEnrollmentGuide,
-    "gifted-program-navigation-guide": GiftedProgramNavigation,
+    "gifted-program-navigation": GiftedProgramNavigation,
     "algebra-vs-math-8-flowchart": AlgebraVsMath8Flowchart,
     "gpa-starts-eighth-grade": GPAStartsEighthGrade,
     "online-foreign-language-credits": OnlineForeignLanguageCredits,
@@ -186,3 +187,44 @@ export const getRelatedPosts = (post: BlogMeta): BlogMeta[] => {
   // Sort by score (highest first) and return the posts
   return scoredPosts.sort((a, b) => b.score - a.score).map((item) => item.post);
 };
+
+// Make sure that every slug from metadata is in the render map
+const allSlugs = flattenItems(BLOG_META).map((post) => getFullSlug(post.slug));
+
+// Recursively extract all slug paths from the render map
+const extractRenderMapSlugs = (
+  map: RenderMap | React.ComponentType,
+  basePath: string = ""
+): string[] => {
+  if (typeof map === "function") {
+    return [basePath];
+  }
+
+  const slugs: string[] = [];
+
+  for (const [key, value] of Object.entries(map as RenderMap)) {
+    const currentPath = basePath ? `${basePath}/${key}` : key;
+
+    if (key === "index") {
+      // For index, use the basePath without the "/index" suffix
+      slugs.push(basePath);
+    } else if (typeof value === "function") {
+      // For components, add the full path
+      slugs.push(currentPath);
+    } else {
+      // For nested objects, recurse
+      slugs.push(...extractRenderMapSlugs(value, currentPath));
+    }
+  }
+
+  return slugs;
+};
+
+const allRenderMapSlugs = extractRenderMapSlugs(RENDER_MAP);
+const missingSlugs = allSlugs.filter(
+  (slug) => !allRenderMapSlugs.includes(slug)
+);
+
+if (missingSlugs.length > 0) {
+  console.error("Missing slugs in render map:", missingSlugs);
+}

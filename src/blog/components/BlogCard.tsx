@@ -9,7 +9,10 @@ import { Link } from 'react-router-dom';
 
 import { cn } from '@utils';
 
-import { BlogMeta } from '../meta-data';
+import {
+  BlogMeta,
+  getFullSlug,
+} from '../meta-data';
 
 interface BlogCardProps extends HTMLMotionProps<"button"> {
   post: BlogMeta;
@@ -17,7 +20,10 @@ interface BlogCardProps extends HTMLMotionProps<"button"> {
 
 export function BlogCard({ post, className, ...props }: BlogCardProps) {
   return (
-    <Link to={`/blog/${post.slug}`} className={cn("h-full", className)}>
+    <Link
+      to={`/blog/${getFullSlug(post.slug)}`}
+      className={cn("h-full", className)}
+    >
       <motion.button
         className={cn(
           "min-h-72 h-full relative rounded-lg border overflow-hidden"
