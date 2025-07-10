@@ -3,11 +3,11 @@ import React from 'react';
 import { ChevronRightIcon } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
+import { BLOG_META } from '@blog/meta-data';
 import {
-  getBlogPostBySlug,
-  POSTS,
-} from '@blog/data';
-import { cn } from '@utils';
+  cn,
+  getBySlug,
+} from '@utils';
 
 interface BreadcrumbsProps {
   currentSlug: string;
@@ -15,7 +15,7 @@ interface BreadcrumbsProps {
 }
 
 export function Breadcrumbs({ currentSlug, className }: BreadcrumbsProps) {
-  const currentPost = getBlogPostBySlug(currentSlug);
+  const currentPost = getBySlug(currentSlug, BLOG_META);
 
   if (!currentPost) {
     return null;
@@ -25,7 +25,7 @@ export function Breadcrumbs({ currentSlug, className }: BreadcrumbsProps) {
   let parentPillar = null;
   let isSubArticle = false;
 
-  for (const pillar of POSTS) {
+  for (const pillar of BLOG_META) {
     if (pillar.subArticles?.some((sub) => sub.slug === currentSlug)) {
       parentPillar = pillar;
       isSubArticle = true;

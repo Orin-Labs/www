@@ -1,9 +1,14 @@
-import React from "react";
+import React from 'react';
 
+import { flattenItems } from '@/utils/nest';
+
+import {
+  BLOG_META,
+  BlogMeta,
+} from './meta-data';
 import {
   AlgebraReadinessChecklist,
   AlgebraVsMath8Flowchart,
-  DiscussingTestResultsWithoutStress,
   DualEnrollmentGuide,
   FractionMasteryGuide,
   FractionsWithPizzaSlicesVideo,
@@ -14,833 +19,71 @@ import {
   MAPScoreRangesExplained,
   MAPStateTestsCompleteGuide,
   MathAnxietySolutions,
-  MathSurvivalGuide,
-  NWEAToStateTestConverter,
   OnlineForeignLanguageCredits,
   OrderOfOperationsGames,
   PLTWVsFirstRobotics,
   PreAlgebraVocabularyFlashcards,
   SeventhGradeMAPPracticePDF,
-  StateTestPrepStrategies,
-  STEMElectivesGuide,
   STEMPortfolioGitHubSlides,
   SummerProgramsHighSchoolCredit,
-  TestDayNutritionSleepChecklist,
   TopYouTubeChannelsEighthGradeMath,
   UnderstandingRITScores,
   WeeklyStudyPlannerTemplate,
-} from "./pages";
+} from './pages/index';
 
-export interface BlogPost {
-  id: string;
-  shortName: string; // Used for blog cards
-  name: string; // Used for layout and SEO (longer version)
-  excerpt: string;
-  date: Date;
-  author: string;
-  readingTime: number; // in minutes
-  slug: string;
+export interface BlogPost extends BlogMeta {
   component: React.ComponentType;
-  keywords: string[];
-  image?: string;
-  underConstruction?: boolean; // Flag for posts still being developed
-  subArticles?: BlogPost[];
 }
 
-// Placeholder pillar posts (to be replaced when content is ready)
-export const POSTS: BlogPost[] = [
-  {
-    id: "academic-assessment-pillar",
-    shortName: "MAP & State Tests",
-    name: "All About MAP & State Tests in Grades 6-8",
-    excerpt:
-      "The complete guide to understanding, preparing for, and using assessment data to support your middle schooler.",
-    date: new Date("2025-06-17"),
-    author: "Education Team",
-    readingTime: 15,
-    slug: "map-testing-state-assessments-complete-guide",
-    keywords: [
-      "MAP testing",
-      "state assessments",
-      "academic assessment",
-      "middle school testing",
-      "RIT scores",
-      "educational assessment",
-      "test preparation",
-      "academic progress",
-      "student evaluation",
-      "assessment data",
-    ],
-    image: "/blog/milad-fakurian-PGdW_bHDbpI-unsplash.jpg",
-    component: MAPStateTestsCompleteGuide,
-    subArticles: [
-      {
-        id: "map-score-ranges-explained",
-        shortName: "Score Ranges",
-        name: "MAP Score Ranges Explained (RIT 200-250)",
-        excerpt:
-          "Decode the numbers: Complete guide to MAP score ranges and what they mean for your middle schooler's academic growth.",
-        date: new Date("2025-06-18"),
-        author: "Education Team",
-        readingTime: 8,
-        slug: "map-testing-state-assessments-complete-guide/map-score-ranges-explained",
-        underConstruction: true,
-        keywords: [
-          "map test scores chart",
-          "RIT scores",
-          "MAP score ranges",
-          "academic benchmarks",
-          "score interpretation",
-          "educational measurement",
-          "academic achievement",
-          "progress tracking",
-          "learning assessment",
-          "NWEA scores",
-        ],
-        image: "/blog/pawel-czerwinski-prMn9KINLtI-unsplash.jpg",
-        component: MAPScoreRangesExplained,
-      },
-      {
-        id: "growth-vs-proficiency",
-        shortName: "Growth vs Proficiency",
-        name: "Growth vs Proficiency—Which Matters?",
-        excerpt:
-          "Understand percentile vs gain: Which matters more for your student's academic progress and how to use both metrics effectively.",
-        date: new Date("2025-06-19"),
-        author: "Education Team",
-        readingTime: 7,
-        slug: "map-testing-state-assessments-complete-guide/growth-vs-proficiency",
-        underConstruction: true,
-        keywords: [
-          "map test growth norms",
-          "growth percentiles",
-          "achievement percentiles",
-          "academic growth",
-          "progress measurement",
-          "educational assessment",
-          "student development",
-          "learning metrics",
-          "academic progress",
-          "assessment data",
-        ],
-        image: "/blog/pawel-czerwinski-Tyg0rVhOTrE-unsplash.jpg",
-        component: GrowthVsProficiency,
-      },
-      {
-        id: "understanding-rit-scores",
-        shortName: "RIT Scores",
-        name: "Understanding RIT Scores: A Complete Guide for Parents",
-        excerpt:
-          "Deep dive into what RIT scores really mean and how to use them to support your student's learning journey.",
-        date: new Date("2025-06-20"),
-        author: "Education Team",
-        image: "/blog/pawel-czerwinski-OOFSqPWjCt0-unsplash.jpg",
-        readingTime: 8,
-        slug: "map-testing-state-assessments-complete-guide/understanding-rit-scores-guide",
-        keywords: [
-          "RIT scores",
-          "MAP testing",
-          "academic growth",
-          "progress tracking",
-          "student assessment",
-          "educational measurement",
-          "academic achievement",
-          "score interpretation",
-          "learning progress",
-          "NWEA assessment",
-        ],
-        component: UnderstandingRITScores,
-      },
-      {
-        id: "seventh-grade-map-practice-pdf",
-        shortName: "7th Grade Practice",
-        name: "Free 7th-Grade MAP Practice PDF",
-        excerpt:
-          "Free downloadable MAP practice test for 7th graders with printable worksheets to build confidence and test familiarity.",
-        date: new Date("2025-06-21"),
-        author: "Education Team",
-        readingTime: 6,
-        slug: "map-testing-state-assessments-complete-guide/seventh-grade-map-practice-pdf",
-        underConstruction: true,
-        keywords: [
-          "map practice test 7th grade",
-          "MAP test prep",
-          "practice worksheets",
-          "test preparation",
-          "printable practice",
-          "assessment preparation",
-          "test familiarity",
-          "study materials",
-          "practice tests",
-          "academic preparation",
-        ],
-        image: "/blog/susan-wilkinson-9UlalA_5VYQ-unsplash.jpg",
-        component: SeventhGradeMAPPracticePDF,
-      },
-      {
-        id: "nwea-to-state-test-converter",
-        shortName: "Score Converter",
-        name: "NWEA to State-Test Score Converter",
-        excerpt:
-          "Interactive tool to convert MAP RIT scores to state test predictions including STAAR, PARCC, and other assessments.",
-        date: new Date("2025-06-22"),
-        author: "Education Team",
-        readingTime: 5,
-        slug: "map-testing-state-assessments-complete-guide/nwea-to-state-test-converter",
-        keywords: [
-          "map to staar conversion",
-          "NWEA converter",
-          "state test prediction",
-          "score conversion",
-          "assessment correlation",
-          "test score conversion",
-          "educational measurement",
-          "academic assessment",
-          "score interpretation",
-          "test comparison",
-        ],
-        image: "/blog/pawel-czerwinski-ruJm3dBXCqw-unsplash.jpg",
-        component: NWEAToStateTestConverter,
-      },
-      {
-        id: "test-day-nutrition-sleep-checklist",
-        shortName: "Test Day Prep",
-        name: "Test-Day Nutrition & Sleep Checklist",
-        excerpt:
-          "Evidence-based nutrition and sleep strategies to optimize your student's test performance with downloadable checklists.",
-        date: new Date("2025-06-23"),
-        author: "Education Team",
-        readingTime: 6,
-        slug: "map-testing-state-assessments-complete-guide/test-day-nutrition-sleep-checklist",
-        underConstruction: true,
-        keywords: [
-          "best breakfast before test",
-          "test day nutrition",
-          "sleep before testing",
-          "test preparation",
-          "cognitive performance",
-          "test anxiety",
-          "test day strategies",
-          "academic performance",
-          "student wellness",
-          "test success",
-        ],
-        image: "/blog/ben-abo-nsvmLnUJOTA-unsplash.jpg",
-        component: TestDayNutritionSleepChecklist,
-      },
-      {
-        id: "discussing-test-results-without-stress",
-        shortName: "Discussing Results",
-        name: "How to Discuss Results Without Stressing Kids",
-        excerpt:
-          "Emotional guidance for discussing test scores with your middle schooler in ways that build confidence rather than create anxiety.",
-        date: new Date("2025-06-24"),
-        author: "Education Team",
-        readingTime: 8,
-        slug: "map-testing-state-assessments-complete-guide/discussing-test-results-without-stress",
-        keywords: [
-          "how to talk about test scores",
-          "test anxiety",
-          "growth mindset",
-          "parent communication",
-          "test score discussion",
-          "educational psychology",
-          "student confidence",
-          "academic support",
-          "emotional guidance",
-          "parent strategies",
-        ],
-        image: "/blog/susan-wilkinson-Ccf9Pdfo-LA-unsplash.jpg",
-        component: DiscussingTestResultsWithoutStress,
-      },
-      {
-        id: "state-test-prep-strategies",
-        shortName: "Test Prep",
-        name: "State Test Preparation Strategies for Middle School Success",
-        excerpt:
-          "Evidence-based strategies for preparing middle schoolers for state assessments without the stress.",
-        date: new Date("2025-06-25"),
-        author: "Education Team",
-        readingTime: 10,
-        keywords: [
-          "state testing",
-          "test preparation",
-          "assessment strategies",
-          "test anxiety",
-          "test taking skills",
-          "academic confidence",
-          "study strategies",
-          "test performance",
-          "preparation techniques",
-          "assessment readiness",
-        ],
-        image: "/blog/susan-wilkinson-F8tGmG1T2rg-unsplash.jpg",
-        slug: "map-testing-state-assessments-complete-guide/state-test-prep-strategies",
-        component: StateTestPrepStrategies,
-      },
-    ],
-  },
-  {
-    id: "math-foundations-pillar",
-    shortName: "Math Foundations",
-    name: "Middle School Math Foundations: Complete Parent Guide",
-    excerpt:
-      "Everything parents need to support their middle schooler through the challenging transition to advanced mathematics.",
-    date: new Date("2025-07-07"),
-    author: "Education Team",
-    keywords: [
-      "math foundations",
-      "middle school math",
-      "mathematical concepts",
-      "algebra preparation",
-      "math skills",
-      "mathematical thinking",
-      "math support",
-      "academic math",
-      "math learning",
-      "mathematical development",
-    ],
-    image: "/blog/allison-saeng-mAM2jcU8dvw-unsplash.jpg",
-    readingTime: 12,
-    slug: "middle-school-math-foundations-guide",
-    component: MathSurvivalGuide,
-    subArticles: [
-      {
-        id: "algebra-readiness-checklist",
-        shortName: "Algebra Ready?",
-        name: "Algebra Readiness Checklist for Middle School Students",
-        excerpt:
-          "A comprehensive assessment tool to determine if your middle schooler has the foundational skills for algebra success.",
-        date: new Date("2025-07-10"),
-        image: "/blog/jj-ying-7JX0-bfiuxQ-unsplash.jpg",
-        author: "Education Team",
-        readingTime: 12,
-        underConstruction: true,
-        keywords: [
-          "algebra readiness",
-          "pre-algebra",
-          "math preparation",
-          "algebra success",
-          "mathematical readiness",
-          "algebra foundations",
-          "math assessment",
-          "algebra skills",
-          "mathematical prerequisites",
-          "algebra transition",
-        ],
-        slug: "middle-school-math-foundations-guide/algebra-readiness-checklist-middle-school",
-        component: AlgebraReadinessChecklist,
-      },
-      {
-        id: "fraction-mastery-guide",
-        shortName: "Fractions",
-        name: "Fraction Mastery Guide for Middle School Success",
-        excerpt:
-          "Transform your student's relationship with fractions using visual strategies and real-world applications.",
-        date: new Date("2025-07-15"),
-        author: "Education Team",
-        underConstruction: true,
-        keywords: [
-          "fractions",
-          "fraction mastery",
-          "math concepts",
-          "visual learning",
-          "fraction skills",
-          "mathematical understanding",
-          "fraction strategies",
-          "math visualization",
-          "fraction applications",
-          "math foundations",
-        ],
-        image: "/blog/blog-1.png",
-        readingTime: 9,
-        slug: "middle-school-math-foundations-guide/fraction-mastery-guide-middle-school",
-        component: FractionMasteryGuide,
-      },
-      {
-        id: "fractions-with-pizza-slices-video",
-        shortName: "Pizza Fractions",
-        name: "Fractions with Pizza Slices Video Guide",
-        excerpt:
-          "Interactive video guide using pizza slices to make fractions visual and fun for middle school students.",
-        date: new Date("2025-07-16"),
-        author: "Education Team",
-        readingTime: 5,
-        underConstruction: true,
-        keywords: [
-          "fractions video",
-          "pizza fractions",
-          "visual fractions",
-          "math videos",
-          "fraction visualization",
-          "interactive math",
-          "fraction concepts",
-          "math learning",
-          "visual learning",
-          "fraction activities",
-        ],
-        image: "/blog/bia-w-a-PO8Woh4YBD8-unsplash.jpg",
-        slug: "middle-school-math-foundations-guide/fractions-with-pizza-slices-video",
-        component: FractionsWithPizzaSlicesVideo,
-      },
-      {
-        id: "integer-rules-cheat-sheet",
-        shortName: "Integer Rules",
-        name: "Integer Rules Cheat Sheet for Middle School",
-        excerpt:
-          "Downloadable cheat sheet with all the essential integer rules for addition, subtraction, multiplication, and division.",
-        date: new Date("2025-07-17"),
-        author: "Education Team",
-        readingTime: 4,
-        underConstruction: true,
-        keywords: [
-          "integer rules",
-          "negative numbers",
-          "positive numbers",
-          "integer operations",
-          "math cheat sheet",
-          "integer addition",
-          "integer subtraction",
-          "integer multiplication",
-          "integer division",
-          "number operations",
-        ],
-        image: "/blog/sebastian-svenson-d2w-_1LJioQ-unsplash.jpg",
-        slug: "middle-school-math-foundations-guide/integer-rules-cheat-sheet",
-        component: IntegerRulesCheatSheet,
-      },
-      {
-        id: "math-anxiety-solutions",
-        shortName: "Math Anxiety",
-        name: "Math Anxiety Solutions for Middle School Students",
-        excerpt:
-          "Practical strategies to help your middle schooler overcome math anxiety and build confidence in mathematics.",
-        date: new Date("2025-07-18"),
-        author: "Education Team",
-        readingTime: 8,
-        underConstruction: true,
-        keywords: [
-          "math anxiety",
-          "math confidence",
-          "math stress",
-          "math fear",
-          "math support",
-          "math mindset",
-          "math help",
-          "math strategies",
-          "math encouragement",
-          "math success",
-        ],
-        image: "/blog/susan-wilkinson-u8ZT4aQUMhs-unsplash.jpg",
-        slug: "middle-school-math-foundations-guide/math-anxiety-solutions",
-        component: MathAnxietySolutions,
-      },
-      {
-        id: "order-of-operations-games",
-        shortName: "Order of Operations",
-        name: "Order of Operations Games and Activities",
-        excerpt:
-          "Fun games and activities to help students master PEMDAS and the order of operations through interactive practice.",
-        date: new Date("2025-07-19"),
-        author: "Education Team",
-        readingTime: 6,
-        underConstruction: true,
-        keywords: [
-          "order of operations",
-          "PEMDAS",
-          "math games",
-          "math activities",
-          "order of operations practice",
-          "math fun",
-          "interactive math",
-          "math practice",
-          "math skills",
-          "math engagement",
-        ],
-        image: "/blog/pawel-czerwinski-ERcQ81KaX9g-unsplash.jpg",
-        slug: "middle-school-math-foundations-guide/order-of-operations-games",
-        component: OrderOfOperationsGames,
-      },
-      {
-        id: "pre-algebra-vocabulary-flashcards",
-        shortName: "Pre-Algebra Vocab",
-        name: "Pre-Algebra Vocabulary Flashcards",
-        excerpt:
-          "Downloadable flashcards covering essential pre-algebra vocabulary terms to build mathematical language skills.",
-        date: new Date("2025-07-20"),
-        author: "Education Team",
-        readingTime: 5,
-        underConstruction: true,
-        keywords: [
-          "pre-algebra vocabulary",
-          "math vocabulary",
-          "algebra terms",
-          "math flashcards",
-          "math language",
-          "mathematical terms",
-          "algebra preparation",
-          "math definitions",
-          "vocabulary building",
-          "math literacy",
-        ],
-        image: "/blog/omid-armin-b50MRxwg_gk-unsplash.jpg",
-        slug: "middle-school-math-foundations-guide/pre-algebra-vocabulary-flashcards",
-        component: PreAlgebraVocabularyFlashcards,
-      },
-      {
-        id: "top-youtube-channels-eighth-grade-math",
-        shortName: "YouTube Channels",
-        name: "Top YouTube Channels for 8th Grade Math",
-        excerpt:
-          "Curated list of the best YouTube channels for 8th grade math with detailed reviews and recommended playlists.",
-        date: new Date("2025-07-21"),
-        author: "Education Team",
-        readingTime: 7,
-        underConstruction: true,
-        keywords: [
-          "YouTube math channels",
-          "8th grade math videos",
-          "online math help",
-          "math video resources",
-          "free math tutorials",
-          "math education videos",
-          "math learning videos",
-          "online math support",
-          "math video lessons",
-          "educational YouTube",
-        ],
-        image: "/blog/mithushi-arya-lXOX3-yTvyQ-unsplash.jpg",
-        slug: "middle-school-math-foundations-guide/top-youtube-channels-eighth-grade-math",
-        component: TopYouTubeChannelsEighthGradeMath,
-      },
-      {
-        id: "weekly-study-planner-template",
-        shortName: "Study Planner",
-        name: "Weekly Study Planner Template for Math",
-        excerpt:
-          "Free downloadable weekly study planner template specifically designed for middle school math organization and success.",
-        date: new Date("2025-07-22"),
-        author: "Education Team",
-        readingTime: 4,
-        underConstruction: true,
-        keywords: [
-          "study planner",
-          "math organization",
-          "study schedule",
-          "math planning",
-          "study template",
-          "math study guide",
-          "organization tools",
-          "study habits",
-          "math homework",
-          "academic planning",
-        ],
-        image: "/blog/susan-wilkinson-jaExxGtbfFA-unsplash.jpg",
-        slug: "middle-school-math-foundations-guide/weekly-study-planner-template",
-        component: WeeklyStudyPlannerTemplate,
-      },
-    ],
-  },
-  {
-    id: "advanced-academics-pillar",
-    shortName: "Advanced Academics",
-    name: "STEM Electives & High-School Credit Options in Middle School",
-    excerpt:
-      "A comprehensive guide to advanced coursework, dual enrollment, and STEM opportunities for middle school students.",
-    date: new Date("2025-05-29"),
-    author: "Education Team",
-    readingTime: 18,
-    keywords: [
-      "advanced academics",
-      "academic acceleration",
-      "gifted education",
-      "advanced coursework",
-      "academic excellence",
-      "high-achieving students",
-      "educational advancement",
-      "academic opportunities",
-      "advanced learning",
-      "academic enrichment",
-    ],
-    image: "/blog/john-sin-Q5rtHn9I4oA-unsplash.jpg",
-    slug: "stem-electives-high-school-credit-middle-school",
-    component: STEMElectivesGuide,
-    subArticles: [
-      {
-        id: "dual-enrollment-guide",
-        shortName: "Dual Enrollment",
-        name: "Dual Enrollment Guide for Middle School Students",
-        excerpt:
-          "A comprehensive guide to dual enrollment opportunities for middle school students, covering readiness assessment, application processes, and key considerations for families considering college courses for 6th-8th graders.",
-        date: new Date("2025-05-30"),
-        author: "Education Team",
-        readingTime: 14,
-        // underConstruction: false (completed)
-        keywords: [
-          "dual enrollment",
-          "college courses",
-          "academic acceleration",
-          "high school credit",
-          "advanced placement",
-          "college-level coursework",
-          "educational opportunities",
-          "academic advancement",
-          "early college",
-          "concurrent enrollment",
-          "middle school acceleration",
-          "college readiness",
-        ],
-        image: "/blog/sebastian-svenson-LpbyDENbQQg-unsplash.jpg",
-        slug: "advanced-academics-middle-school-guide/dual-enrollment-guide-middle-school",
-        component: DualEnrollmentGuide,
-      },
-      {
-        id: "gifted-program-navigation",
-        shortName: "Gifted Programs",
-        name: "Gifted Program Navigation Guide for Parents",
-        excerpt:
-          "A comprehensive guide to understanding, accessing, and maximizing gifted education opportunities.",
-        date: new Date("2025-06-05"),
-        author: "Education Team",
-        readingTime: 11,
-        underConstruction: true,
-        keywords: [
-          "gifted programs",
-          "talented and gifted",
-          "gifted education",
-          "advanced learners",
-          "gifted services",
-          "educational excellence",
-          "gifted identification",
-          "advanced learning",
-          "gifted advocacy",
-          "intellectual giftedness",
-        ],
-        image: "/blog/laura-vinck-Hyu76loQLdk-unsplash.jpg",
-        slug: "advanced-academics-middle-school-guide/gifted-program-navigation-guide",
-        component: GiftedProgramNavigation,
-      },
-      {
-        id: "algebra-vs-math-8-flowchart",
-        shortName: "Algebra vs Math 8",
-        name: "Algebra vs Math 8: Decision Flowchart",
-        excerpt:
-          "Interactive flowchart to help parents decide between Algebra 1 and Math 8 for their middle schooler's optimal math pathway.",
-        date: new Date("2025-06-06"),
-        author: "Education Team",
-        readingTime: 6,
-        underConstruction: true,
-        keywords: [
-          "algebra vs math 8",
-          "math pathway",
-          "algebra readiness",
-          "math acceleration",
-          "middle school math",
-          "academic planning",
-          "course selection",
-          "math progression",
-          "algebra placement",
-          "math curriculum",
-        ],
-        image: "/blog/yassine-ait-tahit-NDtucHeDnWc-unsplash.jpg",
-        slug: "stem-electives-high-school-credit-middle-school/algebra-vs-math-8-flowchart",
-        component: AlgebraVsMath8Flowchart,
-      },
-      {
-        id: "gpa-starts-eighth-grade",
-        shortName: "GPA in 8th Grade",
-        name: "GPA Starts in 8th Grade: What Parents Need to Know",
-        excerpt:
-          "Essential guide to understanding how 8th grade GPA impacts high school placement and college preparation.",
-        date: new Date("2025-06-07"),
-        author: "Education Team",
-        readingTime: 7,
-        underConstruction: true,
-        keywords: [
-          "8th grade GPA",
-          "high school GPA",
-          "academic transcript",
-          "college preparation",
-          "grade point average",
-          "high school placement",
-          "academic planning",
-          "transcript management",
-          "college admissions",
-          "academic records",
-        ],
-        image: "/blog/omid-armin-b50MRxwg_gk-unsplash.jpg",
-        slug: "stem-electives-high-school-credit-middle-school/gpa-starts-eighth-grade",
-        component: GPAStartsEighthGrade,
-      },
-      {
-        id: "online-foreign-language-credits",
-        shortName: "Online Languages",
-        name: "Online Foreign Language Credits for Middle School",
-        excerpt:
-          "Complete guide to earning high school foreign language credits online during middle school years.",
-        date: new Date("2025-06-08"),
-        author: "Education Team",
-        readingTime: 8,
-        underConstruction: true,
-        keywords: [
-          "online foreign language",
-          "language credits",
-          "high school credit",
-          "language learning",
-          "online courses",
-          "foreign language requirement",
-          "language education",
-          "virtual language classes",
-          "language programs",
-          "credit acceleration",
-        ],
-        image: "/blog/susan-wilkinson-F8tGmG1T2rg-unsplash.jpg",
-        slug: "stem-electives-high-school-credit-middle-school/online-foreign-language-credits",
-        component: OnlineForeignLanguageCredits,
-      },
-      {
-        id: "pltw-vs-first-robotics",
-        shortName: "PLTW vs FIRST",
-        name: "PLTW vs FIRST Robotics: Which STEM Path?",
-        excerpt:
-          "Detailed comparison of Project Lead The Way and FIRST Robotics programs to help choose the best STEM pathway.",
-        date: new Date("2025-06-09"),
-        author: "Education Team",
-        readingTime: 9,
-        underConstruction: true,
-        keywords: [
-          "PLTW vs FIRST robotics",
-          "STEM programs",
-          "robotics programs",
-          "engineering education",
-          "STEM pathway",
-          "robotics competition",
-          "engineering curriculum",
-          "STEM electives",
-          "robotics teams",
-          "engineering skills",
-        ],
-        image: "/blog/milad-fakurian-PGdW_bHDbpI-unsplash.jpg",
-        slug: "stem-electives-high-school-credit-middle-school/pltw-vs-first-robotics",
-        component: PLTWVsFirstRobotics,
-      },
-      {
-        id: "stem-portfolio-github-slides",
-        shortName: "STEM Portfolio",
-        name: "STEM Portfolio: GitHub + Google Slides Guide",
-        excerpt:
-          "Step-by-step guide to creating a professional STEM portfolio using GitHub and Google Slides for middle school students.",
-        date: new Date("2025-06-10"),
-        author: "Education Team",
-        readingTime: 10,
-        underConstruction: true,
-        keywords: [
-          "STEM portfolio",
-          "GitHub portfolio",
-          "Google Slides",
-          "student portfolio",
-          "STEM projects",
-          "digital portfolio",
-          "coding projects",
-          "project showcase",
-          "academic portfolio",
-          "STEM documentation",
-        ],
-        image: "/blog/john-sin-Q5rtHn9I4oA-unsplash.jpg",
-        slug: "stem-electives-high-school-credit-middle-school/stem-portfolio-github-slides",
-        component: STEMPortfolioGitHubSlides,
-      },
-      {
-        id: "summer-programs-high-school-credit",
-        shortName: "Summer Programs",
-        name: "Summer Programs for High School Credit",
-        excerpt:
-          "Comprehensive guide to summer programs that offer high school credit opportunities for middle school students.",
-        date: new Date("2025-06-11"),
-        author: "Education Team",
-        readingTime: 11,
-        underConstruction: true,
-        keywords: [
-          "summer programs",
-          "high school credit",
-          "summer courses",
-          "academic acceleration",
-          "summer learning",
-          "credit recovery",
-          "summer school",
-          "enrichment programs",
-          "summer academics",
-          "educational programs",
-        ],
-        image: "/blog/laura-vinck-Hyu76loQLdk-unsplash.jpg",
-        slug: "stem-electives-high-school-credit-middle-school/summer-programs-high-school-credit",
-        component: SummerProgramsHighSchoolCredit,
-      },
-    ],
-  },
-];
-
-// Helper function to get a blog post by slug
-export const getBlogPostBySlug = (slug: string): BlogPost | undefined => {
-  // First check direct matches
-  const directMatch = POSTS.find((post) => post.slug === slug);
-  if (directMatch) return directMatch;
-
-  // Then check sub-articles recursively
-  for (const post of POSTS) {
-    if (post.subArticles) {
-      const subMatch = post.subArticles.find(
-        (subPost) => subPost.slug === slug
-      );
-      if (subMatch) return subMatch;
-    }
-  }
-
-  return undefined;
+export const RENDER_MAP: Record<string, React.ComponentType> = {
+  "map-testing-state-assessments-complete-guide": MAPStateTestsCompleteGuide,
+  "map-testing-state-assessments-complete-guide/map-score-ranges-explained":
+    MAPScoreRangesExplained,
+  "map-testing-state-assessments-complete-guide/growth-vs-proficiency":
+    GrowthVsProficiency,
+  "map-testing-state-assessments-complete-guide/understanding-rit-scores-guide":
+    UnderstandingRITScores,
+  "map-testing-state-assessments-complete-guide/seventh-grade-map-practice-pdf":
+    SeventhGradeMAPPracticePDF,
+  "middle-school-math-foundations-guide/algebra-readiness-checklist-middle-school":
+    AlgebraReadinessChecklist,
+  "middle-school-math-foundations-guide/fraction-mastery-guide-middle-school":
+    FractionMasteryGuide,
+  "middle-school-math-foundations-guide/fractions-with-pizza-slices-video":
+    FractionsWithPizzaSlicesVideo,
+  "middle-school-math-foundations-guide/integer-rules-cheat-sheet":
+    IntegerRulesCheatSheet,
+  "middle-school-math-foundations-guide/math-anxiety-solutions":
+    MathAnxietySolutions,
+  "middle-school-math-foundations-guide/order-of-operations-games":
+    OrderOfOperationsGames,
+  "middle-school-math-foundations-guide/pre-algebra-vocabulary-flashcards":
+    PreAlgebraVocabularyFlashcards,
+  "middle-school-math-foundations-guide/top-youtube-channels-eighth-grade-math":
+    TopYouTubeChannelsEighthGradeMath,
+  "middle-school-math-foundations-guide/weekly-study-planner-template":
+    WeeklyStudyPlannerTemplate,
+  "advanced-academics-middle-school-guide/dual-enrollment-guide-middle-school":
+    DualEnrollmentGuide,
+  "advanced-academics-middle-school-guide/gifted-program-navigation-guide":
+    GiftedProgramNavigation,
+  "stem-electives-high-school-credit-middle-school/algebra-vs-math-8-flowchart":
+    AlgebraVsMath8Flowchart,
+  "stem-electives-high-school-credit-middle-school/gpa-starts-eighth-grade":
+    GPAStartsEighthGrade,
+  "stem-electives-high-school-credit-middle-school/online-foreign-language-credits":
+    OnlineForeignLanguageCredits,
+  "stem-electives-high-school-credit-middle-school/pltw-vs-first-robotics":
+    PLTWVsFirstRobotics,
+  "stem-electives-high-school-credit-middle-school/stem-portfolio-github-slides":
+    STEMPortfolioGitHubSlides,
+  "stem-electives-high-school-credit-middle-school/summer-programs-high-school-credit":
+    SummerProgramsHighSchoolCredit,
 };
 
-// Helper function to recursively flatten all blog posts
-const flattenBlogPosts = (posts: BlogPost[]): BlogPost[] => {
-  const flattened: BlogPost[] = [];
-
-  for (const post of posts) {
-    flattened.push(post);
-    if (post.subArticles) {
-      flattened.push(...flattenBlogPosts(post.subArticles));
-    }
-  }
-
-  return flattened;
-};
-
-export const getReadingTime = (post: BlogPost): number => {
-  function helper(post: BlogPost): number {
-    if (post.subArticles) {
-      return post.subArticles.reduce(
-        (acc, subPost) => acc + helper(subPost),
-        0
-      );
-    }
-    return post.readingTime;
-  }
-  return helper(post);
-};
-
-// Helper function to get all blog posts sorted by date (newest first)
-export const getAllBlogPosts = (): BlogPost[] => {
-  const allPosts = flattenBlogPosts(POSTS);
-
-  // Sort by date (newest first)
-  return allPosts.sort(
-    (a, b) =>
-      (b.subArticles?.length || 0) - (a.subArticles?.length || 0) ||
-      b.date.getTime() - a.date.getTime()
-  );
-};
-
-export const getRelatedPosts = (post: BlogPost): BlogPost[] => {
+export const getRelatedPosts = (post: BlogMeta): BlogMeta[] => {
   // Get all posts flattened
-  const allPosts = flattenBlogPosts(POSTS);
+  const allPosts = flattenItems(BLOG_META);
 
   // Remove the current post from consideration
   const candidatePosts = allPosts.filter(
@@ -848,10 +91,10 @@ export const getRelatedPosts = (post: BlogPost): BlogPost[] => {
   );
 
   // Find the parent pillar post of the current post (if it's a subarticle)
-  let parentPillar: BlogPost | undefined;
-  let siblings: BlogPost[] = [];
+  let parentPillar: BlogMeta | undefined;
+  let siblings: BlogMeta[] = [];
 
-  for (const pillarPost of POSTS) {
+  for (const pillarPost of BLOG_META) {
     if (pillarPost.subArticles) {
       const foundSubArticle = pillarPost.subArticles.find(
         (sub) => sub.id === post.id
@@ -889,7 +132,7 @@ export const getRelatedPosts = (post: BlogPost): BlogPost[] => {
       score = 1000; // Same as siblings
     }
     // Score 4: Other pillar posts
-    else if (POSTS.some((pillar) => pillar.id === candidatePost.id)) {
+    else if (BLOG_META.some((pillar) => pillar.id === candidatePost.id)) {
       score = 100;
     }
     // Score 5: Subarticles of other pillar posts (lowest priority)

@@ -1,9 +1,16 @@
-import React, { useEffect } from "react";
+import React, { useEffect } from 'react';
 
-import { Route, Routes, useLocation } from "react-router-dom";
+import {
+  Route,
+  Routes,
+  useLocation,
+} from 'react-router-dom';
 
-import { getBlogPostBySlug } from "@blog/data";
-import BlogIndex from "@blog/index";
+import { getBySlug } from '@/utils';
+import BlogIndex from '@blog/index';
+import { BLOG_META } from '@blog/meta-data';
+
+import { RENDER_MAP } from './data';
 
 export function ScrollToTop({ children }: { children: React.ReactNode }) {
   const { pathname } = useLocation();
@@ -47,11 +54,15 @@ function BlogPost() {
   const location = useLocation();
   // Remove '/blog/' from the path to get the slug
   const slug = location.pathname.replace("/blog/", "");
-  const blogPost = getBlogPostBySlug(slug);
+  const blogPost = getBySlug(slug, BLOG_META);
 
   if (blogPost) {
-    const PostComponent = blogPost.component;
-    return <PostComponent />;
+    const Component = RENDER_MAP[blogPost.slug];
+    if (Component) {
+      return <Component />;
+    } else {
+      return null;
+    }
   }
 
   // If no blog post found, show 404 or redirect to blog index

@@ -1,22 +1,29 @@
 // Import Swiper styles
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 
-import React, { useEffect } from "react";
+import React, { useEffect } from 'react';
 
-import { motion } from "framer-motion";
-import { ArrowLeft, Clock, Construction } from "lucide-react";
-import posthog from "posthog-js";
+import { motion } from 'framer-motion';
+import {
+  ArrowLeft,
+  Clock,
+  Construction,
+} from 'lucide-react';
+import posthog from 'posthog-js';
 
-import { getBlogPostBySlug, getRelatedPosts, POSTS } from "@blog/data";
-import { FloatingNav } from "@components";
-import { cn } from "@utils";
+import { getRelatedPosts } from '@blog/data';
+import { FloatingNav } from '@components';
+import {
+  cn,
+  getBySlug,
+} from '@utils';
 
-import { BlogCard } from "./BlogCard";
-import { Breadcrumbs } from "./Breadcrumbs";
-import { SEOHead } from "./SEOHead";
-import { SocialShareButtons } from "./SocialShareButtons";
+import { BLOG_META } from '../meta-data';
+import { BlogCard } from './BlogCard';
+import { Breadcrumbs } from './Breadcrumbs';
+import { SocialShareButtons } from './SocialShareButtons';
 
 interface BlogLayoutProps {
   children: React.ReactNode;
@@ -26,21 +33,7 @@ interface BlogLayoutProps {
 export function BlogLayout({ children, className }: BlogLayoutProps) {
   const currentPath = window.location.pathname;
   const currentSlug = currentPath.replace("/blog/", "");
-  const entry = getBlogPostBySlug(currentSlug);
-
-  // Determine if this is a sub-article and find its parent
-  let parentPillar = null;
-  let isSubArticle = false;
-
-  if (entry) {
-    for (const pillar of POSTS) {
-      if (pillar.subArticles?.some((sub) => sub.slug === currentSlug)) {
-        parentPillar = pillar;
-        isSubArticle = true;
-        break;
-      }
-    }
-  }
+  const entry = getBySlug(currentSlug, BLOG_META);
 
   useEffect(() => {
     if (entry) {
@@ -67,13 +60,6 @@ export function BlogLayout({ children, className }: BlogLayoutProps) {
     <div
       className={cn("min-h-screen relative flex flex-col h-screen", className)}
     >
-      {/* SEO Head */}
-      <SEOHead
-        post={entry}
-        isSubArticle={isSubArticle}
-        parentPillar={parentPillar || undefined}
-      />
-
       {/* Floating Navigation */}
       <FloatingNav isVisible={true} />
 

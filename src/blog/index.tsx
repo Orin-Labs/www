@@ -1,9 +1,13 @@
-import { motion } from "framer-motion";
+import { motion } from 'framer-motion';
 
-import { BlogCard, SEOHead } from "@blog/components";
-import { FloatingNav, Footer } from "@components";
+import { BlogCard } from '@blog/components';
+import {
+  FloatingNav,
+  Footer,
+} from '@components';
+import { flattenItems } from '@utils';
 
-import { getAllBlogPosts } from "./data";
+import { BLOG_META } from './meta-data';
 
 function createBlogPattern<T>(array: T[]): T[][] {
   let cycle = 0;
@@ -44,7 +48,7 @@ function createBlogPattern<T>(array: T[]): T[][] {
 
 export default function BlogIndex() {
   const blogPattern = createBlogPattern(
-    getAllBlogPosts().filter((post) => !post.underConstruction)
+    flattenItems(BLOG_META).filter((post) => !post.underConstruction)
   );
 
   return (
@@ -52,7 +56,7 @@ export default function BlogIndex() {
       {/* Floating Navigation */}
       <FloatingNav isVisible={true} />
 
-      <SEOHead
+      {/* <SEOHead
         post={{
           name: "Orin's Blog",
           excerpt:
@@ -67,7 +71,7 @@ export default function BlogIndex() {
           id: "orin-blog",
           image: "/images/blog_og.png",
         }}
-      />
+      /> */}
 
       {/* Main Content */}
       <div className="w-full pt-48">

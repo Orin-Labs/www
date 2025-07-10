@@ -11,26 +11,19 @@ const __dirname = path.dirname(__filename);
 const isProduction = process.env.NODE_ENV === "production";
 const port = process.env.PORT || 3000;
 
-// Import blog data for meta generation
-let getBlogPostBySlug;
-if (isProduction) {
-  // In production, we need to import the built module
-  try {
-    const blogModule = await import("./dist/server/entry-server.js");
-    getBlogPostBySlug = blogModule.getBlogPostBySlug || (() => null);
-  } catch (e) {
-    console.warn("Could not load blog data for meta generation:", e.message);
-    getBlogPostBySlug = () => null;
-  }
-} else {
-  // In development, import directly from source
-  try {
-    const blogModule = await import("./src/blog/data.ts");
-    getBlogPostBySlug = blogModule.getBlogPostBySlug || (() => null);
-  } catch (e) {
-    console.warn("Could not load blog data for meta generation:", e.message);
-    getBlogPostBySlug = () => null;
-  }
+// Import blog metadata for meta tag generation
+let BLOG_META;
+let getBySlug;
+try {
+  // Import the lightweight blog metadata
+  const blogModule = await import("./src/blog/meta-data.ts");
+  BLOG_META = blogModule.BLOG_META;
+  const utilsModule = await import("./src/utils/nest.ts");
+  getBySlug = utilsModule.getBySlug;
+  console.log("✅ Blog metadata loaded successfully");
+} catch (error) {
+  console.warn("Could not load blog metadata:", error.message);
+  BLOG_META = () => null;
 }
 
 async function createServer() {
@@ -94,22 +87,6 @@ async function createServer() {
         .replace(
           '<meta name="title" content="Orin - Unlimited tutoring for middle school math" />',
           `<meta name="title" content="${meta.title}" />`
-        )
-        .replace(
-          '<meta property="og:title" content="Orin - Unlimited tutoring for middle school math" />',
-          `<meta property="og:title" content="${meta.title}" />`
-        )
-        .replace(
-          '<meta property="og:description" content="Meet Orin, your private tutor." />',
-          `<meta property="og:description" content="${meta.description}" />`
-        )
-        .replace(
-          '<meta property="twitter:title" content="Orin - Unlimited tutoring for middle school math" />',
-          `<meta property="twitter:title" content="${meta.title}" />`
-        )
-        .replace(
-          '<meta property="twitter:description" content="Meet Orin, your private tutor." />',
-          `<meta property="twitter:description" content="${meta.description}" />`
         );
 
       res.status(200).set({ "Content-Type": "text/html" }).end(html);
@@ -163,20 +140,20 @@ function generateMetaForRoute(path) {
 
     // Individual blog post
     const slug = cleanPath.replace("/blog/", "");
-    const blogPost = getBlogPostBySlug ? getBlogPostBySlug(slug) : null;
+    const blogMeta = getBySlug(slug, BLOG_META);
 
-    if (blogPost) {
+    if (blogMeta) {
       const description =
-        blogPost.excerpt.length > 160
-          ? blogPost.excerpt.substring(0, 157) + "..."
-          : blogPost.excerpt;
+        blogMeta.excerpt.length > 160
+          ? blogMeta.excerpt.substring(0, 157) + "..."
+          : blogMeta.excerpt;
 
       return {
-        title: `${blogPost.name} | ${baseTitle}`,
+        title: `${blogMeta.name} | ${baseTitle}`,
         description,
-        keywords: blogPost.keywords.join(", "),
-        image: blogPost.image || "/blog_og.png",
-        url: `${baseUrl}/blog/${blogPost.slug}`,
+        keywords: blogMeta.keywords.join(", "),
+        image: "/blog_og.png",
+        url: `${baseUrl}/blog/${slug}`,
         type: "article",
       };
     }
@@ -207,9 +184,14 @@ function generateMetaTags(meta) {
   const tags = [
     `<meta name="keywords" content="${meta.keywords}" />`,
     `<meta property="og:type" content="${meta.type}" />`,
+    `<meta property="og:site_name" content="Learn with Orin" />`,
     `<meta property="og:url" content="${meta.url}" />`,
+    `<meta property="og:title" content="${meta.title}" />`,
+    `<meta property="og:description" content="${meta.description}" />`,
     `<meta property="twitter:card" content="summary_large_image" />`,
     `<meta property="twitter:url" content="${meta.url}" />`,
+    `<meta property="twitter:title" content="${meta.title}" />`,
+    `<meta property="twitter:description" content="${meta.description}" />`,
     `<link rel="canonical" href="${meta.url}" />`,
   ];
 

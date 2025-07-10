@@ -1,14 +1,18 @@
-import React from "react";
+import React from 'react';
 
-import { HTMLMotionProps, motion } from "framer-motion";
-import { ArrowRightIcon } from "lucide-react";
-import { Link } from "react-router-dom";
+import {
+  HTMLMotionProps,
+  motion,
+} from 'framer-motion';
+import { ArrowRightIcon } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
-import { BlogPost } from "@blog/data";
-import { cn } from "@utils";
+import { cn } from '@utils';
+
+import { BlogMeta } from '../meta-data';
 
 interface BlogCardProps extends HTMLMotionProps<"button"> {
-  post: BlogPost;
+  post: BlogMeta;
 }
 
 export function BlogCard({ post, className, ...props }: BlogCardProps) {

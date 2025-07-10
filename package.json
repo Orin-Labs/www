@@ -60,7 +60,7 @@
   },
   "scripts": {
     "dev": "node server.js",
-    "build": "vite build --config vite.client.config.ts --outDir dist/client",
+    "build": "vite build --outDir dist/client",
     "serve": "NODE_ENV=production node server.js",
     "test": "vite test",
     "eject": "react-scripts eject",
