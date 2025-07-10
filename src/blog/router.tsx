@@ -1,19 +1,44 @@
-import React from 'react';
+import React, { useEffect } from "react";
 
-import {
-  Route,
-  Routes,
-  useLocation,
-} from 'react-router-dom';
+import { Route, Routes, useLocation } from "react-router-dom";
 
-import { getBlogPostBySlug } from '@blog/data';
-import BlogIndex from '@blog/index';
+import { getBlogPostBySlug } from "@blog/data";
+import BlogIndex from "@blog/index";
+
+export function ScrollToTop({ children }: { children: React.ReactNode }) {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    // "document.documentElement.scrollTo" is the magic for React Router Dom v6
+    document.documentElement.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "instant", // Optional if you want to skip the scrolling animation
+    });
+  }, [pathname]);
+
+  return children;
+}
 
 export default function BlogRouter() {
   return (
     <Routes>
-      <Route path="/" element={<BlogIndex />} />
-      <Route path="/*" element={<BlogPost />} />
+      <Route
+        path="/"
+        element={
+          <ScrollToTop>
+            <BlogIndex />
+          </ScrollToTop>
+        }
+      />
+      <Route
+        path="/*"
+        element={
+          <ScrollToTop>
+            <BlogPost />
+          </ScrollToTop>
+        }
+      />
     </Routes>
   );
 }

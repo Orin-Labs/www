@@ -76,7 +76,7 @@ export function BlogCard({ post, className, ...props }: BlogCardProps) {
             </div>
             <div
               className={cn(
-                "bg-white text-black px-4 py-2 rounded-md flex items-center gap-2"
+                "text-white px-4 py-2 rounded-md flex items-center gap-2"
               )}
             >
               {post.underConstruction
