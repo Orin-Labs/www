@@ -96,6 +96,8 @@
     />
     <meta property="twitter:image" content="/og_image.png" />
 
+    <!--ssr-meta-->
+
     <!-- Meta Pixel Code - Deferred -->
     <script>
       // Defer Meta Pixel loading
@@ -175,7 +177,7 @@
         style="display: none"
         src="https://www.facebook.com/tr?id=735061775558303&ev=PageView&noscript=1"
     /></noscript>
-    <div id="root"></div>
+    <div id="root"><!--ssr-outlet--></div>
     <script type="module" src="/src/index.tsx"></script>
   </body>
 </html>

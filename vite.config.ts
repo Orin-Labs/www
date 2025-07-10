@@ -21,4 +21,31 @@ export default defineConfig({
       "@constants": path.resolve(__dirname, "src/constants"),
     },
   },
+  // SSR configuration
+  ssr: {
+    // Don't externalize these packages in SSR
+    noExternal: [
+      "react-router-dom",
+      "react-router",
+      "lucide-react",
+      "framer-motion",
+    ],
+    // Mark these as external for SSR
+    external: ["fsevents"],
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ["react", "react-dom"],
+          router: ["react-router-dom"],
+          blog: ["react-markdown", "rehype-katex", "remark-math"],
+        },
+      },
+    },
+  },
+  optimizeDeps: {
+    // Force optimization of these packages
+    include: ["react", "react-dom", "react-router-dom"],
+  },
 });

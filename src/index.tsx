@@ -3,7 +3,7 @@ import './index.css';
 import React, { Suspense } from 'react';
 
 import posthog from 'posthog-js';
-import ReactDOM from 'react-dom/client';
+import { hydrateRoot } from 'react-dom/client';
 import {
   BrowserRouter,
   Route,
@@ -39,11 +39,7 @@ window.addEventListener("load", function () {
   }, 3000);
 });
 
-const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement
-);
-
-root.render(
+const AppWithRouting = () => (
   <React.StrictMode>
     <BrowserRouter>
       <Toaster />
@@ -68,6 +64,19 @@ root.render(
     </BrowserRouter>
   </React.StrictMode>
 );
+
+const container = document.getElementById("root") as HTMLElement;
+
+// Use hydration for SSR, fallback to render for client-only
+if (container.hasChildNodes()) {
+  hydrateRoot(container, <AppWithRouting />);
+} else {
+  // Fallback for development or if SSR fails
+  import("react-dom/client").then(({ createRoot }) => {
+    const root = createRoot(container);
+    root.render(<AppWithRouting />);
+  });
+}
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
