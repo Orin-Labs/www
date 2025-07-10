@@ -83,6 +83,9 @@ export function useSignupForm() {
         fbq("track", "Lead");
 
         // @ts-ignore
+        kad("track", "Lead");
+
+        // @ts-ignore
         window.gtag("event", "conversion", {
           send_to: "AW-16902826455/6DXjCOCAha8aENfT8vs-",
           value: 1.0,
