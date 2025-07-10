@@ -1,6 +1,11 @@
 import React from 'react';
 
-import { cn } from '@/utils';
+import {
+  cn,
+  parseLinksInText,
+} from '@/utils';
+
+type ComparisonTableData = Record<string, any>[];
 
 interface ComparisonTableProps {
   columns: {
@@ -8,7 +13,7 @@ interface ComparisonTableProps {
     key: string;
     className?: string;
   }[];
-  data: Record<string, any>[];
+  data: ComparisonTableData;
   className?: string;
 }
 
@@ -18,8 +23,8 @@ export const ComparisonTable: React.FC<ComparisonTableProps> = ({
   className = "",
 }) => {
   return (
-    <div className={`overflow-x-auto rounded-lg shadow ${className}`}>
-      <table className="w-full border-separate border-spacing-0">
+    <div className={className}>
+      <table className="w-full">
         <thead>
           <tr className="bg-gray-900 text-white">
             {columns.map((column, index) => (
@@ -28,8 +33,7 @@ export const ComparisonTable: React.FC<ComparisonTableProps> = ({
                 className={cn(
                   "border-r border-gray-700 px-4 py-3 font-normal",
                   column.className || "text-left",
-                  index === 0 && "rounded-tl-lg border-l",
-                  index === columns.length - 1 && "rounded-tr-lg"
+                  index === columns.length - 1 && "border-r-0"
                 )}
               >
                 {column.header}
@@ -44,7 +48,7 @@ export const ComparisonTable: React.FC<ComparisonTableProps> = ({
                 <td
                   key={colIndex}
                   className={cn(
-                    "border-b border-r border-gray-100 px-4 py-3",
+                    "border-b border-r  px-4 py-3",
                     column.className || "",
                     index === 0 && "border-t",
                     colIndex === 0 && "border-l",
@@ -56,7 +60,7 @@ export const ComparisonTable: React.FC<ComparisonTableProps> = ({
                       "rounded-br-lg"
                   )}
                 >
-                  {row[column.key]}
+                  {parseLinksInText(row[column.key])}
                 </td>
               ))}
             </tr>

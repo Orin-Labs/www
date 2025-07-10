@@ -1,9 +1,14 @@
-import React from "react";
+import React from 'react';
 
-import { Facebook, Linkedin, MessageCircle, Twitter } from "lucide-react";
-import posthog from "posthog-js";
+import {
+  Facebook,
+  Linkedin,
+  MessageCircle,
+  Twitter,
+} from 'lucide-react';
+import posthog from 'posthog-js';
 
-import { cn } from "@utils";
+import { cn } from '@utils';
 
 interface SocialShareButtonProps {
   platform: "twitter" | "facebook" | "linkedin" | "whatsapp";
@@ -32,7 +37,6 @@ function SocialShareButton({
     let shareUrl = "";
     const encodedUrl = encodeURIComponent(url);
     const encodedTitle = encodeURIComponent(title);
-    const encodedDescription = encodeURIComponent(description);
 
     switch (platform) {
       case "twitter":
@@ -70,7 +74,7 @@ function SocialShareButton({
     <button
       onClick={handleShare}
       className={cn(
-        "p-2 rounded-full border border-gray-200 bg-white transition-colors duration-200",
+        "p-2 rounded-full border  bg-white transition-colors duration-200",
         "hover:shadow-md hover:border-transparent",
         colors[platform]
       )}
@@ -105,7 +109,6 @@ export function SocialShareButtons({
 
   return (
     <div className={cn("flex items-center gap-2", className)}>
-      <span className="text-sm text-gray-500 mr-2">Share:</span>
       {platforms.map((platform) => (
         <SocialShareButton
           key={platform}

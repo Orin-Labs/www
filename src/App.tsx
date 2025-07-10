@@ -84,16 +84,16 @@ function App() {
       <Hero headline={headline} subheadline={subheadline} speed={speed} />
 
       {/* How It Works Section */}
-      <HowItWorks speed={speed} className="border-t border-gray-100" />
+      <HowItWorks speed={speed} className="border-t  " />
 
       {/* Social Proof Section */}
-      <SocialProof className="border-t border-gray-100" />
+      <SocialProof className="border-t  " />
 
       {/* Seamless Coordination Section */}
       <SeamlessCoordination speed={speed} />
 
       {/* Pricing Section */}
-      <Pricing speed={speed} className="border-t border-gray-100" />
+      <Pricing speed={speed} className="border-t  " />
 
       {/* CTA Section */}
       <CTASection

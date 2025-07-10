@@ -64,7 +64,7 @@ export const GPAScale: React.FC<GPAScaleProps> = ({
       yellow: "bg-yellow-100 border-yellow-200 text-yellow-700",
       orange: "bg-orange-100 border-orange-200 text-orange-700",
       red: "bg-red-100 border-red-200 text-red-700",
-      gray: "bg-gray-100 border-gray-200 text-gray-700",
+      gray: "bg-gray-100 text-gray-700",
     };
     return colorMap[color as keyof typeof colorMap] || colorMap.green;
   };

@@ -29,16 +29,16 @@ export const CurriculumRoadmap: React.FC<CurriculumRoadmapProps> = ({
         <h3 className="text-xl font-bold mb-4 text-gray-800">{title}</h3>
       )}
 
-      <div className="border border-gray-100 rounded-lg bg-white overflow-x-auto mb-6">
+      <div className="border  rounded-lg bg-white overflow-x-auto mb-6">
         <div className="flex min-w-full">
           {items.map((item, index) => (
             <div
               key={index}
               className={`flex-1 text-center flex flex-col ${
-                index < items.length - 1 ? "border-r border-gray-100" : ""
+                index < items.length - 1 ? "border-r  " : ""
               }`}
             >
-              <h3 className="text-white w-full border-b bg-gray-800 border-gray-100 p-2">
+              <h3 className="text-white w-full border-b bg-gray-800  p-2">
                 {item.period}
               </h3>
               <div className="flex flex-col gap-2 p-4">

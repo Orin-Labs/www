@@ -1,4 +1,7 @@
-import React, { useState } from 'react';
+import React, {
+  useEffect,
+  useState,
+} from 'react';
 
 import {
   AnimatePresence,
@@ -33,6 +36,35 @@ export function BlogFAQ({
 }: BlogFAQProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
+  // Generate and inject FAQ structured data
+  useEffect(() => {
+    if (items && items.length > 0) {
+      const faqStructuredData = {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: items.map((item) => ({
+          "@type": "Question",
+          name: item.question,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: item.answer,
+          },
+        })),
+      };
+
+      // Add the structured data to the page
+      updateFAQStructuredData(
+        "faq-component-structured-data",
+        faqStructuredData
+      );
+    }
+
+    // Cleanup function to remove structured data when component unmounts
+    return () => {
+      removeFAQStructuredData("faq-component-structured-data");
+    };
+  }, [items]);
+
   const toggleFAQ = (index: number) => {
     const isOpening = openIndex !== index;
     setOpenIndex(openIndex === index ? null : index);
@@ -66,7 +98,7 @@ export function BlogFAQ({
         >
           <div
             className={cn(
-              "p-2 border rounded-lg h-fit border-gray-200 mt-1 transition-colors duration-200",
+              "p-2 border rounded-lg h-fit mt-1 transition-colors duration-200",
               openIndex === index && "bg-gray-900 text-white"
             )}
           >
@@ -112,4 +144,33 @@ export function BlogFAQ({
       ))}
     </motion.div>
   );
+}
+
+// Helper function to add FAQ structured data to the page
+function updateFAQStructuredData(id: string, data: any) {
+  // Remove existing FAQ structured data from SEOHead if it exists
+  const existingSEOFAQ = document.querySelector(
+    'script[data-id="faq-structured-data"]'
+  );
+  if (existingSEOFAQ) {
+    existingSEOFAQ.remove();
+  }
+
+  // Add the new FAQ structured data from the component
+  let element = document.querySelector(`script[data-id="${id}"]`);
+  if (!element) {
+    element = document.createElement("script");
+    element.setAttribute("type", "application/ld+json");
+    element.setAttribute("data-id", id);
+    document.head.appendChild(element);
+  }
+  element.textContent = JSON.stringify(data);
+}
+
+// Helper function to remove FAQ structured data when component unmounts
+function removeFAQStructuredData(id: string) {
+  const element = document.querySelector(`script[data-id="${id}"]`);
+  if (element) {
+    element.remove();
+  }
 }

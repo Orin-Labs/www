@@ -1,4 +1,11 @@
-import React from "react";
+import React from 'react';
+
+import { Clock } from 'lucide-react';
+
+import {
+  cn,
+  parseLinksInText,
+} from '@/utils';
 
 export type DayOfWeek =
   | "Monday"
@@ -20,16 +27,6 @@ interface WeeklyPlannerProps {
   items: WeeklyPlannerItem[];
 }
 
-const dayEmojis: Record<DayOfWeek, string> = {
-  Monday: "🌟",
-  Tuesday: "🔥",
-  Wednesday: "💡",
-  Thursday: "🎯",
-  Friday: "🎉",
-  Saturday: "🌈",
-  Sunday: "✨",
-};
-
 export const WeeklyPlanner: React.FC<WeeklyPlannerProps> = ({
   title,
   items,
@@ -43,53 +40,82 @@ export const WeeklyPlanner: React.FC<WeeklyPlannerProps> = ({
     return acc;
   }, {} as Record<DayOfWeek, WeeklyPlannerItem[]>);
 
-  const daysWithTasks = Object.keys(itemsByDay) as DayOfWeek[];
-
   return (
-    <div className="bg-gradient-to-br from-blue-50 to-indigo-100 border border-blue-200 rounded-2xl p-6 shadow-lg">
-      <div className="text-center mb-6">
-        <h3 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 mb-3">
-          {title}
-        </h3>
-        <div className="w-24 h-1 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full mx-auto"></div>
-      </div>
+    <div className="flex flex-col gap-4">
+      <h3 className="text-3xl font-bold mb-3">{title}</h3>
+      <div className="overflow-x-auto max-w-4xl mx-auto">
+        <table className="min-w-full">
+          <thead className="text-left text-white">
+            <tr>
+              <th className="py-3 px-4 bg-gray-800 rounded-l-lg font-light">
+                Day
+              </th>
+              <th className="py-3 px-4 bg-gray-800 font-light">Time</th>
+              <th className="py-3 px-4 bg-gray-800 rounded-r-lg font-light">
+                Task
+              </th>
+            </tr>
+          </thead>
 
-      <div className="space-y-4 max-w-4xl mx-auto">
-        {daysWithTasks.map((day) => (
-          <div
-            key={day}
-            className="bg-white rounded-lg p-5 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-gray-100"
-          >
-            <div className="flex items-center mb-4">
-              <span className="text-2xl mr-3">{dayEmojis[day]}</span>
-              <h4 className="font-bold text-xl text-gray-800">{day}</h4>
-            </div>
-
-            <div className="space-y-3">
-              {itemsByDay[day].map((item, index) => (
-                <div
-                  key={index}
-                  className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg p-4 border-l-4 border-blue-400"
-                >
-                  <div className="flex items-start space-x-3">
-                    <div className="bg-blue-100 text-blue-700 font-bold text-sm px-3 py-1 rounded-full whitespace-nowrap">
-                      {item.time}
-                    </div>
-                    <p className="text-gray-700 text-sm leading-relaxed flex-1">
-                      {item.task}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        ))}
-      </div>
-
-      <div className="mt-8 text-center">
-        <p className="text-gray-600 text-base italic">
-          💡 Consistency is key - small daily actions create lasting habits
-        </p>
+          <tbody>
+            {(
+              [
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday",
+                "Saturday",
+                "Sunday",
+              ] as DayOfWeek[]
+            ).map((day, idx) => {
+              const dayTasks = itemsByDay[day] || [];
+              const sharedClasses =
+                "py-4 px-4 group-hover:bg-gray-50 transition-colors duration-150";
+              return (
+                <tr key={day} className="transition-colors duration-300 group">
+                  <td className={cn(sharedClasses, "rounded-l-lg")}>{day}</td>
+                  <td className={sharedClasses}>
+                    {dayTasks.length > 0 ? (
+                      <div className="space-y-2">
+                        {dayTasks.map((item, i) => (
+                          <div
+                            key={i}
+                            className={cn(
+                              "bg-blue-100 text-blue-700 font-bold text-sm px-2 py-1 border-blue-200 border whitespace-nowrap",
+                              "rounded-lg flex items-center gap-2 w-fit"
+                            )}
+                          >
+                            <Clock className="w-4 h-4" />
+                            {item.time}
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      <span className="text-gray-400 text-sm">—</span>
+                    )}
+                  </td>
+                  <td className={cn(sharedClasses, "rounded-r-lg")}>
+                    {dayTasks.length > 0 ? (
+                      <ul className="space-y-2">
+                        {dayTasks.map((item, i) => (
+                          <li
+                            key={i}
+                            className="text-gray-700 text-sm leading-relaxed"
+                          >
+                            {parseLinksInText(item.task)}
+                          </li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <span className="text-gray-400 text-sm">No tasks</span>
+                    )}
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
       </div>
     </div>
   );

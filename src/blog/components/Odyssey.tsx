@@ -1,10 +1,13 @@
-import React, { useEffect, useRef } from "react";
+import React, {
+  useEffect,
+  useRef,
+} from 'react';
 
-import { motion } from "framer-motion";
-import { useHover } from "usehooks-ts";
+import { motion } from 'framer-motion';
+import { useHover } from 'usehooks-ts';
 
-import { BackgroundGradient } from "@components/BackgroundGradient";
-import { cn } from "@utils";
+import { BackgroundGradient } from '@components/BackgroundGradient';
+import { cn } from '@utils';
 
 export function Odyssey({ bg = "transparent" }: { bg?: string }) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -46,7 +49,7 @@ export function Odyssey({ bg = "transparent" }: { bg?: string }) {
     <motion.div
       ref={containerRef}
       className={cn(
-        "w-full max-w-full border border-gray-200 pt-8 md:pt-0 rounded-lg overflow-hidden justify-center",
+        "w-full max-w-full border pt-8 md:pt-0 rounded-lg overflow-hidden justify-center",
         "relative shadow-lg hidden md:flex"
       )}
       whileHover={{

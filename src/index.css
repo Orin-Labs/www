@@ -6,10 +6,19 @@ html {
   font-family: "Gowun Dodum", sans-serif;
   font-weight: 400;
   font-style: normal;
+  border-color: var(--gray-50);
 }
 
 body {
   @apply overflow-y-auto bg-white;
+}
+
+a {
+  @apply text-pink-700;
+
+  &:hover {
+    @apply text-pink-800 underline;
+  }
 }
 
 .hind {

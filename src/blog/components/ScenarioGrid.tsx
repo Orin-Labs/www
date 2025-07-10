@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 interface ScenarioItem {
   title: string;
@@ -25,7 +25,7 @@ export const ScenarioGrid: React.FC<ScenarioGridProps> = ({
       blue: "border-blue-200 text-blue-800",
       yellow: "border-yellow-200 text-yellow-800",
       purple: "border-purple-200 text-purple-800",
-      gray: "border-gray-200 text-gray-800",
+      gray: " text-gray-800",
     };
     return colorMap[color as keyof typeof colorMap] || colorMap.gray;
   };

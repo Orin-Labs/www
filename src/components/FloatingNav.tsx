@@ -70,7 +70,7 @@ export default function FloatingNav({
     <motion.header
       className={cn(
         "fixed top-4 left-4 md:left-8 lg:left-12 right-4 md:right-8 lg:right-12 z-50 rounded-lg flex items-center justify-between px-4 py-3",
-        "bg-[#ffffffdd] backdrop-blur-md border border-gray-100 shadow-sm",
+        "bg-[#ffffffdd] backdrop-blur-md border  shadow-sm",
         className
       )}
       initial={{ y: -100, opacity: 0 }}
@@ -84,7 +84,7 @@ export default function FloatingNav({
       }}
     >
       <div className="flex items-center gap-2">
-        <Link to="/">
+        <Link to="/" className="hover:no-underline">
           <h1 className="text-xl font-bold text-gray-800">Learn with Orin</h1>
         </Link>
       </div>

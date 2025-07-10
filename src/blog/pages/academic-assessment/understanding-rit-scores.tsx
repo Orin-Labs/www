@@ -66,7 +66,8 @@ export function UnderstandingRITScores() {
       range: "160-180",
       interpretation: "Approaching Grade Level",
       typical_grade: "2-3",
-      action: "Target specific skill gaps.",
+      action:
+        "Target specific skill gaps. For math support, see our <a href='/blog/math-foundations'>comprehensive playbook</a>.",
     },
     {
       range: "180-200",
@@ -90,7 +91,8 @@ export function UnderstandingRITScores() {
       range: "240+",
       interpretation: "Advanced",
       typical_grade: "6+",
-      action: "Explore gifted programs or acceleration.",
+      action:
+        "Explore <a href='/blog/advanced-academics'>advanced academic opportunities</a> including gifted programs and acceleration options.",
     },
   ];
 
@@ -147,7 +149,7 @@ export function UnderstandingRITScores() {
 
   return (
     <BlogLayout>
-      <p className="text-xl text-gray-600 mb-8">
+      <p className="text-xl text-gray-600">
         Deep dive into what RIT scores really mean and how to use them to
         support your student's learning journey.
       </p>
@@ -158,13 +160,18 @@ export function UnderstandingRITScores() {
           over time. Unlike grade-level scores that compare students to others
           in their grade, RIT scores track individual progress on a continuous
           scale, making them perfect for understanding your child's unique
-          learning journey.
+          learning journey. For a comprehensive overview of how RIT scores fit
+          into the broader assessment landscape, see our{" "}
+          <a href="/blog/map-testing-state-assessments-complete-guide">
+            complete guide to MAP and state testing
+          </a>
+          .
         </p>
       </Alert>
 
       <BlogSection
         title="What Are RIT Scores?"
-        description="Understanding the basics of RIT scoring and why schools use them"
+        description="Understanding the basics of RIT scoring and why schools use them."
       >
         <p>
           RIT (Rasch unIT) scores are a standardized measurement used by many
@@ -187,18 +194,15 @@ export function UnderstandingRITScores() {
           title="Why Schools Love RIT Scores"
           icon={CheckCircle}
         >
-          <ul>
-            <li>They show individual growth over time.</li>
-            <li>They're not limited by grade-level expectations.</li>
-            <li>They help teachers personalize instruction.</li>
-            <li>They provide consistent measurement across years.</li>
-          </ul>
+          RIT scores track each student's growth over time, not just grade-level
+          comparisons. Their consistency helps teachers personalize learning and
+          ensures progress is measured accurately.
         </Alert>
       </BlogSection>
 
       <BlogSection
         title="Reading Your Child's RIT Score Report"
-        description="A step-by-step guide to interpreting the information"
+        description="A step-by-step guide to interpreting the information."
       >
         <NumberedList items={readingSteps} />
 
@@ -214,13 +218,13 @@ export function UnderstandingRITScores() {
 
       <BlogSection
         title="Understanding Score Ranges"
-        description="What different RIT score ranges typically indicate"
+        description="What different RIT score ranges typically indicate."
       >
         <ComparisonTable
           columns={[
-            { header: "Score Range", key: "range" },
+            { header: "Score", key: "range" },
             { header: "Interpretation", key: "interpretation" },
-            { header: "Typical Grade", key: "typical_grade" },
+            { header: "Grade", key: "typical_grade" },
             { header: "Recommended Action", key: "action" },
           ]}
           data={scoreRangeData}
@@ -237,7 +241,7 @@ export function UnderstandingRITScores() {
 
       <BlogSection
         title="Understanding Score Patterns"
-        description="Understanding what different score patterns mean"
+        description="Understanding what different score patterns mean."
       >
         <div className="flex flex-col">
           <h2 className="underline">When to Celebrate:</h2>
@@ -257,12 +261,19 @@ export function UnderstandingRITScores() {
             <li>Large gaps between different subject areas.</li>
             <li>Plateau in scores for extended periods.</li>
           </ul>
+          <p className="mt-4 text-gray-700">
+            When you notice these patterns, it's time to take action. Our{" "}
+            <a href="/blog/map-testing-state-assessments-complete-guide/state-test-prep-strategies">
+              state test prep strategies
+            </a>{" "}
+            can help build confidence and improve performance.
+          </p>
         </div>
       </BlogSection>
 
       <BlogSection
         title="Action Steps Based on Your Child's Scores"
-        description="Concrete next steps you can take at home and school"
+        description="Concrete next steps you can take at home and school."
       >
         <BlogChecklist
           title="Your RIT Score Action Plan"
@@ -274,19 +285,20 @@ export function UnderstandingRITScores() {
       <BlogFAQ
         items={faqItems}
         title="Common RIT Score Questions"
-        description="Get answers to the most frequently asked questions about understanding and using RIT scores"
+        description="Get answers to the most frequently asked questions about understanding and using RIT scores."
       />
 
-      <Alert type="success" title="Bottom Line" icon={Target}>
-        <p>
-          RIT scores are a powerful tool for understanding your child's academic
-          journey. Focus on individual growth over time rather than comparing to
-          others, and use the information to support your child's learning both
-          at home and in partnership with their teachers. Remember: every child
-          learns at their own pace, and RIT scores help us celebrate that unique
-          journey.
-        </p>
-      </Alert>
+      <BlogSection
+        title="Bottom Line"
+        description="A few final thoughts about RIT scores."
+      >
+        RIT scores are a powerful tool for understanding your child's academic
+        journey. Focus on individual growth over time rather than comparing to
+        others, and use the information to support your child's learning both at
+        home and in partnership with their teachers. Remember: every child
+        learns at their own pace, and RIT scores help us celebrate that unique
+        journey.
+      </BlogSection>
     </BlogLayout>
   );
 }

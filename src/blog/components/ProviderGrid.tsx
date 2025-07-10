@@ -38,7 +38,7 @@ export const ProviderGrid: React.FC<ProviderGridProps> = ({
         <h3 className="text-xl font-bold mb-4 text-gray-800">{title}</h3>
       )}
       <div
-        className={`grid md:grid-cols-${columns} gap-4 p-6 rounded-lg border border-gray-200 shadow-md bg-white`}
+        className={`grid md:grid-cols-${columns} gap-4 p-6 rounded-lg border shadow-md bg-white`}
       >
         {providers.map((provider, index) => (
           <div key={index} className="space-y-2">

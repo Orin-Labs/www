@@ -224,7 +224,7 @@ export const SocialProof = ({
               }}
               viewport={{ once: true }}
               className={cn(
-                "bg-gray-50 rounded-lg p-6 relative min-h-60 transition-shadow duration-200 border border-gray-200"
+                "bg-gray-50 rounded-lg p-6 relative min-h-60 transition-shadow duration-200 border "
               )}
               animate={{
                 y: 0,

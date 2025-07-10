@@ -36,7 +36,7 @@ export function Pricing({ speed, className, ...props }: PricingProps) {
       id="pricing"
       className={cn(
         "w-screen min-h-screen md:p-6 bg-white",
-        "border-b border-gray-100",
+        "border-b  ",
         className
       )}
       {...props}
@@ -69,7 +69,7 @@ export function Pricing({ speed, className, ...props }: PricingProps) {
             className="grid md:grid-cols-2 gap-8 max-w-2xl mx-auto"
           >
             {/* Monthly Plan */}
-            <div className="bg-white rounded-2xl p-8 border border-gray-200 shadow-lg hover:shadow-xl transition-all duration-300">
+            <div className="bg-white rounded-2xl p-8 border shadow-lg hover:shadow-xl transition-all duration-300">
               <div className="text-center">
                 <h3 className="text-2xl font-bold mb-2 text-gray-900">
                   {PRICING_COPY.monthly.title}
@@ -95,7 +95,7 @@ export function Pricing({ speed, className, ...props }: PricingProps) {
             </div>
 
             {/* Yearly Plan */}
-            <div className="bg-white rounded-2xl p-8 border border-gray-200 shadow-lg hover:shadow-xl transition-all duration-300 relative">
+            <div className="bg-white rounded-2xl p-8 border shadow-lg hover:shadow-xl transition-all duration-300 relative">
               <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
                 <span className="bg-emerald-500 text-white text-sm px-4 py-1 rounded-full font-medium">
                   {PRICING_COPY.yearly.savings}

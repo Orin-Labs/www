@@ -149,6 +149,7 @@ module.exports = {
         error: theme("colors.error.500"),
         muted: theme("colors.gray.100"),
         success: theme("colors.success.500"),
+        DEFAULT: theme("colors.gray.100"),
       }),
       textColor: ({ theme }) => ({
         default: theme("colors.gray.900"),

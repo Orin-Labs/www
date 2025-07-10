@@ -66,7 +66,7 @@ export function SeamlessCoordination({
   return (
     <section
       className={cn(
-        "w-full bg-gray-50 border-t border-gray-100 md:h-screen min-h-[500px] py-8 md:p-16",
+        "w-full bg-gray-50 border-t  md:h-screen min-h-[500px] py-8 md:p-16",
         className
       )}
       {...props}

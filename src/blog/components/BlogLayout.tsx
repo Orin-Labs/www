@@ -6,18 +6,32 @@ import 'swiper/css/pagination';
 import React, { useEffect } from 'react';
 
 import { motion } from 'framer-motion';
-import { ArrowLeftIcon } from 'lucide-react';
+import {
+  ArrowLeft,
+  Clock,
+  Construction,
+} from 'lucide-react';
 import posthog from 'posthog-js';
-import { useNavigate } from 'react-router-dom';
+import {
+  Navigation,
+  Pagination,
+} from 'swiper/modules';
+import {
+  Swiper,
+  SwiperSlide,
+} from 'swiper/react';
 
 import {
   getBlogPostBySlug,
   getRelatedPosts,
+  POSTS,
 } from '@blog/data';
 import { FloatingNav } from '@components';
 import { cn } from '@utils';
 
 import { BlogCard } from './BlogCard';
+import { Breadcrumbs } from './Breadcrumbs';
+import { SEOHead } from './SEOHead';
 import { SocialShareButtons } from './SocialShareButtons';
 
 interface BlogLayoutProps {
@@ -29,17 +43,32 @@ export function BlogLayout({ children, className }: BlogLayoutProps) {
   const currentPath = window.location.pathname;
   const currentSlug = currentPath.replace("/blog/", "");
   const entry = getBlogPostBySlug(currentSlug);
-  const navigate = useNavigate();
+
+  // Determine if this is a sub-article and find its parent
+  let parentPillar = null;
+  let isSubArticle = false;
+
+  if (entry) {
+    for (const pillar of POSTS) {
+      if (pillar.subArticles?.some((sub) => sub.slug === currentSlug)) {
+        parentPillar = pillar;
+        isSubArticle = true;
+        break;
+      }
+    }
+  }
 
   useEffect(() => {
     if (entry) {
       posthog.capture("blog_post_viewed", {
         blog_post_id: entry.id,
-        blog_post_title: entry.title,
+        blog_post_name: entry.name,
+        blog_post_short_name: entry.shortName,
         blog_post_slug: entry.slug,
         blog_post_author: entry.author,
         blog_post_date: entry.date.toISOString(),
         blog_post_reading_time: entry.readingTime,
+        blog_post_under_construction: entry.underConstruction || false,
         page_path: window.location.pathname,
         referrer: document.referrer,
       });
@@ -54,26 +83,22 @@ export function BlogLayout({ children, className }: BlogLayoutProps) {
     <div
       className={cn("min-h-screen relative flex flex-col h-screen", className)}
     >
+      {/* SEO Head */}
+      <SEOHead
+        post={entry}
+        isSubArticle={isSubArticle}
+        parentPillar={parentPillar || undefined}
+      />
+
       {/* Floating Navigation */}
       <FloatingNav isVisible={true} />
 
-      <div className="flex gap-4 pt-16 grow min-h-0 border-t border-gray-200">
+      <div className="flex flex-col gap-4 grow h-fit p-16">
         {/* Main Content */}
         <div className="flex-1 overflow-y-auto grow">
           <main className="relative z-10 max-w-4xl mx-auto px-4 py-8 md:py-16 md:px-8 lg:px-16 font-sans flex flex-col gap-6">
             <div className="flex justify-between items-center">
-              <button
-                className={cn(
-                  "flex items-center gap-2 text-sm text-gray-500 transition-all duration-300",
-                  "hover:text-gray-700 hover:bg-gray-100 rounded-md p-2"
-                )}
-                onClick={() => {
-                  navigate("/blog");
-                }}
-              >
-                <ArrowLeftIcon className="w-4 h-4" />
-                Back to Blog
-              </button>
+              <Breadcrumbs currentSlug={currentSlug} />
 
               {entry && (
                 <div className="flex items-center gap-2 text-sm text-gray-500">
@@ -117,38 +142,142 @@ export function BlogLayout({ children, className }: BlogLayoutProps) {
                     fontFamily: "Gowun Dodum",
                   }}
                 >
-                  {entry?.title}
+                  {entry?.name}
                 </motion.h1>
 
-                {entry && (
-                  <motion.p>
-                    <span className="hidden md:block text-gray-500">
-                      By <i>{entry.author}</i>
-                    </span>
-                  </motion.p>
-                )}
+                <motion.p>
+                  <span className="hidden md:block text-gray-500 italic">
+                    By {entry.author}
+                  </span>
+                </motion.p>
               </div>
 
-              {children}
+              {/* Under Construction Alert */}
+              {entry.underConstruction && (
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: 0.2 }}
+                  className="bg-amber-50 border-l-4 border-amber-400 p-6 rounded-r-lg shadow-sm"
+                >
+                  <div className="flex items-start gap-3">
+                    <Construction className="w-6 h-6 text-amber-600 mt-0.5 flex-shrink-0" />
+                    <div className="flex-1">
+                      <h3 className="text-amber-800 font-semibold text-lg mb-2">
+                        🚧 Under Construction
+                      </h3>
+                      <p className="text-amber-700 mb-4">
+                        This guide is currently being developed as part of our
+                        comprehensive educational resource library. We're
+                        working hard to bring you detailed, actionable content
+                        that will help you support your middle schooler's
+                        academic journey.
+                      </p>
+                      <div className="flex items-center gap-4 text-sm text-amber-600">
+                        <div className="flex items-center gap-1">
+                          <Clock className="w-4 h-4" />
+                          <span>Expected completion: Coming soon</span>
+                        </div>
+                      </div>
+                      <div className="mt-4">
+                        <a
+                          href="/blog"
+                          className="inline-flex items-center gap-2 text-amber-700 hover:text-amber-800 font-medium transition-colors"
+                        >
+                          <ArrowLeft className="w-4 h-4" />
+                          Browse available guides
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+
+              {/* Show content only if not under construction */}
+              {!entry.underConstruction && children}
+
+              {/* Show preview content if under construction */}
+              {entry.underConstruction && (
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: 0.4 }}
+                  className="bg-gray-50 border rounded-lg p-6"
+                >
+                  <h3 className="text-xl font-semibold text-gray-900 mb-3">
+                    What to Expect
+                  </h3>
+                  <p className="text-gray-700 mb-4">{entry.excerpt}</p>
+                  <p className="text-gray-600 text-sm">
+                    This comprehensive guide will include practical strategies,
+                    expert insights, and actionable steps to help you navigate
+                    this important aspect of your student's education.
+                  </p>
+                </motion.div>
+              )}
             </motion.div>
 
-            <SocialShareButtons
-              title={entry?.title}
-              url={window.location.href}
-              description={entry?.excerpt}
-              blogPostId={entry?.slug}
-              className="my-12"
-            />
-
-            {/* Related Posts */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {getRelatedPosts(entry)
-                .slice(0, 4)
-                .map((article) => (
-                  <BlogCard post={article} />
-                ))}
-            </div>
+            {/* Only show social sharing for completed posts */}
+            {!entry.underConstruction && (
+              <SocialShareButtons
+                title={entry?.name}
+                url={window.location.href}
+                description={entry?.excerpt}
+                blogPostId={entry?.slug}
+              />
+            )}
           </main>
+        </div>
+
+        {/* Related Posts */}
+        <div className="w-full">
+          <Swiper
+            modules={[Navigation, Pagination]}
+            spaceBetween={16}
+            slidesPerView={1}
+            mousewheel={{
+              forceToAxis: true,
+            }}
+            navigation={{
+              nextEl: ".swiper-button-next-custom",
+              prevEl: ".swiper-button-prev-custom",
+            }}
+            pagination={{
+              clickable: true,
+              el: ".swiper-pagination-custom",
+              type: "bullets",
+            }}
+            grabCursor={true}
+            touchRatio={1}
+            touchAngle={45}
+            simulateTouch={true}
+            allowTouchMove={true}
+            resistance={true}
+            resistanceRatio={0.85}
+            breakpoints={{
+              640: {
+                slidesPerView: 2,
+                spaceBetween: 16,
+              },
+              768: {
+                slidesPerView: 3,
+                spaceBetween: 16,
+              },
+              1024: {
+                slidesPerView: 4,
+                spaceBetween: 16,
+              },
+            }}
+            className="related-posts-carousel pb-4"
+          >
+            {getRelatedPosts(entry)
+              .slice(0, 10)
+              .map((article) => (
+                <SwiperSlide key={article.id}>
+                  <BlogCard post={article} />
+                </SwiperSlide>
+              ))}
+          </Swiper>
         </div>
       </div>
     </div>

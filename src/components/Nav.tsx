@@ -1,10 +1,13 @@
-import { HTMLProps } from "react";
+import { HTMLProps } from 'react';
 
-import { ArrowRightIcon } from "lucide-react";
-import { Link, useNavigate } from "react-router-dom";
+import { ArrowRightIcon } from 'lucide-react';
+import {
+  Link,
+  useNavigate,
+} from 'react-router-dom';
 
-import { Button } from "../Button";
-import { cn } from "../utils";
+import { Button } from '../Button';
+import { cn } from '../utils';
 
 type NavItem = {
   label: string;
@@ -65,7 +68,7 @@ export default function Nav({
       {...props}
     >
       <div className="flex items-center gap-2">
-        <Link to="/">
+        <Link to="/" className="hover:no-underline">
           <h1 className="text-2xl font-bold text-gray-800">Learn with Orin</h1>
         </Link>
       </div>
