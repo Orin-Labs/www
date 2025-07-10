@@ -15,5 +15,16 @@ export function getBySlug<T extends { slug: string; subArticles?: T[] }>(
   slug: string,
   items: T[]
 ): T | null {
-  return items.find((item) => item.slug === slug) || null;
+  for (const item of items) {
+    if (item.slug === slug) {
+      return item;
+    }
+    if (item.subArticles) {
+      const found = getBySlug(slug, item.subArticles);
+      if (found) {
+        return found;
+      }
+    }
+  }
+  return null;
 }

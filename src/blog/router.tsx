@@ -55,6 +55,7 @@ function BlogPost() {
   // Remove '/blog/' from the path to get the slug
   const slug = location.pathname.replace("/blog/", "");
   const blogPost = getBySlug(slug, BLOG_META);
+  console.log(blogPost);
 
   if (blogPost) {
     const Component = RENDER_MAP[blogPost.slug];
