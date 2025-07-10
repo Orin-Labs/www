@@ -73,6 +73,34 @@
     />
 
     <!-- Open Graph / Facebook and Twitter meta tags are dynamically generated -->
+    <!--- Koah Pixel --->
+    <script>
+      !(function (w, d) {
+        if (!w.kad) {
+          var p = (w.kad = function () {
+            p.sendEvent
+              ? p.sendEvent.apply(p, arguments)
+              : p.queue.push(arguments);
+          });
+          p.queue = [];
+          var t = d.createElement("script");
+          (t.src = "https://app.koah.ai/pixel.js"), (t.async = !0);
+          var s = d.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(t, s);
+        }
+      })(window, document);
+      kad("init", "b514521c-6fe7-49a6-9b89-209827dc4633");
+      kad("track", "PageView");
+    </script>
+    <noscript>
+      <img
+        height="1"
+        width="1"
+        style="display: none"
+        src="https://app.koah.ai/kad/tr?id=b514521c-6fe7-49a6-9b89-209827dc4633&ev=PageView&noscript=1"
+      />
+    </noscript>
+    <!--- End Koah Pixel --->
 
     <!--ssr-meta-->
 
