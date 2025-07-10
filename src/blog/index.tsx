@@ -65,6 +65,7 @@ export default function BlogIndex() {
           author: "Orin",
           readingTime: 0,
           id: "orin-blog",
+          image: "/images/blog_og.png",
         }}
       />
 
