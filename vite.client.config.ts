@@ -8,7 +8,7 @@ const __filename = fileURLToPath(import.meta.url);
 
 const __dirname = path.dirname(__filename);
 
-// https://vite.dev/config/
+// Client-specific Vite config with manual chunks
 export default defineConfig({
   plugins: [react()],
   resolve: {
@@ -21,20 +21,18 @@ export default defineConfig({
       "@constants": path.resolve(__dirname, "src/constants"),
     },
   },
-  // SSR configuration
-  ssr: {
-    // Don't externalize these packages in SSR
-    noExternal: ["react-router-dom", "react-router", "lucide-react"],
-    // Externalize problematic packages for SSR
-    external: [
-      "framer-motion",
-      "motion",
-      "@paper-design/shaders-react",
-      "fsevents",
-    ],
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ["react", "react-dom"],
+          router: ["react-router-dom"],
+          blog: ["react-markdown", "rehype-katex", "remark-math"],
+        },
+      },
+    },
   },
   optimizeDeps: {
-    // Force optimization of these packages
     include: ["react", "react-dom", "react-router-dom"],
   },
 });

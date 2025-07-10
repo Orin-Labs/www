@@ -4,7 +4,7 @@ import plugin from 'tailwindcss/plugin';
 
 import typography from '@tailwindcss/typography';
 
-module.exports = {
+export default {
   content: [
     "./src/**/*.{ts,tsx}",
     "./index.html",

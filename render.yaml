@@ -1,8 +1,9 @@
 services:
   - type: web
     name: learnwithorin-www
-    env: node
-    buildCommand: yarn && yarn build
+    runtime: node
+    plan: starter
+    buildCommand: yarn install && yarn build
     startCommand: yarn serve
     envVars:
       - key: NODE_ENV
@@ -10,16 +11,13 @@ services:
       - key: PORT
         value: 10000
     healthCheckPath: /
-    numInstances: 1
-    plan: starter
-    # Auto-deploy from main branch
     autoDeploy: true
     # Custom domain configuration (optional)
     # customDomains:
     #   - name: learnwithorin.com
     #   - name: www.learnwithorin.com
 
-    # Environment variables for production
+    # Build filters for efficient deploys
     buildFilter:
       paths:
         - src/**/*
@@ -31,3 +29,6 @@ services:
         - index.html
         - tailwind.config.js
         - postcss.config.js
+      ignoredPaths:
+        - README.md
+        - .env.example

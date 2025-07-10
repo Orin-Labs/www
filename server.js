@@ -11,23 +11,35 @@ const __dirname = path.dirname(__filename);
 const isProduction = process.env.NODE_ENV === "production";
 const port = process.env.PORT || 3000;
 
+// Import blog data for meta generation
+let getBlogPostBySlug;
+if (isProduction) {
+  // In production, we need to import the built module
+  try {
+    const blogModule = await import("./dist/server/entry-server.js");
+    getBlogPostBySlug = blogModule.getBlogPostBySlug || (() => null);
+  } catch (e) {
+    console.warn("Could not load blog data for meta generation:", e.message);
+    getBlogPostBySlug = () => null;
+  }
+} else {
+  // In development, import directly from source
+  try {
+    const blogModule = await import("./src/blog/data.ts");
+    getBlogPostBySlug = blogModule.getBlogPostBySlug || (() => null);
+  } catch (e) {
+    console.warn("Could not load blog data for meta generation:", e.message);
+    getBlogPostBySlug = () => null;
+  }
+}
+
 async function createServer() {
   const app = express();
 
   // Add compression middleware
   app.use(compression());
 
-  let vite;
-  if (!isProduction) {
-    // Development mode - use Vite dev server
-    const { createServer } = await import("vite");
-    vite = await createServer({
-      server: { middlewareMode: true },
-      appType: "custom",
-      base: "/",
-    });
-    app.use(vite.ssrLoadModule);
-  } else {
+  if (isProduction) {
     // Production mode - serve static files
     app.use(
       "/",
@@ -37,42 +49,39 @@ async function createServer() {
         brotli: true,
       })
     );
+  } else {
+    // Development mode - serve public files
+    app.use(express.static("public"));
   }
 
-  // Handle all routes for SSR
+  // Handle all routes for meta tag injection
   app.use("*", async (req, res, next) => {
     try {
       const url = req.originalUrl;
 
       let template;
-      let render;
-
       if (!isProduction) {
-        // Development: read template from file system and transform via vite
+        // Development: read template from file system
         template = fs.readFileSync(
           path.resolve(__dirname, "index.html"),
           "utf-8"
         );
-        template = await vite.transformIndexHtml(url, template);
-        render = (await vite.ssrLoadModule("/src/entry-server.tsx")).render;
       } else {
-        // Production: use built template and server bundle
+        // Production: use built template
         template = fs.readFileSync(
           path.resolve(__dirname, "dist/client/index.html"),
           "utf-8"
         );
-        render = (await import("./dist/server/entry-server.js")).render;
       }
 
-      // Render the app to string
-      const { html: appHtml, meta } = await render(url);
+      // Generate meta tags based on route
+      const meta = generateMetaForRoute(url);
 
       // Generate meta tags HTML
       const metaTags = generateMetaTags(meta);
 
-      // Replace placeholders in template
+      // Replace meta tags in template (keep the app as client-side)
       const html = template
-        .replace("<!--ssr-outlet-->", appHtml)
         .replace("<!--ssr-meta-->", metaTags)
         .replace(
           "<title>Orin - Unlimited tutoring for middle school math</title>",
@@ -105,18 +114,93 @@ async function createServer() {
 
       res.status(200).set({ "Content-Type": "text/html" }).end(html);
     } catch (e) {
-      // Handle errors
-      if (vite) {
-        vite.ssrFixStacktrace(e);
-      }
-      console.error("SSR Error:", e);
-      res.status(500).end("Internal Server Error");
+      console.error("Meta injection error:", e);
+      // Fallback to serving the file as-is
+      next();
     }
   });
 
   app.listen(port, () => {
     console.log(`Server started at http://localhost:${port}`);
   });
+}
+
+function generateMetaForRoute(path) {
+  const baseTitle = "Learn with Orin";
+  const baseDescription = "Meet Orin, your private tutor.";
+  const baseUrl = "https://learnwithorin.com";
+
+  // Extract the path from the URL
+  const cleanPath = path.split("?")[0];
+
+  // Default meta for home page
+  if (cleanPath === "/") {
+    return {
+      title: `Orin - Unlimited tutoring for middle school math`,
+      description: baseDescription,
+      keywords:
+        "middle school math, tutoring, education, math help, algebra, pre-algebra",
+      image: "/og_image.png",
+      url: baseUrl,
+      type: "website",
+    };
+  }
+
+  // Blog routes
+  if (cleanPath.startsWith("/blog")) {
+    if (cleanPath === "/blog" || cleanPath === "/blog/") {
+      return {
+        title: `Blog - ${baseTitle}`,
+        description:
+          "Expert guidance for middle school parents navigating academics, assessments, and STEM education.",
+        keywords:
+          "middle school, education, parents, academic support, blog, math foundations, assessment guide",
+        image: "/blog_og.png",
+        url: `${baseUrl}/blog`,
+        type: "website",
+      };
+    }
+
+    // Individual blog post
+    const slug = cleanPath.replace("/blog/", "");
+    const blogPost = getBlogPostBySlug ? getBlogPostBySlug(slug) : null;
+
+    if (blogPost) {
+      const description =
+        blogPost.excerpt.length > 160
+          ? blogPost.excerpt.substring(0, 157) + "..."
+          : blogPost.excerpt;
+
+      return {
+        title: `${blogPost.name} | ${baseTitle}`,
+        description,
+        keywords: blogPost.keywords.join(", "),
+        image: blogPost.image || "/blog_og.png",
+        url: `${baseUrl}/blog/${blogPost.slug}`,
+        type: "article",
+      };
+    }
+  }
+
+  // Privacy page
+  if (cleanPath === "/privacy") {
+    return {
+      title: `Privacy Policy - ${baseTitle}`,
+      description: "Privacy policy for Learn with Orin tutoring services.",
+      keywords: "privacy policy, data protection, tutoring services",
+      url: `${baseUrl}/privacy`,
+      type: "website",
+    };
+  }
+
+  // 404 or unknown routes
+  return {
+    title: `Page Not Found - ${baseTitle}`,
+    description: baseDescription,
+    keywords: "404, page not found",
+    url: `${baseUrl}${cleanPath}`,
+    type: "website",
+  };
 }
 
 function generateMetaTags(meta) {
