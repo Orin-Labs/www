@@ -27,6 +27,7 @@ import {
   PLTWVsFirstRobotics,
   PreAlgebraVocabularyFlashcards,
   SeventhGradeMAPPracticePDF,
+  StateTestPrepStrategies,
   STEMElectivesGuide,
   STEMPortfolioGitHubSlides,
   SummerProgramsHighSchoolCredit,
@@ -40,60 +41,81 @@ export interface BlogPost extends BlogMeta {
   component: React.ComponentType;
 }
 
-export const RENDER_MAP: Record<string, React.ComponentType> = {
-  "map-testing-state-assessments-complete-guide": MAPStateTestsCompleteGuide,
-  "map-testing-state-assessments-complete-guide/map-score-ranges-explained":
-    MAPScoreRangesExplained,
-  "map-testing-state-assessments-complete-guide/growth-vs-proficiency":
-    GrowthVsProficiency,
-  "map-testing-state-assessments-complete-guide/understanding-rit-scores-guide":
-    UnderstandingRITScores,
-  "map-testing-state-assessments-complete-guide/seventh-grade-map-practice-pdf":
-    SeventhGradeMAPPracticePDF,
-  "middle-school-math-foundations-guide/algebra-readiness-checklist-middle-school":
-    AlgebraReadinessChecklist,
-  "middle-school-math-foundations-guide/fraction-mastery-guide-middle-school":
-    FractionMasteryGuide,
-  "middle-school-math-foundations-guide/fractions-with-pizza-slices-video":
-    FractionsWithPizzaSlicesVideo,
-  "middle-school-math-foundations-guide/integer-rules-cheat-sheet":
-    IntegerRulesCheatSheet,
-  "middle-school-math-foundations-guide/math-anxiety-solutions":
-    MathAnxietySolutions,
-  "middle-school-math-foundations-guide/order-of-operations-games":
-    OrderOfOperationsGames,
-  "middle-school-math-foundations-guide/pre-algebra-vocabulary-flashcards":
-    PreAlgebraVocabularyFlashcards,
-  "middle-school-math-foundations-guide/top-youtube-channels-eighth-grade-math":
-    TopYouTubeChannelsEighthGradeMath,
-  "middle-school-math-foundations-guide/weekly-study-planner-template":
-    WeeklyStudyPlannerTemplate,
-  "advanced-academics-middle-school-guide/dual-enrollment-guide-middle-school":
-    DualEnrollmentGuide,
-  "advanced-academics-middle-school-guide/gifted-program-navigation-guide":
-    GiftedProgramNavigation,
-  "stem-electives-high-school-credit-middle-school/algebra-vs-math-8-flowchart":
-    AlgebraVsMath8Flowchart,
-  "stem-electives-high-school-credit-middle-school/gpa-starts-eighth-grade":
-    GPAStartsEighthGrade,
-  "stem-electives-high-school-credit-middle-school/online-foreign-language-credits":
-    OnlineForeignLanguageCredits,
-  "stem-electives-high-school-credit-middle-school/pltw-vs-first-robotics":
-    PLTWVsFirstRobotics,
-  "stem-electives-high-school-credit-middle-school/stem-portfolio-github-slides":
-    STEMPortfolioGitHubSlides,
-  "stem-electives-high-school-credit-middle-school/summer-programs-high-school-credit":
-    SummerProgramsHighSchoolCredit,
-  "advanced-academics-middle-school-guide/discussing-test-results-without-stress":
-    DiscussingTestResultsWithoutStress,
-  "advanced-academics-middle-school-guide/test-day-nutrition-sleep-checklist":
-    TestDayNutritionSleepChecklist,
-  "advanced-academics-middle-school-guide/math-survival-guide":
-    MathSurvivalGuide,
-  "advanced-academics-middle-school-guide/nwea-to-state-test-converter":
-    NWEAToStateTestConverter,
-  "stem-electives-high-school-credit-middle-school/stem-electives-guide":
-    STEMElectivesGuide,
+export type RenderMap = { [key: string]: React.ComponentType | RenderMap };
+
+export const RENDER_MAP: RenderMap = {
+  // Academic Assessment Pillar
+  "map-testing-state-assessments-complete-guide": {
+    index: MAPStateTestsCompleteGuide,
+    "map-score-ranges-explained": MAPScoreRangesExplained,
+    "growth-vs-proficiency": GrowthVsProficiency,
+    "understanding-rit-scores-guide": UnderstandingRITScores,
+    "seventh-grade-map-practice-pdf": SeventhGradeMAPPracticePDF,
+    "nwea-to-state-test-converter": NWEAToStateTestConverter,
+    "test-day-nutrition-sleep-checklist": TestDayNutritionSleepChecklist,
+    "discussing-test-results-without-stress":
+      DiscussingTestResultsWithoutStress,
+    "state-test-prep-strategies": StateTestPrepStrategies,
+  },
+
+  // Math Foundations Pillar
+  "middle-school-math-foundations-guide": {
+    index: MathSurvivalGuide,
+    "algebra-readiness-checklist-middle-school": AlgebraReadinessChecklist,
+    "fraction-mastery-guide-middle-school": FractionMasteryGuide,
+    "fractions-with-pizza-slices-video": FractionsWithPizzaSlicesVideo,
+    "integer-rules-cheat-sheet": IntegerRulesCheatSheet,
+    "math-anxiety-solutions": MathAnxietySolutions,
+    "order-of-operations-games": OrderOfOperationsGames,
+    "pre-algebra-vocabulary-flashcards": PreAlgebraVocabularyFlashcards,
+    "top-youtube-channels-eighth-grade-math": TopYouTubeChannelsEighthGradeMath,
+    "weekly-study-planner-template": WeeklyStudyPlannerTemplate,
+  },
+
+  // STEM Electives / Advanced Academics Pillar
+  "stem-electives-high-school-credit-middle-school": {
+    index: STEMElectivesGuide,
+    "dual-enrollment-guide-middle-school": DualEnrollmentGuide,
+    "gifted-program-navigation-guide": GiftedProgramNavigation,
+    "algebra-vs-math-8-flowchart": AlgebraVsMath8Flowchart,
+    "gpa-starts-eighth-grade": GPAStartsEighthGrade,
+    "online-foreign-language-credits": OnlineForeignLanguageCredits,
+    "pltw-vs-first-robotics": PLTWVsFirstRobotics,
+    "stem-portfolio-github-slides": STEMPortfolioGitHubSlides,
+    "summer-programs-high-school-credit": SummerProgramsHighSchoolCredit,
+  },
+};
+
+export const getRenderMap = (
+  slug: string,
+  map: RenderMap | React.ComponentType = RENDER_MAP
+): React.ComponentType | undefined => {
+  if (typeof map !== "object") {
+    return map as React.ComponentType;
+  }
+  const parts = slug.split("/");
+  if (parts.length === 0 || !parts[0]) {
+    // If slug is empty, return undefined
+    return undefined;
+  }
+  const [first, ...rest] = parts;
+  const next = (map as RenderMap)[first === "" ? "index" : first];
+  if (next === undefined) {
+    return undefined;
+  }
+  if (rest.length === 0) {
+    // If no more parts, return the found component or nested map
+    if (typeof next === "function") {
+      return next as React.ComponentType;
+    }
+    // If next is a nested map, return its "index" if available
+    if (typeof next === "object" && next !== null && "index" in next) {
+      return (next as RenderMap)["index"] as React.ComponentType;
+    }
+    return undefined;
+  }
+  // Recurse for the rest of the slug
+  return getRenderMap(rest.join("/"), next);
 };
 
 export const getRelatedPosts = (post: BlogMeta): BlogMeta[] => {

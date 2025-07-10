@@ -10,7 +10,7 @@ import { getBySlug } from '@/utils';
 import BlogIndex from '@blog/index';
 import { BLOG_META } from '@blog/meta-data';
 
-import { RENDER_MAP } from './data';
+import { getRenderMap } from './data';
 
 export function ScrollToTop({ children }: { children: React.ReactNode }) {
   const { pathname } = useLocation();
@@ -58,7 +58,7 @@ function BlogPost() {
   console.log(blogPost);
 
   if (blogPost) {
-    const Component = RENDER_MAP[blogPost.slug];
+    const Component = getRenderMap(blogPost.slug);
     if (Component) {
       return <Component />;
     } else {
