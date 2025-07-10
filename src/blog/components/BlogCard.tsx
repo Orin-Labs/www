@@ -1,17 +1,11 @@
-import React from 'react';
+import React from "react";
 
-import {
-  HTMLMotionProps,
-  motion,
-} from 'framer-motion';
-import { ArrowRightIcon } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { HTMLMotionProps, motion } from "framer-motion";
+import { ArrowRightIcon } from "lucide-react";
+import { Link } from "react-router-dom";
 
-import {
-  BlogPost,
-  getReadingTime,
-} from '@blog/data';
-import { cn } from '@utils';
+import { BlogPost, getReadingTime } from "@blog/data";
+import { cn } from "@utils";
 
 interface BlogCardProps extends HTMLMotionProps<"button"> {
   post: BlogPost;
@@ -66,9 +60,7 @@ export function BlogCard({ post, className, ...props }: BlogCardProps) {
           <div className="flex justify-between items-center gap-4">
             <div className="flex flex-col items-start">
               <p className="text-gray-200 text-sm md:text-md">
-                {post.subArticles
-                  ? `${post.subArticles.length} articles`
-                  : post.underConstruction
+                {post.underConstruction
                   ? "Coming soon"
                   : `${getReadingTime(post)} min read`}
               </p>

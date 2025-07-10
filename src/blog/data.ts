@@ -831,7 +831,11 @@ export const getAllBlogPosts = (): BlogPost[] => {
   const allPosts = flattenBlogPosts(POSTS);
 
   // Sort by date (newest first)
-  return allPosts.sort((a, b) => b.date.getTime() - a.date.getTime());
+  return allPosts.sort(
+    (a, b) =>
+      (b.subArticles?.length || 0) - (a.subArticles?.length || 0) ||
+      b.date.getTime() - a.date.getTime()
+  );
 };
 
 export const getRelatedPosts = (post: BlogPost): BlogPost[] => {
@@ -839,7 +843,9 @@ export const getRelatedPosts = (post: BlogPost): BlogPost[] => {
   const allPosts = flattenBlogPosts(POSTS);
 
   // Remove the current post from consideration
-  const candidatePosts = allPosts.filter((p) => p.id !== post.id);
+  const candidatePosts = allPosts.filter(
+    (p) => p.id !== post.id && !p.underConstruction
+  );
 
   // Find the parent pillar post of the current post (if it's a subarticle)
   let parentPillar: BlogPost | undefined;
