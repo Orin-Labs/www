@@ -9,6 +9,7 @@ import {
 import {
   AlgebraReadinessChecklist,
   AlgebraVsMath8Flowchart,
+  DiscussingTestResultsWithoutStress,
   DualEnrollmentGuide,
   FractionMasteryGuide,
   FractionsWithPizzaSlicesVideo,
@@ -19,13 +20,17 @@ import {
   MAPScoreRangesExplained,
   MAPStateTestsCompleteGuide,
   MathAnxietySolutions,
+  MathSurvivalGuide,
+  NWEAToStateTestConverter,
   OnlineForeignLanguageCredits,
   OrderOfOperationsGames,
   PLTWVsFirstRobotics,
   PreAlgebraVocabularyFlashcards,
   SeventhGradeMAPPracticePDF,
+  STEMElectivesGuide,
   STEMPortfolioGitHubSlides,
   SummerProgramsHighSchoolCredit,
+  TestDayNutritionSleepChecklist,
   TopYouTubeChannelsEighthGradeMath,
   UnderstandingRITScores,
   WeeklyStudyPlannerTemplate,
@@ -79,6 +84,16 @@ export const RENDER_MAP: Record<string, React.ComponentType> = {
     STEMPortfolioGitHubSlides,
   "stem-electives-high-school-credit-middle-school/summer-programs-high-school-credit":
     SummerProgramsHighSchoolCredit,
+  "advanced-academics-middle-school-guide/discussing-test-results-without-stress":
+    DiscussingTestResultsWithoutStress,
+  "advanced-academics-middle-school-guide/test-day-nutrition-sleep-checklist":
+    TestDayNutritionSleepChecklist,
+  "advanced-academics-middle-school-guide/math-survival-guide":
+    MathSurvivalGuide,
+  "advanced-academics-middle-school-guide/nwea-to-state-test-converter":
+    NWEAToStateTestConverter,
+  "stem-electives-high-school-credit-middle-school/stem-electives-guide":
+    STEMElectivesGuide,
 };
 
 export const getRelatedPosts = (post: BlogMeta): BlogMeta[] => {
