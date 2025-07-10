@@ -1,4 +1,6 @@
-import React from 'react';
+import React from "react";
+
+import { cn } from "@/utils";
 
 interface ScenarioItem {
   title: string;
@@ -49,9 +51,14 @@ export const ScenarioGrid: React.FC<ScenarioGridProps> = ({
                 {scenario.description}
               </p>
             )}
-            <ul className="text-sm space-y-1 text-gray-800">
+            <ul
+              className={cn(
+                "text-sm space-y-1 text-gray-800",
+                scenario.details.length > 1 && "list-disc list-inside"
+              )}
+            >
               {scenario.details.map((detail, detailIndex) => (
-                <li key={detailIndex}>• {detail}</li>
+                <li key={detailIndex}>{detail}</li>
               ))}
             </ul>
           </div>

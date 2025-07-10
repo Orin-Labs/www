@@ -1,38 +1,22 @@
 // Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 
-import { motion } from 'framer-motion';
-import {
-  ArrowLeft,
-  Clock,
-  Construction,
-} from 'lucide-react';
-import posthog from 'posthog-js';
-import {
-  Navigation,
-  Pagination,
-} from 'swiper/modules';
-import {
-  Swiper,
-  SwiperSlide,
-} from 'swiper/react';
+import { motion } from "framer-motion";
+import { ArrowLeft, Clock, Construction } from "lucide-react";
+import posthog from "posthog-js";
 
-import {
-  getBlogPostBySlug,
-  getRelatedPosts,
-  POSTS,
-} from '@blog/data';
-import { FloatingNav } from '@components';
-import { cn } from '@utils';
+import { getBlogPostBySlug, getRelatedPosts, POSTS } from "@blog/data";
+import { FloatingNav } from "@components";
+import { cn } from "@utils";
 
-import { BlogCard } from './BlogCard';
-import { Breadcrumbs } from './Breadcrumbs';
-import { SEOHead } from './SEOHead';
-import { SocialShareButtons } from './SocialShareButtons';
+import { BlogCard } from "./BlogCard";
+import { Breadcrumbs } from "./Breadcrumbs";
+import { SEOHead } from "./SEOHead";
+import { SocialShareButtons } from "./SocialShareButtons";
 
 interface BlogLayoutProps {
   children: React.ReactNode;
@@ -230,54 +214,10 @@ export function BlogLayout({ children, className }: BlogLayoutProps) {
         </div>
 
         {/* Related Posts */}
-        <div className="w-full">
-          <Swiper
-            modules={[Navigation, Pagination]}
-            spaceBetween={16}
-            slidesPerView={1}
-            mousewheel={{
-              forceToAxis: true,
-            }}
-            navigation={{
-              nextEl: ".swiper-button-next-custom",
-              prevEl: ".swiper-button-prev-custom",
-            }}
-            pagination={{
-              clickable: true,
-              el: ".swiper-pagination-custom",
-              type: "bullets",
-            }}
-            grabCursor={true}
-            touchRatio={1}
-            touchAngle={45}
-            simulateTouch={true}
-            allowTouchMove={true}
-            resistance={true}
-            resistanceRatio={0.85}
-            breakpoints={{
-              640: {
-                slidesPerView: 2,
-                spaceBetween: 16,
-              },
-              768: {
-                slidesPerView: 3,
-                spaceBetween: 16,
-              },
-              1024: {
-                slidesPerView: 4,
-                spaceBetween: 16,
-              },
-            }}
-            className="related-posts-carousel pb-4"
-          >
-            {getRelatedPosts(entry)
-              .slice(0, 10)
-              .map((article) => (
-                <SwiperSlide key={article.id}>
-                  <BlogCard post={article} />
-                </SwiperSlide>
-              ))}
-          </Swiper>
+        <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {getRelatedPosts(entry).map((article) => (
+            <BlogCard post={article} />
+          ))}
         </div>
       </div>
     </div>

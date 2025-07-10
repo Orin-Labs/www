@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 import {
   AlgebraReadinessChecklist,
@@ -29,7 +29,7 @@ import {
   TopYouTubeChannelsEighthGradeMath,
   UnderstandingRITScores,
   WeeklyStudyPlannerTemplate,
-} from './pages';
+} from "./pages";
 
 export interface BlogPost {
   id: string;
@@ -71,7 +71,7 @@ export const POSTS: BlogPost[] = [
       "student evaluation",
       "assessment data",
     ],
-    image: "/blog/pawel-czerwinski-ruJm3dBXCqw-unsplash.jpg",
+    image: "/blog/milad-fakurian-PGdW_bHDbpI-unsplash.jpg",
     component: MAPStateTestsCompleteGuide,
     subArticles: [
       {
@@ -187,7 +187,6 @@ export const POSTS: BlogPost[] = [
         author: "Education Team",
         readingTime: 5,
         slug: "map-testing-state-assessments-complete-guide/nwea-to-state-test-converter",
-        underConstruction: true,
         keywords: [
           "map to staar conversion",
           "NWEA converter",
@@ -200,7 +199,7 @@ export const POSTS: BlogPost[] = [
           "score interpretation",
           "test comparison",
         ],
-        image: "/blog/milad-fakurian-PGdW_bHDbpI-unsplash.jpg",
+        image: "/blog/pawel-czerwinski-ruJm3dBXCqw-unsplash.jpg",
         component: NWEAToStateTestConverter,
       },
       {
@@ -239,7 +238,6 @@ export const POSTS: BlogPost[] = [
         author: "Education Team",
         readingTime: 8,
         slug: "map-testing-state-assessments-complete-guide/discussing-test-results-without-stress",
-        underConstruction: true,
         keywords: [
           "how to talk about test scores",
           "test anxiety",
@@ -302,7 +300,7 @@ export const POSTS: BlogPost[] = [
       "math learning",
       "mathematical development",
     ],
-    image: "/blog/omid-armin-b50MRxwg_gk-unsplash.jpg",
+    image: "/blog/allison-saeng-mAM2jcU8dvw-unsplash.jpg",
     readingTime: 12,
     slug: "middle-school-math-foundations-guide",
     component: MathSurvivalGuide,
@@ -407,7 +405,7 @@ export const POSTS: BlogPost[] = [
           "integer division",
           "number operations",
         ],
-        image: "/blog/john-sin-Q5rtHn9I4oA-unsplash.jpg",
+        image: "/blog/sebastian-svenson-d2w-_1LJioQ-unsplash.jpg",
         slug: "middle-school-math-foundations-guide/integer-rules-cheat-sheet",
         component: IntegerRulesCheatSheet,
       },
@@ -485,7 +483,7 @@ export const POSTS: BlogPost[] = [
           "vocabulary building",
           "math literacy",
         ],
-        image: "/blog/mithushi-arya-lXOX3-yTvyQ-unsplash.jpg",
+        image: "/blog/omid-armin-b50MRxwg_gk-unsplash.jpg",
         slug: "middle-school-math-foundations-guide/pre-algebra-vocabulary-flashcards",
         component: PreAlgebraVocabularyFlashcards,
       },
@@ -511,7 +509,7 @@ export const POSTS: BlogPost[] = [
           "math video lessons",
           "educational YouTube",
         ],
-        image: "/blog/allison-saeng-mAM2jcU8dvw-unsplash.jpg",
+        image: "/blog/mithushi-arya-lXOX3-yTvyQ-unsplash.jpg",
         slug: "middle-school-math-foundations-guide/top-youtube-channels-eighth-grade-math",
         component: TopYouTubeChannelsEighthGradeMath,
       },
@@ -564,7 +562,7 @@ export const POSTS: BlogPost[] = [
       "advanced learning",
       "academic enrichment",
     ],
-    image: "/blog/sebastian-svenson-d2w-_1LJioQ-unsplash.jpg",
+    image: "/blog/john-sin-Q5rtHn9I4oA-unsplash.jpg",
     slug: "stem-electives-high-school-credit-middle-school",
     component: STEMElectivesGuide,
     subArticles: [
