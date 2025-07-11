@@ -1,6 +1,6 @@
 export const COPY_VARIATIONS = {
   control: {
-    headline: "Meet Orin, your private tutor",
+    headline: "Meet Orin, your digital tutor",
     subheadline: "Unlimited tutoring for $49/month",
     cta: "Get your own Orin",
   },
