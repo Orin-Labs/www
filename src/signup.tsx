@@ -59,7 +59,7 @@ export default function Signup() {
       </motion.div>
 
       <motion.div
-        className="w-full h-full p-4"
+        className="w-full h-full p-4 hidden md:block"
         initial={{ opacity: 0, x: 20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.6 }}

@@ -69,7 +69,12 @@ export default function Nav({
     >
       <div className="flex items-center gap-2">
         <Link to="/" className="hover:no-underline">
-          <h1 className="text-2xl font-bold text-gray-800">Learn with Orin</h1>
+          <h1 className="block md:hidden text-2xl font-bold text-gray-800">
+            Orin
+          </h1>
+          <h1 className="hidden md:block text-2xl font-bold text-gray-800">
+            Learn with Orin
+          </h1>
         </Link>
       </div>
       <nav>
