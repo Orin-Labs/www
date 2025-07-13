@@ -121,7 +121,7 @@ export default function Nav({
             className="gap-2 relative overflow-hidden"
             onClick={() => navigate("/signup")}
           >
-            Free 2 week trial
+            Try for Free
             <ArrowRightIcon className="w-4 h-4" />
           </Button>
         </div>

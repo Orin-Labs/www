@@ -51,7 +51,7 @@ export const Ad = ({ title, description, className, ...props }: AdProps) => {
           className="gap-2 z-10"
           onClick={handleCTAClick}
         >
-          Free 2 Week Trial
+          Try for Free
           <ArrowRightIcon className="w-4 h-4" />
         </Button>
       </div>

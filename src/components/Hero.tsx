@@ -87,7 +87,7 @@ export function Hero({
               className="gap-2"
               onClick={() => navigate("/signup")}
             >
-              Free 2 week trial
+              Try for Free
               <ArrowRightIcon className="w-4 h-4" />
             </Button>
             <small className="text-gray-500">No credit card required</small>
