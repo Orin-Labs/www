@@ -34,7 +34,7 @@ export function BackgroundGradient({ speed }: BackgroundGradientProps) {
           color2={COLORS[1]}
           color3={COLORS[2]}
           speed={speed}
-          seed={0}
+          seed={1000}
           style={gradientStyle}
         />
       </div>

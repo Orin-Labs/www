@@ -114,15 +114,7 @@ export default function Nav({
             shadow="neu"
             bg="gray"
             className="gap-2 relative overflow-hidden"
-            onClick={() => {
-              if (window.location.pathname === "/") {
-                document.getElementById("cta-section")?.scrollIntoView({
-                  behavior: "smooth",
-                });
-              } else {
-                navigate("/?scrollTo=cta-section");
-              }
-            }}
+            onClick={() => navigate("/signup")}
           >
             Free 2 week trial
             <ArrowRightIcon className="w-4 h-4" />

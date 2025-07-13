@@ -1,3 +1,8 @@
+import {
+  TargetAndTransition,
+  Transition,
+} from 'framer-motion';
+
 function cn(...classes: (string | undefined | boolean)[]) {
   return classes.filter(Boolean).join(" ");
 }
@@ -19,5 +24,21 @@ const parseLinksInText = (text: string): React.ReactNode => {
     });
 };
 
-export { cn, parseLinksInText };
+const delayed = (
+  delay: number
+): {
+  initial: TargetAndTransition;
+  animate: TargetAndTransition;
+  transition: Transition;
+} => ({
+  initial: { opacity: 0, y: 5 },
+  animate: { opacity: 1, y: 0 },
+  transition: {
+    delay,
+    duration: 0.3,
+    ease: "easeOut",
+  },
+});
+
+export { cn, delayed, parseLinksInText };
 export * from "./nest";

@@ -25,14 +25,8 @@ export const Ad = ({ title, description, className, ...props }: AdProps) => {
       blog_post_id: window.location.pathname.split("/").pop(),
     });
 
-    // Execute original navigation
-    if (window.location.pathname === "/") {
-      document.getElementById("cta-section")?.scrollIntoView({
-        behavior: "smooth",
-      });
-    } else {
-      navigate("/?scrollTo=cta-section");
-    }
+    // Navigate to signup page
+    navigate("/signup");
   };
 
   return (

@@ -8,7 +8,6 @@ import {
 import { motion } from 'framer-motion';
 
 import { cn } from '../utils';
-import { BackgroundGradient } from './BackgroundGradient';
 import { Message } from './Phone';
 
 // Lazy loading image component
@@ -49,7 +48,7 @@ const LazyImage = ({
   };
 
   return (
-    <div ref={imgRef} className={cn("w-full h-full", className)}>
+    <div ref={imgRef} className={cn("w-full h-full shadow-md", className)}>
       {!isInView && (
         <div
           className="w-full h-full bg-gradient-to-br from-blue-100 to-purple-100 rounded-lg absolute top-0 left-0 flex items-center justify-center cursor-pointer"
@@ -85,12 +84,11 @@ const GradientNumberBadge = ({
   number: number;
   speed: number;
 }) => (
-  <div className="w-12 h-12 rounded-full flex items-center justify-center relative overflow-hidden">
-    <BackgroundGradient speed={speed} />
+  <div className="w-12 h-12 rounded-full flex items-center justify-center relative bg-gray-900">
     <div
       className={cn(
         "absolute inset-0 rounded-full pointer-events-none z-10",
-        "shadow-[inset_2px_2px_8px_#00000044,_inset_-2px_-2px_8px_#ffffffbb]"
+        "shadow-[2px_2px_4px_#00000044,_-2px_-2px_4px_#ffffff99]"
       )}
     />
     <span className="text-white text-xl font-bold z-20 relative">{number}</span>

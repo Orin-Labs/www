@@ -197,7 +197,7 @@ export const SocialProof = ({
           viewport={{ once: true }}
           className="text-center text-6xl mb-2 font-bold"
         >
-          Loved by 100+ families
+          Loved by hundreds of families
         </motion.h1>
         <motion.p
           initial={{ opacity: 0, y: 20 }}
@@ -224,7 +224,7 @@ export const SocialProof = ({
               }}
               viewport={{ once: true }}
               className={cn(
-                "bg-gray-50 rounded-lg p-6 relative min-h-60 transition-shadow duration-200 border "
+                "rounded-lg p-6 relative min-h-60 transition-shadow duration-200 border"
               )}
               animate={{
                 y: 0,
@@ -245,12 +245,12 @@ export const SocialProof = ({
               ) : (
                 <>
                   <div className="mb-3">
-                    <p className="text-lg font-semibold text-blue-600 italic">
+                    <p className="text-lg font-bold text-pink-600 italic">
                       "{(card as TestimonialCard).pullQuote}"
                     </p>
                   </div>
 
-                  <blockquote className="text-base text-gray-800 mb-4 leading-relaxed italic">
+                  <blockquote className="text-base text-gray-700 mb-4 leading-relaxed italic">
                     "{(card as TestimonialCard).quote}"
                   </blockquote>
 

@@ -14,7 +14,7 @@ body {
 }
 
 a {
-  @apply text-pink-700;
+  @apply text-pink-600;
 
   &:hover {
     @apply text-pink-800 underline;

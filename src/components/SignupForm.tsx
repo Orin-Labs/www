@@ -1,42 +1,21 @@
+import { useState } from 'react';
+
 import {
   HTMLMotionProps,
   motion,
 } from 'framer-motion';
 import {
+  ArrowLeft,
   ArrowRight,
   Loader2,
 } from 'lucide-react';
 import { useMediaQuery } from 'react-responsive';
 import { toast } from 'sonner';
 
+import { cn } from '@/utils';
+
 import { Button } from '../Button';
-
-interface SubmittedVariantProps {
-  onReset: () => void;
-}
-
-function SubmittedVariant({ onReset }: SubmittedVariantProps) {
-  return (
-    <motion.div
-      className="flex flex-col gap-6 items-center px-4 z-10 w-full max-w-md text-center"
-      initial={{ opacity: 0, scale: 0.9 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.6 }}
-    >
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.3 }}
-      >
-        <h3 className="text-2xl font-bold text-white mb-2">Thank You!</h3>
-      </motion.div>
-
-      <Button type="button" bg="transparent" onClick={onReset} shadow="neu">
-        Submit Another
-      </Button>
-    </motion.div>
-  );
-}
+import { Families } from './Families';
 
 interface SignupFormProps extends Omit<HTMLMotionProps<"form">, "onSubmit"> {
   phoneNumber: string;
@@ -81,9 +60,38 @@ export function SignupForm({
   ...props
 }: SignupFormProps) {
   const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
+  const [hasPromoCode, setHasPromoCode] = useState(false);
+
+  const inputClass =
+    "bg-transparent outline-none p-3 rounded-md border focus:ring-2 ring-offset-2";
 
   if (submitted) {
-    return <SubmittedVariant onReset={onReset} />;
+    return (
+      <motion.div
+        className="flex flex-col gap-6 items-center px-4 z-10 w-full max-w-md text-center"
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.6 }}
+      >
+        <div className="text-center">
+          <h3 className="text-4xl mb-2">Thank You!</h3>
+          <p className="text-gray-600">
+            Orin will be in touch soon to set up your first lesson.
+          </p>
+        </div>
+
+        <Button
+          type="button"
+          bg="gray"
+          onClick={onReset}
+          shadow="neu"
+          className="gap-2"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          Submit Again
+        </Button>
+      </motion.div>
+    );
   }
 
   return (
@@ -110,56 +118,54 @@ export function SignupForm({
       }}
       {...props}
     >
+      <div className="text-center">
+        <motion.h1 className="text-3xl font-bold text-gray-900">
+          Start Free Trial
+        </motion.h1>
+        <motion.p className="text-gray-600">
+          No credit card required.{" "}
+          <span className="text-pink-600">Cancel anytime.</span>
+        </motion.p>
+      </div>
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
         <motion.input
           type="text"
-          className="bg-transparent placeholder:text-[#ffffff99] text-white outline-none p-3 rounded-md border-white border"
+          className={inputClass}
           placeholder="Parent Name"
           autoFocus={!isMobile}
           disabled={isLoading}
           value={parentName}
           onChange={(e) => setParentName(e.target.value)}
           required
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
         />
-        <motion.input
-          type="text"
-          className="bg-transparent placeholder:text-[#ffffff99] text-white outline-none p-3 rounded-md border-white border"
-          placeholder="Student Name"
-          disabled={isLoading}
-          value={studentName}
-          onChange={(e) => setStudentName(e.target.value)}
-          required
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        />
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
         <motion.input
           type="email"
-          className="bg-transparent placeholder:text-[#ffffff99] text-white outline-none p-3 rounded-md border-white border"
+          className={inputClass}
           placeholder="Parent Email"
           disabled={isLoading}
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
+        />
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
+        <motion.input
+          type="text"
+          className={inputClass}
+          placeholder="Student Name"
+          disabled={isLoading}
+          value={studentName}
+          onChange={(e) => setStudentName(e.target.value)}
+          required
         />
         <motion.select
-          className="bg-transparent placeholder:text-[#ffffff99] text-white outline-none p-3 rounded-md border-white border"
+          className={inputClass}
           disabled={isLoading}
           value={studentGrade}
           onChange={(e) => setStudentGrade(e.target.value)}
           required
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
         >
           <option value="" className="bg-gray-800">
             Student Grade
@@ -206,23 +212,23 @@ export function SignupForm({
         </motion.select>
       </div>
 
-      <div className="flex gap-2 items-center w-full">
-        <motion.input
+      <motion.div className="flex gap-2 items-center w-full">
+        <input
           type="tel"
-          className="bg-transparent placeholder:text-[#ffffff99] text-white outline-none p-3 rounded-md border-white border flex-1"
+          className={`${inputClass} flex-1`}
           placeholder="Parent Phone Number"
           disabled={isLoading}
           value={phoneNumber}
           onChange={(e) => handlePhoneChange(e.target.value)}
           key="invite-text"
           required
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.5 }}
         />
         <motion.button
           type="submit"
-          className="bg-white text-black mix-blend-screen flex justify-center items-center gap-2 h-12 w-12 rounded-md"
+          className={cn(
+            "bg-gray-900 text-white flex justify-center",
+            "items-center gap-2 h-12 w-12 rounded-md"
+          )}
           animate={{
             y: 0,
             boxShadow:
@@ -231,24 +237,14 @@ export function SignupForm({
           whileHover={{
             boxShadow:
               "3px 3px 8px rgba(0, 0, 0, 0.2), -3px -3px 8px rgba(255, 255, 255, 0.2)",
-            transition: {
-              duration: 0.1,
-              delay: 0,
-            },
           }}
           whileTap={{
-            y: 2,
+            y: 1,
             boxShadow:
               "1px 1px 4px rgba(0, 0, 0, 0.15), -1px -1px 4px rgba(255, 255, 255, 0.15)",
-            transition: {
-              duration: 0.1,
-              delay: 0,
-            },
           }}
           disabled={isLoading}
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
+          transition={{ duration: 0.1 }}
         >
           {isLoading ? (
             <Loader2 className="w-4 h-4 animate-spin" />
@@ -256,19 +252,38 @@ export function SignupForm({
             <ArrowRight className="w-4 h-4" />
           )}
         </motion.button>
-      </div>
+      </motion.div>
 
-      <motion.input
-        type="text"
-        className="bg-transparent placeholder:text-[#ffffff99] text-white outline-none p-3 rounded-md border-white border w-full"
-        placeholder="Promo Code (optional)"
-        disabled={isLoading}
-        value={promoCode}
-        onChange={(e) => setPromoCode(e.target.value)}
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.7 }}
-      />
+      {hasPromoCode && (
+        <input
+          type="text"
+          className={`${inputClass} w-full`}
+          placeholder="Promo Code (optional)"
+          disabled={isLoading}
+          value={promoCode}
+          onChange={(e) => setPromoCode(e.target.value)}
+        />
+      )}
+
+      <Families />
+
+      {!hasPromoCode && (
+        <motion.span
+          className="text-sm hover:underline hover:text-pink-600 cursor-pointer"
+          onClick={() => setHasPromoCode(true)}
+        >
+          I have a promo code
+        </motion.span>
+      )}
+
+      {hasPromoCode && (
+        <span
+          className="text-sm hover:underline hover:text-pink-600 cursor-pointer"
+          onClick={() => setHasPromoCode(false)}
+        >
+          Back
+        </span>
+      )}
     </motion.form>
   );
 }

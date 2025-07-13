@@ -50,7 +50,7 @@ export function BlogChecklist({
               defaultChecked={item.checked}
               className="scale-125 accent-pink-500"
             />
-            <span className="group-hover:text-pink-700 transition-colors">
+            <span className="group-hover:text-pink-600 transition-colors">
               {item.text}
             </span>
           </motion.label>

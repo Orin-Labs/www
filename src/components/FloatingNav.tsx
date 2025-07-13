@@ -130,15 +130,7 @@ export default function FloatingNav({
             shadow="neu"
             bg="gray"
             className="gap-2 relative overflow-hidden text-sm px-4 py-2"
-            onClick={() => {
-              if (window.location.pathname === "/") {
-                document.getElementById("cta-section")?.scrollIntoView({
-                  behavior: "smooth",
-                });
-              } else {
-                navigate("/?scrollTo=cta-section");
-              }
-            }}
+            onClick={() => navigate("/signup")}
           >
             Free 2 week trial
             <ArrowRightIcon className="w-3 h-3" />

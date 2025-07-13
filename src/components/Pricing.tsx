@@ -1,6 +1,7 @@
 import { HTMLProps } from 'react';
 
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 
 import { PRICING_COPY } from '../constants/copy';
 import { cn } from '../utils';
@@ -10,6 +11,8 @@ interface PricingProps extends HTMLProps<HTMLElement> {
 }
 
 export function Pricing({ speed, className, ...props }: PricingProps) {
+  const navigate = useNavigate();
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -26,9 +29,7 @@ export function Pricing({ speed, className, ...props }: PricingProps) {
   };
 
   const handleGetStarted = () => {
-    document.getElementById("cta-section")?.scrollIntoView({
-      behavior: "smooth",
-    });
+    navigate("/signup");
   };
 
   return (

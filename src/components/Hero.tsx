@@ -1,43 +1,22 @@
 import {
   HTMLProps,
   useEffect,
-  useRef,
   useState,
 } from 'react';
 
-import {
-  motion,
-  TargetAndTransition,
-  Transition,
-} from 'framer-motion';
-import {
-  ArrowRightIcon,
-  Pause,
-  Play,
-} from 'lucide-react';
+import { motion } from 'framer-motion';
+import { ArrowRightIcon } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 import { Button } from '../Button';
-import { cn } from '../utils';
-import { BackgroundGradient } from './BackgroundGradient';
+import {
+  cn,
+  delayed,
+} from '../utils';
+import { Families } from './Families';
 import FloatingNav from './FloatingNav';
 import Nav from './Nav';
 import { RotatingText } from './RotatingText';
-
-const delayed = (
-  delay: number
-): {
-  initial: TargetAndTransition;
-  animate: TargetAndTransition;
-  transition: Transition;
-} => ({
-  initial: { opacity: 0, y: 5 },
-  animate: { opacity: 1, y: 0 },
-  transition: {
-    delay,
-    duration: 0.3,
-    ease: "easeOut",
-  },
-});
 
 interface HeroProps extends HTMLProps<HTMLElement> {
   headline: string;
@@ -52,28 +31,8 @@ export function Hero({
   className,
   ...props
 }: HeroProps) {
-  const audioRef = useRef<HTMLAudioElement>(null);
-  const [isPlaying, setIsPlaying] = useState(false);
   const [scrollY, setScrollY] = useState(0);
-
-  useEffect(() => {
-    const audio = audioRef.current;
-    if (!audio) return;
-
-    const handlePlay = () => setIsPlaying(true);
-    const handlePause = () => setIsPlaying(false);
-    const handleEnded = () => setIsPlaying(false);
-
-    audio.addEventListener("play", handlePlay);
-    audio.addEventListener("pause", handlePause);
-    audio.addEventListener("ended", handleEnded);
-
-    return () => {
-      audio.removeEventListener("play", handlePlay);
-      audio.removeEventListener("pause", handlePause);
-      audio.removeEventListener("ended", handleEnded);
-    };
-  }, []);
+  const navigate = useNavigate();
 
   useEffect(() => {
     let ticking = false;
@@ -103,68 +62,42 @@ export function Hero({
 
       <Nav />
 
-      <audio ref={audioRef} src="/intro.mp3" />
-      <div className="w-full grow md:rounded-lg overflow-hidden relative flex flex-col justify-center items-center gap-4 px-2 md:px-4">
-        <h1 className="text-6xl md:text-7xl font-bold z-10 text-center">
-          {headline === "ROTATING_HEADLINE" ? <RotatingText /> : headline}
-        </h1>
-        <motion.h3
-          {...delayed(0.1)}
-          className="text-3xl md:text-4xl mb-12 z-10 text-center"
-        >
-          {subheadline}
-        </motion.h3>
+      <div className="grid md:grid-cols-2 gap-8 h-full">
+        <div className="flex flex-col gap-4 text-gray-900 justify-center px-8">
+          <h1 className="text-6xl md:text-7xl font-bold z-10">
+            {headline === "ROTATING_HEADLINE" ? (
+              <RotatingText />
+            ) : (
+              <span dangerouslySetInnerHTML={{ __html: headline }} />
+            )}
+          </h1>
+          <motion.h3 {...delayed(0.1)} className="text-xl md:text-2xl z-10">
+            <span dangerouslySetInnerHTML={{ __html: subheadline }} />
+          </motion.h3>
 
-        <motion.button
-          className={cn(
-            "w-32 h-32 rounded-full flex justify-center items-center z-10 bg-transparent transition-shadow duration-50",
-            `shadow-[4px_4px_8px_#00000044,_-4px_-4px_8px_#ffffff99] active:shadow-[2px_2px_1px_#00000022,_-2px_-2px_1px_#ffffff44]`
-          )}
-          {...delayed(0.2)}
-          onClick={() => {
-            if (isPlaying) {
-              audioRef.current?.pause();
-            } else {
-              audioRef.current?.play();
-            }
-          }}
-        >
-          {isPlaying ? (
-            <Pause className="w-12 h-12 text-white" strokeWidth={1.5} />
-          ) : (
-            <Play className="w-12 h-12 text-white" strokeWidth={1.5} />
-          )}
-        </motion.button>
-        <motion.small {...delayed(0.3)} className="text-white z-10">
-          Hear introduction
-        </motion.small>
+          <Families />
 
-        <motion.div
-          className="flex flex-col gap-2 items-center z-10 mt-8"
-          {...delayed(0.4)}
-        >
-          <Button
-            shadow="neu"
-            bg="transparent"
-            className="gap-2"
-            onClick={() => {
-              document.getElementById("cta-section")?.scrollIntoView({
-                behavior: "smooth",
-              });
-            }}
+          <motion.div
+            className="flex flex-col gap-2 z-10 w-fit items-center"
+            {...delayed(0.4)}
           >
-            Free 2 week trial
-            <ArrowRightIcon className="w-4 h-4" />
-          </Button>
-          <small className="text-white">No credit card required</small>
-        </motion.div>
+            <Button
+              shadow="neu"
+              bg="gray"
+              className="gap-2"
+              onClick={() => navigate("/signup")}
+            >
+              Free 2 week trial
+              <ArrowRightIcon className="w-4 h-4" />
+            </Button>
+            <small className="text-gray-500">No credit card required</small>
+          </motion.div>
+        </div>
 
-        <BackgroundGradient speed={speed} />
-        <div
-          className={cn(
-            "absolute inset-0 rounded-lg pointer-events-none z-10",
-            "shadow-[inset_2px_2px_8px_#00000044,_inset_-2px_-2px_8px_#ffffffbb]"
-          )}
+        <img
+          src="/hero.avif"
+          alt="Hero"
+          className="overflow-hidden rounded-lg object-cover h-full"
         />
       </div>
     </section>
