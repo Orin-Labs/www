@@ -5,5 +5,4 @@ export * from "./discussing-test-results-without-stress";
 export * from "./growth-vs-proficiency";
 export * from "./map-score-ranges-explained";
 export * from "./nwea-to-state-test-converter";
-export * from "./seventh-grade-map-practice-pdf";
 export * from "./test-day-nutrition-sleep-checklist";

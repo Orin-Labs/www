@@ -22,7 +22,6 @@ import {
   NWEAToStateTestConverter,
   OnlineForeignLanguageCredits,
   PLTWVsFirstRobotics,
-  SeventhGradeMAPPracticePDF,
   StateTestPrepStrategies,
   STEMElectivesGuide,
   STEMPortfolioGitHubSlides,
@@ -46,7 +45,6 @@ export const RENDER_MAP: RenderMap = {
     "map-score-ranges-explained": MAPScoreRangesExplained,
     "growth-vs-proficiency": GrowthVsProficiency,
     "understanding-rit-scores-guide": UnderstandingRITScores,
-    "seventh-grade-map-practice-pdf": SeventhGradeMAPPracticePDF,
     "nwea-to-state-test-converter": NWEAToStateTestConverter,
     "test-day-nutrition-sleep-checklist": TestDayNutritionSleepChecklist,
     "discussing-test-results-without-stress":
