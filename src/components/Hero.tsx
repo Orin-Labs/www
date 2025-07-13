@@ -52,7 +52,7 @@ export function Hero({
   return (
     <section
       className={cn(
-        "w-screen h-screen flex flex-col md:p-6 !pt-0 text-white",
+        "w-screen flex flex-col py-12 md:p-6 !pt-0 text-white",
         className
       )}
       {...props}
@@ -62,7 +62,7 @@ export function Hero({
 
       <Nav />
 
-      <div className="grid md:grid-cols-2 gap-8 h-full">
+      <div className="grid md:grid-cols-2 gap-8 h-full my-16">
         <div className="flex flex-col gap-4 text-gray-900 justify-center px-8">
           <h1 className="text-6xl md:text-7xl font-bold z-10">
             {headline === "ROTATING_HEADLINE" ? (
@@ -97,7 +97,7 @@ export function Hero({
         <img
           src="/hero.avif"
           alt="Hero"
-          className="overflow-hidden rounded-lg object-cover h-full"
+          className="overflow-hidden hidden md:block rounded-lg object-cover h-full"
         />
       </div>
     </section>
