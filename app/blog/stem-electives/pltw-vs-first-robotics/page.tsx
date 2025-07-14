@@ -11,15 +11,15 @@ import {
 } from 'lucide-react';
 import { Metadata } from 'next';
 
-import { Alert } from '../components/Alert';
-import { BlogChecklist } from '../components/BlogChecklist';
+import { Alert } from '@/blog/components/Alert';
+import { BlogChecklist } from '@/blog/components/BlogChecklist';
 import {
   BlogFAQ,
   type FAQItem,
-} from '../components/BlogFAQ';
-import { BlogLayout } from '../components/BlogLayout';
-import { BlogSection } from '../components/BlogSection';
-import { ComparisonTable } from '../components/ComparisonTable';
+} from '@/blog/components/BlogFAQ';
+import { BlogLayout } from '@/blog/components/BlogLayout';
+import { BlogSection } from '@/blog/components/BlogSection';
+import { ComparisonTable } from '@/blog/components/ComparisonTable';
 
 export const metadata: Metadata = {
   title: "PLTW vs FIRST Robotics: Which STEM Path is Right for Your Child?",

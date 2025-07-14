@@ -1,3 +1,5 @@
+"use client";
+
 import { motion } from 'framer-motion';
 
 import { MeshGradient } from '@paper-design/shaders-react';

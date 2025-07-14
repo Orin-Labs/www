@@ -2,8 +2,8 @@
 
 import { motion } from 'framer-motion';
 
-import { BlogMeta } from '../lib/types';
-import { BlogCard } from './BlogCard';
+import { BlogCard } from '@/blog/components/BlogCard';
+import { BlogMeta } from '@/blog/types';
 
 interface BlogIndexContentProps {
   posts: BlogMeta[];

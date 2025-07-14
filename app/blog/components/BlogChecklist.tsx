@@ -6,10 +6,10 @@ import { motion } from 'framer-motion';
 
 import { cn } from '@/utils';
 
-interface ChecklistItem {
+export interface ChecklistItem {
   id: string;
   text: string;
-  completed: boolean;
+  completed?: boolean;
 }
 
 interface BlogChecklistProps {

@@ -1,20 +1,20 @@
 import React from 'react';
 
 import { Info } from 'lucide-react';
-import { Metadata } from 'next';
 
-import { Alert } from '../components/Alert';
-import { BlogChecklist } from '../components/BlogChecklist';
+import { Alert } from '@/blog/components/Alert';
+import { BlogChecklist } from '@/blog/components/BlogChecklist';
 import {
   BlogFAQ,
   type FAQItem,
-} from '../components/BlogFAQ';
-import { BlogLayout } from '../components/BlogLayout';
-import { BlogSection } from '../components/BlogSection';
-import { ComparisonTable } from '../components/ComparisonTable';
-import { NumberedList } from '../components/NumberedList';
+} from '@/blog/components/BlogFAQ';
+import { BlogLayout } from '@/blog/components/BlogLayout';
+import { BlogSection } from '@/blog/components/BlogSection';
+import { ComparisonTable } from '@/blog/components/ComparisonTable';
+import { NumberedList } from '@/blog/components/NumberedList';
+import { asMetadata } from '@/blog/utils';
 
-export const metadata: Metadata = {
+export const metadata = asMetadata({
   title: "Understanding RIT Scores: A Complete Guide for Parents",
   description:
     "Deep dive into what RIT scores really mean and how to use them to support your student's learning journey.",
@@ -26,36 +26,11 @@ export const metadata: Metadata = {
     "student assessment",
   ],
   authors: [{ name: "Education Team" }],
-  openGraph: {
-    title: "Understanding RIT Scores: A Complete Guide for Parents",
-    description:
-      "Deep dive into what RIT scores really mean and how to use them to support your student's learning journey.",
-    images: ["/blog/pawel-czerwinski-OOFSqPWjCt0-unsplash.jpg"],
-    type: "article",
-    publishedTime: "2025-06-20T00:00:00.000Z",
-  },
-};
-
-const blogMeta = {
-  id: "understanding-rit-scores",
-  shortName: "RIT Scores",
-  name: "Understanding RIT Scores: A Complete Guide for Parents",
-  excerpt:
-    "Deep dive into what RIT scores really mean and how to use them to support your student's learning journey.",
-  date: new Date("2025-06-20"),
+  image: "/blog/pawel-czerwinski-OOFSqPWjCt0-unsplash.jpg",
+  date: new Date(),
   author: "Education Team",
   readingTime: 8,
-  slug: "understanding-rit-scores-guide",
-  image: "/blog/pawel-czerwinski-OOFSqPWjCt0-unsplash.jpg",
-  keywords: [
-    "RIT scores",
-    "MAP testing",
-    "academic growth",
-    "progress tracking",
-    "student assessment",
-  ],
-  underConstruction: false,
-};
+});
 
 export default function UnderstandingRITScores() {
   const faqItems: FAQItem[] = [
@@ -114,7 +89,7 @@ export default function UnderstandingRITScores() {
   ];
 
   return (
-    <BlogLayout blogMeta={blogMeta}>
+    <BlogLayout blogMeta={metadata}>
       <BlogSection
         title="What Are RIT Scores?"
         description="Understanding the foundation of MAP testing"

@@ -8,50 +8,24 @@ import {
   Star,
   Target,
 } from 'lucide-react';
-import { Metadata } from 'next';
 
-import { Alert } from '../components/Alert';
-import { BlogChecklist } from '../components/BlogChecklist';
+import { Alert } from '@/blog/components/Alert';
+import { BlogChecklist } from '@/blog/components/BlogChecklist';
 import {
   BlogFAQ,
   type FAQItem,
-} from '../components/BlogFAQ';
-import { BlogLayout } from '../components/BlogLayout';
-import { BlogSection } from '../components/BlogSection';
-import { ProviderGrid } from '../components/ProviderGrid';
+} from '@/blog/components/BlogFAQ';
+import { BlogLayout } from '@/blog/components/BlogLayout';
+import { BlogSection } from '@/blog/components/BlogSection';
+import {
+  ProviderGrid,
+  ProviderItem,
+} from '@/blog/components/ProviderGrid';
+import { asMetadata } from '@/blog/utils';
 
-export const metadata: Metadata = {
-  title: "Online Foreign Language Credits for Middle School | Complete Guide",
+export const metadata = asMetadata({
+  title: "Online Foreign Language Credits for Middle School",
   description:
-    "Complete guide to earning high school foreign language credits online during middle school years.",
-  keywords: [
-    "online foreign language",
-    "language credits",
-    "high school credit",
-    "language learning",
-    "online courses",
-    "foreign language requirement",
-    "language education",
-    "virtual language classes",
-    "language programs",
-    "credit acceleration",
-  ],
-  authors: [{ name: "Education Team" }],
-  openGraph: {
-    title: "Online Foreign Language Credits for Middle School | Complete Guide",
-    description:
-      "Complete guide to earning high school foreign language credits online during middle school years.",
-    images: ["/blog/susan-wilkinson-F8tGmG1T2rg-unsplash.jpg"],
-    type: "article",
-    publishedTime: "2025-06-08T00:00:00.000Z",
-  },
-};
-
-const blogMeta = {
-  id: "online-foreign-language-credits",
-  shortName: "Online Languages",
-  name: "Online Foreign Language Credits for Middle School",
-  excerpt:
     "Complete guide to earning high school foreign language credits online during middle school years.",
   date: new Date("2025-06-08"),
   author: "Education Team",
@@ -64,13 +38,9 @@ const blogMeta = {
     "high school credit",
     "language learning",
     "online courses",
-    "foreign language requirement",
-    "language education",
-    "virtual language classes",
-    "language programs",
-    "credit acceleration",
   ],
-};
+  authors: [{ name: "Education Team" }],
+});
 
 const benefits = [
   {
@@ -200,65 +170,63 @@ const languageOptions = [
   },
 ];
 
-const topProviders = [
+const topProviders: ProviderItem[] = [
   {
     name: "Florida Virtual School (FLVS)",
-    type: "Public Online School",
-    cost: "Free for FL residents, fees for out-of-state",
-    strengths: [
-      "Fully accredited courses",
-      "Experienced online teachers",
-      "Comprehensive curriculum",
-      "Strong student support",
-    ],
-    languages: ["Spanish", "French", "German", "Latin"],
-    requirements: "Must be enrolled in school, parent/counselor approval",
+    description:
+      "A fully accredited online school offering a wide range of foreign language courses with experienced teachers and strong student support.",
+    metadata: {
+      Languages: "Spanish, French, German, Latin",
+      Strengths: "Accredited, comprehensive curriculum, strong support",
+      Requirements: "Must be enrolled in school, parent/counselor approval",
+    },
+    action: {
+      text: "Visit FLVS",
+      url: "https://www.flvs.net/online-courses/foreign-language",
+    },
   },
   {
     name: "BYU Independent Study",
-    type: "University Program",
-    cost: "$169-199 per semester",
-    strengths: [
-      "University-level rigor",
-      "Self-paced learning",
-      "Strong academic reputation",
-      "Detailed curriculum",
-    ],
-    languages: [
-      "Spanish",
-      "French",
-      "German",
-      "Portuguese",
-      "Latin",
-      "Chinese",
-    ],
-    requirements: "Parent/counselor approval, self-motivated students",
+    description:
+      "University-level online courses with self-paced options, strong academic reputation, and detailed curriculum for motivated students.",
+    metadata: {
+      Languages: "Spanish, French, German, Portuguese, Latin, Chinese",
+      Strengths: "University rigor, self-paced, detailed curriculum",
+      Requirements: "Parent/counselor approval, self-motivated students",
+    },
+    action: {
+      text: "Visit BYU Independent Study",
+      url: "https://is.byu.edu/catalog/foreign-language",
+    },
   },
   {
     name: "Edgenuity",
-    type: "Commercial Provider",
-    cost: "Varies by district/school",
-    strengths: [
-      "Interactive multimedia",
-      "Adaptive learning technology",
-      "Progress tracking",
-      "Engaging content",
-    ],
-    languages: ["Spanish", "French", "German"],
-    requirements: "School or district partnership",
+    description:
+      "Interactive online platform with adaptive learning technology, engaging content, and progress tracking for language learners.",
+    metadata: {
+      Languages: "Spanish, French, German",
+      Strengths:
+        "Interactive multimedia, adaptive technology, progress tracking",
+      Requirements: "School or district partnership",
+    },
+    action: {
+      text: "Visit Edgenuity",
+      url: "https://www.edgenuity.com/course-catalog/foreign-languages/",
+    },
   },
   {
     name: "University of Missouri",
-    type: "University Program",
-    cost: "$300-400 per course",
-    strengths: [
-      "University credit option",
-      "Rigorous academics",
-      "Flexible pacing",
-      "Personal instructor support",
-    ],
-    languages: ["Spanish", "French", "German", "Latin"],
-    requirements: "High academic standards, counselor approval",
+    description:
+      "Offers rigorous online language courses with university credit options, flexible pacing, and personal instructor support.",
+    metadata: {
+      Languages: "Spanish, French, German, Latin",
+      Strengths: "University credit, rigorous academics, flexible pacing",
+      Requirements: "High academic standards, counselor approval",
+    },
+    action: {
+      text: "Visit Mizzou Academy",
+      url: "https://mizzouacademy.missouri.edu/academics/courses/world-languages/",
+    },
   },
 ];
 
@@ -438,7 +406,7 @@ const faqItems: FAQItem[] = [
 
 export default function OnlineForeignLanguageCredits() {
   return (
-    <BlogLayout blogMeta={blogMeta}>
+    <BlogLayout blogMeta={metadata}>
       <BlogSection title="Online Foreign Language Learning for Middle Schoolers">
         <div className="flex items-center gap-3 mb-6">
           <Globe className="w-8 h-8 text-blue-600" />

@@ -7,9 +7,8 @@ import {
 import { ArrowRightIcon } from 'lucide-react';
 import Link from 'next/link';
 
+import { BlogMeta } from '@/blog/types';
 import { cn } from '@/utils';
-
-import { BlogMeta } from '../lib/types';
 
 interface BlogCardProps extends HTMLMotionProps<"button"> {
   post: BlogMeta;
@@ -17,7 +16,7 @@ interface BlogCardProps extends HTMLMotionProps<"button"> {
 
 export function BlogCard({ post, className, ...props }: BlogCardProps) {
   return (
-    <Link href={`/blog/${post.slug}`} className={cn("h-full", className)}>
+    <Link href={`/blog/${post.title}`} className={cn("h-full", className)}>
       <motion.button
         className={cn(
           "min-h-72 h-full relative rounded-lg border overflow-hidden"

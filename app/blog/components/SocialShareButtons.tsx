@@ -20,7 +20,6 @@ interface SocialShareButtonProps {
   url: string;
   title: string;
   description: string;
-  blogPostId: string;
 }
 
 function SocialShareButton({
@@ -28,13 +27,11 @@ function SocialShareButton({
   url,
   title,
   description,
-  blogPostId,
 }: SocialShareButtonProps) {
   const handleShare = () => {
     // Track social share click
     posthog.capture("blog_social_share_clicked", {
       platform,
-      blog_post_id: blogPostId,
       blog_post_title: title,
       page_path: window.location.pathname,
     });
@@ -100,7 +97,6 @@ interface SocialShareButtonsProps {
 export function SocialShareButtons({
   title,
   description,
-  blogPostId,
   className,
 }: SocialShareButtonsProps) {
   const [mounted, setMounted] = useState(false);
@@ -141,7 +137,6 @@ export function SocialShareButtons({
           url={url}
           title={title}
           description={description}
-          blogPostId={blogPostId}
         />
       ))}
     </div>

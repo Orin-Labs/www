@@ -2,71 +2,21 @@ import React from 'react';
 
 import { ChevronRightIcon } from 'lucide-react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 import { cn } from '@/utils';
 
-import { BLOG_REGISTRY } from '../lib/blog-registry';
-
 interface BreadcrumbsProps {
-  currentSlug: string;
   className?: string;
 }
 
-export function Breadcrumbs({ currentSlug, className }: BreadcrumbsProps) {
-  // Find the current post by slug
-  const findPostBySlug = (slug: string) => {
-    for (const pillar of BLOG_REGISTRY) {
-      if (pillar.slug === slug) {
-        return pillar;
-      }
-      if (pillar.subArticles) {
-        for (const subArticle of pillar.subArticles) {
-          if (subArticle.slug === slug) {
-            return subArticle;
-          }
-        }
-      }
-    }
-    return null;
-  };
-
-  const currentPost = findPostBySlug(currentSlug);
-
-  if (!currentPost) {
-    return null;
-  }
-
-  // Find if this is a sub-article and get its parent
-  let parentPillar = null;
-  let isSubArticle = false;
-
-  for (const pillar of BLOG_REGISTRY) {
-    if (pillar.subArticles?.some((sub) => sub.slug === currentSlug)) {
-      parentPillar = pillar;
-      isSubArticle = true;
-      break;
-    }
-  }
-
-  const breadcrumbItems = [{ label: "Blog", href: "/blog" }];
-
-  if (isSubArticle && parentPillar) {
-    // This is a sub-article, show: Blog > Parent Pillar > Current Article
-    breadcrumbItems.push({
-      label: parentPillar.shortName,
-      href: `/blog/${parentPillar.slug}`,
-    });
-    breadcrumbItems.push({
-      label: currentPost.shortName,
-      href: `/blog/${currentPost.slug}`,
-    });
-  } else {
-    // This is a pillar post, show: Blog > Current Pillar
-    breadcrumbItems.push({
-      label: currentPost.shortName,
-      href: `/blog/${currentPost.slug}`,
-    });
-  }
+export function Breadcrumbs({ className }: BreadcrumbsProps) {
+  const pathname = usePathname();
+  const breadcrumbItems: string[] = pathname
+    .split("/")
+    .filter(Boolean)
+    .map((item) => item.replace(/-/g, " "))
+    .map((item) => item.charAt(0).toUpperCase() + item.slice(1));
 
   return (
     <nav
@@ -76,17 +26,17 @@ export function Breadcrumbs({ currentSlug, className }: BreadcrumbsProps) {
       )}
     >
       {breadcrumbItems.map((item, index) => (
-        <React.Fragment key={item.href}>
+        <React.Fragment key={item}>
           {index === breadcrumbItems.length - 1 ? (
             // Current page - not a link
-            <span className="font-medium text-gray-700">{item.label}</span>
+            <span className="font-medium text-gray-700">{item}</span>
           ) : (
             // Link to parent pages
             <Link
-              href={item.href}
+              href={`/${item}`}
               className="hover:text-gray-700 transition-colors"
             >
-              {item.label}
+              {item}
             </Link>
           )}
           {index < breadcrumbItems.length - 1 && (

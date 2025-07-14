@@ -13,13 +13,13 @@ import {
   X,
 } from 'lucide-react';
 
-interface DecisionTreeQuestion {
+export interface DecisionTreeQuestion {
   id: number;
   question: string;
   context?: string;
 }
 
-interface DecisionTreeResult {
+export interface DecisionTreeResult {
   type: "success" | "caution" | "wait";
   title: string;
   message: string;

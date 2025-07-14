@@ -12,15 +12,15 @@ import {
 } from 'lucide-react';
 import { Metadata } from 'next';
 
-import { Alert } from '../components/Alert';
-import { BlogChecklist } from '../components/BlogChecklist';
+import { Alert } from '@/blog/components/Alert';
+import { BlogChecklist } from '@/blog/components/BlogChecklist';
 import {
   BlogFAQ,
   type FAQItem,
-} from '../components/BlogFAQ';
-import { BlogLayout } from '../components/BlogLayout';
-import { BlogSection } from '../components/BlogSection';
-import { WeeklyPlanner } from '../components/WeeklyPlanner';
+} from '@/blog/components/BlogFAQ';
+import { BlogLayout } from '@/blog/components/BlogLayout';
+import { BlogSection } from '@/blog/components/BlogSection';
+import { WeeklyPlanner } from '@/blog/components/WeeklyPlanner';
 
 export const metadata: Metadata = {
   title: "Weekly Study Planner Template for Math | Free Download",

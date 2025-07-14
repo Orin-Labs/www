@@ -1,6 +1,6 @@
 import React from 'react';
 
-interface ProviderItem {
+export interface ProviderItem {
   name: string;
   description: string;
   metadata?: Record<string, string>;

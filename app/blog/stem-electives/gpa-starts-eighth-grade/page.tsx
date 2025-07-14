@@ -9,16 +9,16 @@ import {
 } from 'lucide-react';
 import { Metadata } from 'next';
 
-import { Alert } from '../components/Alert';
-import { BlogChecklist } from '../components/BlogChecklist';
+import { Alert } from '@/blog/components/Alert';
+import { BlogChecklist } from '@/blog/components/BlogChecklist';
 import {
   BlogFAQ,
   type FAQItem,
-} from '../components/BlogFAQ';
-import { BlogLayout } from '../components/BlogLayout';
-import { BlogSection } from '../components/BlogSection';
-import { ComparisonTable } from '../components/ComparisonTable';
-import { GPAScale } from '../components/GPAScale';
+} from '@/blog/components/BlogFAQ';
+import { BlogLayout } from '@/blog/components/BlogLayout';
+import { BlogSection } from '@/blog/components/BlogSection';
+import { ComparisonTable } from '@/blog/components/ComparisonTable';
+import { GPAScale } from '@/blog/components/GPAScale';
 
 export const metadata: Metadata = {
   title: "GPA Starts in 8th Grade: What Parents Need to Know",
