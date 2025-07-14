@@ -1,36 +1,32 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": ["dom", "dom.iterable", "es6"],
     "allowJs": true,
     "skipLibCheck": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
     "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true,
+    "noEmit": true,
+    "esModuleInterop": true,
     "module": "esnext",
-    "moduleResolution": "node",
-
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react-jsx",
+    "jsx": "preserve",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"],
-      "@": ["src"],
-      "@components/*": ["src/components/*"],
-      "@components": ["src/components"],
-      "@blog/*": ["src/blog/*"],
-      "@blog": ["src/blog"],
-      "@hooks/*": ["src/hooks/*"],
-      "@hooks": ["src/hooks"],
-      "@utils/*": ["src/utils/*"],
-      "@utils": ["src/utils"],
-      "@constants/*": ["src/constants/*"],
-      "@constants": ["src/constants"]
-    }
+      "@/*": ["./app/*"],
+      "@/components/*": ["./app/components/*"],
+      "@/hooks/*": ["./app/hooks/*"],
+      "@/utils/*": ["./app/utils/*"],
+      "@/constants/*": ["./app/constants/*"]
+    },
+    "target": "ES2017"
   },
-  "include": ["src"]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "exclude": ["node_modules"]
 }

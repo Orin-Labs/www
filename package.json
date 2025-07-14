@@ -2,93 +2,48 @@
   "name": "www",
   "version": "0.1.0",
   "private": true,
-  "type": "module",
   "dependencies": {
     "@ant-design/icons": "^5.5.2",
     "@calcom/embed-react": "^1.5.2",
     "@paper-design/shaders-react": "^0.0.23",
     "@tailwindcss/typography": "^0.5.16",
-    "@testing-library/jest-dom": "^5.14.1",
-    "@testing-library/react": "^13.0.0",
-    "@testing-library/user-event": "^13.2.1",
-    "@types/jest": "^27.0.1",
-    "@types/node": "^16.7.13",
-    "@types/react": "^18.0.0",
-    "@types/react-dom": "^18.0.0",
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
     "@vapi-ai/web": "^2.2.1",
-    "@vitejs/plugin-react": "^4.3.4",
-    "add": "^2.0.6",
     "compression": "^1.7.4",
-    "desmos-react": "^1.2.0",
     "express": "^4.18.2",
     "framer-motion": "^12.5.0",
     "geist": "^1.3.1",
-    "github-markdown-css": "^5.8.1",
-    "kea": "^3.1.6",
     "libphonenumber-js": "^1.12.8",
     "lucide-react": "^0.475.0",
-    "motion": "^12.0.6",
+    "next": "15.1.5",
     "posthog-js": "^1.215.1",
     "random-words": "^2.0.1",
-    "react": "18.3.1",
-    "react-audio-visualize": "^1.2.0",
-    "react-dom": "18.3.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "react-markdown": "^9.0.3",
     "react-responsive": "^10.0.1",
-    "react-router-dom": "^7.6.3",
-    "react-router-sitemap": "^1.2.0",
-    "react-scripts": "5.0.1",
-    "react-type-animation": "^3.2.0",
-    "recharts": "^2.15.1",
-    "rehype-katex": "^7.0.1",
-    "rehype-raw": "^7.0.0",
-    "remark-breaks": "^4.0.0",
-    "remark-math": "^6.0.0",
-    "sirv": "^2.0.4",
     "sonner": "^1.7.4",
-    "swiper": "^11.2.10",
     "tailwindcss-animate": "^1.0.7",
-    "typescript": "^4.4.2",
+    "typescript": "^5",
     "use-local-storage-state": "^19.5.0",
     "use-sound": "^5.0.0",
     "usehooks-ts": "^3.1.1",
-    "vite": "^6.3.5",
-    "web-vitals": "^2.1.0",
-    "yarn": "^1.22.22",
-    "zod": "^3.24.2",
-    "zod-to-json-schema": "^3.24.2"
+    "zod": "^3.24.2"
   },
   "scripts": {
-    "dev": "vite",
-    "build": "vite build --outDir dist/client",
-    "serve": "NODE_ENV=production tsx server.js",
-    "test": "vite test",
-    "eject": "react-scripts eject",
-    "generate-sitemap": "tsx scripts/generate-sitemap.js",
-    "build:sitemap": "yarn generate-sitemap && yarn build"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "serve": "NODE_ENV=production node server.js"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.20",
+    "eslint": "^8",
+    "eslint-config-next": "15.1.5",
     "postcss": "^8.4.49",
-    "tailwindcss": "^3.4.16",
-    "tsx": "^4.20.3"
+    "tailwindcss": "^3.4.16"
   }
 }

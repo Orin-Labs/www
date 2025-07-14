@@ -1,13 +1,13 @@
-import tailwindCssAnimate from 'tailwindcss-animate';
-import primaryTheme from 'tailwindcss/defaultTheme';
-import plugin from 'tailwindcss/plugin';
+const tailwindCssAnimate = require("tailwindcss-animate");
+const primaryTheme = require("tailwindcss/defaultTheme");
+const plugin = require("tailwindcss/plugin");
 
-import typography from '@tailwindcss/typography';
+const typography = require("@tailwindcss/typography");
 
-export default {
+module.exports = {
   content: [
-    "./src/**/*.{ts,tsx}",
-    "./index.html",
+    "./app/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
     "./node_modules/slate-ui/dist/**/*.{js,ts,jsx,tsx,css}",
   ],
   theme: {
