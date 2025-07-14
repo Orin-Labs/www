@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 
 import FloatingNav from '@/components/FloatingNav';
 import { Footer } from '@/components/Footer';
+import Nav from '@/components/Nav';
 
 import { BlogIndexContent } from './components/BlogIndexContent';
 import {
@@ -30,11 +31,11 @@ export default function BlogIndex() {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Floating Navigation */}
+      <Nav />
       <FloatingNav />
 
       {/* Main Content */}
-      <div className="w-full pt-48">
+      <div className="w-full pt-24">
         <main className="mx-auto flex flex-col gap-4 px-4 max-w-6xl">
           <BlogIndexContent posts={posts} />
         </main>

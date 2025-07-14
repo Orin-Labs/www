@@ -10,7 +10,7 @@ export const BLOG_REGISTRY: BlogMeta[] = [
     date: new Date("2025-06-17"),
     author: "Education Team",
     readingTime: 15,
-    slug: "map-testing-state-assessments-complete-guide",
+    slug: "academic-assessment",
     keywords: [
       "MAP testing",
       "state assessments",
@@ -242,7 +242,7 @@ export const BLOG_REGISTRY: BlogMeta[] = [
     ],
     image: "/blog/allison-saeng-mAM2jcU8dvw-unsplash.jpg",
     readingTime: 12,
-    slug: "middle-school-math-foundations-guide",
+    slug: "math-foundations",
     subArticles: [
       {
         id: "algebra-readiness-checklist",
@@ -368,7 +368,7 @@ export const BLOG_REGISTRY: BlogMeta[] = [
       "academic enrichment",
     ],
     image: "/blog/john-sin-Q5rtHn9I4oA-unsplash.jpg",
-    slug: "advanced-academics-middle-school-guide",
+    slug: "stem-electives",
     subArticles: [
       {
         id: "dual-enrollment-guide",

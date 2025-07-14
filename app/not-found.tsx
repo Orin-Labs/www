@@ -1,3 +1,4 @@
+import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 
 export default function NotFound() {
@@ -11,11 +12,11 @@ export default function NotFound() {
         <p className="text-gray-600 mb-8">
           Sorry, we couldn't find the page you're looking for.
         </p>
-        <Link
-          href="/"
-          className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 transition-colors duration-200"
-        >
-          Go back home
+        <Link href="/">
+          <button className="flex items-center gap-2 rounded-lg bg-gray-900 text-white px-4 py-2 mx-auto">
+            <ArrowLeft className="w-4 h-4 mr-2" />
+            Go back home
+          </button>
         </Link>
       </div>
     </div>
