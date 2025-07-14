@@ -1,16 +1,21 @@
-import React, { useState } from "react";
+"use client";
 
-import { AnimatePresence, motion } from "framer-motion";
+import React, { useState } from 'react';
+
+import {
+  AnimatePresence,
+  motion,
+} from 'framer-motion';
 import {
   AlertTriangle,
   ArrowLeft,
   ArrowRight,
   Ban,
   MapPin,
-} from "lucide-react";
-import posthog from "posthog-js";
+} from 'lucide-react';
+import posthog from 'posthog-js';
 
-import { cn } from "@utils";
+import { cn } from '@/utils';
 
 interface StateTestPrediction {
   testName: string;

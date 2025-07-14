@@ -1,7 +1,17 @@
-import React, { useState } from "react";
+"use client";
 
-import { AnimatePresence, motion } from "framer-motion";
-import { ArrowLeft, Check, Play, X } from "lucide-react";
+import React, { useState } from 'react';
+
+import {
+  AnimatePresence,
+  motion,
+} from 'framer-motion';
+import {
+  ArrowLeft,
+  Check,
+  Play,
+  X,
+} from 'lucide-react';
 
 interface DecisionTreeQuestion {
   id: number;

@@ -1,5 +1,10 @@
 "use client";
 
+import {
+  useEffect,
+  useState,
+} from 'react';
+
 import { motion } from 'framer-motion';
 import { ArrowRightIcon } from 'lucide-react';
 import Link from 'next/link';
@@ -56,15 +61,21 @@ const NAV_ITEMS: NavItem[] = [
 ];
 
 interface FloatingNavProps {
-  isVisible: boolean;
   className?: string;
 }
 
-export default function FloatingNav({
-  isVisible,
-  className,
-}: FloatingNavProps) {
+export default function FloatingNav({ className }: FloatingNavProps) {
   const router = useRouter();
+  const [scrollY, setScrollY] = useState(0);
+  const isVisible = scrollY > 150;
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <motion.header

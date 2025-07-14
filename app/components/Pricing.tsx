@@ -1,31 +1,15 @@
 import { HTMLProps } from 'react';
 
-import { motion } from 'framer-motion';
 import Link from 'next/link';
 
-import { PRICING_COPY } from '../constants/copy';
-import { cn } from '../utils';
+import { PRICING_COPY } from '@/constants/copy';
+import { cn } from '@/utils';
 
 interface PricingProps extends HTMLProps<HTMLElement> {
   speed: number;
 }
 
 export function Pricing({ speed, className, ...props }: PricingProps) {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0 },
-  };
-
   return (
     <section
       id="pricing"
@@ -37,32 +21,17 @@ export function Pricing({ speed, className, ...props }: PricingProps) {
       {...props}
     >
       <div className="w-full min-h-screen md:rounded-lg overflow-hidden relative flex flex-col justify-center items-center px-4 py-20">
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          className="max-w-4xl mx-auto text-center z-10"
-        >
+        <div className="max-w-4xl mx-auto text-center z-10">
           {/* Header */}
-          <motion.h2
-            variants={itemVariants}
-            className="text-4xl md:text-5xl font-bold mb-4 text-gray-900"
-          >
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">
             {PRICING_COPY.headline}
-          </motion.h2>
-          <motion.p
-            variants={itemVariants}
-            className="text-xl text-gray-600 mb-12"
-          >
+          </h2>
+          <p className="text-xl text-gray-600 mb-12">
             {PRICING_COPY.subheadline}
-          </motion.p>
+          </p>
 
           {/* Pricing Cards */}
-          <motion.div
-            variants={itemVariants}
-            className="grid md:grid-cols-2 gap-8 max-w-2xl mx-auto"
-          >
+          <div className="grid md:grid-cols-2 gap-8 max-w-2xl mx-auto">
             {/* Monthly Plan */}
             <div className="bg-white rounded-2xl p-8 border shadow-lg hover:shadow-xl transition-all duration-300">
               <div className="text-center">
@@ -117,8 +86,8 @@ export function Pricing({ speed, className, ...props }: PricingProps) {
                 </Link>
               </div>
             </div>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       </div>
     </section>
   );

@@ -598,3 +598,28 @@ export function getBlogById(id: string): BlogMeta | undefined {
 export function getBlogBySlug(slug: string): BlogMeta | undefined {
   return flattenPosts(BLOG_REGISTRY).find((post) => post.slug === slug);
 }
+
+export function getFullSlug(slug: string): string {
+  function findSlugPath(
+    posts: BlogMeta[],
+    targetSlug: string,
+    parentPath: string[] = []
+  ): string[] | null {
+    for (const post of posts) {
+      const currentPath = [...parentPath, post.slug];
+      if (post.slug === targetSlug) {
+        return currentPath;
+      }
+      if (post.subArticles) {
+        const found = findSlugPath(post.subArticles, targetSlug, currentPath);
+        if (found) {
+          return found;
+        }
+      }
+    }
+    return null;
+  }
+
+  const path = findSlugPath(BLOG_REGISTRY, slug);
+  return path ? path.join("/") : slug;
+}

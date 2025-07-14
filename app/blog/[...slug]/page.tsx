@@ -8,9 +8,9 @@ import {
 } from '../lib/blog-registry';
 
 interface BlogPostPageProps {
-  params: {
+  params: Promise<{
     slug: string[];
-  };
+  }>;
 }
 
 export async function generateStaticParams() {

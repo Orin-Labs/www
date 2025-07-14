@@ -5,7 +5,7 @@ import posthog from 'posthog-js';
 import { toast } from 'sonner';
 import useLocalStorageState from 'use-local-storage-state';
 
-import { useCopyVariation } from './useCopyVariation';
+import { COPY_VARIATIONS } from '@/constants/copy';
 
 const formatter = new AsYouType("US");
 
@@ -39,7 +39,7 @@ export function useSignupForm() {
   const [submitted, setSubmitted] = useLocalStorageState("signup-submitted", {
     defaultValue: false,
   });
-  const { cta } = useCopyVariation();
+  const { cta } = COPY_VARIATIONS.control;
 
   const handleSubmit = async () => {
     if (isLoading) return;

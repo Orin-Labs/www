@@ -31,7 +31,7 @@ export default function BlogIndex() {
   return (
     <div className="min-h-screen bg-white">
       {/* Floating Navigation */}
-      <FloatingNav isVisible={true} />
+      <FloatingNav />
 
       {/* Main Content */}
       <div className="w-full pt-48">

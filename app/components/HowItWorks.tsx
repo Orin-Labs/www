@@ -1,81 +1,13 @@
-import {
-  HTMLProps,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+"use client";
+
+import { HTMLProps } from 'react';
 
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 import { cn } from '@/utils';
 
 import { Message } from './Phone';
-
-// Lazy loading image component
-const LazyImage = ({
-  src,
-  alt,
-  className,
-}: {
-  src: string;
-  alt: string;
-  className?: string;
-}) => {
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [isInView, setIsInView] = useState(false);
-  const imgRef = useRef<HTMLImageElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsInView(true);
-          observer.disconnect();
-        }
-      },
-      { rootMargin: "200px" } // Much larger margin to delay loading further
-    );
-
-    if (imgRef.current) {
-      observer.observe(imgRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
-
-  // Only load image when user explicitly scrolls near them
-  const handleLoadImage = () => {
-    setIsInView(true);
-  };
-
-  return (
-    <div ref={imgRef} className={cn("w-full h-full shadow-md", className)}>
-      {!isInView && (
-        <div
-          className="w-full h-full bg-gradient-to-br from-blue-100 to-purple-100 rounded-lg absolute top-0 left-0 flex items-center justify-center cursor-pointer"
-          onClick={handleLoadImage}
-        >
-          <div className="text-center text-gray-600">
-            <div className="text-4xl mb-2">📚</div>
-            <div className="text-sm">Click to load lesson</div>
-          </div>
-        </div>
-      )}
-      {isInView && (
-        <img
-          src={src}
-          alt={alt}
-          className="w-full h-full object-cover rounded-lg"
-          onLoad={() => setIsLoaded(true)}
-          style={{ opacity: isLoaded ? 1 : 0, transition: "opacity 0.5s" }}
-        />
-      )}
-      {isInView && !isLoaded && (
-        <div className="w-full h-full bg-gray-200 animate-pulse rounded-lg absolute top-0 left-0" />
-      )}
-    </div>
-  );
-};
 
 // Gradient number badge component
 const GradientNumberBadge = ({
@@ -188,7 +120,7 @@ const StepVisualization = ({
     initial={{ opacity: 0, x: rightAligned ? 20 : -20 }}
     whileInView={{ opacity: 1, x: 0 }}
     transition={{ duration: 0.6, delay }}
-    className={`flex justify-center ${
+    className={`flex justify-center min-h-[200px] ${
       rightAligned ? "order-2 lg:order-1" : ""
     }`}
   >
@@ -300,7 +232,12 @@ export function HowItWorks({ speed, className }: HowItWorksProps) {
           const visualization = (
             <StepVisualization rightAligned={isRightAligned}>
               {step.isImagePlaceholder ? (
-                <LazyImage src="/lesson.png" alt="lesson" />
+                <Image
+                  src="/lesson.png"
+                  alt="lesson"
+                  fill
+                  objectFit="contain"
+                />
               ) : (
                 <MessageVisualization messages={step.messages!} />
               )}

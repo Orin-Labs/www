@@ -23,7 +23,8 @@
       "@/components/*": ["./app/components/*"],
       "@/hooks/*": ["./app/hooks/*"],
       "@/utils/*": ["./app/utils/*"],
-      "@/constants/*": ["./app/constants/*"]
+      "@/constants/*": ["./app/constants/*"],
+      "@blog/*": ["./app/blog/*"]
     },
     "target": "ES2017"
   },

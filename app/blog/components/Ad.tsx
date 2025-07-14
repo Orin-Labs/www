@@ -2,11 +2,10 @@ import React from 'react';
 
 import { Button } from 'app/components/Button';
 import { ArrowRightIcon } from 'lucide-react';
-import posthog from 'posthog-js';
-import { useNavigate } from 'react-router-dom';
+import Link from 'next/link';
 
-import { BackgroundGradient } from '@components/BackgroundGradient';
-import { cn } from '@utils';
+import { BackgroundGradient } from '@/components/BackgroundGradient';
+import { cn } from '@/utils';
 
 type AdProps = {
   title: string;
@@ -14,21 +13,6 @@ type AdProps = {
 } & React.HTMLProps<HTMLDivElement>;
 
 export const Ad = ({ title, description, className, ...props }: AdProps) => {
-  const navigate = useNavigate();
-
-  const handleCTAClick = () => {
-    // Track CTA click
-    posthog.capture("blog_cta_clicked", {
-      cta_title: title,
-      cta_description: description,
-      page_path: window.location.pathname,
-      blog_post_id: window.location.pathname.split("/").pop(),
-    });
-
-    // Navigate to signup page
-    navigate("/signup");
-  };
-
   return (
     <div
       className={cn(
@@ -45,15 +29,12 @@ export const Ad = ({ title, description, className, ...props }: AdProps) => {
       >
         <h3 className="text-4xl font-bold z-10">{title}</h3>
         <p className="text-xl z-10">{description}</p>
-        <Button
-          shadow="neu"
-          bg="gray"
-          className="gap-2 z-10"
-          onClick={handleCTAClick}
-        >
-          Try for Free
-          <ArrowRightIcon className="w-4 h-4" />
-        </Button>
+        <Link href="/signup">
+          <Button shadow="neu" bg="gray" className="gap-2 z-10">
+            Try for Free
+            <ArrowRightIcon className="w-4 h-4" />
+          </Button>
+        </Link>
       </div>
 
       <BackgroundGradient speed={0.2} />

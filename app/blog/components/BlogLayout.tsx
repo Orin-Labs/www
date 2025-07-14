@@ -53,7 +53,7 @@ export function BlogLayout({ children, className, blogMeta }: BlogLayoutProps) {
       className={cn("min-h-screen relative flex flex-col h-screen", className)}
     >
       {/* Floating Navigation */}
-      <FloatingNav isVisible={true} />
+      <FloatingNav />
 
       <div className="flex flex-col gap-4 grow h-fit p-16">
         {/* Main Content */}

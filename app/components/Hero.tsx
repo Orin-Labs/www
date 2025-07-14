@@ -1,13 +1,10 @@
-import {
-  HTMLProps,
-  useEffect,
-  useState,
-} from 'react';
+"use client";
+
+import { HTMLProps } from 'react';
 
 import { motion } from 'framer-motion';
 import { ArrowRightIcon } from 'lucide-react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 
 import { Button } from '@/components/Button';
 
@@ -18,7 +15,6 @@ import {
 import { Families } from './Families';
 import FloatingNav from './FloatingNav';
 import Nav from './Nav';
-import { RotatingText } from './RotatingText';
 
 interface HeroProps extends HTMLProps<HTMLElement> {
   headline: string;
@@ -33,24 +29,6 @@ export function Hero({
   className,
   ...props
 }: HeroProps) {
-  const [scrollY, setScrollY] = useState(0);
-  const router = useRouter();
-
-  useEffect(() => {
-    let ticking = false;
-    const handleScroll = () => {
-      if (!ticking) {
-        requestAnimationFrame(() => {
-          setScrollY(window.scrollY);
-          ticking = false;
-        });
-        ticking = true;
-      }
-    };
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
   return (
     <section
       className={cn(
@@ -60,18 +38,14 @@ export function Hero({
       {...props}
     >
       {/* Floating Navigation */}
-      <FloatingNav isVisible={scrollY > 150} />
+      <FloatingNav />
 
       <Nav />
 
       <div className="grid md:grid-cols-2 gap-8 h-full my-16">
         <div className="flex flex-col gap-4 text-gray-900 justify-center px-8">
           <h1 className="text-6xl md:text-7xl font-bold z-10">
-            {headline === "ROTATING_HEADLINE" ? (
-              <RotatingText />
-            ) : (
-              <span dangerouslySetInnerHTML={{ __html: headline }} />
-            )}
+            <span dangerouslySetInnerHTML={{ __html: headline }} />
           </h1>
           <motion.h3 {...delayed(0.1)} className="text-xl md:text-2xl z-10">
             <span dangerouslySetInnerHTML={{ __html: subheadline }} />

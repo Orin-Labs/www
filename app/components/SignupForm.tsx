@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from 'react';
 
 import {
@@ -12,9 +14,9 @@ import {
 import { useMediaQuery } from 'react-responsive';
 import { toast } from 'sonner';
 
+import { Button } from '@/components/Button';
 import { cn } from '@/utils';
 
-import { Button } from '../Button';
 import { Families } from './Families';
 
 interface SignupFormProps extends Omit<HTMLMotionProps<"form">, "onSubmit"> {

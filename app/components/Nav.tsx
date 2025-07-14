@@ -1,3 +1,5 @@
+"use client";
+
 import { HTMLProps } from 'react';
 
 import { ArrowRightIcon } from 'lucide-react';

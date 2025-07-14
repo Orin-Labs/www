@@ -1,4 +1,4 @@
-import { getFullSlug } from 'src/blog/meta-data';
+import { getFullSlug } from '@/blog/lib/blog-registry';
 
 export function flattenItems<T extends { subArticles?: T[] }>(items: T[]): T[] {
   const flattened: T[] = [];

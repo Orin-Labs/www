@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useRef } from 'react';
 
 import { motion } from 'framer-motion';
@@ -5,7 +7,7 @@ import { ArrowRight } from 'lucide-react';
 import posthog from 'posthog-js';
 import { useHover } from 'usehooks-ts';
 
-import { cn } from '@utils';
+import { cn } from '@/utils';
 
 export interface GridCardProps {
   title: string;
