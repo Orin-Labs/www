@@ -1,32 +1,22 @@
 // Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 
-import { motion } from 'framer-motion';
-import {
-  ArrowLeft,
-  Clock,
-  Construction,
-} from 'lucide-react';
-import posthog from 'posthog-js';
+import { motion } from "framer-motion";
+import { ArrowLeft, Clock, Construction } from "lucide-react";
+import posthog from "posthog-js";
 
-import { getRelatedPosts } from '@blog/data';
-import { FloatingNav } from '@components';
-import {
-  cn,
-  getBySlug,
-} from '@utils';
+import { getRelatedPosts } from "@blog/data";
+import { FloatingNav } from "@components";
+import { cn, getBySlug } from "@utils";
 
-import {
-  BLOG_META,
-  getFullSlug,
-} from '../meta-data';
-import { BlogCard } from './BlogCard';
-import { Breadcrumbs } from './Breadcrumbs';
-import { SocialShareButtons } from './SocialShareButtons';
+import { BLOG_META, getFullSlug } from "../meta-data";
+import { BlogCard } from "./BlogCard";
+import { Breadcrumbs } from "./Breadcrumbs";
+import { SocialShareButtons } from "./SocialShareButtons";
 
 interface BlogLayoutProps {
   children: React.ReactNode;
@@ -66,7 +56,7 @@ export function BlogLayout({ children, className }: BlogLayoutProps) {
       {/* Floating Navigation */}
       <FloatingNav isVisible={true} />
 
-      <div className="flex flex-col gap-4 grow h-fit p-16">
+      <div className="flex flex-col gap-4 grow h-fit p-4 sm:p-8 md:p-16 pt-16">
         {/* Main Content */}
         <div className="flex-1 overflow-y-auto grow">
           <main className="relative z-10 max-w-4xl mx-auto px-4 py-8 md:py-16 md:px-8 lg:px-16 font-sans flex flex-col gap-6">

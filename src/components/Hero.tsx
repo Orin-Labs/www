@@ -57,14 +57,13 @@ export function Hero({
       )}
       {...props}
     >
-      {/* Floating Navigation */}
       <FloatingNav isVisible={scrollY > 150} />
 
       <Nav />
 
-      <div className="grid md:grid-cols-2 gap-8 h-full my-16">
+      <div className="grid md:grid-cols-2 gap-8 h-full mt-8">
         <div className="flex flex-col gap-4 text-gray-900 justify-center px-8">
-          <h1 className="text-6xl md:text-7xl font-bold z-10">
+          <h1 className="text-4xl md:text-7xl font-bold z-10">
             {headline === "ROTATING_HEADLINE" ? (
               <RotatingText />
             ) : (

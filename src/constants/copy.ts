@@ -1,9 +1,15 @@
 export const COPY_VARIATIONS = {
   control: {
     headline:
-      "Meet <span class='text-pink-600'>Orin</span>, your new digital tutor",
+      "AI tutoring built for <span class='text-pink-700'>families</span>",
     subheadline:
-      "Crush state benchmarks with as little as <span class='text-pink-600'>one hour a day</span>.",
+      "Crush state benchmarks with as little as <span class='text-pink-700'>one hour a day</span>",
+    cta: "Get your own Orin",
+  },
+  "top-scores": {
+    headline:
+      "Top math scores with as little as <span class='text-pink-700'>one hour a day</span>.",
+    subheadline: "Work with an AI tutor built for middle school families.",
     cta: "Get your own Orin",
   },
 } as const;

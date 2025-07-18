@@ -8,7 +8,7 @@ import {
   CopyVariation,
 } from '../constants/copy';
 
-const EXPERIMENT_NAME = "landing-page-copy-1";
+const EXPERIMENT_NAME = "landing-page-copy-2";
 
 export function useCopyVariation() {
   const [variation, setVariation] = useLocalStorage<CopyVariation>(
