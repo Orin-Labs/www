@@ -84,7 +84,10 @@ export function Hero({
               shadow="neu"
               bg="gray"
               className="gap-2"
-              onClick={() => navigate("/signup")}
+              onClick={() =>
+                (window.location.href =
+                  "https://portal.learnwithorin.com/signup")
+              }
             >
               Try for Free
               <ArrowRightIcon className="w-4 h-4" />

@@ -26,7 +26,7 @@ export const Ad = ({ title, description, className, ...props }: AdProps) => {
     });
 
     // Navigate to signup page
-    navigate("/signup");
+    window.location.href = "https://portal.learnwithorin.com/signup";
   };
 
   return (

@@ -135,7 +135,9 @@ export default function FloatingNav({
             shadow="neu"
             bg="gray"
             className="gap-2 relative overflow-hidden text-sm px-4 py-2"
-            onClick={() => navigate("/signup")}
+            onClick={() =>
+              (window.location.href = "https://portal.learnwithorin.com/signup")
+            }
           >
             Try for Free
             <ArrowRightIcon className="w-3 h-3" />
