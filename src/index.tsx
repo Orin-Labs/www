@@ -14,7 +14,6 @@ import { Toaster } from 'sonner';
 import App from './App';
 import Privacy from './privacy';
 import reportWebVitals from './reportWebVitals';
-import Signup from './signup';
 
 // Lazy load blog components to reduce initial bundle size
 const BlogRouter = React.lazy(() => import("@blog/router"));
@@ -50,7 +49,6 @@ root.render(
       <Toaster />
       <Routes>
         <Route path="/" element={<App />} />
-        <Route path="/signup" element={<Signup />} />
         <Route path="/privacy" element={<Privacy />} />
         <Route
           path="/blog/*"

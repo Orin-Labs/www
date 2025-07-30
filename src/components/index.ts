@@ -7,6 +7,5 @@ export { default as Nav } from './Nav';
 export { Phone } from './Phone';
 export { Pricing } from './Pricing';
 export { RotatingText } from './RotatingText';
-export { SignupForm } from './SignupForm';
 export { SocialProof } from './SocialProof';
 export { TextInput } from './TextInput';
