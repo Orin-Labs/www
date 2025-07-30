@@ -23,7 +23,7 @@ const BlogRouter = React.lazy(() => import("@blog/router"));
 window.addEventListener("load", function () {
   setTimeout(function () {
     if (window.location.hostname !== "localhost") {
-      posthog.init("phc_GumBfH2sDPA0iuqX5XN7e0JX2sR7uPUXCmdK3KMoWb0", {
+      posthog.init("phc_BcerROVZY0UeR1v8xZPzWmlPdMBrJJbBxd1F1hq7p5I", {
         api_host: "https://d3nk0c1kx1c6s3.cloudfront.net",
         ui_host: "https://us.posthog.com",
         person_profiles: "always", // or 'always' to create profiles for anonymous users as well
