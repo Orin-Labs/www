@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 
 import { Hero } from './components/Hero';
 import { HowItWorks } from './components/HowItWorks';
-import { Pricing } from './components/Pricing';
 import { SocialProof } from './components/SocialProof';
 import { useCopyVariation } from './hooks/useCopyVariation';
 
@@ -25,7 +24,6 @@ function App() {
       <Hero headline={headline} subheadline={subheadline} speed={speed} />
       <HowItWorks speed={speed} className="border-t  " />
       <SocialProof className="border-t  " />
-      <Pricing speed={speed} className="border-t  " />
     </>
   );
 }
